@@ -672,18 +672,18 @@ namespace SbigSharp
         /// </summary>
         public class FailedOperationException : Exception
         {
-            public Error errorCode;
+            public Error ErrorCode { get; private set; }
 
             public FailedOperationException(Error errorCode)
             {
-                this.errorCode = errorCode;
+                ErrorCode = errorCode;
             }
 
             public override string Message
             {
                 get
                 {
-                    return errorCode.ToString();
+                    return ErrorCode.ToString();
                 }
             }
         } // class FailedOperation
