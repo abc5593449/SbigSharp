@@ -670,11 +670,11 @@ namespace SbigSharp
         /// <summary>
         /// gets thrown whenever an SBIG operation doesn't return success (CE_NO_ERROR)
         /// </summary>
-        class FailedOperation : Exception
+        public class FailedOperationException : Exception
         {
             public Error errorcode;
 
-            public FailedOperation(Error errorcode)
+            public FailedOperationException(Error errorcode)
             {
                 this.errorcode = errorcode;
             }
@@ -710,7 +710,7 @@ namespace SbigSharp
         /// </summary>
         /// <param name="Command">the command to be executed</param>
         /// <param name="Parameters">inputs to the operation, null if none</param>
-        /// <exception cref="FailedOperation">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
+        /// <exception cref="FailedOperationException">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
         public static void UnivDrvCommand(Cmd Command, object Parameters)
         {
             // marshall the input structure, if it exists
@@ -727,7 +727,7 @@ namespace SbigSharp
             //
             Error err = SBIGUnivDrvCommand(Command, ParamPtr, IntPtr.Zero);
             if (Error.CE_NO_ERROR != err)
-                throw new FailedOperation(err);
+                throw new FailedOperationException(err);
 
             // clean up
             if (IntPtr.Zero != ParamPtr)
@@ -740,7 +740,7 @@ namespace SbigSharp
         /// <param name="Command">the command to be executed</param>
         /// <param name="Parameters">inputs to the operation, null if none</param>
         /// <param name="Results">array or structure to write command output DIRECTLY into (no marshalling occurs)</param>
-        /// <exception cref="FailedOperation">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
+        /// <exception cref="FailedOperationException">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
         public static void UnivDrvCommand(Cmd Command, object Parameters, object Results)
         {
             // marshall the input structure, if it exists
@@ -759,7 +759,7 @@ namespace SbigSharp
             //
             Error err = SBIGUnivDrvCommand(Command, ParamPtr, ResultsGch.AddrOfPinnedObject());
             if (Error.CE_NO_ERROR != err)
-                throw new FailedOperation(err);
+                throw new FailedOperationException(err);
 
             // clean up
             ResultsGch.Free();
@@ -773,7 +773,7 @@ namespace SbigSharp
         /// </summary>
         /// <param name="Command">the command to be executed</param>
         /// <param name="Parameters">inputs to the operation, null if none</param>
-        /// <exception cref="FailedOperation">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
+        /// <exception cref="FailedOperationException">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
         public static void UnivDrvCommandMarshal(Cmd Command, object Parameters)
         {
             // marshall the input structure, if it exists
@@ -789,7 +789,7 @@ namespace SbigSharp
             //
             Error err = SBIGUnivDrvCommand(Command, ParamPtr, IntPtr.Zero);
             if (Error.CE_NO_ERROR != err)
-                throw new FailedOperation(err);
+                throw new FailedOperationException(err);
 
             // clean up
             if (IntPtr.Zero != ParamPtr)
@@ -802,7 +802,7 @@ namespace SbigSharp
         /// <param name="Command">the command to be executed</param>
         /// <param name="Parameters">inputs to the operation, null if none</param>
         /// <returns>object with command output written DIRECTLY into it (no marshalling occurs)</returns>
-        /// <exception cref="FailedOperation">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
+        /// <exception cref="FailedOperationException">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
         public static T UnivDrvCommand<T>(Cmd Command, object Parameters) where T : new()
         {
             // marshall the input structure, if it exists
@@ -823,7 +823,7 @@ namespace SbigSharp
             //
             Error err = SBIGUnivDrvCommand(Command, ParamPtr, ResultsPtr);
             if (Error.CE_NO_ERROR != err)
-                throw new FailedOperation(err);
+                throw new FailedOperationException(err);
 
             // clean up
             ResultsGch.Free();
@@ -840,7 +840,7 @@ namespace SbigSharp
         /// <param name="Command">the command to be executed</param>
         /// <param name="Parameters">inputs to the operation, null if none</param>
         /// <returns>object with command output MARSHALLED into it (types are translated as necessary)</returns>
-        /// <exception cref="FailedOperation">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
+        /// <exception cref="FailedOperationException">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
         public static T UnivDrvCommandMarshal<T>(Cmd Command, object Parameters)
         {
             // marshall the input structure, if it exists
@@ -858,7 +858,7 @@ namespace SbigSharp
             //
             Error err = SBIGUnivDrvCommand(Command, ParamPtr, ResultsPtr);
             if (Error.CE_NO_ERROR != err)
-                throw new FailedOperation(err);
+                throw new FailedOperationException(err);
 
             // un-marshal the output
             T Results = (T)Marshal.PtrToStructure(ResultsPtr, typeof(T));
@@ -898,7 +898,7 @@ namespace SbigSharp
             //
             Error err = SBIGUnivDrvCommand(Command, ParamPtr, ResultsPtr);
             if (Error.CE_NO_ERROR != err)
-                throw new FailedOperation(err);
+                throw new FailedOperationException(err);
 
             // Marshall back
             Marshal.PtrToStructure(ResultsPtr, Results);
