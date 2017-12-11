@@ -60,18 +60,20 @@ namespace SbigSharp
             // query temperature
             SBIG.QueryTemperatureStatusParams qtsp = new SBIG.QueryTemperatureStatusParams(SBIG.TempStatusRequest.TEMP_STATUS_ADVANCED2);
             var qtsr2 = SBIG.UnivDrvCommand<SBIG.QueryTemperatureStatusResults2>(SBIG.Cmd.CC_QUERY_TEMPERATURE_STATUS, qtsp);
-            
+
 
             // start an exposure
-            SBIG.StartExposureParams2 sep = new SBIG.StartExposureParams2();
-            sep.ccd = SBIG.CCD.Imaging;
-            sep.abgState = SBIG.AbgState.Off;
-            sep.openShutter = SBIG.ShutterState.Unchanged;
-            sep.exposureTime = 100;
-            //sep.width = 765;
-            //sep.height = 510;
-            sep.width = 1530;
-            sep.height = 1020;
+            SBIG.StartExposureParams2 sep = new SBIG.StartExposureParams2
+            {
+                ccd = SBIG.CCD.Imaging,
+                abgState = SBIG.AbgState.Off,
+                openShutter = SBIG.ShutterState.Unchanged,
+                exposureTime = 100,
+                //sep.width = 765;
+                //sep.height = 510;
+                width = 1530,
+                height = 1020
+            };
             SBIG.UnivDrvCommand(SBIG.Cmd.CC_START_EXPOSURE, sep);
 
 
@@ -79,31 +81,37 @@ namespace SbigSharp
             ushort[,] img = SBIG.WaitEndAndReadoutExposure(sep);
             //FitsUtil.WriteFitsImage("simcam.fits", img);
             //SBIG.SaveImageToVernacularFormat(sep, img, "foo.gif", ImageFormat.Gif);
-                        
+
             //
             // setup for TDI
             //
-            SBIG.MiscellaneousControlParams mcp = new SBIG.MiscellaneousControlParams();
-            mcp.fanEnable = 1;
-            mcp.ledState = SBIG.LedState.BlinkHigh;
-            mcp.shutterCommand = SBIG.ShutterState.Open;
+            SBIG.MiscellaneousControlParams mcp = new SBIG.MiscellaneousControlParams
+            {
+                fanEnable = 1,
+                ledState = SBIG.LedState.BlinkHigh,
+                shutterCommand = SBIG.ShutterState.Open
+            };
             SBIG.UnivDrvCommand(SBIG.Cmd.CC_MISCELLANEOUS_CONTROL, mcp);
 
             // turn off pipelining for USB connected cameras
-            SBIG.SetDriverControlParams sdcp = new SBIG.SetDriverControlParams();
-            sdcp.controlParameter = SBIG.DriverControlParam.DCP_USB_FIFO_ENABLE;
-            sdcp.controlValue = 0;
+            SBIG.SetDriverControlParams sdcp = new SBIG.SetDriverControlParams
+            {
+                controlParameter = SBIG.DriverControlParam.DCP_USB_FIFO_ENABLE,
+                controlValue = 0
+            };
             SBIG.UnivDrvCommand(SBIG.Cmd.CC_SET_DRIVER_CONTROL, sdcp, null);
 
             //
             // read a TDI line
             //
             // input params
-            SBIG.ReadoutLineParams rlp = new SBIG.ReadoutLineParams();
-            rlp.ccd = SBIG.CCD.Imaging;
-            rlp.pixelStart = 0;
-            rlp.pixelLength = 1530;
-            rlp.readoutMode = SBIG.ReadoutLineParams.MakeNBinMode(SBIG.ReadoutMode.BinNx1, 4);
+            SBIG.ReadoutLineParams rlp = new SBIG.ReadoutLineParams
+            {
+                ccd = SBIG.CCD.Imaging,
+                pixelStart = 0,
+                pixelLength = 1530,
+                readoutMode = SBIG.ReadoutLineParams.MakeNBinMode(SBIG.ReadoutMode.BinNx1, 4)
+            };
             // output
             ushort[] data = new ushort[rlp.pixelLength];
             // make the call!!!
