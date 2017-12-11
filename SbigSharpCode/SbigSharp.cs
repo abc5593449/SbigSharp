@@ -928,13 +928,15 @@ namespace SbigSharp
             // prepare the CCD for readout
             UnivDrvCommand(Cmd.CC_END_EXPOSURE, new EndExposureParams(CCD.Imaging));
             // then telling it where and how we're going to read
-            StartReadoutParams srp = new StartReadoutParams();
-            srp.ccd = CCD.Imaging;
-            srp.readoutMode = 0;
-            srp.left = 0;
-            srp.top = 0;
-            srp.width = sep.width;
-            srp.height = sep.height;
+            StartReadoutParams srp = new StartReadoutParams
+            {
+                ccd = CCD.Imaging,
+                readoutMode = 0,
+                left = 0,
+                top = 0,
+                width = sep.width,
+                height = sep.height
+            };
             UnivDrvCommand(Cmd.CC_START_READOUT, srp);
 
             // allocate the image buffer
@@ -943,11 +945,13 @@ namespace SbigSharp
             IntPtr dataptr = datagch.AddrOfPinnedObject();
 
             // put the data into it
-            ReadoutLineParams rlp = new ReadoutLineParams();
-            rlp.ccd = CCD.Imaging;
-            rlp.pixelStart = 0;
-            rlp.pixelLength = sep.width;
-            rlp.readoutMode = 0;
+            ReadoutLineParams rlp = new ReadoutLineParams
+            {
+                ccd = CCD.Imaging,
+                pixelStart = 0,
+                pixelLength = sep.width,
+                readoutMode = 0
+            };
             GCHandle rlpgch = GCHandle.Alloc(rlp, GCHandleType.Pinned);
             // get the image from the camera, line by line
             for (int i = 0; i < sep.height; i++)
