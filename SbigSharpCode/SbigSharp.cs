@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SbigSharp
 {
-    class SBIG
+    public class SBIG
     {
         //
         #region Constants
@@ -265,28 +265,28 @@ namespace SbigSharp
         }
 
         public enum DriverControlParam : ushort
-        { 
-	        DCP_USB_FIFO_ENABLE, 
-	        DCP_CALL_JOURNAL_ENABLE,
-	        DCP_IVTOH_RATIO, 
-	        DCP_USB_FIFO_SIZE, 
-	        DCP_USB_DRIVER, 
-	        DCP_KAI_RELGAIN,
-	        DCP_USB_PIXEL_DL_ENABLE, 
-	        DCP_HIGH_THROUGHPUT, 
-	        DCP_VDD_OPTIMIZED,
-	        DCP_AUTO_AD_GAIN, 
-	        DCP_NO_HCLKS_FOR_INTEGRATION, 
-	        DCP_TDI_MODE_ENABLE, 
-	        DCP_VERT_FLUSH_CONTROL_ENABLE, 
-	        DCP_ETHERNET_PIPELINE_ENABLE, 
-	        DCP_FAST_LINK, 
-	        DCP_OVERSCAN_ROWSCOLS, 
-	        DCP_PIXEL_PIPELINE_ENABLE, 
-	        DCP_COLUMN_REPAIR_ENABLE,
-	        DCP_WARM_PIXEL_REPAIR_ENABLE, 
-	        DCP_WARM_PIXEL_REPAIR_COUNT, 
-	        DCP_LAST 
+        {
+            DCP_USB_FIFO_ENABLE,
+            DCP_CALL_JOURNAL_ENABLE,
+            DCP_IVTOH_RATIO,
+            DCP_USB_FIFO_SIZE,
+            DCP_USB_DRIVER,
+            DCP_KAI_RELGAIN,
+            DCP_USB_PIXEL_DL_ENABLE,
+            DCP_HIGH_THROUGHPUT,
+            DCP_VDD_OPTIMIZED,
+            DCP_AUTO_AD_GAIN,
+            DCP_NO_HCLKS_FOR_INTEGRATION,
+            DCP_TDI_MODE_ENABLE,
+            DCP_VERT_FLUSH_CONTROL_ENABLE,
+            DCP_ETHERNET_PIPELINE_ENABLE,
+            DCP_FAST_LINK,
+            DCP_OVERSCAN_ROWSCOLS,
+            DCP_PIXEL_PIPELINE_ENABLE,
+            DCP_COLUMN_REPAIR_ENABLE,
+            DCP_WARM_PIXEL_REPAIR_ENABLE,
+            DCP_WARM_PIXEL_REPAIR_COUNT,
+            DCP_LAST
         }
 
         public enum TempStatusRequest : ushort
@@ -342,7 +342,7 @@ namespace SbigSharp
             AutoFreeze,
             DisableAutoFreeze
         }
-        
+
         #endregion Enums
 
         //
@@ -408,7 +408,7 @@ namespace SbigSharp
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public class QueryTemperatureStatusParams
         {
-	        public TempStatusRequest request;
+            public TempStatusRequest request;
 
             public QueryTemperatureStatusParams() : this(TempStatusRequest.TEMP_STATUS_STANDARD) { }
             public QueryTemperatureStatusParams(TempStatusRequest tsr)
@@ -420,11 +420,11 @@ namespace SbigSharp
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public class QueryTemperatureStatusResults
         {
-	        public ushort enabled;
-	        public ushort ccdSetpoint;
-	        public ushort power;
-	        public ushort ccdThermistor;
-	        public ushort ambientThermistor;
+            public ushort enabled;
+            public ushort ccdSetpoint;
+            public ushort power;
+            public ushort ccdThermistor;
+            public ushort ambientThermistor;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -507,7 +507,7 @@ namespace SbigSharp
 
             public OpenDeviceParams()
             {
-                deviceType = (DeviceType) 0;    // illegal value to make things fail fast if unintialized
+                deviceType = (DeviceType)0;    // illegal value to make things fail fast if unintialized
                 ipAddress = 0;
                 lptBaseAddress = 0;             // either it's irrelvant or the OS will handle it
             }
@@ -557,9 +557,9 @@ namespace SbigSharp
             public ushort cameraFound;
             public bool CameraFound { get { return 0 != cameraFound; } }
             public CameraType cameraType;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=64)]
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             public string name;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=10)]
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
             public string serialNumber;
         }
 
@@ -567,7 +567,7 @@ namespace SbigSharp
         public class QueryUsbResults
         {
             public ushort camerasFound;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst=8)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
             public UsbInfo[] dev;
         }
 
@@ -687,7 +687,7 @@ namespace SbigSharp
                 }
             }
         } // class FailedOperation
-        
+
         #endregion Types
 
 
@@ -1032,10 +1032,10 @@ namespace SbigSharp
         //    // strip off the leading dot, if it's there
         //    if (ext.StartsWith("."))
         //        ext = ext.Substring(1);
-            
+
         //    // pick the format based on it matching the strings used in the ImageFormat enum
         //    ImageFormat format = (ImageFormat) Enum.Parse(typeof(ImageFormat), ext);
-            
+
         //    // do the heaving lifting
         //    throw new Exception("Not yet imnplemented, probably never will be, and probably shouldn't be");
         //    //WaitEndAndReadExposureAsBitmap(sep).Save(filename, format);
@@ -1052,6 +1052,6 @@ namespace SbigSharp
         }
 
         #endregion Methods
-        
+
     } // class
 } // namespace
