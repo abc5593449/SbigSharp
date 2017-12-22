@@ -30,7 +30,7 @@ namespace SbigSharp
             // query camera info
             SBIG.GetCcdInfoResults01 gcir0 = new SBIG.GetCcdInfoResults01();
             SBIG.UnivDrvCommand_OutComplex(SBIG.Cmd.CC_GET_CCD_INFO,
-                                           new SBIG.GetCcdInfoParams(SBIG.CcdInfoRequest.ImagingCcdStandard),
+                                           new SBIG.GetCcdInfoParams(SBIG.CcdInfoRequest.CCD_INFO_IMAGING),
                                            gcir0);
             // now print it out
             Console.WriteLine("Firmware version: " + (gcir0.firmwareVersion >> 8) + "." + (gcir0.firmwareVersion & 0xFF));
@@ -49,7 +49,7 @@ namespace SbigSharp
             // get extended info
             SBIG.GetCcdInfoResults2 gcir2 = new SBIG.GetCcdInfoResults2();
             SBIG.UnivDrvCommand_OutComplex(SBIG.Cmd.CC_GET_CCD_INFO,
-                                           new SBIG.GetCcdInfoParams(SBIG.CcdInfoRequest.CameraInfoExtended),
+                                           new SBIG.GetCcdInfoParams(SBIG.CcdInfoRequest.CCD_INFO_EXTENDED),
                                            gcir2);
             // print it out
             Console.Write("Bad columns: " + gcir2.badColumns + " = ");
@@ -65,9 +65,9 @@ namespace SbigSharp
             // start an exposure
             SBIG.StartExposureParams2 sep = new SBIG.StartExposureParams2
             {
-                ccd = SBIG.CCD.Imaging,
-                abgState = SBIG.AbgState.Off,
-                openShutter = SBIG.ShutterState.Unchanged,
+                ccd = SBIG.CCD_Request.CCD_IMAGING,
+                abgState = SBIG.AbgState7.ABG_LOW7,
+                openShutter = SBIG.ShutterCommand.SC_LEAVE_SHUTTER,
                 exposureTime = 100,
                 //sep.width = 765;
                 //sep.height = 510;
@@ -88,8 +88,8 @@ namespace SbigSharp
             SBIG.MiscellaneousControlParams mcp = new SBIG.MiscellaneousControlParams
             {
                 fanEnable = 1,
-                ledState = SBIG.LedState.BlinkHigh,
-                shutterCommand = SBIG.ShutterState.Open
+                ledState = SBIG.LedState.LED_BLINK_HIGH,
+                shutterCommand = SBIG.ShutterCommand.SC_OPEN_SHUTTER
             };
             SBIG.UnivDrvCommand(SBIG.Cmd.CC_MISCELLANEOUS_CONTROL, mcp);
 
@@ -107,10 +107,10 @@ namespace SbigSharp
             // input params
             SBIG.ReadoutLineParams rlp = new SBIG.ReadoutLineParams
             {
-                ccd = SBIG.CCD.Imaging,
+                ccd = SBIG.CCD_Request.CCD_IMAGING,
                 pixelStart = 0,
                 pixelLength = 1530,
-                readoutMode = SBIG.ReadoutLineParams.MakeNBinMode(SBIG.ReadoutMode.BinNx1, 4)
+                readoutMode = SBIG.ReadoutLineParams.MakeNBinMode(SBIG.ReadoutBinningMode.RM_NX1, 4)
             };
             // output
             ushort[] data = new ushort[rlp.pixelLength];
