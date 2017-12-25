@@ -1024,6 +1024,7 @@ namespace SbigSharp
         /// <summary>
         /// Boolean type definition.
         /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct MY_LOGICAL
         {
             public ushort value;
@@ -1076,20 +1077,20 @@ namespace SbigSharp
             /// <summary>
             /// <seealso cref="CCD_Request"/>
             /// </summary>
-            ushort ccd;
+            public ushort ccd;
             /// <summary>
             /// Exposure time in hundredths of a second in least significant 24 bits. 
             /// Most significant bits are bit-flags described in exposureTime #define block.
             /// </summary>
-            ulong exposureTime;
+            public ulong exposureTime;
             /// <summary>
             /// <seealso cref="AbgState7"/>
             /// </summary>
-            ushort abgState;
+            public ushort abgState;
             /// <summary>
             /// <seealso cref="ShutterCommand"/>
             /// </summary>
-            ushort openShutter;
+            public ushort openShutter;
         }
 
         /// <summary>
@@ -1118,7 +1119,7 @@ namespace SbigSharp
             /// <summary>
             /// <seealso cref="ReadoutBinningMode"/>
             /// </summary>
-            public ushort readoutMode;
+            public ReadoutBinningMode readoutMode;
             /// <summary>
             /// top-most row to read out. (0 based)
             /// </summary>
