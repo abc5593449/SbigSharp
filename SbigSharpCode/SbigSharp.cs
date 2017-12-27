@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SbigSharp
 {
-    public struct SBIG
+    public static class SBIG
     {
         //
         #region Constants
