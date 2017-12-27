@@ -11,7 +11,7 @@ namespace SbigSharp
 
             // ask the SBIG driver what, if any, USB cameras are plugged in
             SBIG.QueryUsbResults qur = new SBIG.QueryUsbResults();
-            SBIG.UnivDrvCommand_OutComplex(SBIG.PAR_COMMAND.CC_QUERY_USB, null, qur);
+            SBIG.UnivDrvCommand_OutComplex(SBIG.PAR_COMMAND.CC_QUERY_USB, null, out qur);
             for (int i = 0; i < qur.camerasFound; i++)
             {
                 if (!qur.dev[i].cameraFound)
@@ -31,7 +31,7 @@ namespace SbigSharp
             var gcir0 = new SBIG.GetCCDInfoResults0and1();
             SBIG.UnivDrvCommand_OutComplex(SBIG.PAR_COMMAND.CC_GET_CCD_INFO,
                                            new SBIG.GetCcdInfoParams(SBIG.CcdInfoRequest.CCD_INFO_IMAGING),
-                                           gcir0);
+                                           out gcir0);
             // now print it out
             Console.WriteLine("Firmware version: " + (gcir0.firmwareVersion >> 8) + "." + (gcir0.firmwareVersion & 0xFF));
             Console.WriteLine("Camera type: " + gcir0.cameraType.ToString());
@@ -51,7 +51,7 @@ namespace SbigSharp
             SBIG.UnivDrvCommand_OutComplex(
                 SBIG.PAR_COMMAND.CC_GET_CCD_INFO,
                 new SBIG.GetCcdInfoParams(SBIG.CcdInfoRequest.CCD_INFO_EXTENDED),
-                gcir2);
+                out gcir2);
             // print it out
             Console.Write("Bad columns: " + gcir2.badColumns + " = ");
             Console.WriteLine(gcir2.columns[0] + ", " + gcir2.columns[1] + ", " + gcir2.columns[2] + ", " + gcir2.columns[3]);
@@ -60,8 +60,10 @@ namespace SbigSharp
 
             // query temperature
             SBIG.QueryTemperatureStatusParams qtsp =
-                new SBIG.QueryTemperatureStatusParams(
-                    SBIG.TempStatusRequest.TEMP_STATUS_ADVANCED2);
+                new SBIG.QueryTemperatureStatusParams()
+                {
+                    request = SBIG.TempStatusRequest.TEMP_STATUS_ADVANCED2
+                };
             var qtsr2 = SBIG.UnivDrvCommand<SBIG.QueryTemperatureStatusResults2>(
                 SBIG.PAR_COMMAND.CC_QUERY_TEMPERATURE_STATUS, qtsp);
 
