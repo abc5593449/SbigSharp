@@ -1146,7 +1146,6 @@ namespace SbigSharp
             public CCD_Request ccd;
         }
 
-        //TODO: 重新檢查是否符合類別動作
         /// <summary>
         /// Parameters used to readout lines of SBIG cameras during readout.
         /// </summary>
@@ -1169,18 +1168,6 @@ namespace SbigSharp
             /// number of pixels to digitize.
             /// </summary>
             public UInt16 pixelLength;
-
-            //public static ushort MakeNBinMode(ReadoutBinningMode rlp, ushort n)
-            //{
-            //    // put the high byte in place, but only if it's one of those binning modes
-            //    if (ReadoutBinningMode.RM_NX1 == rlp ||
-            //        ReadoutBinningMode.RM_NX2 == rlp ||
-            //        ReadoutBinningMode.RM_NX3 == rlp ||
-            //        ReadoutBinningMode.RM_NXN == rlp)
-            //        return (ushort)(((ushort)rlp) | (n << 8));
-            //    else
-            //        return (ushort)rlp;
-            //}
         }
 
         /// <summary>
@@ -1293,7 +1280,6 @@ namespace SbigSharp
             public TempStatusRequest request;
         }
 
-        //TODO: 檢查MY_LOGICAL
         /// <summary>
         /// The results struct of a Temperature Status Query, with request set to TEMP_STATUS_STANDARD.
         /// </summary>
@@ -1322,7 +1308,6 @@ namespace SbigSharp
             public UInt16 ambientThermistor;
         }
 
-        //TODO: 檢查MY_LOGICAL
         /// <summary>
         /// The results struct of a Temperature Status Query, with request set to TEMP_STATUS_ADVANCED.
         /// </summary>
@@ -1576,7 +1561,7 @@ namespace SbigSharp
             /// </summary>
             public UInt32 pixel_height;
         }
-        
+
         /// <summary>
         /// Get CCD Info command results 0 and 1 request.
         /// </summary>
@@ -1690,6 +1675,7 @@ namespace SbigSharp
         /// <para>b1: 0 = Bayer color matrix, 1 = Truesense color matrix</para>
         /// <para>b2 ?b31: reserved for future expansion</para>
         /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetCCDInfoResults6
         {
             /// <summary>
@@ -1971,7 +1957,6 @@ namespace SbigSharp
             public UInt32 count;
         }
 
-        //TODO: 移植uchar類型指標
         /// <summary>
         /// Intended for SBIG internal use only. Unimplemented.
         /// </summary>
@@ -1989,7 +1974,7 @@ namespace SbigSharp
             /// <summary>
             /// Buffer of data to send.
             /// </summary>
-            //public unsigned char* source;
+            public UIntPtr source;
         }
 
         /// <summary>
@@ -2060,7 +2045,6 @@ namespace SbigSharp
             public UInt16 motorAlwaysOn;
         }
 
-        //TODO: 移植uchar類型指標
         /// <summary>
         /// Intended for SBIG internal use only. Unused.
         /// </summary>
@@ -2074,7 +2058,7 @@ namespace SbigSharp
             /// <summary>
             /// Outgoing buffer.
             /// </summary>
-            //public uchar* outPtr;
+            public UIntPtr outPtr;
             /// <summary>
             /// Incoming buffer length.
             /// </summary>
@@ -2082,7 +2066,7 @@ namespace SbigSharp
             /// <summary>
             /// Incoming buffer.
             /// </summary>
-            //public uchar* inPtr;
+            public UIntPtr inPtr;
         }
 
         /// <summary>
@@ -2497,7 +2481,6 @@ namespace SbigSharp
             public UInt32 countHigh;
         }
 
-        //TODO: 移植uchar類型
         /// <summary>
         /// This command is used read or write data to the USB cameras I2C expansion port. 
         /// It writes the supplied data to the I2C port, or reads data from the supplied address.
@@ -2511,11 +2494,11 @@ namespace SbigSharp
             /// <summary>
             /// Address to read from or write to
             /// </summary>
-           // public uchar address;
+            public Byte address;
             /// <summary>
             /// Data to write to the external I2C device, ignored for read
             /// </summary>
-          //  public uchar data;
+            public Byte data;
             /// <summary>
             /// TRUE when write is desired , FALSE when read is desired
             /// </summary>
@@ -2523,10 +2506,9 @@ namespace SbigSharp
             /// <summary>
             /// Device Address of the I2C peripheral
             /// </summary>
-           // public uchar deviceAddress;
+            public Byte deviceAddress;
         }
 
-        //TODO: 移植uchar類型
         /// <summary>
         /// This command is used read or write data to the USB cameras I2C expansion port.
         /// It returns the result of the read request.
@@ -2540,11 +2522,9 @@ namespace SbigSharp
             /// <summary>
             /// Data read from the external I2C device
             /// </summary>
-           // public uchar data;
+            public Byte data;
         }
 
-        //"bullet" | "number" | "table"
-        //TODO: 移植uchar類型指標
         /// <summary>
         /// The CFW Command is a high-level API for controlling the SBIG color filter wheels. 
         /// It supports the 
@@ -2610,7 +2590,7 @@ namespace SbigSharp
             /// <summary>
             /// command specific.
             /// </summary>
-            //  public uchar* outPtr;
+            public UIntPtr outPtr;
             /// <summary>
             /// command specific.
             /// </summary>
@@ -2618,7 +2598,7 @@ namespace SbigSharp
             /// <summary>
             /// command specific.
             /// </summary>
-           // public uchar* inPtr;
+            public UIntPtr inPtr;
         }
 
 
@@ -2736,7 +2716,6 @@ namespace SbigSharp
             public MY_LOGICAL bitIsSet;
         }
 
-        //TODO: 移植uchar類型指標
         /// <summary>
         /// Read or write a block of data the user space in the EEPROM.
         /// </summary>
@@ -2750,10 +2729,10 @@ namespace SbigSharp
             /// <summary>
             /// Buffer of data to be written.
             /// </summary>
-            /// public uchar data[32];
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public Byte[] data;
         }
 
-        //TODO: 移植uchar類型指標
         /// <summary>
         /// Read or write a block of data the user space in the EEPROM.
         /// </summary>
@@ -2767,7 +2746,8 @@ namespace SbigSharp
             /// <summary>
             /// Buffer of data to be written.
             /// </summary>
-            /// public uchar data[32];
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public Byte[] data;
         }
 
         /// <summary>
@@ -2826,7 +2806,6 @@ namespace SbigSharp
             public UInt16 flags;
         }
 
-        //TODO: 移植uchar類型
         /// <summary>
         /// Send the Biorad setup to the camera, returning any error.
         /// </summary>
@@ -2836,7 +2815,7 @@ namespace SbigSharp
             /// <summary>
             /// Row period.
             /// </summary>
-           // public uchar rowPeriod;
+            public Byte rowPeriod;
         }
 
         /// <summary>
@@ -2851,7 +2830,6 @@ namespace SbigSharp
             public BTDI_Error btdiErrors;
         }
 
-        //TODO: 移植uchar類型指標
         /// <summary>
         /// The Motor Focus Command is a high-level API for controlling SBIG Motor Focus accessories. 
         /// It supports the new ST Motor Focus unit and will be expanded as required to support new models in the future.
@@ -2917,7 +2895,7 @@ namespace SbigSharp
             /// <summary>
             /// command specific.
             /// </summary>
-           // public uchar* outPtr;
+            public UIntPtr outPtr;
             /// <summary>
             /// command specific.
             /// </summary>
@@ -2925,7 +2903,7 @@ namespace SbigSharp
             /// <summary>
             /// command specific.
             /// </summary>
-           // public uchar* inPtr;
+            public UIntPtr inPtr;
         }
 
         /// <summary>
@@ -2996,7 +2974,6 @@ namespace SbigSharp
             public Int32 mfResult2;
         }
 
-        //TODO: 移植uchar類型指標
         /// <summary>
         /// Differential Guider Command Guide:
         /// * DGC_DETECT detects whether a Differential Guide unit is connected to the camera.
@@ -3032,7 +3009,7 @@ namespace SbigSharp
             /// <summary>
             /// output buffer. Command specific.
             /// </summary>
-          //  public uchar* outPtr;
+            public UIntPtr outPtr;
             /// <summary>
             /// Size of input buffer. Command specific.
             /// </summary>
@@ -3040,7 +3017,7 @@ namespace SbigSharp
             /// <summary>
             /// input buffer. Command specific.
             /// </summary>
-           // public uchar* inPtr;
+            public UIntPtr inPtr;
         }
 
         /// <summary>
@@ -3091,7 +3068,6 @@ namespace SbigSharp
             public UInt16 nIRBrightness;
         }
 
-        //TODO: 移植char類型指標
         /// <summary>
         /// Internal SBIG use only. Implement the Bulk IO command which is used for Bulk Reads/Writes to the camera for diagnostic purposes.
         /// </summary>
@@ -3113,7 +3089,7 @@ namespace SbigSharp
             /// <summary>
             /// data buffer.
             /// </summary>
-           // public char* dataPtr;
+            public IntPtr dataPtr;
         }
 
         /// <summary>
@@ -3239,6 +3215,7 @@ namespace SbigSharp
             public FeatureFirmwareRequirement ffr;
         }
 
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryFeatureSupportedResults
         {
             /// <summary>
@@ -3247,29 +3224,45 @@ namespace SbigSharp
             public MY_LOGICAL result;
         }
 
-        //TODO: 找尋正確的移植方式
-        ///// <summary>
-        ///// Internal SBIG use only. Queries Start/End exposure performance tracking.
-        ///// </summary>
-        //public struct QueryExposureTicksResults
-        //{
-        //    /// <summary>
-        //    /// Start exposure tick initial value.
-        //    /// </summary>
-        //    public LARGE_INTEGER startExposureTicks0;
-        //    /// <summary>
-        //    /// Start exposure tick final value.
-        //    /// </summary>
-        //    public LARGE_INTEGER startExposureTicks1;
-        //    /// <summary>
-        //    /// End exposure tick initial value.
-        //    /// </summary>
-        //    public LARGE_INTEGER endExposureTicks0;
-        //    /// <summary>
-        //    /// End exposure tick final value.
-        //    /// </summary>
-        //    public LARGE_INTEGER endExposureTicks1;
-        //}
+        //TODO: 檢查移植類型正確性
+        /// <summary>
+        /// Internal SBIG use only. Queries Start/End exposure performance tracking.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
+        public struct QueryExposureTicksResults
+        {
+            /// <summary>
+            /// C union _LARGE_INTEGER type.
+            /// </summary>
+            [StructLayout(LayoutKind.Explicit, Pack = 8)]
+            public struct LARGE_INTEGER
+            {
+                [FieldOffset(0)]
+                public UInt32 LowPart;
+                [FieldOffset(4)]
+                public Int32 HighPart;
+
+                [FieldOffset(0)]
+                public Int64 QuadPart;
+            }
+
+            /// <summary>
+            /// Start exposure tick initial value.
+            /// </summary>
+            public LARGE_INTEGER startExposureTicks0;
+            /// <summary>
+            /// Start exposure tick final value.
+            /// </summary>
+            public LARGE_INTEGER startExposureTicks1;
+            /// <summary>
+            /// End exposure tick initial value.
+            /// </summary>
+            public LARGE_INTEGER endExposureTicks0;
+            /// <summary>
+            /// End exposure tick final value.
+            /// </summary>
+            public LARGE_INTEGER endExposureTicks1;
+        }
 
         /// <summary>
         /// gets thrown whenever an SBIG operation doesn't return success (CE_NO_ERROR)
@@ -3298,7 +3291,6 @@ namespace SbigSharp
         #region DEBUG
         //
 
-        //TODO: 檢查列舉定義
         /// <summary>
         /// Flags for enabling debug messages of CC_***_*** commands.
         /// </summary>
@@ -3339,7 +3331,6 @@ namespace SbigSharp
             DLF_CC_80 = 0x0080
         }
 
-        //TODO: 檢查列舉定義
         /// <summary>
         /// Flags for enabling debug messages of MC_***_*** commands.
         /// </summary>
@@ -3380,7 +3371,6 @@ namespace SbigSharp
             DLF_MC_80 = 0x0080
         }
 
-        //TODO: 檢查列舉定義
         /// <summary>
         /// Flags for enabling debug messages of communication methods.
         /// </summary>
