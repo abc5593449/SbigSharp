@@ -1578,69 +1578,7 @@ namespace SbigSharp
             /// </summary>
             public UInt32 pixel_height;
         }
-
-        //#region 舊GetCCDInfoResults方法
-        ///// <summary>
-        ///// Result structure for CC_GET_CCD_INFO request types 0 and 1
-        ///// </summary>
-        //[StructLayout(LayoutKind.Sequential, Pack = 8)]
-        //public struct GetCcdInfoResults01
-        //{
-        //    public UInt16 firmwareVersion; // 0x1234 = v12.34
-        //    public CameraType cameraType;
-        //    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
-        //    public string name;
-        //    public UInt16 readoutModeCount;
-        //    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
-        //    public ReadoutInfo[] readoutInfo;
-        //}
-
-        ///// <summary>
-        ///// Result structure for CC_GET_CCD_INFO request type 2
-        ///// </summary>
-        //[StructLayout(LayoutKind.Sequential, Pack = 8)]
-        //public struct GetCcdInfoResults2
-        //{
-        //    public UInt16 badColumns;
-        //    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        //    public UInt16[] columns;
-        //    public ImagingABG imagingABG; // 0 = no ABG, 1 = Anti-Blooming Gate protection
-        //    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
-        //    public string serialNumber;
-        //}
-
-        ///// <summary>
-        ///// Result structure for CC_GET_CCD_INFO request type 3
-        ///// </summary>
-        //[StructLayout(LayoutKind.Sequential, Pack = 8)]
-        //public struct GetCcdInfoResults3
-        //{
-        //    public AD_Size a2dSize;
-        //    public FilterType filterType;
-        //}
-
-        ///// <summary>
-        ///// Result structure for CC_GET_CCD_INFO request type 4 and 5
-        ///// </summary>
-        //[StructLayout(LayoutKind.Sequential, Pack = 8)]
-        //public struct GetCcdInfoResults45
-        //{
-        //    public UInt16 capabilitiesBits;
-        //    public UInt16 dumpExtra;
-        //}
-
-        ///// <summary>
-        ///// Result structure for CC_GET_CCD_INFO request type 6
-        ///// </summary>
-        //[StructLayout(LayoutKind.Sequential, Pack = 8)]
-        //public struct GetCcdInfoResults6
-        //{
-        //    public UInt32 cameraBits;
-        //    public UInt32 ccdBits;
-        //    public UInt32 extraBits;
-        //}
-        //#endregion
-
+        
         /// <summary>
         /// Get CCD Info command results 0 and 1 request.
         /// </summary>
