@@ -1020,14 +1020,14 @@ namespace SbigSharp
         #region Types
         //
 
-        //TODO: 移植類型
+        //TODO: 檢查移植類型正確性
         /// <summary>
         /// Boolean type definition.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct MY_LOGICAL
         {
-            public ushort value;
+            public UInt16 value;
 
             public MY_LOGICAL(ushort value)
             {
@@ -1077,20 +1077,20 @@ namespace SbigSharp
             /// <summary>
             /// <seealso cref="CCD_Request"/>
             /// </summary>
-            public ushort ccd;
+            public UInt16 ccd;
             /// <summary>
             /// Exposure time in hundredths of a second in least significant 24 bits. 
             /// Most significant bits are bit-flags described in exposureTime #define block.
             /// </summary>
-            public ulong exposureTime;
+            public UInt32 exposureTime;
             /// <summary>
             /// <seealso cref="AbgState7"/>
             /// </summary>
-            public ushort abgState;
+            public UInt16 abgState;
             /// <summary>
             /// <seealso cref="ShutterCommand"/>
             /// </summary>
-            public ushort openShutter;
+            public UInt16 openShutter;
         }
 
         /// <summary>
@@ -1123,22 +1123,21 @@ namespace SbigSharp
             /// <summary>
             /// top-most row to read out. (0 based)
             /// </summary>
-            public ushort top;
+            public UInt16 top;
             /// <summary>
             /// left-most column to read out. (0 based)
             /// </summary>
-            public ushort left;
+            public UInt16 left;
             /// <summary>
             ///  image height in binned pixels.
             /// </summary>
-            public ushort height;
+            public UInt16 height;
             /// <summary>
             /// image width in binned pixels.
             /// </summary>
-            public ushort width;
+            public UInt16 width;
         }
 
-        //TODO: 重新檢查是否符合類別動作
         /// <summary>
         /// Parameters used to end SBIG camera exposures.
         /// Set ABORT_DONT_END flag in ccd to abort exposures in supported cameras.
@@ -1147,12 +1146,6 @@ namespace SbigSharp
         public struct EndExposureParams
         {
             public CCD_Request ccd;
-
-            //public EndExposureParams() : this(CCD_Request.CCD_IMAGING) { }
-            public EndExposureParams(CCD_Request ccd)
-            {
-                this.ccd = ccd;
-            }
         }
 
         //TODO: 重新檢查是否符合類別動作
@@ -1173,11 +1166,11 @@ namespace SbigSharp
             /// <summary>
             /// left-most pixel to read out.
             /// </summary>
-            public ushort pixelStart;
+            public UInt16 pixelStart;
             /// <summary>
             /// number of pixels to digitize.
             /// </summary>
-            public ushort pixelLength;
+            public UInt16 pixelLength;
 
             //public static ushort MakeNBinMode(ReadoutBinningMode rlp, ushort n)
             //{
@@ -1209,7 +1202,7 @@ namespace SbigSharp
             /// <summary>
             /// number of lines to dump.
             /// </summary>
-            public ushort lineLength;
+            public UInt16 lineLength;
         }
 
         /// <summary>
@@ -1238,19 +1231,19 @@ namespace SbigSharp
             /// <summary>
             /// top-most row to read out. (0 based)
             /// </summary>
-            public ushort top;
+            public UInt16 top;
             /// <summary>
             /// left-most column to read out. (0 based)
             /// </summary>
-            public ushort left;
+            public UInt16 left;
             /// <summary>
             /// image height in binned pixels.
             /// </summary>
-            public ushort height;
+            public UInt16 height;
             /// <summary>
             /// image width in binned pixels.
             /// </summary>
-            public ushort width;
+            public UInt16 width;
         }
 
         /// <summary>
@@ -1268,7 +1261,7 @@ namespace SbigSharp
             /// <summary>
             /// CCD temperature setpoint in A/D units if regulation on or TE drive level (0-255 = 0-100%) if regulation override.
             /// </summary>
-            public ushort ccdSetpointA2dUnits;
+            public UInt16 ccdSetpointA2dUnits;
         }
 
         /// <summary>
@@ -1287,7 +1280,6 @@ namespace SbigSharp
             public double ccdSetpointCelcius;
         }
 
-        //TODO: 重新檢查是否符合類別動作
         /// <summary>
         /// The Query Temperature Status command is used to monitor the CCD's temperature regulation. 
         /// The original version of this command took no Parameters (a NULL pointer) but the command has been expanded to allow a more user friendly result. 
@@ -1301,12 +1293,6 @@ namespace SbigSharp
             /// <seealso cref="TempStatusRequest"/>
             /// </summary>
             public TempStatusRequest request;
-
-            //public QueryTemperatureStatusParams() : this(TempStatusRequest.TEMP_STATUS_STANDARD) { }
-            public QueryTemperatureStatusParams(TempStatusRequest tsr)
-            {
-                request = tsr;
-            }
         }
 
         //TODO: 檢查MY_LOGICAL
@@ -1323,19 +1309,19 @@ namespace SbigSharp
             /// <summary>
             /// CCD temperature or thermistor setpoint in A/D units.
             /// </summary>
-            public ushort ccdSetpoint;
+            public UInt16 ccdSetpoint;
             /// <summary>
             /// this is the power being applied to the TE cooler to maintain temperature regulation and is in the range 0 thru 255.
             /// </summary>
-            public ushort power;
+            public UInt16 power;
             /// <summary>
             /// this is the CCD thermistor reading in A/D units.
             /// </summary>
-            public ushort ccdThermistor;
+            public UInt16 ccdThermistor;
             /// <summary>
             /// this is the ambient thermistor reading in A/D units.
             /// </summary>
-            public ushort ambientThermistor;
+            public UInt16 ambientThermistor;
         }
 
         //TODO: 檢查MY_LOGICAL
@@ -1414,10 +1400,10 @@ namespace SbigSharp
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct ActivateRelayParams
         {
-            public ushort tXPlus;
-            public ushort tXMinus;
-            public ushort tYPlus;
-            public ushort tYMinus;
+            public UInt16 tXPlus;
+            public UInt16 tXMinus;
+            public UInt16 tYPlus;
+            public UInt16 tYMinus;
         }
 
         /// <summary>
@@ -1432,15 +1418,15 @@ namespace SbigSharp
             /// <summary>
             /// number of pulses to generate (0 thru 255).
             /// </summary>
-            public ushort numberPulses;
+            public UInt16 numberPulses;
             /// <summary>
             /// width of pulses in units of microseconds with a minimum of 9 microseconds.
             /// </summary>
-            public ushort pulseWidth;
+            public UInt16 pulseWidth;
             /// <summary>
             /// period of pulses in units of microseconds with a minimum of 29 plus the pulseWidth microseconds.
             /// </summary>
-            public ushort pulsePeriod;
+            public UInt16 pulsePeriod;
         }
 
         /// <summary>
@@ -1455,12 +1441,12 @@ namespace SbigSharp
             /// <summary>
             /// Length of data buffer to send.
             /// </summary>
-            public ushort dataLength;
+            public UInt16 dataLength;
             /// <summary>
             /// Buffer of data to send.
             /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-            public ushort[] data;
+            public UInt16[] data;
         }
 
         /// <summary>
@@ -1472,7 +1458,7 @@ namespace SbigSharp
             /// <summary>
             /// Bytes sent out.
             /// </summary>
-            public ushort bytesSent;
+            public UInt16 bytesSent;
         }
 
         /// <summary>
@@ -1497,7 +1483,7 @@ namespace SbigSharp
             /// <summary>
             /// Maintained for historical purposes. Keep set to 0.
             /// </summary>
-            public ushort sbigUseOnly;
+            public UInt16 sbigUseOnly;
         }
 
         /// <summary>
@@ -1535,7 +1521,7 @@ namespace SbigSharp
             /// <summary>
             /// driver version in BCD with the format XX.XX
             /// </summary>
-            public ushort version;
+            public UInt16 version;
             /// <summary>
             /// driver name, null terminated string
             /// </summary>
@@ -1544,7 +1530,7 @@ namespace SbigSharp
             /// <summary>
             /// maximum request response available from this driver
             /// </summary>
-            public ushort maxRequest;
+            public UInt16 maxRequest;
         }
 
         /// <summary>
@@ -1574,23 +1560,23 @@ namespace SbigSharp
             /// <summary>
             /// width of image in pixels.
             /// </summary>
-            public ushort width;
+            public UInt16 width;
             /// <summary>
             /// height of image in pixels.
             /// </summary>
-            public ushort height;
+            public UInt16 height;
             /// <summary>
             /// a four digit BCD number specifying the amplifier gain in e-/ADU in XX.XX format.
             /// </summary>
-            public ushort gain;
+            public UInt16 gain;
             /// <summary>
             /// an eight digit BCD number specifying the pixel width in microns in the XXXXXX.XX format.
             /// </summary>
-            public ulong pixel_width;
+            public UInt32 pixel_width;
             /// <summary>
             /// an eight digit BCD number specifying the pixel height in microns in the XXXXXX.XX format.
             /// </summary>
-            public ulong pixel_height;
+            public UInt32 pixel_height;
         }
 
         //#region 舊GetCCDInfoResults方法
@@ -1600,11 +1586,11 @@ namespace SbigSharp
         //[StructLayout(LayoutKind.Sequential, Pack = 8)]
         //public struct GetCcdInfoResults01
         //{
-        //    public ushort firmwareVersion; // 0x1234 = v12.34
+        //    public UInt16 firmwareVersion; // 0x1234 = v12.34
         //    public CameraType cameraType;
         //    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
         //    public string name;
-        //    public ushort readoutModeCount;
+        //    public UInt16 readoutModeCount;
         //    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
         //    public ReadoutInfo[] readoutInfo;
         //}
@@ -1615,9 +1601,9 @@ namespace SbigSharp
         //[StructLayout(LayoutKind.Sequential, Pack = 8)]
         //public struct GetCcdInfoResults2
         //{
-        //    public ushort badColumns;
+        //    public UInt16 badColumns;
         //    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        //    public ushort[] columns;
+        //    public UInt16[] columns;
         //    public ImagingABG imagingABG; // 0 = no ABG, 1 = Anti-Blooming Gate protection
         //    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         //    public string serialNumber;
@@ -1639,8 +1625,8 @@ namespace SbigSharp
         //[StructLayout(LayoutKind.Sequential, Pack = 8)]
         //public struct GetCcdInfoResults45
         //{
-        //    public ushort capabilitiesBits;
-        //    public ushort dumpExtra;
+        //    public UInt16 capabilitiesBits;
+        //    public UInt16 dumpExtra;
         //}
 
         ///// <summary>
@@ -1649,9 +1635,9 @@ namespace SbigSharp
         //[StructLayout(LayoutKind.Sequential, Pack = 8)]
         //public struct GetCcdInfoResults6
         //{
-        //    public ulong cameraBits;
-        //    public ulong ccdBits;
-        //    public ulong extraBits;
+        //    public UInt32 cameraBits;
+        //    public UInt32 ccdBits;
+        //    public UInt32 extraBits;
         //}
         //#endregion
 
@@ -1664,7 +1650,7 @@ namespace SbigSharp
             /// <summary>
             /// version of the firmware in the resident microcontroller in BCD format (XX.XX, 0x1234 = 12.34).
             /// </summary>
-            public ushort firmwareVersion;
+            public UInt16 firmwareVersion;
             /// <summary>
             /// <seealso cref="CameraType"/>
             /// </summary>
@@ -1677,7 +1663,7 @@ namespace SbigSharp
             /// <summary>
             /// number of readout modes supported.
             /// </summary>
-            public ushort readoutModes;
+            public UInt16 readoutModes;
             /// <summary>
             /// <seealso cref="READOUT_INFO"/>
             /// </summary>
@@ -1694,17 +1680,17 @@ namespace SbigSharp
             /// <summary>
             /// number of bad columns in imaging CCD.
             /// </summary>
-            public ushort badColumns;
+            public UInt16 badColumns;
             /// <summary>
             /// bad columns.
             /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-            public ushort[] columns;
+            public UInt16[] columns;
             /// <summary>
             /// type of Imaging CCD, 0= No ABG Protection, 1 = ABG Present.
             /// see also: <seealso cref="ImagingABG"/> enum.
             /// </summary>
-            public ushort imagingABG;
+            public UInt16 imagingABG;
             /// <summary>
             /// null terminated serial number string.
             /// </summary>
@@ -1748,11 +1734,11 @@ namespace SbigSharp
             /// <summary>
             /// Camera capabilities. See the CB_XXX_XXX definitions in the sbigurdv.h header file.
             /// </summary>
-            public ushort capabilitiesBits;
+            public UInt16 capabilitiesBits;
             /// <summary>
             /// Number of unbinned rows to dump to transfer image area to storage area.
             /// </summary>
-            public ushort dumpExtra;
+            public UInt16 dumpExtra;
         }
 
         /// <summary>
@@ -1773,18 +1759,17 @@ namespace SbigSharp
             /// <summary>
             /// Set of bits for additional camera capabilities.
             /// </summary>
-            public ulong cameraBits;
+            public UInt32 cameraBits;
             /// <summary>
             /// Set of bits for additional CCD capabilities.
             /// </summary>
-            public ulong ccdBits;
+            public UInt32 ccdBits;
             /// <summary>
             /// Set of bits for additional capabilities.
             /// </summary>
-            public ulong extraBits;
+            public UInt32 extraBits;
         }
 
-        //TODO: 重新檢查是否符合類別動作
         /// <summary>
         /// The Query Command Status command is used to monitor the progress of a previously requested command.
         /// Typically this will be used to monitor the progress of an exposure, relay closure or CFW-6A move command.
@@ -1796,15 +1781,8 @@ namespace SbigSharp
             /// command of which the status is desired.
             /// </summary>
             public PAR_COMMAND command;
-
-            // public QueryCommandStatusParams() : this(PAR_COMMAND.CC_NULL) { }
-            public QueryCommandStatusParams(PAR_COMMAND cmd)
-            {
-                command = cmd;
-            }
         }
 
-        //TODO: 重新檢查是否符合類別動作
         /// <summary>
         /// Results for the Query Command Status command.
         /// </summary>
@@ -1815,12 +1793,6 @@ namespace SbigSharp
             /// command status.
             /// </summary>
             public PAR_ERROR status;
-
-            // public QueryCommandStatusResults() : this(PAR_ERROR.CE_NO_ERROR) { }
-            public QueryCommandStatusResults(PAR_ERROR error)
-            {
-                status = error;
-            }
         }
 
         /// <summary>
@@ -1832,11 +1804,11 @@ namespace SbigSharp
             /// <summary>
             /// command status.
             /// </summary>
-            public ushort status;
+            public UInt16 status;
             /// <summary>
             /// expanded information on command status.
             /// </summary>
-            public ushort info;
+            public UInt16 info;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -1878,7 +1850,7 @@ namespace SbigSharp
             /// <summary>
             /// the CCD's offset.
             /// </summary>
-            public ushort offset;
+            public UInt16 offset;
         }
 
         /// <summary>
@@ -1891,7 +1863,7 @@ namespace SbigSharp
             /// <summary>
             /// the CCD's offset.
             /// </summary>
-            public ushort offset;
+            public UInt16 offset;
             /// <summary>
             /// noise in the ccd readout register in ADUs rms.
             /// </summary>
@@ -1907,11 +1879,11 @@ namespace SbigSharp
             /// <summary>
             /// this is the desired position of the mirror in the X axis.
             /// </summary>
-            public ushort xDeflection;
+            public UInt16 xDeflection;
             /// <summary>
             /// this is the desired position of the mirror in the Y axis.
             /// </summary>
-            public ushort yDeflection;
+            public UInt16 yDeflection;
         }
 
         /// <summary>
@@ -1938,7 +1910,7 @@ namespace SbigSharp
             /// <summary>
             /// this is the desired delay in microseconds.
             /// </summary>
-            public ulong delay;
+            public UInt32 delay;
         }
 
         /// <summary>
@@ -1966,18 +1938,11 @@ namespace SbigSharp
             /// <summary>
             /// for deviceType::DEV_LPTN: Windows 9x Only, Win NT uses deviceSelect.
             /// </summary>
-            public ushort lptBaseAddress;
+            public UInt16 lptBaseAddress;
             /// <summary>
             /// for deviceType::DEV_ETH: Ethernet address.
             /// </summary>
             public uint ipAddress;
-
-            //public OpenDeviceParams()
-            //{
-            //    deviceType = (DeviceType)0;    // illegal value to make things fail fast if unintialized
-            //    ipAddress = 0;
-            //    lptBaseAddress = 0;             // either it's irrelvant or the OS will handle it
-            //}
 
             public OpenDeviceParams(string s) : this()
             {
@@ -1992,9 +1957,8 @@ namespace SbigSharp
                 catch (FormatException)
                 {
                     // if it's not an IP, it should be a string value of the enum
-                    if (!Enum.TryParse<DeviceType>(s, true, out deviceType))
+                    if (!Enum.TryParse(s, true, out deviceType))
                         throw new ArgumentException("must pass either an IP address or valid DeviceType enum string");
-
                 }
             }
         }
@@ -2014,7 +1978,7 @@ namespace SbigSharp
             /// <summary>
             /// IRQ Level.
             /// </summary>
-            public ushort level;
+            public UInt16 level;
         }
 
         /// <summary>
@@ -2026,7 +1990,7 @@ namespace SbigSharp
             /// <summary>
             /// IRQ Level.
             /// </summary>
-            public ushort level;
+            public UInt16 level;
         }
 
         /// <summary>
@@ -2042,7 +2006,7 @@ namespace SbigSharp
             /// <summary>
             /// base address of the LPT port.
             /// </summary>
-            public ushort baseAddress;
+            public UInt16 baseAddress;
             /// <summary>
             /// see also: <seealso cref="CameraType"/> enum.
             /// </summary>
@@ -2050,11 +2014,11 @@ namespace SbigSharp
             /// <summary>
             /// total number of communications with camera.
             /// </summary>
-            public ulong comTotal;
+            public UInt32 comTotal;
             /// <summary>
             /// total number of failed communications with camera.
             /// </summary>
-            public ulong comFailed;
+            public UInt32 comFailed;
         }
 
         /// <summary>
@@ -2068,7 +2032,7 @@ namespace SbigSharp
             /// <summary>
             /// counter value in microseconds.
             /// </summary>
-            public ulong count;
+            public UInt32 count;
         }
 
         //TODO: 移植uchar類型指標
@@ -2081,11 +2045,11 @@ namespace SbigSharp
             /// <summary>
             /// Destination port.
             /// </summary>
-            public ushort port;
+            public UInt16 port;
             /// <summary>
             /// Length of data buffer.
             /// </summary>
-            public ushort length;
+            public UInt16 length;
             /// <summary>
             /// Buffer of data to send.
             /// </summary>
@@ -2101,11 +2065,11 @@ namespace SbigSharp
             /// <summary>
             /// Destination port.
             /// </summary>
-            public ushort port;
+            public UInt16 port;
             /// <summary>
             /// Buffer of data to send.
             /// </summary>
-            public ushort data;
+            public UInt16 data;
         }
 
         /// <summary>
@@ -2125,11 +2089,11 @@ namespace SbigSharp
             /// <summary>
             /// Starting pixel. (Unused)
             /// </summary>
-            public ushort pixelStart;
+            public UInt16 pixelStart;
             /// <summary>
             /// Count of cycles to pass.
             /// </summary>
-            public ushort pixelLength;
+            public UInt16 pixelLength;
         }
 
         /// <summary>
@@ -2141,23 +2105,23 @@ namespace SbigSharp
             /// <summary>
             /// Flag TRUE to test the clocks.
             /// </summary>
-            public ushort testClocks;
+            public UInt16 testClocks;
             /// <summary>
             /// Flag TRUE to test the motors.
             /// </summary>
-            public ushort testMotor;
+            public UInt16 testMotor;
             /// <summary>
             /// Flag TRUE to test 5800 (???).
             /// </summary>
-            public ushort test5800;
+            public UInt16 test5800;
             /// <summary>
             /// Flag true to align STL (???).
             /// </summary>
-            public ushort stlAlign;
+            public UInt16 stlAlign;
             /// <summary>
             /// Flag true for motor always on (???).
             /// </summary>
-            public ushort motorAlwaysOn;
+            public UInt16 motorAlwaysOn;
         }
 
         //TODO: 移植uchar類型指標
@@ -2170,7 +2134,7 @@ namespace SbigSharp
             /// <summary>
             /// Outgoing buffer length.
             /// </summary>
-            public ushort outLength;
+            public UInt16 outLength;
             /// <summary>
             /// Outgoing buffer.
             /// </summary>
@@ -2178,7 +2142,7 @@ namespace SbigSharp
             /// <summary>
             /// Incoming buffer length.
             /// </summary>
-            public ushort inLength;
+            public UInt16 inLength;
             /// <summary>
             /// Incoming buffer.
             /// </summary>
@@ -2365,7 +2329,7 @@ namespace SbigSharp
             /// <summary>
             /// the value of the control parameter.
             /// </summary>
-            public ulong controlValue;
+            public UInt32 controlValue;
         }
 
         /// <summary>
@@ -2460,7 +2424,7 @@ namespace SbigSharp
             /// <summary>
             /// Number of cameras found. (Max 4)
             /// </summary>
-            public ushort camerasFound;
+            public UInt16 camerasFound;
             /// <summary>
             /// Information returned by cameras.
             /// </summary>
@@ -2477,7 +2441,7 @@ namespace SbigSharp
             /// <summary>
             /// Number of cameras found. (Max 8)
             /// </summary>
-            public ushort camerasFound;
+            public UInt16 camerasFound;
             /// <summary>
             /// Information returned by cameras.
             /// </summary>
@@ -2491,7 +2455,7 @@ namespace SbigSharp
             /// <summary>
             /// Number of cameras found. (Max 24)
             /// </summary>
-            public ushort camerasFound;
+            public UInt16 camerasFound;
             /// <summary>
             /// Information returned by cameras.
             /// </summary>
@@ -2512,7 +2476,7 @@ namespace SbigSharp
             /// <summary>
             /// IP address of camera found.
             /// </summary>
-            public ulong ipAddress;
+            public UInt32 ipAddress;
             /// <summary>
             /// Camera type found. see also: <seealso cref="CameraType"/> enum.
             /// </summary>
@@ -2538,7 +2502,7 @@ namespace SbigSharp
             /// <summary>
             /// Number of cameras found
             /// </summary>
-            public ushort camerasFound;
+            public UInt16 camerasFound;
             /// <summary>
             /// Information of found devices.
             /// </summary>
@@ -2555,7 +2519,7 @@ namespace SbigSharp
             /// <summary>
             /// Number of cameras found
             /// </summary>
-            public ushort camerasFound;
+            public UInt16 camerasFound;
             /// <summary>
             /// Information of found devices.
             /// </summary>
@@ -2575,7 +2539,7 @@ namespace SbigSharp
             /// <summary>
             /// number of bits to shift the results to the right (dividing by 2)
             /// </summary>
-            public ushort rightShift;
+            public UInt16 rightShift;
         }
 
         /// <summary>
@@ -2590,11 +2554,11 @@ namespace SbigSharp
             /// <summary>
             /// lower 32 bits of the Pentium cycle counter
             /// </summary>
-            public ulong countLow;
+            public UInt32 countLow;
             /// <summary>
             /// upper 32 bits of the Pentium cycle counter
             /// </summary>
-            public ulong countHigh;
+            public UInt32 countHigh;
         }
 
         //TODO: 移植uchar類型
@@ -2698,15 +2662,15 @@ namespace SbigSharp
             /// <summary>
             /// command specific.
             /// </summary>
-            public ulong cfwParam1;
+            public UInt32 cfwParam1;
             /// <summary>
             /// command specific.
             /// </summary>
-            public ulong cfwParam2;
+            public UInt32 cfwParam2;
             /// <summary>
             /// command specific.
             /// </summary>
-            public ushort outLength;
+            public UInt16 outLength;
             /// <summary>
             /// command specific.
             /// </summary>
@@ -2714,7 +2678,7 @@ namespace SbigSharp
             /// <summary>
             /// command specific.
             /// </summary>
-            public ushort inLength;
+            public UInt16 inLength;
             /// <summary>
             /// command specific.
             /// </summary>
@@ -2784,11 +2748,11 @@ namespace SbigSharp
             /// <summary>
             /// command specific
             /// </summary>
-            public ulong cfwResult1;
+            public UInt32 cfwResult1;
             /// <summary>
             /// command specific
             /// </summary>
-            public ulong cfwResult2;
+            public UInt32 cfwResult2;
         }
 
         /// <summary>
@@ -2891,11 +2855,11 @@ namespace SbigSharp
             /// Specify up to 7 columns to repair.
             /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 7)]
-            public ushort[] columns;
+            public UInt16[] columns;
             /// <summary>
             /// not used at this time.
             /// </summary>
-            public ushort flags;
+            public UInt16 flags;
         }
 
         /// <summary>
@@ -2919,11 +2883,11 @@ namespace SbigSharp
             /// Specify up to 7 columns to repair.
             /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 7)]
-            public ushort[] columns;
+            public UInt16[] columns;
             /// <summary>
             /// not used at this time.
             /// </summary>
-            public ushort flags;
+            public UInt16 flags;
         }
 
         //TODO: 移植uchar類型
@@ -3005,15 +2969,15 @@ namespace SbigSharp
             /// <summary>
             /// command specific.
             /// </summary>
-            public long mfParam1;
+            public Int32 mfParam1;
             /// <summary>
             /// command specific.
             /// </summary>
-            public long mfParam2;
+            public Int32 mfParam2;
             /// <summary>
             /// command specific.
             /// </summary>
-            public ushort outLength;
+            public UInt16 outLength;
             /// <summary>
             /// command specific.
             /// </summary>
@@ -3021,7 +2985,7 @@ namespace SbigSharp
             /// <summary>
             /// command specific.
             /// </summary>
-            public ushort inLength;
+            public UInt16 inLength;
             /// <summary>
             /// command specific.
             /// </summary>
@@ -3077,7 +3041,7 @@ namespace SbigSharp
             /// <summary>
             /// position of the Motor Focus, 0=Center, signed. 
             /// </summary>
-            public long mfPosition;
+            public Int32 mfPosition;
             /// <summary>
             /// see also: <seealso cref="MF_Status"/> enum.
             /// </summary>
@@ -3089,11 +3053,11 @@ namespace SbigSharp
             /// <summary>
             /// command specific.
             /// </summary>
-            public long mfResult1;
+            public Int32 mfResult1;
             /// <summary>
             /// command specific.
             /// </summary>
-            public long mfResult2;
+            public Int32 mfResult2;
         }
 
         //TODO: 移植uchar類型指標
@@ -3116,19 +3080,19 @@ namespace SbigSharp
             /// <summary>
             /// Unused.
             /// </summary>
-            public ushort spareShort;
+            public UInt16 spareShort;
             /// <summary>
             /// Unused.
             /// </summary>
-            public ulong diffGuiderParam1;
+            public UInt32 diffGuiderParam1;
             /// <summary>
             /// Unused.
             /// </summary>
-            public ulong diffGuiderParam2;
+            public UInt32 diffGuiderParam2;
             /// <summary>
             /// Size of output buffer. Command specific.
             /// </summary>
-            public ushort outLength;
+            public UInt16 outLength;
             /// <summary>
             /// output buffer. Command specific.
             /// </summary>
@@ -3136,7 +3100,7 @@ namespace SbigSharp
             /// <summary>
             /// Size of input buffer. Command specific.
             /// </summary>
-            public ushort inLength;
+            public UInt16 inLength;
             /// <summary>
             /// input buffer. Command specific.
             /// </summary>
@@ -3160,11 +3124,11 @@ namespace SbigSharp
             /// <summary>
             /// Unused.
             /// </summary>
-            public ulong diffGuiderResult1;
+            public UInt32 diffGuiderResult1;
             /// <summary>
             /// Unused.
             /// </summary>
-            public ulong diffGuiderResult2;
+            public UInt32 diffGuiderResult2;
         }
 
         /// <summary>
@@ -3176,19 +3140,19 @@ namespace SbigSharp
             /// <summary>
             /// TRUE if Red LED is on, FALSE otherwise.
             /// </summary>
-            public ushort bRedEnable;
+            public UInt16 bRedEnable;
             /// <summary>
             /// TRUE if IR LED is on, FALSE otherwise.
             /// </summary>
-            public ushort bIREnable;
+            public UInt16 bIREnable;
             /// <summary>
             /// brightness setting of Red LED from 0x00 to 0xFF.
             /// </summary>
-            public ushort nRedBrightness;
+            public UInt16 nRedBrightness;
             /// <summary>
             /// brightness setting of IR LED from 0x00 to 0xFF.
             /// </summary>
-            public ushort nIRBrightness;
+            public UInt16 nIRBrightness;
         }
 
         //TODO: 移植char類型指標
@@ -3209,7 +3173,7 @@ namespace SbigSharp
             /// <summary>
             /// Length of data buffer.
             /// </summary>
-            public ulong dataLength;
+            public UInt32 dataLength;
             /// <summary>
             /// data buffer.
             /// </summary>
@@ -3225,7 +3189,7 @@ namespace SbigSharp
             /// <summary>
             /// Bytes sent/received.
             /// </summary>
-            public ulong dataLength;
+            public UInt32 dataLength;
         }
 
         /// <summary>
@@ -3293,7 +3257,7 @@ namespace SbigSharp
             /// <summary>
             /// AO model.
             /// </summary>
-            public ushort i2cAoModel;
+            public UInt16 i2cAoModel;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -3319,15 +3283,15 @@ namespace SbigSharp
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct SetRBIPreflashParams
         {
-            public ushort darkFrameLength;
-            public ushort flushCount;
+            public UInt16 darkFrameLength;
+            public UInt16 flushCount;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetRBIPreflashResults
         {
-            public ushort darkFrameLength;
-            public ushort flushCount;
+            public UInt16 darkFrameLength;
+            public UInt16 flushCount;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -3402,6 +3366,7 @@ namespace SbigSharp
         /// <summary>
         /// Flags for enabling debug messages of CC_***_*** commands.
         /// </summary>
+        [Flags]
         public enum DEBUG_LOG_CC_FLAGS
         {
             /// <summary>
@@ -3442,6 +3407,7 @@ namespace SbigSharp
         /// <summary>
         /// Flags for enabling debug messages of MC_***_*** commands.
         /// </summary>
+        [Flags]
         public enum DEBUG_LOG_MC_FLAGS
         {
             /// <summary>
@@ -3482,6 +3448,7 @@ namespace SbigSharp
         /// <summary>
         /// Flags for enabling debug messages of communication methods.
         /// </summary>
+        [Flags]
         public enum DEBUG_LOG_FCE_FLAGS
         {
             /// <summary>
@@ -3521,6 +3488,7 @@ namespace SbigSharp
         /// <summary>
         /// Flags for enabling debug messages of I/O operations.
         /// </summary>
+        [Flags]
         public enum DEBUG_LOG_IO_FLAGS
         {
             /// <summary>
@@ -3566,19 +3534,19 @@ namespace SbigSharp
             /// <summary>
             /// Command flags.
             /// </summary>
-            public ushort ccFlags;
+            public DEBUG_LOG_CC_FLAGS ccFlags;
             /// <summary>
             /// Microcommand flags.
             /// </summary>
-            public ushort mcFlags;
+            public DEBUG_LOG_MC_FLAGS mcFlags;
             /// <summary>
             /// Communication flags.
             /// </summary>
-            public ushort fceFlags;
+            public DEBUG_LOG_FCE_FLAGS fceFlags;
             /// <summary>
             /// I/O flags.
             /// </summary>
-            public ushort ioFlags;
+            public DEBUG_LOG_IO_FLAGS ioFlags;
             /// <summary>
             /// Path to SBIGUDRV log file.
             /// </summary>
@@ -3586,16 +3554,17 @@ namespace SbigSharp
             public string logFilePathName;
         }
 
-        //TODO: 檢查移植方式
-        ///// <summary>
-        ///// A function used to expose writing to the log file to calling programs.
-        ///// Useful for debugging purposes.
-        ///// </summary>
-        ///// <param name="pStr">pointer to an array of characters, null-terminated, which should be written to the log file.</param>
-        ///// <param name="length">buffer's length in bytes.</param>
-        ///// <returns></returns>
-        //[DllImport("SBIGUDrv.dll")]
-        //private static extern short SBIGLogDebugMsg(char* pStr, uint length)
+        //TODO: 檢查移植方式，還無法正常使用
+        /// <summary>
+        /// A function used to expose writing to the log file to calling programs.
+        /// Useful for debugging purposes.
+        /// </summary>
+        /// <param name="pStr">pointer to an array of characters, null-terminated, which should be written to the log file.</param>
+        /// <param name="length">buffer's length in bytes.</param>
+        /// <returns></returns>
+        [DllImport("SBIGUDrv.dll")]
+        private static extern short SBIGLogDebugMsg(
+            [MarshalAs(UnmanagedType.LPStr)]StringBuilder pStr, UInt16 length);
 
         #endregion
 
@@ -3611,7 +3580,23 @@ namespace SbigSharp
         /// <param name="Results">outputs from the operation, if any</param>
         /// <returns>error code from Error enum (e.g. CE_CAMERA_NOT_FOUND)</returns>
         [DllImport("SBIGUDrv.dll")]
-        private static extern PAR_ERROR SBIGUnivDrvCommand(PAR_COMMAND Command, IntPtr Parameters, IntPtr Results);
+        private static extern PAR_ERROR SBIGUnivDrvCommand(
+            PAR_COMMAND Command, IntPtr Parameters, IntPtr Results);
+
+        /// <summary>
+        /// Direct pass-through to SBIG Universal Driver.
+        /// </summary>
+        /// <param name="Command">the command to be executed</param>
+        /// <param name="Parameters">inputs to the operation, if any</param>
+        /// <param name="Results">outputs from the operation, if any</param>
+        /// <exception cref="FailedOperationException">when SBIGUnivDrvCommand error.</exception>
+        private static void _UnivDrvCommand(
+            PAR_COMMAND Command, IntPtr Parameters, IntPtr Results)
+        {
+            PAR_ERROR err = SBIGUnivDrvCommand(Command, Parameters, Results);
+            if (PAR_ERROR.CE_NO_ERROR != err)
+                throw new FailedOperationException(err);
+        }
 
         /// <summary>
         /// Calls the SBIG Universal Driver with a (possibly null) input parameter struct
@@ -3619,12 +3604,13 @@ namespace SbigSharp
         /// <param name="Command">the command to be executed</param>
         /// <param name="Parameters">inputs to the operation, null if none</param>
         /// <exception cref="FailedOperationException">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
-        public static void UnivDrvCommand(PAR_COMMAND Command, object Parameters)
+        public static void UnivDrvCommand(
+            PAR_COMMAND Command, object Parameters)
         {
             // marshall the input structure, if it exists
-            GCHandle ParamGch = NullGch;
-            IntPtr ParamPtr = IntPtr.Zero;
-            if (null != Parameters)
+            var ParamGch = NullGch;
+            var ParamPtr = IntPtr.Zero;
+            if (!(Parameters is null))
             {
                 ParamGch = GCHandle.Alloc(Parameters, GCHandleType.Pinned);
                 ParamPtr = ParamGch.AddrOfPinnedObject();
@@ -3633,9 +3619,7 @@ namespace SbigSharp
             //
             // make the call
             //
-            PAR_ERROR err = SBIGUnivDrvCommand(Command, ParamPtr, IntPtr.Zero);
-            if (PAR_ERROR.CE_NO_ERROR != err)
-                throw new FailedOperationException(err);
+            _UnivDrvCommand(Command, ParamPtr, IntPtr.Zero);
 
             // clean up
             if (IntPtr.Zero != ParamPtr)
@@ -3649,25 +3633,24 @@ namespace SbigSharp
         /// <param name="Parameters">inputs to the operation, null if none</param>
         /// <param name="Results">array or structure to write command output DIRECTLY into (no marshalling occurs)</param>
         /// <exception cref="FailedOperationException">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
-        public static void UnivDrvCommand(PAR_COMMAND Command, object Parameters, object Results)
+        public static void UnivDrvCommand(
+            PAR_COMMAND Command, object Parameters, object Results)
         {
             // marshall the input structure, if it exists
-            GCHandle ParamGch = NullGch;
-            IntPtr ParamPtr = IntPtr.Zero;
-            if (null != Parameters)
+            var ParamGch = NullGch;
+            var ParamPtr = IntPtr.Zero;
+            if (!(Parameters is null))
             {
                 ParamGch = GCHandle.Alloc(Parameters, GCHandleType.Pinned);
                 ParamPtr = ParamGch.AddrOfPinnedObject();
             }
             // pin the output bytes while we pass the buffer to the SBIG SDK
-            GCHandle ResultsGch = GCHandle.Alloc(Results, GCHandleType.Pinned);
+            var ResultsGch = GCHandle.Alloc(Results, GCHandleType.Pinned);
 
             //
             // make the call
             //
-            PAR_ERROR err = SBIGUnivDrvCommand(Command, ParamPtr, ResultsGch.AddrOfPinnedObject());
-            if (PAR_ERROR.CE_NO_ERROR != err)
-                throw new FailedOperationException(err);
+            _UnivDrvCommand(Command, ParamPtr, ResultsGch.AddrOfPinnedObject());
 
             // clean up
             ResultsGch.Free();
@@ -3686,7 +3669,7 @@ namespace SbigSharp
         {
             // marshall the input structure, if it exists
             IntPtr ParamPtr = IntPtr.Zero;
-            if (null != Parameters)
+            if (!(Parameters is null))
             {
                 ParamPtr = Marshal.AllocHGlobal(Marshal.SizeOf(Parameters));
                 Marshal.StructureToPtr(Parameters, ParamPtr, false);
@@ -3695,9 +3678,7 @@ namespace SbigSharp
             //
             // make the call
             //
-            PAR_ERROR err = SBIGUnivDrvCommand(Command, ParamPtr, IntPtr.Zero);
-            if (PAR_ERROR.CE_NO_ERROR != err)
-                throw new FailedOperationException(err);
+            _UnivDrvCommand(Command, ParamPtr, IntPtr.Zero);
 
             // clean up
             if (IntPtr.Zero != ParamPtr)
@@ -3716,7 +3697,7 @@ namespace SbigSharp
             // marshall the input structure, if it exists
             GCHandle ParamGch = NullGch;
             IntPtr ParamPtr = IntPtr.Zero;
-            if (null != Parameters)
+            if (!(Parameters is null))
             {
                 ParamGch = GCHandle.Alloc(Parameters, GCHandleType.Pinned);
                 ParamPtr = ParamGch.AddrOfPinnedObject();
@@ -3729,9 +3710,7 @@ namespace SbigSharp
             //
             // make the call
             //
-            PAR_ERROR err = SBIGUnivDrvCommand(Command, ParamPtr, ResultsPtr);
-            if (PAR_ERROR.CE_NO_ERROR != err)
-                throw new FailedOperationException(err);
+            _UnivDrvCommand(Command, ParamPtr, ResultsPtr);
 
             // clean up
             ResultsGch.Free();
@@ -3753,7 +3732,7 @@ namespace SbigSharp
         {
             // marshall the input structure, if it exists
             IntPtr ParamPtr = IntPtr.Zero;
-            if (null != Parameters)
+            if (!(Parameters is null))
             {
                 ParamPtr = Marshal.AllocHGlobal(Marshal.SizeOf(Parameters));
                 Marshal.StructureToPtr(Parameters, ParamPtr, false);
@@ -3764,9 +3743,7 @@ namespace SbigSharp
             //
             // make the call
             //
-            PAR_ERROR err = SBIGUnivDrvCommand(Command, ParamPtr, ResultsPtr);
-            if (PAR_ERROR.CE_NO_ERROR != err)
-                throw new FailedOperationException(err);
+            _UnivDrvCommand(Command, ParamPtr, ResultsPtr);
 
             // un-marshal the output
             T Results = (T)Marshal.PtrToStructure(ResultsPtr, typeof(T));
@@ -3786,12 +3763,16 @@ namespace SbigSharp
         /// <param name="Command"></param>
         /// <param name="Parameters"></param>
         /// <param name="Results"></param>
-        public static void UnivDrvCommand_OutComplex(PAR_COMMAND Command, object Parameters, object Results)
+        /// <exception cref="FailedOperationException">throws a FailedOperation exception if command doesn't return CE_NO_ERROR</exception>
+        public static void UnivDrvCommand_OutComplex<TResult>(
+            PAR_COMMAND Command, object Parameters, out TResult Results)
+            where TResult : struct
         {
+            Results = default(TResult);
             // marshall the input structure, if it exists
             GCHandle ParamGch = NullGch;
             IntPtr ParamPtr = IntPtr.Zero;
-            if (null != Parameters)
+            if (!(Parameters is null))
             {
                 ParamGch = GCHandle.Alloc(Parameters, GCHandleType.Pinned);
                 ParamPtr = ParamGch.AddrOfPinnedObject();
@@ -3804,12 +3785,11 @@ namespace SbigSharp
             //
             // make the call
             //
-            PAR_ERROR err = SBIGUnivDrvCommand(Command, ParamPtr, ResultsPtr);
-            if (PAR_ERROR.CE_NO_ERROR != err)
-                throw new FailedOperationException(err);
+            _UnivDrvCommand(Command, ParamPtr, ResultsPtr);
 
             // Marshall back
-            Marshal.PtrToStructure(ResultsPtr, Results);
+            //Marshal.PtrToStructure(ResultsPtr, Results);
+            Results = (TResult)Marshal.PtrToStructure(ResultsPtr, typeof(TResult));
 
             // clean up
             Marshal.FreeHGlobal(ResultsPtr);
@@ -3828,13 +3808,25 @@ namespace SbigSharp
         public static ushort[,] WaitEndAndReadoutExposure(StartExposureParams2 sep)
         {
             // wait for the exposure to be done
-            QueryCommandStatusParams qcsp = new QueryCommandStatusParams(PAR_COMMAND.CC_START_EXPOSURE);
-            QueryCommandStatusResults qcsr = new QueryCommandStatusResults(PAR_ERROR.CE_NO_ERROR);
+            QueryCommandStatusResults qcsr = new QueryCommandStatusResults()
+            {
+                status = PAR_ERROR.CE_NO_ERROR
+            };
             while (PAR_ERROR.CE_NO_EXPOSURE_IN_PROGRESS != qcsr.status)
-                qcsr = UnivDrvCommand<QueryCommandStatusResults>(PAR_COMMAND.CC_QUERY_COMMAND_STATUS, qcsp);
+                qcsr = UnivDrvCommand<QueryCommandStatusResults>(
+                    PAR_COMMAND.CC_QUERY_COMMAND_STATUS,
+                    new QueryCommandStatusParams()
+                    {
+                        command = PAR_COMMAND.CC_START_EXPOSURE
+                    });
 
             // prepare the CCD for readout
-            UnivDrvCommand(PAR_COMMAND.CC_END_EXPOSURE, new EndExposureParams(CCD_Request.CCD_IMAGING));
+            UnivDrvCommand(
+                PAR_COMMAND.CC_END_EXPOSURE,
+                new EndExposureParams()
+                {
+                    ccd = CCD_Request.CCD_IMAGING
+                });
             // then telling it where and how we're going to read
             StartReadoutParams srp = new StartReadoutParams
             {
