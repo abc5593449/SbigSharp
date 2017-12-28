@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace SbigSharp
 {
@@ -315,9 +313,8 @@ namespace SbigSharp
             /// </summary>
             CC_QUERY_COMMAND_STATUS2,
             #endregion // 51 - 60
-            /*
-                SBIG Use Only Commands
-            */
+
+            // SBIG Use Only Commands
             #region 90 - 99
             /// <summary>
             /// Send block command
@@ -2238,9 +2235,7 @@ namespace SbigSharp
             XES_POST_EXP
         };
 
-        /*
-          General Purpose Flags
-        */
+        #region General Purpose Flags
 
         /// <summary>
         /// set in EndExposureParams::ccd to skip synchronization delay - Use this to increase the rep rate when taking darks to later be subtracted from SC_LEAVE_SHUTTER exposures such as when tracking and imaging.
@@ -2510,6 +2505,8 @@ namespace SbigSharp
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
         const Int16 MIN_STU_EXPOSURE = 1;
+
+        #endregion // General Purpose Flags
 
         /*!
             \defgroup commandParamStructs
