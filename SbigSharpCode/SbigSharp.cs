@@ -5,74 +5,55 @@ using System.Text;
 
 namespace SbigSharp
 {
+    /// <summary>
+    /// This supports the following devices:
+    /// * ST-5C/237/237A (PixCel255/237)
+    /// * ST-7E/8E/9E/10E
+    /// * ST-1K, ST-2K, ST-4K
+    /// * STL Large Format Cameras
+    /// * ST-402 Family of Cameras
+    /// * ST-8300 Cameras
+    /// * STF-8300, 8050 Cameras
+    /// * STT Cameras
+    /// * STX/STXL Cameras
+    /// * ST-i Cameras
+    /// * AO-7, AOL, AO-8
+    /// * CFW-8, CFW-9, CFW-10, CFW-L
+    /// * FW5-8300, FW8-8300
+    /// * ST Focuser
+    /// * Differential Guider Accessory (Preliminary)
+    /// 
+    /// Enumerated Constants
+    ///     Note that the various constants are declared here as enums
+    ///     for ease of declaration but in the structures that use the
+    ///     enums unsigned shorts are used to force the various
+    ///     16 and 32 bit compilers to use 16 bits.
+    /// 
+    /// </summary>
     public static class SBIG
     {
-        /*!
-           * \file SBIGUDRV.H
-           * \brief Contains the function prototypes and enumerated constants for the Universal Parallel/USB/Ethernet driver.
-           *
-           * This supports the following devices:
-           *
-           * * ST-5C/237/237A (PixCel255/237)
-           * * ST-7E/8E/9E/10E
-           * * ST-1K, ST-2K, ST-4K
-           * * STL Large Format Cameras
-           * * ST-402 Family of Cameras
-           * * ST-8300 Cameras
-           * * STF-8300, 8050 Cameras
-           * * STT Cameras
-           * * STX/STXL Cameras
-           * * ST-i Cameras
-           * * AO-7, AOL, AO-8
-           * * CFW-8, CFW-9, CFW-10, CFW-L
-           * * FW5-8300, FW8-8300
-           * * ST Focuser
-           * * Differential Guider Accessory (Preliminary)
-           */
-
-        /*
-
-            Enumerated Constants
-
-            Note that the various constants are declared here as enums
-            for ease of declaration but in the structures that use the
-            enums unsigned shorts are used to force the various
-            16 and 32 bit compilers to use 16 bits.
-
-        */
-
         /*!
             \defgroup BASE_STRUCTURES
             Supported Camera Commands
 
             These are the commands supported by the driver.
-            They are prefixed by CC_ to designate them as
-            camera commands and avoid conflicts with other
-            enums.
+            They are prefixed by CC_ to designate them as camera commands and avoid conflicts with other enums.
 
-            Some of the commands are marked as SBIG use only
-            and have been included to enhance testability
-            of the driver for SBIG.
-
+            Some of the commands are marked as SBIG use only and have been included to enhance testability of the driver for SBIG.
         */
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Command ID enum 
-         */
+
+        /// <summary>
+        /// Command ID enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum PAR_COMMAND : ushort
-
         {
-            /*
-
-                General Use Commands
-
-            */
             /// <summary>
             /// Null Command
             /// </summary>
             CC_NULL,
 
-            /* 1 - 10 */
+            #region 1 - 10
             /// <summary>
             /// Start exposure command
             /// </summary>
@@ -113,8 +94,9 @@ namespace SbigSharp
             /// Get driver info command
             /// </summary>
             CC_GET_DRIVER_INFO,
+            #endregion // 1 - 10 
 
-            /* 11 - 20 */
+            #region 11 - 20
             /// <summary>
             /// Get CCD info command
             /// </summary>
@@ -155,8 +137,9 @@ namespace SbigSharp
             /// Get serial status command
             /// </summary>
             CC_GET_SERIAL_STATUS,
+            #endregion // 11 - 20 
 
-            /* 21 - 30 */
+            #region 21 - 30
             /// <summary>
             /// AO tip/tilt command
             /// </summary>
@@ -198,8 +181,9 @@ namespace SbigSharp
             /// Get IRQL command
             /// </summary>
             CC_GET_IRQL,
+            #endregion // 21 - 30
 
-            /* 31 - 40 */
+            #region // 31 - 40
             /// <summary>
             /// Get line command
             /// </summary>
@@ -240,8 +224,9 @@ namespace SbigSharp
             /// Query USB command
             /// </summary>
             CC_QUERY_USB,
+            #endregion // 31 - 40
 
-            /* 41 - 50 */
+            #region 41 - 50
             /// <summary>
             /// Get Pentium cycle count command
             /// </summary>
@@ -282,8 +267,9 @@ namespace SbigSharp
             /// Start Exposure command v2
             /// </summary>
             CC_START_EXPOSURE2,
+            #endregion // 41 - 50
 
-            /* 51 - 60 */
+            #region 51 - 60
             /// <summary>
             /// Set Temperature regulation command
             /// </summary>
@@ -328,11 +314,11 @@ namespace SbigSharp
             /// Expanded Query Command Status to include extra information
             /// </summary>
             CC_QUERY_COMMAND_STATUS2,
+            #endregion // 51 - 60
             /*
                 SBIG Use Only Commands
             */
-
-            /* 90 - 99 */
+            #region 90 - 99
             /// <summary>
             /// Send block command
             /// </summary>
@@ -373,8 +359,9 @@ namespace SbigSharp
             /// Firmware command
             /// </summary>
             CC_FIRMWARE,
+            #endregion // 90 - 99
 
-            /* 100 -109 */
+            #region 100 - 109
             /// <summary>
             /// Bulk I/O command
             /// </summary>
@@ -419,32 +406,27 @@ namespace SbigSharp
             /// Last command ID
             /// </summary>
             CC_LAST_COMMAND
-
-            /* 110 - 119 */
+            #endregion // 100 - 109
 
         };
 
         /*
-
             Return Error Codes
 
-            These are the error codes returned by the driver
-            function.  They are prefixed with CE_ to designate
-            them as camera errors.
-
+            These are the error codes returned by the driver function.  They are prefixed with CE_ to designate them as camera errors.
         */
-        /*!
-         * Base value for all error IDs.
-         */
+        /// <summary>
+        /// Base value for all error IDs.
+        /// </summary>
         const ushort CE_ERROR_BASE = 1;
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Error ID enum 
-         */
+        /// <summary>
+        /// Error ID enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum PAR_ERROR : ushort
         {
-            /* 0 - 10 */
+            #region 0 - 10
             /// <summary>
             /// No error ID
             /// </summary>
@@ -489,8 +471,9 @@ namespace SbigSharp
             /// Received Cancel
             /// </summary>
             CE_CAN_RECEIVED,
+            #endregion // 0 - 10
 
-            /* 11 - 20 */
+            #region 11 - 20
             /// <summary>
             /// Unknown response error
             /// </summary>
@@ -531,8 +514,9 @@ namespace SbigSharp
             /// Driver not open error
             /// </summary>
             CE_DRIVER_NOT_OPEN,
+            #endregion // 11 - 20
 
-            /* 21 - 30 */
+            #region 21 - 30
             /// <summary>
             /// Driver not closed error
             /// </summary>
@@ -573,8 +557,9 @@ namespace SbigSharp
             /// Device not implemented error
             /// </summary>
             CE_DEVICE_NOT_IMPLEMENTED,
+            #endregion // 21 - 30
 
-            /* 31 - 40 */
+            #region 31 - 40
             /// <summary>
             /// Device disabled error
             /// </summary>
@@ -615,8 +600,9 @@ namespace SbigSharp
             /// EZUSB Reset error
             /// </summary>
             CE_EZUSB_RESET,
+            #endregion // 31 - 40
 
-            /* 41 - 50*/
+            #region 41 - 50
             /// <summary>
             /// Firmware needs update to support feature.
             /// </summary>
@@ -629,21 +615,20 @@ namespace SbigSharp
             /// Development purposes: Next Error
             /// </summary>
             CE_NEXT_ERROR
-
+            #endregion // 41 - 50
         };
 
         /*
             Camera Command State Codes
 
-            These are the return status codes for the Query
-            Command Status command.  They are prefixed with
-            CS_ to designate them as camera status.
-
+            These are the return status codes for the Query Command Status command.
+            They are prefixed with CS_ to designate them as camera status.
         */
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Camera states enum 
-         */
+
+        /// <summary>
+        /// Camera states enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum PAR_COMMAND_STATUS : ushort
         {
             /// <summary>
@@ -672,16 +657,16 @@ namespace SbigSharp
             FFR_LAST
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Pulse in is currently active state modifier flag.
-         */
+        /// <summary>
+        /// Pulse in is currently active state modifier flag.
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         const UInt16 CS_PULSE_IN_ACTIVE = 0x8000;
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Waiting for trigger state modifier flag
-         */
+        /// <summary>
+        /// Waiting for trigger state modifier flag
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         const UInt16 CS_WAITING_FOR_TRIGGER = 0x8000;
 
         const UInt16 RBI_PREFLASH_LENGTH_MASK = 0x0FFF;
@@ -713,10 +698,10 @@ namespace SbigSharp
             DIFF_GUIDER_COMMAND, DIFF_GUIDER_STATE, DIFF_GUIDER_ERROR - Used with the Diff Guider Command
         */
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Query Temperature Status enum 
-         */
+        /// <summary>
+        /// Query Temperature Status enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum QUERY_TEMP_STATUS_REQUEST : ushort
         {
             /// <summary>
@@ -733,10 +718,10 @@ namespace SbigSharp
             TEMP_STATUS_ADVANCED2
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * ABG state enum 
-         */
+        /// <summary>
+        /// ABG state enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum ABG_STATE7 : ushort
         {
             /// <summary>
@@ -757,10 +742,11 @@ namespace SbigSharp
             ABG_CLK_HI7
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Boolean type definition 
-         */
+        /// <summary>
+        /// Boolean type definition 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct MY_LOGICAL
         {
             /// <summary>
@@ -808,15 +794,14 @@ namespace SbigSharp
             /// <param name="logical">MY_LOGICAL type value.</param>
             public static implicit operator bool(MY_LOGICAL logical)
             {
-                // FALSE = 0;
-                return (logical.value != 0);
+                return (logical.value != FALSE);
             }
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Driver request enum 
-         */
+        /// <summary>
+        /// Driver request enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum DRIVER_REQUEST : ushort
         {
             /// <summary>
@@ -833,10 +818,10 @@ namespace SbigSharp
             DRIVER_USB_LOADER
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * CCD Request enum 
-         */
+        /// <summary>
+        /// CCD Request enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum CCD_REQUEST : ushort
         {
             /// <summary>
@@ -853,10 +838,10 @@ namespace SbigSharp
             CCD_EXT_TRACKING
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Readout Modes enum 
-         */
+        /// <summary>
+        /// Readout Modes enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum READOUT_BINNING_MODE : ushort
         {
             /// <summary>
@@ -905,10 +890,10 @@ namespace SbigSharp
             RM_NXN
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * CCD Information request enum 
-         */
+        /// <summary>
+        /// CCD Information request enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum CCD_INFO_REQUEST : ushort
         {
             /// <summary>
@@ -941,10 +926,10 @@ namespace SbigSharp
             CCD_INFO_EXTENDED3
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Anti-blooming gate capability enum 
-         */
+        /// <summary>
+        /// Anti-blooming gate capability enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum IMAGING_ABG : ushort
         {
             /// <summary>
@@ -957,10 +942,10 @@ namespace SbigSharp
             ABG_PRESENT
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Port bit-rate enum 
-         */
+        /// <summary>
+        /// Port bit-rate enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum PORT_RATE : ushort
         {
             /// <summary>
@@ -989,10 +974,10 @@ namespace SbigSharp
             BR_115K
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Camera type enum 
-         */
+        /// <summary>
+        /// Camera type enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum CAMERA_TYPE : ushort
         {
             /// <summary>
@@ -1077,10 +1062,10 @@ namespace SbigSharp
             NO_CAMERA = 0xFFFF
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Shutter Control enum 
-         */
+        /// <summary>
+        /// Shutter Control enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum SHUTTER_COMMAND : ushort
         {
             /// <summary>
@@ -1109,10 +1094,10 @@ namespace SbigSharp
             SC_CLOSE_EXT_SHUTTER
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Shutter State enum 
-         */
+        /// <summary>
+        /// Shutter State enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum SHUTTER_STATE7 : ushort
         {
             /// <summary>
@@ -1133,10 +1118,10 @@ namespace SbigSharp
             SS_CLOSING
         };
 
-        /*!
-         * \ingroup BASE_STRUCTURES
-         * Temperature regulation enum 
-         */
+        /// <summary>
+        /// Temperature regulation enum 
+        /// <para>ingroup BASE_STRUCTURES</para>
+        /// </summary>
         public enum TEMPERATURE_REGULATION : ushort
         {
             /// <summary>
@@ -1169,14 +1154,14 @@ namespace SbigSharp
             REGULATION_DISABLE_AUTOFREEZE
         };
 
-        /*!
-         * Mask for Temperature Regulation frozen state
-         */
+        /// <summary>
+        /// Mask for Temperature Regulation frozen state
+        /// </summary>
         const UInt16 REGULATION_FROZEN_MASK = 0x8000;
 
-        /*!
-         * LED State enum 
-         */
+        /// <summary>
+        /// LED State enum 
+        /// </summary>
         public enum LED_STATE : ushort
         {
             /// <summary>
@@ -1197,9 +1182,9 @@ namespace SbigSharp
             LED_BLINK_HIGH
         };
 
-        /*!
-         * Filter command enum
-         */
+        /// <summary>
+        /// Filter command enum
+        /// </summary>
         public enum FILTER_COMMAND : ushort
         {
             /// <summary>
@@ -1236,9 +1221,9 @@ namespace SbigSharp
             FILTER_INIT
         };
 
-        /*!
-         * Filter State enum 
-         */
+        /// <summary>
+        /// Filter State enum 
+        /// </summary>
         public enum FILTER_STATE : ushort
         {
             /// <summary>
@@ -1271,9 +1256,9 @@ namespace SbigSharp
             FS_UNKNOWN
         };
 
-        /*!
-         * A/D Size enum 
-         */
+        /// <summary>
+        /// A/D Size enum 
+        /// </summary>
         public enum AD_SIZE : ushort
         {
             /// <summary>
@@ -1290,9 +1275,9 @@ namespace SbigSharp
             AD_16_BITS
         };
 
-        /*!
-         * Filter Wheel Type enum
-         */
+        /// <summary>
+        /// Filter Wheel Type enum
+        /// </summary>
         public enum FILTER_TYPE : ushort
         {
             /// <summary>
@@ -1313,9 +1298,9 @@ namespace SbigSharp
             FW_FILTER_WHEEL
         };
 
-        /*!
-         * AO Focus enum 
-         */
+        /// <summary>
+        /// AO Focus enum 
+        /// </summary>
         public enum AO_FOCUS_COMMAND : ushort
         {
             /// <summary>
@@ -1337,19 +1322,19 @@ namespace SbigSharp
         };
 
         // Ethernet stuff
-        /*!
-         * Service port for Ethernet access.
-         */
+        /// <summary>
+        /// Service port for Ethernet access.
+        /// </summary>
         const Int16 SRV_SERVICE_PORT = 5000;
 
-        /*!
-         * Broadcast port for SBIG Cameras
-         */
+        /// <summary>
+        /// Broadcast port for SBIG Cameras
+        /// </summary>
         const Int16 BROADCAST_PORT = 5001;
 
-        /*!
-         * SBIG Device types enum 
-         */
+        /// <summary>
+        /// SBIG Device types enum 
+        /// </summary>
         public enum SBIG_DEVICE_TYPE : ushort
         {
             /// <summary>
@@ -1474,9 +1459,9 @@ namespace SbigSharp
             DEV_USB24,
         };
 
-        /*!
-         * Driver control parameters enum
-         */
+        /// <summary>
+        /// Driver control parameters enum
+        /// </summary>
         public enum DRIVER_CONTROL_PARAM : ushort
         {
             /// <summary>
@@ -1577,9 +1562,9 @@ namespace SbigSharp
             DCP_LAST
         };
 
-        /*!
-         * USB A/D Control commands 
-         */
+        /// <summary>
+        /// USB A/D Control commands 
+        /// </summary>
         public enum USB_AD_CONTROL_COMMAND : ushort
         {
             /// <summary>
@@ -1628,9 +1613,9 @@ namespace SbigSharp
             USB_AD_IMAGING_OFFSET_RIGHT,
         };
 
-        /*!
-         * USB Driver enum 
-         */
+        /// <summary>
+        /// USB Driver enum 
+        /// </summary>
         public enum ENUM_USB_DRIVER : ushort
         {
             /// <summary>
@@ -1651,9 +1636,9 @@ namespace SbigSharp
             USBD_NEXT
         };
 
-        /*!
-         * Filter Weel Model Selection enum 
-         */
+        /// <summary>
+        /// Filter Weel Model Selection enum 
+        /// </summary>
         public enum CFW_MODEL_SELECT : ushort
         {
             /// <summary>
@@ -1738,9 +1723,9 @@ namespace SbigSharp
             CFWSEL_FW5_STF_DETENT
         };
 
-        /*!
-         * Filter Wheel Command enum 
-         */
+        /// <summary>
+        /// Filter Wheel Command enum 
+        /// </summary>
         public enum CFW_COMMAND : ushort
         {
             /// <summary>
@@ -1769,9 +1754,9 @@ namespace SbigSharp
             CFWC_CLOSE_DEVICE
         };
 
-        /*!
-         * Filter Wheel Status enum 
-         */
+        /// <summary>
+        /// Filter Wheel Status enum 
+        /// </summary>
         public enum CFW_STATUS : ushort
         {
             /// <summary>
@@ -1788,9 +1773,9 @@ namespace SbigSharp
             CFWS_BUSY
         };
 
-        /*!
-         * Filter Wheel errors enum 
-         */
+        /// <summary>
+        /// Filter Wheel errors enum 
+        /// </summary>
         public enum CFW_ERROR : ushort
         {
             /// <summary>
@@ -1831,9 +1816,9 @@ namespace SbigSharp
             CFWE_I2C_ERROR
         };
 
-        /*!
-         * Filter Wheel position enum 
-         */
+        /// <summary>
+        /// Filter Wheel position enum 
+        /// </summary>
         public enum CFW_POSITION : ushort
         {
             /// <summary>
@@ -1882,9 +1867,9 @@ namespace SbigSharp
             CFWP_10
         };
 
-        /*!
-         * Filter Wheel COM port enum 
-         */
+        /// <summary>
+        /// Filter Wheel COM port enum 
+        /// </summary>
         public enum CFW_COM_PORT : ushort
         {
             /// <summary>
@@ -1905,9 +1890,9 @@ namespace SbigSharp
             CFWPORT_COM4
         };
 
-        /*!
-         * Filter Wheel Get Info select enum 
-         */
+        /// <summary>
+        /// Filter Wheel Get Info select enum 
+        /// </summary>
         public enum CFW_GETINFO_SELECT : ushort
         {
             /// <summary>
@@ -1924,9 +1909,9 @@ namespace SbigSharp
             CFWG_DATA_REGISTERS
         };
 
-        /*!
-         * Bit I/O Operation enum 
-         */
+        /// <summary>
+        /// Bit I/O Operation enum 
+        /// </summary>
         public enum BITIO_OPERATION : ushort
         {
             /// <summary>
@@ -1939,9 +1924,9 @@ namespace SbigSharp
             BITIO_READ
         };
 
-        /*!
-         * Bit I/O Name enum 
-         */
+        /// <summary>
+        /// Bit I/O Name enum 
+        /// </summary>
         public enum BITIO_NAME : ushort
         {
             /// <summary>
@@ -1966,9 +1951,9 @@ namespace SbigSharp
             BITO_FPGA_WE
         };
 
-        /*!
-         * Biorad TDI Error enum 
-         */
+        /// <summary>
+        /// Biorad TDI Error enum 
+        /// </summary>
         public enum BTDI_ERROR : ushort
         {
             /// <summary>
@@ -1981,9 +1966,9 @@ namespace SbigSharp
             BTDI_OVERRUN_ERROR = 2
         };
 
-        /*!
-         * Motor Focus Model Selection enum 
-         */
+        /// <summary>
+        /// Motor Focus Model Selection enum 
+        /// </summary>
         public enum MF_MODEL_SELECT : ushort
         {
             /// <summary>
@@ -2000,9 +1985,9 @@ namespace SbigSharp
             MFSEL_STF
         };
 
-        /*!
-         * Motor Focus Command enum 
-         */
+        /// <summary>
+        /// Motor Focus Command enum 
+        /// </summary>
         public enum MF_COMMAND : ushort
         {
             /// <summary>
@@ -2027,9 +2012,9 @@ namespace SbigSharp
             MFC_ABORT
         };
 
-        /*!
-         * Motor Focus Status 
-         */
+        /// <summary>
+        /// Motor Focus Status 
+        /// </summary>
         public enum MF_STATUS : ushort
         {
             /// <summary>
@@ -2046,9 +2031,9 @@ namespace SbigSharp
             MFS_BUSY
         };
 
-        /*!
-         * Motor Focus Error state enum 
-         */
+        /// <summary>
+        /// Motor Focus Error state enum 
+        /// </summary>
         public enum MF_ERROR : ushort
         {
             /// <summary>
@@ -2085,9 +2070,9 @@ namespace SbigSharp
             MFE_NOT_FOUND
         };
 
-        /*!
-         * Motor Focus Get Info Select enum 
-         */
+        /// <summary>
+        /// Motor Focus Get Info Select enum 
+        /// </summary>
         public enum MF_GETINFO_SELECT : ushort
         {
             /// <summary>
@@ -2100,9 +2085,9 @@ namespace SbigSharp
             MFG_DATA_REGISTERS
         };
 
-        /*!
-         * Differential guider commands enum 
-         */
+        /// <summary>
+        /// Differential guider commands enum 
+        /// </summary>
         public enum DIFF_GUIDER_COMMAND : ushort
         {
             /// <summary>
@@ -2119,9 +2104,9 @@ namespace SbigSharp
             DGC_SET_BRIGHTNESS
         };
 
-        /*!
-         * Differential guider error enum 
-         */
+        /// <summary>
+        /// Differential guider error enum 
+        /// </summary>
         public enum DIFF_GUIDER_ERROR : ushort
         {
             /// <summary>
@@ -2142,9 +2127,9 @@ namespace SbigSharp
             DGE_BAD_PARAMETER
         };
 
-        /*!
-         * Differential Guider status enum 
-         */
+        /// <summary>
+        /// Differential Guider status enum 
+        /// </summary>
         public enum DIFF_GUIDER_STATUS : ushort
         {
             /// <summary>
@@ -2161,9 +2146,9 @@ namespace SbigSharp
             DGS_BUSY
         };
 
-        /*!
-         * Fan state enum 
-         */
+        /// <summary>
+        /// Fan state enum 
+        /// </summary>
         public enum FAN_STATE : ushort
         {
             /// <summary>
@@ -2180,9 +2165,9 @@ namespace SbigSharp
             FS_AUTOCONTROL
         };
 
-        /*!
-         * Bulk IO command enum 
-         */
+        /// <summary>
+        /// Bulk IO command enum 
+        /// </summary>
         public enum BULK_IO_COMMAND : ushort
         {
             /// <summary>
@@ -2199,9 +2184,9 @@ namespace SbigSharp
             BIO_FLUSH
         };
 
-        /*!
-         * Pixel channel mode enum 
-         */
+        /// <summary>
+        /// Pixel channel mode enum 
+        /// </summary>
         public enum PIXEL_CHANNEL_MODE : ushort
         {
             /// <summary>
@@ -2218,9 +2203,9 @@ namespace SbigSharp
             PIXEL_CHANNEL_MODE_AB
         };
 
-        /*!
-         * Active Pixel Channel enum 
-         */
+        /// <summary>
+        /// Active Pixel Channel enum 
+        /// </summary>
         public enum ACTIVE_PIXEL_CHANNEL : ushort
         {
             /// <summary>
@@ -2235,354 +2220,361 @@ namespace SbigSharp
 
         public enum EXTRA_EXPOSURE_STATUS : ushort
         {
-            XES_IDLE,           //!< CCD is currently idle.
-            XES_PRE_EXP,        //!< CCD is in the pre-exposure phase.
-            XES_INTEGRATING,    //!< CCD is currently exposing/integrating an image.
-            XES_POST_EXP        //!< CCD is in the post-exposure phase.
+            /// <summary>
+            /// CCD is currently idle.
+            /// </summary>
+            XES_IDLE,
+            /// <summary>
+            /// CCD is in the pre-exposure phase.
+            /// </summary>
+            XES_PRE_EXP,
+            /// <summary>
+            /// CCD is currently exposing/integrating an image.
+            /// </summary>
+            XES_INTEGRATING,
+            /// <summary>
+            /// CCD is in the post-exposure phase.
+            /// </summary>
+            XES_POST_EXP
         };
 
         /*
-         * General Purpose Flags
-         */
+          General Purpose Flags
+        */
 
-        /*!
-         * set in EndExposureParams::ccd to skip synchronization delay - Use this to increase the
-         * rep rate when taking darks to later be subtracted from SC_LEAVE_SHUTTER exposures such as when tracking and imaging.
-         */
+        /// <summary>
+        /// set in EndExposureParams::ccd to skip synchronization delay - Use this to increase the rep rate when taking darks to later be subtracted from SC_LEAVE_SHUTTER exposures such as when tracking and imaging.
+        /// </summary>
         const UInt16 END_SKIP_DELAY = 0x8000;
 
-        /*!
-         * Set in StartExposureParams::ccd to skip lowering Imaging CCD Vdd during integration. - Use this to
-         * increase the rep rate when you don't care about glow in the upper-left corner of the imaging CCD.
-         */
+        /// <summary>
+        /// Set in StartExposureParams::ccd to skip lowering Imaging CCD Vdd during integration. - Use this to increase the rep rate when you don't care about glow in the upper-left corner of the imaging CCD.
+        /// </summary>
         const UInt16 START_SKIP_VDD = 0x8000;
 
-        /*!
-         *  Set in StartExposureParams::ccd and EndExposureParams::ccd to force shutter motor to stay on all the 
-         * time which reduces delays in Start and End Exposure timing and yields higher image throughput.  Don't
-         * do this too often or camera head will heat up.
-         */
+        /// <summary>
+        /// Set in StartExposureParams::ccd and EndExposureParams::ccd to force shutter motor to stay on all the time which reduces delays in Start and End Exposure timing and yields higher image throughput.
+        /// Don't do this too often or camera head will heat up.
+        /// </summary>
         const UInt16 START_MOTOR_ALWAYS_ON = 0x4000;
 
-        /*!
-         * Set in EndExposureParams::ccd to abort the exposure completely instead of just ending 
-         * the integration phase for cameras with internal frame buffers like the STX.
-         */
+        /// <summary>
+        /// Set in EndExposureParams::ccd to abort the exposure completely instead of just ending the integration phase for cameras with internal frame buffers like the STX.
+        /// </summary>
         const UInt16 ABORT_DONT_END = 0x2000;
 
-        /*!
-         */
-
-        /*!
-         * \ingroup EXPOSURE_FLAGS
-         * Set in StartExposureParams2::exposureTime enable TDI readout mode [TODO: Add supported cameras].
-         */
+        //TODO: Add supported cameras.
+        /// <summary>
+        /// Set in StartExposureParams2::exposureTime enable TDI readout mode
+        /// <para>ingroup EXPOSURE_FLAGS</para>
+        /// </summary>
         const UInt32 EXP_TDI_ENABLE = 0x01000000;   //!< Enable TDI mode flag.
 
-        /*!
-         * \ingroup EXPOSURE_FLAGS
-         * Set in StarExposureParams2::exposureTime ripple correction for STF-8050/4070
-         */
+        /// <summary>
+        /// Set in StarExposureParams2::exposureTime ripple correction for STF-8050/4070
+        /// <para>ingroup EXPOSURE_FLAGS</para>
+        /// </summary>
         const UInt32 EXP_RIPPLE_CORRECTION = 0x02000000;    //!< Enable Ripple correction flag.
 
-        /*!
-         * \ingroup EXPOSURE_FLAGS
-         * Set in StarExposureParams2::exposureTime to activate the dual channel CCD readout mode of the STF-8050.
-         */
+        /// <summary>
+        /// Set in StarExposureParams2::exposureTime to activate the dual channel CCD readout mode of the STF-8050.
+        /// <para>ingroup EXPOSURE_FLAGS</para>
+        /// </summary>
         const UInt32 EXP_DUAL_CHANNEL_MODE = 0x04000000;    //!< Enable dual channel readout mode flag.
 
-        /*!
-         * \ingroup EXPOSURE_FLAGS
-         * Set in StarExposureParams2::exposureTime to activate the fast readout mode of the STF-8300, etc.
-         */
+        /// <summary>
+        /// Set in StarExposureParams2::exposureTime to activate the fast readout mode of the STF-8300, etc.
+        /// <para>ingroup EXPOSURE_FLAGS</para>
+        /// </summary>
         const UInt32 EXP_FAST_READOUT = 0x08000000; //!< Enable fast readout mode flag.
 
-        /*!
-         * \ingroup EXPOSURE_FLAGS
-         * Set in StarExposureParams2::exposureTime to interpret exposure time as milliseconds.
-         */
+        /// <summary>
+        /// Set in StarExposureParams2::exposureTime to interpret exposure time as milliseconds.
+        /// <para>ingroup EXPOSURE_FLAGS</para>
+        /// </summary>
         const UInt32 EXP_MS_EXPOSURE = 0x10000000;  //!< Enable millisecond exposure time flag.
 
-        /*!
-         * \ingroup EXPOSURE_FLAGS
-         * Set in StarExposureParams2::exposureTime to do light clear of the CCD.
-         */
+        /// <summary>
+        /// Set in StarExposureParams2::exposureTime to do light clear of the CCD.
+        /// <para>ingroup EXPOSURE_FLAGS</para>
+        /// </summary>
         const UInt32 EXP_LIGHT_CLEAR = 0x20000000;  //!< Do light clear of CCD flag.
 
-        /*!
-         * \ingroup EXPOSURE_FLAGS
-         * Set in StarExposureParams2::exposureTime to send trigger out Y-.
-         */
+        /// <summary>
+        /// Set in StarExposureParams2::exposureTime to send trigger out Y-.
+        /// <para>ingroup EXPOSURE_FLAGS</para>
+        /// </summary>
         const UInt32 EXP_SEND_TRIGGER_OUT = 0x40000000;  //!< Send trigger out flag.
 
-        /*!
-         * \ingroup EXPOSURE_FLAGS
-         * Set in StarExposureParams2::exposureTime to wait for trigger in pulse.
-         */
+        /// <summary>
+        /// Set in StarExposureParams2::exposureTime to wait for trigger in pulse.
+        /// <para>ingroup EXPOSURE_FLAGS</para>
+        /// </summary>
         const UInt32 EXP_WAIT_FOR_TRIGGER_IN = 0x80000000;  //!< Wait for trigger in flag.
 
-        /*!
-         * \ingroup EXPOSURE_FLAGS
-         * Set in StarExposureParams2::exposureTime to mask with exposure time to remove flags.
-         */
+        /// <summary>
+        /// Set in StarExposureParams2::exposureTime to mask with exposure time to remove flags.
+        /// <para>ingroup EXPOSURE_FLAGS</para>
+        /// </summary>
         const UInt32 EXP_TIME_MASK = 0x00FFFFFF;  //!< Mask for exposure time value.
 
-        /*!
-         * Bit Field Definitions for the in the GetCCDInfoResults4 struct.
-         */
+        /// <summary>
+        /// Bit Field Definitions for the in the GetCCDInfoResults4 struct.
+        /// </summary>
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * mask for CCD type
-         */
+        /// <summary>
+        /// mask for CCD type
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_TYPE_MASK = 0x0001; //!< Mask for CCD type.
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b0=0 is full frame CCD
-         */
+        /// <summary>
+        /// b0=0 is full frame CCD
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_TYPE_FULL_FRAME = 0x0000;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b0=1 is frame transfer CCD
-         */
+        /// <summary>
+        /// b0=1 is frame transfer CCD
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_TYPE_FRAME_TRANSFER = 0x0001;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * mask for electronic shutter type
-         */
+        /// <summary>
+        /// mask for electronic shutter type
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_ESHUTTER_MASK = 0x0002;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b1=0 indicates no electronic shutter
-         */
+        /// <summary>
+        /// b1=0 indicates no electronic shutter
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_ESHUTTER_NO = 0x0000;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b1=1 indicates electronic shutter
-         */
+        /// <summary>
+        /// b1=1 indicates electronic shutter
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_ESHUTTER_YES = 0x0002;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * mask for external tracker support
-         */
+        /// <summary>
+        /// mask for external tracker support
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_EXT_TRACKER_MASK = 0x0004;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b2=0 indicates no external tracker support
-         */
+        /// <summary>
+        /// b2=0 indicates no external tracker support
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_EXT_TRACKER_NO = 0x0000;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b2=1 indicates external tracker support
-         */
+        /// <summary>
+        /// b2=1 indicates external tracker support
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_EXT_TRACKER_YES = 0x0004;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * mask for BTDI support
-         */
+        /// <summary>
+        /// mask for BTDI support
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_BTDI_MASK = 0x0008;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b3=0 indicates no BTDI support
-         */
+        /// <summary>
+        /// b3=0 indicates no BTDI support
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_BTDI_NO = 0x0000;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b3=1 indicates BTDI support
-         */
+        /// <summary>
+        /// b3=1 indicates BTDI support
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_CCD_BTDI_YES = 0x0008;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * mask for AO-8 detected 
-         */
+        /// <summary>
+        /// mask for AO-8 detected 
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_AO8_MASK = 0x0010;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b4=0 indicates no AO-8 detected
-         */
+        /// <summary>
+        /// b4=0 indicates no AO-8 detected
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_AO8_NO = 0x0000;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b4=1 indicates AO-8 detected
-         */
+        /// <summary>
+        /// b4=1 indicates AO-8 detected
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_AO8_YES = 0x0010;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * mask for camera with frame buffer
-         */
+        /// <summary>
+        /// mask for camera with frame buffer
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_FRAME_BUFFER_MASK = 0x0020;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b5=0 indicates camera without Frame Buffer
-         */
+        /// <summary>
+        /// b5=0 indicates camera without Frame Buffer
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_FRAME_BUFFER_NO = 0x0000;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b5=1 indicates camera with Frame Buffer
-         */
+        /// <summary>
+        /// b5=1 indicates camera with Frame Buffer
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_FRAME_BUFFER_YES = 0x0020;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * mask for camera that requires StartExposure2
-         */
+        /// <summary>
+        /// mask for camera that requires StartExposure2
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_REQUIRES_STARTEXP2_MASK = 0x0040;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b6=0 indicates camera works with StartExposure
-         */
+        /// <summary>
+        /// b6=0 indicates camera works with StartExposure
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_REQUIRES_STARTEXP2_NO = 0x0000;
 
-        /*!
-         * \ingroup CAPABILITIES_BITS
-         * b6=1 indicates camera Requires StartExposure2
-         */
+        /// <summary>
+        /// b6=1 indicates camera Requires StartExposure2
+        /// <para>ingroup CAPABILITIES_BITS</para>
+        /// </summary>
         const UInt16 CB_REQUIRES_STARTEXP2_YES = 0x0040;
 
-        /*!
-         */
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure for ST-7 cameras in 1/100ths second
-         */
+        /// <summary>
+        /// Minimum exposure for ST-7 cameras in 1/100ths second
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_ST7_EXPOSURE = 12;
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure for ST-402 cameras in 1/100ths second
-         */
+        /// <summary>
+        /// Minimum exposure for ST-402 cameras in 1/100ths second
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_ST402_EXPOSURE = 4;
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure fpr STF-3200 cameras in 1/100ths second
-         */
+        /// <summary>
+        /// Minimum exposure fpr STF-3200 cameras in 1/100ths second
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_ST3200_EXPOSURE = 9;
 
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure for STF-8300 cameras in 1/100ths second
-         */
+        /// <summary>
+        /// Minimum exposure for STF-8300 cameras in 1/100ths second
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_STF8300_EXPOSURE = 9;
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure for STF-8050 cameras in 1/1000ths second since has E Shutter
-         */
+        /// <summary>
+        /// Minimum exposure for STF-8050 cameras in 1/1000ths second since has E Shutter
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_STF8050_EXPOSURE = 1;
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure for STF-4070 cameras in 1/1000ths second since has E Shutter
-         */
+        /// <summary>
+        /// Minimum exposure for STF-4070 cameras in 1/1000ths second since has E Shutter
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_STF4070_EXPOSURE = 1;
 
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure for STF-0402 cameras in 1/100ths second.
-         */
+        /// <summary>
+        /// Minimum exposure for STF-0402 cameras in 1/100ths second.
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_STF0402_EXPOSURE = 4;
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure for STX cameras in 1/100ths second
-         */
+        /// <summary>
+        /// Minimum exposure for STX cameras in 1/100ths second
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_STX_EXPOSURE = 18;
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure for STT cameras in 1/100ths second
-         */
+        /// <summary>
+        /// Minimum exposure for STT cameras in 1/100ths second
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_STT_EXPOSURE = 12;
 
-        /*!
-         * \ingroup MINIMUM_DEFINES
-         * Minimum exposure in 1/1000ths second since ST-i has E Shutter
-         */
+        /// <summary>
+        /// Minimum exposure in 1/1000ths second since ST-i has E Shutter
+        /// <para>ingroup MINIMUM_DEFINES</para>
+        /// </summary>
         const Int16 MIN_STU_EXPOSURE = 1;
 
         /*!
             \defgroup commandParamStructs
             Command Parameter and Results Structs
 
-            Make sure you set your compiler for byte structure alignment
-            as that is how the driver was built.
-
+            Make sure you set your compiler for byte structure alignment as that is how the driver was built.
         */
 
-        /*!
-         * \brief Start Exposure command parameters
-         *
-         * Parameters used to start SBIG camera exposures.
-         */
+        /// <summary>
+        /// Parameters used to start SBIG camera exposures.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct StartExposureParams
         {
             /// <summary>
-            /// Requested CCD. see also: CCD_REQUEST enum.
+            /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
             /// </summary>
-            public UInt16 ccd;
+            public CCD_REQUEST ccd;
+
             /// <summary>
             /// Exposure time in hundredths of a second in least significant 24 bits. Most significant bits are bit-flags described in exposureTime #define block.
             /// </summary>
             public UInt32 exposureTime;
             /// <summary>
-            /// see also: ABG_STATE7 enum.
+            /// see also: <seealso cref="ABG_STATE7"/> enum.
             /// </summary>
-            public UInt16 abgState;
+            public ABG_STATE7 abgState;
+
             /// <summary>
-            /// see also: SHUTTER_COMMAND enum.
+            /// see also: <seealso cref="SHUTTER_COMMAND"/> enum.
             /// </summary>
-            public UInt16 openShutter;
+            public SHUTTER_COMMAND openShutter;
+
         };
 
-        /*!
-         * \brief Start Exposure command parameters Expanded
-         *
-         * Expanded parameters structure used to start SBIG camera exposures.
-         */
+        /// <summary>
+        /// Expanded parameters structure used to start SBIG camera exposures.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct StartExposureParams2
         {
             /// <summary>
-            /// Requested CCD. see also: CCD_REQUEST enum.
+            /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
             /// </summary>
-            public UInt16 ccd;
+            public CCD_REQUEST ccd;
+
             /// <summary>
             /// Exposure time in hundredths of a second in least significant 24 bits. Most significant bits are bit-flags described in exposureTime #define block.
             /// </summary>
             public UInt32 exposureTime;
             /// <summary>
-            /// Deprecated. See also: ABG_STATE7.
+            /// Deprecated. See also: <seealso cref="ABG_STATE7"/>.
             /// </summary>
-            public UInt16 abgState;
+            public ABG_STATE7 abgState;
+
             /// <summary>
-            /// see also: SHUTTER_COMMAND enum.
+            /// see also: <seealso cref="SHUTTER_COMMAND"/> enum.
             /// </summary>
-            public UInt16 openShutter;
+            public SHUTTER_COMMAND openShutter;
+
             /// <summary>
-            /// readout mode. See also: READOUT_BINNING_MODE enum.
+            /// readout mode. See also: <seealso cref="READOUT_BINNING_MODE"/> enum.
             /// </summary>
-            public UInt16 readoutMode;
+            public READOUT_BINNING_MODE readoutMode;
+
             /// <summary>
             /// top-most row to read out. (0 based)
             /// </summary>
@@ -2601,35 +2593,36 @@ namespace SbigSharp
             public UInt16 width;
         };
 
-        /*!
-         * \brief End Exposure command parameters
-         *
-         * Parameters used to end SBIG camera exposures.
-         * Set ABORT_DONT_END flag in ccd to abort exposures in supported cameras.
-         */
+        /// <summary>
+        /// Parameters used to end SBIG camera exposures.
+        /// <para>Set ABORT_DONT_END flag in ccd to abort exposures in supported cameras.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct EndExposureParams
         {
             /// <summary>
-            /// Requested CCD. see also: CCD_REQUEST enum.
+            /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
             /// </summary>
-            public UInt16 ccd;
+            public CCD_REQUEST ccd;
+
         };
 
-        /*!
-         * \brief Readout Line command parameters
-         *
-         * Parameters used to readout lines of SBIG cameras during readout.
-         */
+        /// <summary>
+        /// Parameters used to readout lines of SBIG cameras during readout.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct ReadoutLineParams
         {
             /// <summary>
-            /// Requested CCD. see also: CCD_REQUEST enum.
+            /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
             /// </summary>
-            public UInt16 ccd;
+            public CCD_REQUEST ccd;
+
             /// <summary>
-            /// readout mode. See also: READOUT_BINNING_MODE enum.
+            /// readout mode. See also: <seealso cref="READOUT_BINNING_MODE"/> enum.
             /// </summary>
-            public UInt16 readoutMode;
+            public READOUT_BINNING_MODE readoutMode;
+
             /// <summary>
             /// left-most pixel to read out.
             /// </summary>
@@ -2640,56 +2633,58 @@ namespace SbigSharp
             public UInt16 pixelLength;
         };
 
-        /*!
-         * \brief Dump Lines command parameters
-         *
-         * Parameters used to dump/flush CCD lines during readout.
-         */
+        /// <summary>
+        /// Parameters used to dump/flush CCD lines during readout.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct DumpLinesParams
         {
             /// <summary>
-            /// Requested CCD. see also: CCD_REQUEST enum.
+            /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
             /// </summary>
-            public UInt16 ccd;
+            public CCD_REQUEST ccd;
+
             /// <summary>
-            /// readout mode. See also: READOUT_BINNING_MODE enum.
+            /// readout mode. See also: <seealso cref="READOUT_BINNING_MODE"/> enum.
             /// </summary>
-            public UInt16 readoutMode;
+            public READOUT_BINNING_MODE readoutMode;
+
             /// <summary>
             /// number of lines to dump.
             /// </summary>
             public UInt16 lineLength;
         };
 
-        /*!
-         * \brief End Readout command parameters
-         *
-         * Parameters used to end SBIG camera readout.
-         */
+        /// <summary>
+        /// Parameters used to end SBIG camera readout.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct EndReadoutParams
         {
             /// <summary>
-            /// Requested CCD. see also: CCD_REQUEST enum.
+            /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
             /// </summary>
-            public UInt16 ccd;
+            public CCD_REQUEST ccd;
+
         };
 
-        /*!
-         * \brief Start Readout command parameters
-         *
-         * (Optional) Parameters used to start SBIG camera readout.
-         * Automatically dumps unused exposure lines.
-         */
+        /// <summary>
+        /// (Optional) Parameters used to start SBIG camera readout.
+        /// <para>Automatically dumps unused exposure lines.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct StartReadoutParams
         {
             /// <summary>
-            /// Requested CCD. see also: CCD_REQUEST enum.
+            /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
             /// </summary>
-            public UInt16 ccd;
+            public CCD_REQUEST ccd;
+
             /// <summary>
-            /// readout mode. See also: READOUT_BINNING_MODE enum.
+            /// readout mode. See also: <seealso cref="READOUT_BINNING_MODE"/> enum.
             /// </summary>
-            public UInt16 readoutMode;
+            public READOUT_BINNING_MODE readoutMode;
+
             /// <summary>
             /// top-most row to read out. (0 based)
             /// </summary>
@@ -2708,67 +2703,62 @@ namespace SbigSharp
             public UInt16 width;
         };
 
-        /*!
-         * \brief Set Temperature Regulation command parameters
-         *
-         * The Set Temperature Regulation command is used to enable or disable the CCD's temperature
-         * regulation. Uses special units for the CCD temperature. The Set Temperature Regulation 2 
-         * command described in the next section is easier to use with temperatures stated in Degrees
-         * Celsius.
-         * 
-         */
+
+        /// <summary>
+        /// The Set Temperature Regulation command is used to enable or disable the CCD's temperature regulation. Uses special units for the CCD temperature. 
+        /// The <seealso cref="SetTemperatureRegulationParams2"/> described in the next section is easier to use with temperatures stated in Degrees Celsius.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct SetTemperatureRegulationParams
         {
             /// <summary>
-            /// see also: TEMPERATURE_REGULATION enum.
+            /// see also: <seealso cref="TEMPERATURE_REGULATION"/> enum.
             /// </summary>
-            public UInt16 regulation;
+            public TEMPERATURE_REGULATION regulation;
+
             /// <summary>
             /// CCD temperature setpoint in A/D units if regulation on or TE drive level (0-255 = 0-100%) if regulation override.
             /// </summary>
             public UInt16 ccdSetpoint;
         };
 
-        /*!
-         * \brief Set Temperature Regulation command parameters Alternate
-         *
-         * The Set Temperature Regulation 2 command is used to enable or disable the CCD's temperature
-         * regulation using temperatures in Degrees C instead of the funny A/D units described above.
-         */
+        /// <summary>
+        /// The Set Temperature Regulation 2 command is used to enable or disable the CCD's temperature
+        /// <para>regulation using temperatures in Degrees C instead of the funny A/D units described above.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct SetTemperatureRegulationParams2
         {
             /// <summary>
-            /// see also: TEMPERATURE_REGULATION enum.
+            /// see also: <seealso cref="TEMPERATURE_REGULATION"/> enum.
             /// </summary>
-            public UInt16 regulation;
+            public TEMPERATURE_REGULATION regulation;
+
             /// <summary>
             /// CCD temperature setpoint in degrees Celsius.
             /// </summary>
             public double ccdSetpoint;
         };
 
-        /*!
-         * \brief Query Temperature Status command parameters
-         *
-         * The Query Temperature Status command is used to monitor the CCD's temperature regulation. The
-         * original version of this command took no Parameters (a NULL pointer) but the command has been
-         * expanded to allow a more user friendly result. If you pass a NULL pointer in the Parameters variable
-         * youl get the classic result. If you pass a pointer to a QueryTemperatureStatusParams struct youl have
-         * access to the expanded results.
-         */
+        /// <summary>
+        /// The Query Temperature Status command is used to monitor the CCD's temperature regulation. 
+        /// The original version of this command took no Parameters (a NULL pointer) but the command has been expanded to allow a more user friendly result. 
+        /// If you pass a NULL pointer in the Parameters variable you'll get the classic result. 
+        /// If you pass a pointer to a QueryTemperatureStatusParams struct you'll have access to the expanded results.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryTemperatureStatusParams
         {
             /// <summary>
-            /// see also: TEMP_STATUS_REQUEST enum.
+            /// see also: <seealso cref="TEMP_STATUS_REQUEST"/> enum.
             /// </summary>
             public UInt16 request;
         };
 
-        /*!
-         * \brief Query Temperature Status command results
-         *
-         * The results struct of a Temperature Status Query, with request set to TEMP_STATUS_STANDARD.
-         */
+        /// <summary>
+        /// The results struct of a Temperature Status Query, with request set to TEMP_STATUS_STANDARD.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryTemperatureStatusResults
         {
             /// <summary>
@@ -2793,11 +2783,10 @@ namespace SbigSharp
             public UInt16 ambientThermistor;
         };
 
-        /*!
-         * \brief Query Temperature Status command results expanded
-         *
-         * The results struct of a Temperature Status Query, with request set to TEMP_STATUS_ADVANCED.
-         */
+        /// <summary>
+        /// The results struct of a Temperature Status Query, with request set to TEMP_STATUS_ADVANCED.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryTemperatureStatusResults2
         {
             /// <summary>
@@ -2858,18 +2847,15 @@ namespace SbigSharp
             public double trackingCCDSetpoint;
         };
 
-        /*!
-         * \brief Activate Relay command parameters
-         *
-         * The Activate Relay command is used to activate one or more of the telescope control outputs or to cancel an activation in progress.
-         *
-         * The status for this command (from QueryCommandStatus) consists of four bit fields:
-         * 
-         * b3 = +X Relay, 0=Off, 1= Active
-         * b2 = -X Relay, 0=Off, 1= Active
-         * b1 = +Y Relay, 0=Off, 1= Active
-         * b0 = -Y Relay, 0=Off, 1= Active
-         */
+        /// <summary>
+        /// The Activate Relay command is used to activate one or more of the telescope control outputs or to cancel an activation in progress.
+        /// <para>The status for this command (from QueryCommandStatus) consists of four bit fields:</para>
+        /// <para>b3 = +X Relay, 0=Off, 1= Active</para>
+        /// <para>b2 = -X Relay, 0=Off, 1= Active</para>
+        /// <para>b1 = +Y Relay, 0=Off, 1= Active</para>
+        /// <para>b0 = -Y Relay, 0=Off, 1= Active</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct ActivateRelayParams
         {
             /// <summary>
@@ -2890,18 +2876,13 @@ namespace SbigSharp
             public UInt16 tYMinus;
         };
 
-        /*!
-         * \brief Pulse Out command parameters
-         *
-         * The Pulse Out command is used with the ST-7/8/etc to position the CFW-6A/CFW-8 and with the PixCel255 and PixCel237 to position 
-         * the internal vane/filter wheel.
-         * 
-         * The status for this command is: 
-         * 
-         * b0 - Normal status, 0 = inactive, 1 = pulse out in progress
-         * b1-b3 - PixCel255/237 Filter state, 0=moving, 1-5=at position 1-5, 6=unknown
-         *
-         */
+        /// <summary>
+        /// The Pulse Out command is used with the ST-7/8/etc to position the CFW-6A/CFW-8 and with the PixCel255 and PixCel237 to position the internal vane/filter wheel.
+        /// <para>The status for this command is: </para>
+        /// <para>b0 - Normal status, 0 = inactive, 1 = pulse out in progress</para>
+        /// <para>b1-b3 - PixCel255/237 Filter state, 0=moving, 1-5=at position 1-5, 6=unknown</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct PulseOutParams
         {
             /// <summary>
@@ -2918,30 +2899,31 @@ namespace SbigSharp
             public UInt16 pulsePeriod;
         };
 
-        /*!
-         * \brief Transfer Serial Bytes command parameters
-         *
-         * The TX Serial Bytes command is for internal use by SBIG. It's a very low level version of commands
-         * like AO Tip Tilt that are used to send data out the ST-7/8/etc's telescope port to accessories like the
-         * AO-7. There're no reason why you should need to use this command. Just use the dedicated commands
-         * like AO Tip Tilt.
-         *
-         */
+        /// <summary>
+        /// The TX Serial Bytes command is for internal use by SBIG.
+        /// It's a very low level version of commands like AO Tip Tilt that are used to send data out the ST-7/8/etc's telescope port to accessories like the AO-7. 
+        /// There're no reason why you should need to use this command. 
+        /// Just use the dedicated commands like AO Tip Tilt.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct TXSerialBytesParams
         {
             /// <summary>
             /// Length of data buffer to send
             /// </summary>
             public UInt16 dataLength;
+            /// <summary>
+            /// Buffer of data to send.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-            public Byte[] data;    //!< Buffer of data to send.
+            public Byte[] data;
         };
 
-        /*!
-         *  \brief Transfer Serial Bytes command results.
-         * 
-         * Results of a TXSerialBytes command.
-         */
+        /// <summary>
+        /// Transfer Serial Bytes command results.
+        /// <para>Results of a TXSerialBytes command.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct TXSerialBytesResults
         {
             /// <summary>
@@ -2950,26 +2932,23 @@ namespace SbigSharp
             public UInt16 bytesSent;
         };
 
-        /*!
-         *  \brief Get Serial Status command results.
-         * 
-         * The Get Serial Status command is for internal use by SBIG. It's a very low level version of commands
-         * like AO Tip Tilt that are used to send data out the ST-7/8/etc's telescope port to accessories like the
-         * AO-7. There're no reason why you should need to use this command. Just use the dedicated commands
-         * like AO Tip Tilt.
-         */
+        /// <summary>
+        /// The Get Serial Status command is for internal use by SBIG. 
+        /// It's a very low level version of commands like AO Tip Tilt that are used to send data out the ST-7/8/etc's telescope port to accessories like the AO-7. 
+        /// There're no reason why you should need to use this command. 
+        /// Just use the dedicated commands like AO Tip Tilt.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetSerialStatusResults
         {
             public MY_LOGICAL clearToCOM;
         };
 
-        /*!
-         * \brief Establish Link command parameters
-         *
-         * The Establish Link command is used by the application to establish a communications link with the
-         * camera. It should be used before any other commands are issued to the camera (excluding the Get
-         * Driver Info command).
-         */
+        /// <summary>
+        /// The Establish Link command is used by the application to establish a communications link with the camera.
+        /// It should be used before any other commands are issued to the camera (excluding the Get Driver Info command).
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct EstablishLinkParams
         {
             /// <summary>
@@ -2978,40 +2957,38 @@ namespace SbigSharp
             public UInt16 sbigUseOnly;
         };
 
-        /*!
-         * \brief Establish Link command results
-         * 
-         * Results from an EstablishLink command.
-         */
+        /// <summary>
+        /// Results from an EstablishLink command.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct EstablishLinkResults
         {
             /// <summary>
-            /// Returns connected camera's type ID. See also: CAMERA_TYPE enum. 
+            /// Returns connected camera's type ID. See also: <seealso cref="CAMERA_TYPE"/> enum. 
             /// </summary>
-            public UInt16 cameraType;
+            public CAMERA_TYPE cameraType;
+
         };
 
-        /*!
-         * \brief Get Driver Info command parameters
-         *
-         * The Get Driver Info command is used to determine the version and capabilities of the DLL/Driver. For
-         * future expandability this command allows you to request several types of information. Initially the
-         * standard request and extended requests will be supported but as the driver evolves additional requests
-         * will be added.
-         */
+        /// <summary>
+        /// The Get Driver Info command is used to determine the version and capabilities of the DLL/Driver. 
+        /// For future expandability this command allows you to request several types of information. 
+        /// Initially the standard request and extended requests will be supported but as the driver evolves additional requests will be added.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetDriverInfoParams
         {
             /// <summary>
-            /// see also: DRIVER_REQUEST enum.
+            /// see also: <seealso cref="DRIVER_REQUEST"/> enum.
             /// </summary>
-            public UInt16 request;
+            public DRIVER_REQUEST request;
+
         };
 
-        /*!
-         * \brief Get Driver Info command Results 0
-         * 
-         * Standard, Extended and USB Loader Results Struct.
-         */
+        /// <summary>
+        /// Standard, Extended and USB Loader Results Struct.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetDriverInfoResults0
         {
             /// <summary>
@@ -3029,30 +3006,31 @@ namespace SbigSharp
             public UInt16 maxRequest;
         };
 
-        /*!
-         * \brief Get CCD Info command parameters
-         *
-         * The Get CCD Info command is used by the application to determine the model of camera being
-         * controlled and its capabilities. For future expandability this command allows you to request several
-         * types of information. Currently 6 standard requests are supported but as the driver evolves additional
-         * requests will be added.
-         */
+        /// <summary>
+        /// The Get CCD Info command is used by the application to determine the model of camera being controlled and its capabilities. 
+        /// For future expandability this command allows you to request several types of information. 
+        /// Currently 6 standard requests are supported but as the driver evolves additional requests will be added.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetCCDInfoParams
         {
-            public UInt16 request; /* see also: CCD_INFO_REQUEST. */
+            /// <summary>
+            /// see also: <seealso cref="CCD_INFO_REQUEST"/>.
+            /// </summary>
+            public CCD_INFO_REQUEST request;
         };
 
-        /*!
-         * \brief Readout mode property struct.
-         * 
-         * Internal structure for storing readout modes.
-         */
+        /// <summary>
+        /// Internal structure for storing readout modes.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct READOUT_INFO
         {
             /// <summary>
-            /// readout mode ID (see also: READOUT_BINNING_MODE)
+            /// readout mode ID (see also: <seealso cref="READOUT_BINNING_MODE"/>)
             /// </summary>
-            public UInt16 mode;
+            public READOUT_BINNING_MODE mode;
+
             /// <summary>
             /// width of image in pixels
             /// </summary>
@@ -3075,11 +3053,10 @@ namespace SbigSharp
             public UInt32 pixel_height;
         };
 
-        /*!
-         * \brief Get CCD Info command results
-         *
-         * Get CCD Info command results 0 and 1 request.
-         */
+        /// <summary>
+        /// Get CCD Info command results 0 and 1 request.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetCCDInfoResults0
         {
             /// <summary>
@@ -3087,9 +3064,10 @@ namespace SbigSharp
             /// </summary>
             public UInt16 firmwareVersion;
             /// <summary>
-            /// Camera type ID. see also: CAMERA_TYPE enum.
+            /// Camera type ID. see also: <seealso cref="CAMERA_TYPE"/> enum.
             /// </summary>
-            public UInt16 cameraType;
+            public CAMERA_TYPE cameraType;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             /// <summary>
             /// null terminated string containing the name of the camera.
@@ -3103,23 +3081,27 @@ namespace SbigSharp
             public READOUT_INFO[] readoutInfo;
         };
 
-        /*!
-         * \brief Get CCD Info command results pass 2
-         *
-         * Get CCD Info command results second request.
-         */
+        /// <summary>
+        /// Get CCD Info command results second request.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetCCDInfoResults2
         {
             /// <summary>
             /// number of bad columns in imaging CCD
             /// </summary>
             public UInt16 badColumns;
+            /// <summary>
+            /// bad columns
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-            public UInt16[] columns;  //!< bad columns
-                                      /// <summary>
-                                      /// type of Imaging CCD, 0= No ABG Protection, 1 = ABG Present. see also: IMAGING_ABG enum.
-                                      /// </summary>
-            public UInt16 imagingABG;
+            public UInt16[] columns;
+            /// <summary>
+            /// type of Imaging CCD, 0= No ABG Protection, 1 = ABG Present.
+            /// see also: <seealso cref="IMAGING_ABG"/> enum.
+            /// </summary>
+            public IMAGING_ABG imagingABG;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
             /// <summary>
             /// null terminated serial number string
@@ -3127,40 +3109,37 @@ namespace SbigSharp
             public string serialNumber;
         };
 
-        /*!
-         * \brief Get CCD Info command results pass 3
-         *
-         * Get CCD Info command results third request. (For the PixCel255/237)
-         */
+        /// <summary>
+        /// Get CCD Info command results third request. (For the PixCel255/237)
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetCCDInfoResults3
         {
             /// <summary>
-            /// 0 = Unknown, 1 = 12 bits, 2 = 16 bits. see also: AD_SIZE enum.
+            /// 0 = Unknown, 1 = 12 bits, 2 = 16 bits. see also: <seealso cref="AD_SIZE"/> enum.
             /// </summary>
-            public UInt16 adSize;
+            public AD_SIZE adSize;
+
             /// <summary>
-            /// 0 = Unknown, 1 = External, 2 = 2 Position, 3 = 5 Position. see also: FILTER_TYPE enum. 
+            /// 0 = Unknown, 1 = External, 2 = 2 Position, 3 = 5 Position. see also: <seealso cref="FILTER_TYPE"/> enum. 
             /// </summary>
-            public UInt16 filterType;
+            public FILTER_TYPE filterType;
+
         };
 
-        /*!
-         * \brief Get CCD Info command results pass 4 and 5
-         *
-         * Get CCD Info command results fourth and fifth request. (For all cameras)
-         * 
-         * Capabilities bits:
-         * b0: 0 = CCD is Full Frame Device, 1 = CCD is Frame Transfer Device,
-         * b1: 0 = No Electronic Shutter, 1 = Interline Imaging CCD with Electronic Shutter and
-         * millisecond exposure capability
-         * b2: 0 = No hardware support for external Remote Guide Head, 1 = Detected hardware
-         * support for external Remote Guide Head.
-         * b3: 1 = Supports the special Biorad TDI acquisition mode.
-         * b4: 1 = AO8 detected.
-         * b5: 1 = Camera contains an internal frame buffer.
-         * b6: 1 = Camera requires the StartExposure2 command instead of the older depricated StartExposure command.
-         * Other: See the CB_XXX_XXX definitions in the sbigurdv.h header file.
-         */
+        /// <summary>
+        /// Get CCD Info command results fourth and fifth request. (For all cameras)
+        /// <para>Capabilities bits:</para>
+        /// <para>b0: 0 = CCD is Full Frame Device, 1 = CCD is Frame Transfer Device,</para>
+        /// <para>b1: 0 = No Electronic Shutter, 1 = Interline Imaging CCD with Electronic Shutter and millisecond exposure capability</para>
+        /// <para>b2: 0 = No hardware support for external Remote Guide Head, 1 = Detected hardware support for external Remote Guide Head.</para>
+        /// <para>b3: 1 = Supports the special Biorad TDI acquisition mode.</para>
+        /// <para>b4: 1 = AO8 detected.</para>
+        /// <para>b5: 1 = Camera contains an internal frame buffer.</para>
+        /// <para>b6: 1 = Camera requires the StartExposure2 command instead of the older depricated StartExposure command.</para>
+        /// <para>Other: See the CB_XXX_XXX definitions in the sbigurdv.h header file.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetCCDInfoResults4
         {
             /// <summary>
@@ -3173,21 +3152,18 @@ namespace SbigSharp
             public UInt16 dumpExtra;
         };
 
-        /*!
-         * \brief Get CCD Info command results pass 6
-         *
-         * Get CCD Info command results sixth request. (For all cameras)
-         * 
-         * Camera bits:
-         * b0: 0 = STX camera, 1 = STXL camera
-         * b1: 0 = Mechanical shutter, 1 = No mechanical shutter (only an electronic shutter)
-         * b2 ?b31: reserved for future expansion
-         * 
-         * CCD Bits:
-         * b0: 0 = Imaging Mono CCD, 1 = Imaging Color CCD
-         * b1: 0 = Bayer color matrix, 1 = Truesense color matrix
-         * b2 ?b31: reserved for future expansion
-         */
+        /// <summary>
+        /// Get CCD Info command results sixth request. (For all cameras)
+        /// <para>Camera bits:</para>
+        /// <para>b0: 0 = STX camera, 1 = STXL camera</para>
+        /// <para>b1: 0 = Mechanical shutter, 1 = No mechanical shutter (only an electronic shutter)</para>
+        /// <para>b2 ?b31: reserved for future expansion</para>
+        /// <para>CCD Bits:</para>
+        /// <para>b0: 0 = Imaging Mono CCD, 1 = Imaging Color CCD</para>
+        /// <para>b1: 0 = Bayer color matrix, 1 = Truesense color matrix</para>
+        /// <para>b2 ?b31: reserved for future expansion</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetCCDInfoResults6
         {
             /// <summary>
@@ -3204,13 +3180,11 @@ namespace SbigSharp
             public UInt32 extraBits;
         };
 
-        /*!
-         * \brief Query Command Status command parameters
-         *
-         * The Query Command Status command is used to monitor the progress of a previously requested
-         * command. Typically this will be used to monitor the progress of an exposure, relay closure or CFW-6A
-         * move command.
-         */
+        /// <summary>
+        /// The Query Command Status command is used to monitor the progress of a previously requested command.
+        /// Typically this will be used to monitor the progress of an exposure, relay closure or CFW-6A move command.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryCommandStatusParams
         {
             /// <summary>
@@ -3219,11 +3193,10 @@ namespace SbigSharp
             public UInt16 command;
         };
 
-        /*!
-         * \brief Query Command Status command results 
-         *
-         * Results for the Query Command Status command.
-         */
+        /// <summary>
+        /// Results for the Query Command Status command.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryCommandStatusResults
         {
             /// <summary>
@@ -3232,11 +3205,10 @@ namespace SbigSharp
             public UInt16 status;
         };
 
-        /*!
-         * \brief Query Command Status command results 
-         *
-         * Results for the Query Command Status command.
-         */
+        /// <summary>
+        /// Results for the Query Command Status command.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryCommandStatusResults2
         {
             /// <summary>
@@ -3249,20 +3221,17 @@ namespace SbigSharp
             public UInt16 info;
         };
 
-        /*!
-         * \brief Miscellaneous Control command results 
-         *
-         * The Miscellaneous Control command is used to control the Fan, LED, and shutter. The camera powers
-         * up with the Fan on, the LED on solid, and the shutter closed. The driver flashes the LED at the low rate
-         * while the Imaging CCD is integrating, flashes the LED at the high rate while the Tracking CCD is
-         * integrating and sets it on solid during the readout.
-         * 
-         * The status returned for this command from Query Command Status has the following structure:
-         * b7-b0 - Shutter edge - This is the position the edge of the shutter was detected at for the last shutter move. Normal values are 7 thru 9. Any other value including 255 indicates a shutter failure and the shutter should be reinitialized.
-         * b8 - the Fan is enabled when this bit is 1
-         * b10b9 - Shutter state, 0=open, 1=closed, 2=opening, 3=closing
-         * b12b11 - LED state, 0=off, 1=on, 2=blink low, 3=blink high
-         */
+        /// <summary>
+        /// The Miscellaneous Control command is used to control the Fan, LED, and shutter.
+        /// The camera powers up with the Fan on, the LED on solid, and the shutter closed.
+        /// The driver flashes the LED at the low rate while the Imaging CCD is integrating, flashes the LED at the high rate while the Tracking CCD is integrating and sets it on solid during the readout.
+        /// <para>The status returned for this command from Query Command Status has the following structure:</para>
+        /// <para>b7-b0 - Shutter edge - This is the position the edge of the shutter was detected at for the last shutter move. Normal values are 7 thru 9. Any other value including 255 indicates a shutter failure and the shutter should be reinitialized.</para>
+        /// <para>b8 - the Fan is enabled when this bit is 1</para>
+        /// <para>b10b9 - Shutter state, 0=open, 1=closed, 2=opening, 3=closing</para>
+        /// <para>b12b11 - LED state, 0=off, 1=on, 2=blink low, 3=blink high</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct MiscellaneousControlParams
         {
             /// <summary>
@@ -3270,34 +3239,35 @@ namespace SbigSharp
             /// </summary>
             public MY_LOGICAL fanEnable;
             /// <summary>
-            /// see also: SHUTTER_COMMAND enum.
+            /// see also: <seealso cref="SHUTTER_COMMAND"/> enum.
             /// </summary>
-            public UInt16 shutterCommand;
+            public SHUTTER_COMMAND shutterCommand;
+
             /// <summary>
-            /// see also: LED_STATE enum.
+            /// see also: <seealso cref="LED_STATE"/> enum.
             /// </summary>
-            public UInt16 ledState;
+            public LED_STATE ledState;
+
         };
 
-        /*!
-         * \brief Read Offset command parameters
-         *
-         * The Read Offset command is used to measure the CCD's offset. In the SBIG cameras the offset is 
-         * adjusted at the factory and this command is for testing or informational purposes only.
-         */
+        /// <summary>
+        /// The Read Offset command is used to measure the CCD's offset.
+        /// In the SBIG cameras the offset is adjusted at the factory and this command is for testing or informational purposes only.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct ReadOffsetParams
         {
             /// <summary>
-            /// see also: CCD_REQUEST enum.
+            /// see also: <seealso cref="CCD_REQUEST"/> enum.
             /// </summary>
-            public UInt16 ccd;
+            public CCD_REQUEST ccd;
+
         };
 
-        /*!
-         * \brief Read Offset command results
-         *
-         * Results structure for the Read Offset command.
-         */
+        /// <summary>
+        /// Results structure for the Read Offset command.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct ReadOffsetResults
         {
             /// <summary>
@@ -3306,13 +3276,10 @@ namespace SbigSharp
             public UInt16 offset;
         };
 
-        /*!
-         * \brief Read Offset command results expanded
-         *
-         * The Read Offset 2 command is used to measure the CCD's offset and the noise in the readout register.
-         * In the SBIG cameras the offset is adjusted at the factory and this command is for testing or informational
-         * purposes only.
-         */
+        /// <summary>The Read Offset 2 command is used to measure the CCD's offset and the noise in the readout register.
+        /// In the SBIG cameras the offset is adjusted at the factory and this command is for testing or informational purposes only.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct ReadOffsetResults2
         {
             /// <summary>
@@ -3325,11 +3292,10 @@ namespace SbigSharp
             public double rms;
         };
 
-        /*!
-         * \brief AO Tip/Tilt command parameters
-         *
-         * The AO Tip Tilt Command is used to position an AO-7 attached to the telescope port of an ST-7/8/etc.
-         */
+        /// <summary>
+        /// The AO Tip Tilt Command is used to position an AO-7 attached to the telescope port of an ST-7/8/etc.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct AOTipTiltParams
         {
             /// <summary>
@@ -3342,27 +3308,26 @@ namespace SbigSharp
             public UInt16 yDeflection;
         };
 
-        /*!
-         * \brief AO Set Focus command parameters
-         *
-         * This command is reserved for future use with motorized focus units. Prototypes of the AO-7 had
-         * motorized focus but the feature was removed in the production units. This command is a holdover from
-         * that.
-         */
+        /// <summary>
+        /// This command is reserved for future use with motorized focus units.
+        /// Prototypes of the AO-7 had motorized focus but the feature was removed in the production units. 
+        /// This command is a holdover from that.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct AOSetFocusParams
         {
             /// <summary>
-            /// see also: AO_FOCUS_COMMAND enum.
+            /// see also: <seealso cref="AO_FOCUS_COMMAND"/> enum.
             /// </summary>
-            public UInt16 focusCommand;
+            public AO_FOCUS_COMMAND focusCommand;
+
         };
 
-        /*!
-         * \brief AO Delay command parameters
-         *
-         * The AO Delay Command is used to generate millisecond type delays for exposing the Tracking CCD.
-         * This sleep command is blocking.
-         */
+        /// <summary>
+        /// The AO Delay Command is used to generate millisecond type delays for exposing the Tracking CCD.
+        /// <para>This sleep command is blocking.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct AODelayParams
         {
             /// <summary>
@@ -3371,12 +3336,12 @@ namespace SbigSharp
             public UInt32 delay;
         };
 
-        /*!
-         * \brief Get Turbo Status command results
-         *
-         * The current driver does not use this command. It was added in a previous version and never removed. It
-         * could be reassigned in the future.
-         */
+        /// <summary>
+        /// The current driver does not use this command.
+        /// It was added in a previous version and never removed.
+        /// It could be reassigned in the future.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetTurboStatusResults
         {
             /// <summary>
@@ -3385,18 +3350,18 @@ namespace SbigSharp
             public MY_LOGICAL turboDetected;
         };
 
-        /*!
-         * \brief Open Device command parameters
-         *
-         * The Open Device command is used to load and initialize the low-level driver. You will typically call
-         * this second (after Open Driver).
-         */
+        /// <summary>
+        /// The Open Device command is used to load and initialize the low-level driver. 
+        /// You will typically call this second (after Open Driver).
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct OpenDeviceParams
         {
             /// <summary>
-            /// see also: SBIG_DEVICE_TYPE enum. specifies LPT, Ethernet, etc.
+            /// see also: <seealso cref="SBIG_DEVICE_TYPE"/> enum. specifies LPT, Ethernet, etc.
             /// </summary>
-            public UInt16 deviceType;
+            public SBIG_DEVICE_TYPE deviceType;
+
             /// <summary>
             /// for deviceType::DEV_LPTN: Windows 9x Only, Win NT uses deviceSelect.
             /// </summary>
@@ -3407,16 +3372,13 @@ namespace SbigSharp
             public UInt32 ipAddress;
         };
 
-        /*!
-         * \brief Set IRQ Level command parameters
-         *
-         * This command allows you to control the IRQ priority of the driver under Windows NT/2000/XP. The
-         * default settings should work fine for all users and these commands should not need to be used.
-         * 
-         * We use three settings in our CCDOPS software: High = 27, Medium = 15, Low = 2. Under fast
-         * machines Low will work fine. On slower machines the mouse may get sluggish unless you select the
-         * Medium or High priority.
-         */
+        /// <summary>
+        /// This command allows you to control the IRQ priority of the driver under Windows NT/2000/XP. 
+        /// The default settings should work fine for all users and these commands should not need to be used.
+        /// We use three settings in our CCDOPS software: High = 27, Medium = 15, Low = 2. 
+        /// Under fast machines Low will work fine. On slower machines the mouse may get sluggish unless you select the Medium or High priority.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct SetIRQLParams
         {
             /// <summary>
@@ -3425,11 +3387,10 @@ namespace SbigSharp
             public UInt16 level;
         };
 
-        /*!
-         * \brief Get IRQ Level command results
-         *
-         * Results of Get IRQ Level command.
-         */
+        /// <summary>
+        /// Results of Get IRQ Level command.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetIRQLResults
         {
             /// <summary>
@@ -3438,11 +3399,10 @@ namespace SbigSharp
             public UInt16 level;
         };
 
-        /*!
-         * \brief Get Link Status command results
-         *
-         * This command returns the status of the communications link established with the camera.
-         */
+        /// <summary>
+        /// This command returns the status of the communications link established with the camera.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetLinkStatusResults
         {
             /// <summary>
@@ -3454,9 +3414,10 @@ namespace SbigSharp
             /// </summary>
             public UInt16 baseAddress;
             /// <summary>
-            /// see also: CAMERA_TYPE enum.
+            /// see also: <seealso cref="CAMERA_TYPE"/> enum.
             /// </summary>
-            public UInt16 cameraType;
+            public CAMERA_TYPE cameraType;
+
             /// <summary>
             /// total number of communications with camera.
             /// </summary>
@@ -3467,13 +3428,12 @@ namespace SbigSharp
             public UInt32 comFailed;
         };
 
-        /*!
-         * \brief Get Microsecond Timer command results
-         *
-         * This command is of extremely limited (and unknown) use. When you have established a link to a
-         * parallel port based camera under Windows NT/2000/XP this command returns a counter with 1
-         * microsecond resolution. Under all other circumstances the counter is zero.
-         */
+        /// <summary>
+        /// This command is of extremely limited (and unknown) use.
+        /// When you have established a link to a parallel port based camera under Windows NT/2000/XP this command returns a counter with 1 microsecond resolution.
+        /// Under all other circumstances the counter is zero.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetUSTimerResults
         {
             /// <summary>
@@ -3482,13 +3442,12 @@ namespace SbigSharp
             public UInt32 count;
         };
 
-        /*!
-         * \brief Send Block command parameters
-         * \internal
-         *
-         * Intended for SBIG internal use only. Unimplemented.
-         */
-        public struct SendBlockParams
+        /// <summary>
+        /// \internal
+        /// <para>Intended for SBIG internal use only. Unimplemented.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
+        private struct SendBlockParams
         {
             /// <summary>
             /// Destination port.
@@ -3505,13 +3464,12 @@ namespace SbigSharp
             public UIntPtr source;
         };
 
-        /*!
-         * \brief Send Byte command parameters
-         * \internal
-         *
-         * Intended for SBIG internal use only. Unimplemented.
-         */
-        public struct SendByteParams
+        /// <summary>
+        /// \internal
+        /// <para>Intended for SBIG internal use only. Unimplemented.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
+        private struct SendByteParams
         {
             /// <summary>
             /// Destination port.
@@ -3523,22 +3481,23 @@ namespace SbigSharp
             public UInt16 data;
         };
 
-        /*!
-         * \brief Clock A/D command parameters
-         * \internal
-         *
-         * Intended for SBIG internal use only. Clock the AD the number of times passed.
-         */
+        /// <summary>
+        /// \internal
+        /// <para>Intended for SBIG internal use only. Clock the AD the number of times passed.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct ClockADParams
         {
             /// <summary>
-            /// CCD to clock. see also: CCD_REQUEST enum. (Unused)
+            /// CCD to clock. see also: <seealso cref="CCD_REQUEST"/> enum. (Unused)
             /// </summary>
-            public UInt16 ccd;
+            public CCD_REQUEST ccd;
+
             /// <summary>
-            /// Readout mode. see also: READOUT_BINNING_MODE enum. (Unused)
+            /// Readout mode. see also: <seealso cref="READOUT_BINNING_MODE"/> enum. (Unused)
             /// </summary>
-            public UInt16 readoutMode;
+            public READOUT_BINNING_MODE readoutMode;
+
             /// <summary>
             /// Starting pixel. (Unused)
             /// </summary>
@@ -3549,12 +3508,11 @@ namespace SbigSharp
             public UInt16 pixelLength;
         };
 
-        /*!
-         * \brief System Test command parameters
-         * \internal
-         *
-         * Intended for SBIG internal use only. Pass the SystemTest command to the micro.
-         */
+        /// <summary>
+        /// \internal
+        /// <para>Intended for SBIG internal use only. Pass the SystemTest command to the micro.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct SystemTestParams
         {
             /// <summary>
@@ -3579,13 +3537,12 @@ namespace SbigSharp
             public UInt16 motorAlwaysOn;
         };
 
-        /*!
-         * \brief Send STV Block command parameters
-         * \internal
-         *
-         * Intended for SBIG internal use only. Unused.
-         */
-        public struct SendSTVBlockParams
+        /// <summary>
+        /// \internal
+        /// <para>Intended for SBIG internal use only. Unused.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
+        private struct SendSTVBlockParams
         {
             /// <summary>
             /// Outgoing buffer length.
@@ -3607,26 +3564,25 @@ namespace SbigSharp
             public UIntPtr inPtr;
         };
 
-        /*!
-         * \brief Get Error String command parameters
-         *
-         * This command returns a null terminated C string in English (not Unicode) corresponding to the passed
-         * error number. It's handy for reporting driver level errors to the user.
-         */
+        /// <summary>
+        /// This command returns a null terminated C string in English (not Unicode) corresponding to the passed
+        /// <para>error number. It's handy for reporting driver level errors to the user.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetErrorStringParams
         {
             /// <summary>
-            /// Error code. see also: PAR_ERROR enum.
+            /// Error code. see also: <seealso cref="PAR_ERROR"/> enum.
             /// </summary>
-            public UInt16 errorNo;
+            public PAR_ERROR errorNo;
+
         };
 
-        /*!
-         * \brief Get Error String command results
-         *
-         * This command returns a null terminated C string in English (not Unicode) corresponding to the passed
-         * error number. It's handy for reporting driver level errors to the user.
-         */
+        /// <summary>
+        /// This command returns a null terminated C string in English (not Unicode) corresponding to the passed
+        /// <para>error number. It's handy for reporting driver level errors to the user.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetErrorStringResults
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
@@ -3636,40 +3592,37 @@ namespace SbigSharp
             public string errorString;
         };
 
-        /*!
-         * \brief Set Driver Handle command parameters
-         *
-         * The Get/Set Driver Handle commands are for use by applications that wish to talk to multiple cameras
-         * on various ports at the same time. If your software only wants to talk to one camera at a time you can
-         * ignore these commands.
-         *
-         * The Get Driver Handle command takes a NULL Parameters pointer and a pointer to a
-         * GetDriverHandleResults struct for Results. The Set Driver Handle command takes a pointer to a
-         * SetDriverHandleParams struct for Parameters and a NULL pointer for Results. To establish links to
-         * multiple cameras do the following sequence:
-         * 
-         * * Call Open Driver for Camera 1
-         * * Call Open Device for Camera 1
-         * * Call Establish Link for Camera 1
-         * * Call Get Driver Handle and save the result as Handle1
-         * * Call Set Driver Handle with INVALID_HANDLE_VALUE in the handle parameter
-         * * Call Open Driver for Camera 2
-         * * Call Open Device for Camera 2
-         * * Call Establish Link for Camera 2
-         * * Call Get Driver Handle and save the result as Handle2
-         *
-         * Then, when you want to talk to Camera 1, call Set Driver Handle with Handle1 and when you want to
-         * talk to Camera 2, call Set Driver Handle with Handle2. To shut down you must call Set Driver Handle,
-         * Close Device and Close Driver in that sequence for each camera.
-         * 
-         * Each time you call Set Driver Handle with INVALID_HANDLE_VALUE you are allowing access to an
-         * additional camera up to a maximum of four cameras. These cameras can be on different LPT ports,
-         * multiple USB4 cameras or at different Ethernet addresses. There is a restriction though due to memory
-         * considerations. You can only have a single readout in process at a time for all cameras and CCDs within
-         * a camera. Readout begins with the Start Readout or Readout Line commands and ends with the End
-         * Readout command. If you try to do multiple interleaved readouts the data from the multiple cameras
-         * will be commingled. To avoid this, simply readout one camera/CCD at a time in an atomic process.
-         */
+
+        /// <summary>
+        /// The Get/Set Driver Handle commands are for use by applications that wish to talk to multiple cameras on various ports at the same time.
+        /// If your software only wants to talk to one camera at a time you can ignore these commands.
+        /// </summary>
+        /// <remarks>
+        /// The Get Driver Handle command takes a NULL Parameters pointer and a pointer to a
+        /// GetDriverHandleResults struct for Results. The Set Driver Handle command takes a pointer to a
+        /// SetDriverHandleParams struct for Parameters and a NULL pointer for Results. To establish links to
+        /// multiple cameras do the following sequence:
+        /// * Call Open Driver for Camera 1
+        /// * Call Open Device for Camera 1
+        /// * Call Establish Link for Camera 1
+        /// * Call Get Driver Handle and save the result as Handle1
+        /// * Call Set Driver Handle with INVALID_HANDLE_VALUE in the handle parameter
+        /// * Call Open Driver for Camera 2
+        /// * Call Open Device for Camera 2
+        /// * Call Establish Link for Camera 2
+        /// * Call Get Driver Handle and save the result as Handle2
+        /// Then, when you want to talk to Camera 1, call Set Driver Handle with Handle1 and when you want to
+        /// talk to Camera 2, call Set Driver Handle with Handle2. To shut down you must call Set Driver Handle,
+        /// Close Device and Close Driver in that sequence for each camera.
+        /// Each time you call Set Driver Handle with INVALID_HANDLE_VALUE you are allowing access to an
+        /// additional camera up to a maximum of four cameras. These cameras can be on different LPT ports,
+        /// multiple USB4 cameras or at different Ethernet addresses. There is a restriction though due to memory
+        /// considerations. You can only have a single readout in process at a time for all cameras and CCDs within
+        /// a camera. Readout begins with the Start Readout or Readout Line commands and ends with the End
+        /// Readout command. If you try to do multiple interleaved readouts the data from the multiple cameras
+        /// will be commingled. To avoid this, simply readout one camera/CCD at a time in an atomic process.
+        /// </remarks>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct SetDriverHandleParams
         {
             /// <summary>
@@ -3678,40 +3631,35 @@ namespace SbigSharp
             public Int16 handle;
         };
 
-        /*!
-         * \brief Get Driver Handle command results
-         *
-         * The Get/Set Driver Handle commands are for use by applications that wish to talk to multiple cameras
-         * on various ports at the same time. If your software only wants to talk to one camera at a time you can
-         * ignore these commands.
-         *
-         * The Get Driver Handle command takes a NULL Parameters pointer and a pointer to a
-         * GetDriverHandleResults struct for Results. The Set Driver Handle command takes a pointer to a
-         * SetDriverHandleParams struct for Parameters and a NULL pointer for Results. To establish links to
-         * multiple cameras do the following sequence:
-         * 
-         * * Call Open Driver for Camera 1
-         * * Call Open Device for Camera 1
-         * * Call Establish Link for Camera 1
-         * * Call Get Driver Handle and save the result as Handle1
-         * * Call Set Driver Handle with INVALID_HANDLE_VALUE in the handle parameter
-         * * Call Open Driver for Camera 2
-         * * Call Open Device for Camera 2
-         * * Call Establish Link for Camera 2
-         * * Call Get Driver Handle and save the result as Handle2
-         *
-         * Then, when you want to talk to Camera 1, call Set Driver Handle with Handle1 and when you want to
-         * talk to Camera 2, call Set Driver Handle with Handle2. To shut down you must call Set Driver Handle,
-         * Close Device and Close Driver in that sequence for each camera.
-         * 
-         * Each time you call Set Driver Handle with INVALID_HANDLE_VALUE you are allowing access to an
-         * additional camera up to a maximum of four cameras. These cameras can be on different LPT ports,
-         * multiple USB4 cameras or at different Ethernet addresses. There is a restriction though due to memory
-         * considerations. You can only have a single readout in process at a time for all cameras and CCDs within
-         * a camera. Readout begins with the Start Readout or Readout Line commands and ends with the End
-         * Readout command. If you try to do multiple interleaved readouts the data from the multiple cameras
-         * will be commingled. To avoid this, simply readout one camera/CCD at a time in an atomic process.
-         */
+        /// <summary>The Get/Set Driver Handle commands are for use by applications that wish to talk to multiple cameras on various ports at the same time.
+        /// If your software only wants to talk to one camera at a time you can ignore these commands.
+        /// </summary>
+        /// <remarks>
+        /// The Get Driver Handle command takes a NULL Parameters pointer and a pointer to a
+        /// GetDriverHandleResults struct for Results. The Set Driver Handle command takes a pointer to a
+        /// SetDriverHandleParams struct for Parameters and a NULL pointer for Results. To establish links to
+        /// multiple cameras do the following sequence:
+        /// * Call Open Driver for Camera 1
+        /// * Call Open Device for Camera 1
+        /// * Call Establish Link for Camera 1
+        /// * Call Get Driver Handle and save the result as Handle1
+        /// * Call Set Driver Handle with INVALID_HANDLE_VALUE in the handle parameter
+        /// * Call Open Driver for Camera 2
+        /// * Call Open Device for Camera 2
+        /// * Call Establish Link for Camera 2
+        /// * Call Get Driver Handle and save the result as Handle2
+        /// Then, when you want to talk to Camera 1, call Set Driver Handle with Handle1 and when you want to
+        /// talk to Camera 2, call Set Driver Handle with Handle2. To shut down you must call Set Driver Handle,
+        /// Close Device and Close Driver in that sequence for each camera.
+        /// Each time you call Set Driver Handle with INVALID_HANDLE_VALUE you are allowing access to an
+        /// additional camera up to a maximum of four cameras. These cameras can be on different LPT ports,
+        /// multiple USB4 cameras or at different Ethernet addresses. There is a restriction though due to memory
+        /// considerations. You can only have a single readout in process at a time for all cameras and CCDs within
+        /// a camera. Readout begins with the Start Readout or Readout Line commands and ends with the End
+        /// Readout command. If you try to do multiple interleaved readouts the data from the multiple cameras
+        /// will be commingled. To avoid this, simply readout one camera/CCD at a time in an atomic process.
+        /// </remarks>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetDriverHandleResults
         {
             /// <summary>
@@ -3720,174 +3668,158 @@ namespace SbigSharp
             public Int16 handle;
         };
 
-        /*!
-         * \brief Set Driver Control command parameters
-         *
-         * This command is used to modify the behavior of the driver by changing the settings of one of the driver control parameters. 
-         * Driver options can be enabled or disabled with this command. There is one set of parameters for the whole DLL vs. one per handle.
-         *
-         * * The DCP_USB_FIFO_ENABLE parameter defaults to TRUE and can be set FALSE to disable
-         *   the FIFO and associated pipelining in the USB cameras. You would do this for example in
-         *   applications using Time Delay Integration (TDI) where you don't want data in the CCD digitized
-         *   until the actual call to ReadoutLine is made.
-         *   
-         * * The DCP_CALL_JOURNAL_ENABLE parameter defaults to FALSE and can be set to TRUE
-         *   to have the driver broadcast Driver API calls. These broadcasts are handy as a debug tool for
-         *   monitoring the sequence of API calls made to the driver. The broadcasts can be received and
-         *   displayed with the Windows based SBIGUDRVJournalRx.exe application.
-         *   Only use this for testing purposes and do not enabled this feature in your released version of you
-         *   application as the journaling mechanism can introduce minor artifacts in the readout.
-         *   
-         * * The DCP_IVTOH_RATIO parameter sets the number of Vertical Rows that are dumped (fast)
-         *   before the Horizontal Register is dumped (not as fast) in the DumpRows command for Parallel
-         *   Port based cameras. This is a very specialized parameter and you should think hard about
-         *   changing it if you do. The default of 5 for the IHTOV_RATIO has been determined to offer a
-         *   good compromise between the time it takes to clear the CCD or Dump Rows and the ability to
-         *   effectively clear the CCD after imaging a bright object. Finally should you find it necessary to
-         *   change it read the current setting and restore it when you're done.
-         *   
-         * * The DCP_USB_FIFO_SIZE parameter sets the size of the FIFO used to receive data from USB
-         *   cameras. The default and maximum value of 16384 yields the highest download speeds.
-         *   Lowering the value will cause the camera to digitize and download pixels in smaller chunks.
-         *   Again this is a specialized parameter that 99.9% of programs out there will have no need for
-         *   changing.
-         *   
-         * * The DCP_USB_PIXEL_DL_ENABLE parameter allows disabling the actual downloading of
-         *   pixel data from the camera for testing purposes. This parameter defaults to TRUE.
-         *   
-         * * The DCP_HIGH_THROUGHPUT parameter allows configuring the driver for the highest
-         *   possible imaging throughput at the expense of image noise and or artifacts. This parameter
-         *   defaults to FALSE and you should only enable this for short periods of time. You might use this
-         *   in Focus mode for example to get higher image throughput but you should never use it when you
-         *   are taking keeper images. It does things that avoid timed delays in the camera like leaving the
-         *   shutter motor on all the time, etc. At this time this feature is supported in the driver but not all
-         *   cameras show a benefit from its use.
-         *   
-         * * The DCP_VDD_OPTIMIZED parameter defaults to TRUE which lowers the CCD's Vdd (which
-         *   reduces amplifier glow) only for images 3 seconds and longer. This was done to increase the
-         *   image throughput for short exposures as raising and lowering Vdd takes 100s of milliseconds.
-         *   The lowering and subsequent raising of Vdd delays the image readout slightly which causes short
-         *   exposures to have a different bias structure than long exposures. Setting this parameter to
-         *   FALSE stops the short exposure optimization from occurring.
-         *   
-         * * The DCP_AUTO_AD_GAIN parameter defaults to TRUE whereby the driver is responsible for
-         *   setting the A/D gain in USB cameras. Setting this to FALSE allows overriding the driver
-         *   imposed A/D gains.
-         *   
-         * * The DCP_NO_HCLKS_FOR_INTEGRATION parameter defaults to FALSE and setting it to
-         *   TRUE disables the horizontal clocks during exposure integration and is intended for SBIG
-         *   testing only.
-         *   
-         * * The DCP_TDI_MODE_ENABLE parameter defaults to FALSE and setting it to TRUE enables
-         *   the special Biorad TDI mode.
-         *   
-         * * The DCP_VERT_FLUSH_CONTROL_ENABLE parameter defaults to TRUE and setting it to
-         *   FALSE it disables the background flushing of the vertical clocks of KAI CCDs during exposure
-         *   integration and is intended for SBIG testing only.
-         *
-         * * The DCP_ETHERNET_PIPELINE_ENABLE parameter defaults to FALSE and setting it to
-         *   TRUE can increase the throughput of Ethernet based cameras like the STX & STT but doing so
-         *   is not recommended for robust operation.
-         * 
-         * * The DCP_FAST_LINK parameter defaults to FALSE and setting it to TRUE speeds up the
-         *   Establish Link command by not dumping the pixel FIFOs in the camera, It is used internally to
-         *   speed up the Query USB and Query Ethernet commands.
-         * 
-         * * The DCP_COLUMN_REPAIR_ENABLE defaults to FALSE and setting it to TRUE causes the
-         *   Universal Driver Library to repair up to 7 columns in the Imaging CCD automatically. This is
-         *   done in conjunction with column data stored in nonvolatile memory in the cameras. Under
-         *   Windows the setting of this parameter persists in the Registry through the setting of the
-         *   HKEY_CURRENT_USER\Software\SBIG\SBIGUDRV\Filter\ColumnRepairEnable setting.
-         * 
-         * * The DCP_WARM_PIXEL_REPAIR_ENABLE defaults to Zero and setting it to 1 through 8
-         *   causes the Universal Driver Library to repair warm pixels in the Imaging CCD automatically. A
-         *   setting of 8 replaces approximately 5% of pixels and a setting of 1 replaces approximately 1 in a
-         *   million. A decrease of 1 in the setting replaces approximately 1/10th the number of pixels of the
-         *   higher setting (7 ~ 0.5%, 6 ~ 0.05%, etc). Under Windows the setting of this parameter persists
-         *   in the Registry through the setting of the
-         *   HKEY_CURRENT_USER\Software\SBIG\SBIGUDRV\Filter\WarmPixelRepairEnable setting.
-         * 
-         * * The DCP_WARM_PIXEL_REPAIR_COUNT parameter returns the total number of pixels
-         *   replaced in the last image by the Warm Pixel Repair routine described above. You can use this
-         *   parameter to tweak the DCP_WARM_PIXEL_REPAIR_ENABLE parameter to filter as many
-         *   warm pixels as your application requires.
-         */
+        /// <summary>
+        /// This command is used to modify the behavior of the driver by changing the settings of one of the driver control parameters. 
+        /// Driver options can be enabled or disabled with this command.
+        /// There is one set of parameters for the whole DLL vs. one per handle.
+        /// </summary>
+        /// <remarks>
+        /// * The DCP_USB_FIFO_ENABLE parameter defaults to TRUE and can be set FALSE to disable
+        ///   the FIFO and associated pipelining in the USB cameras. You would do this for example in
+        ///   applications using Time Delay Integration (TDI) where you don't want data in the CCD digitized
+        ///   until the actual call to ReadoutLine is made.
+        /// * The DCP_CALL_JOURNAL_ENABLE parameter defaults to FALSE and can be set to TRUE
+        ///   to have the driver broadcast Driver API calls. These broadcasts are handy as a debug tool for
+        ///   monitoring the sequence of API calls made to the driver. The broadcasts can be received and
+        ///   displayed with the Windows based SBIGUDRVJournalRx.exe application.
+        ///   Only use this for testing purposes and do not enabled this feature in your released version of you
+        ///   application as the journaling mechanism can introduce minor artifacts in the readout.
+        /// * The DCP_IVTOH_RATIO parameter sets the number of Vertical Rows that are dumped (fast)
+        ///   before the Horizontal Register is dumped (not as fast) in the DumpRows command for Parallel
+        ///   Port based cameras. This is a very specialized parameter and you should think hard about
+        ///   changing it if you do. The default of 5 for the IHTOV_RATIO has been determined to offer a
+        ///   good compromise between the time it takes to clear the CCD or Dump Rows and the ability to
+        ///   effectively clear the CCD after imaging a bright object. Finally should you find it necessary to
+        ///   change it read the current setting and restore it when you're done.
+        /// * The DCP_USB_FIFO_SIZE parameter sets the size of the FIFO used to receive data from USB
+        ///   cameras. The default and maximum value of 16384 yields the highest download speeds.
+        ///   Lowering the value will cause the camera to digitize and download pixels in smaller chunks.
+        ///   Again this is a specialized parameter that 99.9% of programs out there will have no need for
+        ///   changing.
+        /// * The DCP_USB_PIXEL_DL_ENABLE parameter allows disabling the actual downloading of
+        ///   pixel data from the camera for testing purposes. This parameter defaults to TRUE.
+        /// * The DCP_HIGH_THROUGHPUT parameter allows configuring the driver for the highest
+        ///   possible imaging throughput at the expense of image noise and or artifacts. This parameter
+        ///   defaults to FALSE and you should only enable this for short periods of time. You might use this
+        ///   in Focus mode for example to get higher image throughput but you should never use it when you
+        ///   are taking keeper images. It does things that avoid timed delays in the camera like leaving the
+        ///   shutter motor on all the time, etc. At this time this feature is supported in the driver but not all
+        ///   cameras show a benefit from its use.
+        /// * The DCP_VDD_OPTIMIZED parameter defaults to TRUE which lowers the CCD's Vdd (which
+        ///   reduces amplifier glow) only for images 3 seconds and longer. This was done to increase the
+        ///   image throughput for short exposures as raising and lowering Vdd takes 100s of milliseconds.
+        ///   The lowering and subsequent raising of Vdd delays the image readout slightly which causes short
+        ///   exposures to have a different bias structure than long exposures. Setting this parameter to
+        ///   FALSE stops the short exposure optimization from occurring.
+        /// * The DCP_AUTO_AD_GAIN parameter defaults to TRUE whereby the driver is responsible for
+        ///   setting the A/D gain in USB cameras. Setting this to FALSE allows overriding the driver
+        ///   imposed A/D gains.
+        /// * The DCP_NO_HCLKS_FOR_INTEGRATION parameter defaults to FALSE and setting it to
+        ///   TRUE disables the horizontal clocks during exposure integration and is intended for SBIG
+        ///   testing only.
+        /// * The DCP_TDI_MODE_ENABLE parameter defaults to FALSE and setting it to TRUE enables
+        ///   the special Biorad TDI mode.
+        /// * The DCP_VERT_FLUSH_CONTROL_ENABLE parameter defaults to TRUE and setting it to
+        ///   FALSE it disables the background flushing of the vertical clocks of KAI CCDs during exposure
+        ///   integration and is intended for SBIG testing only.
+        /// * The DCP_ETHERNET_PIPELINE_ENABLE parameter defaults to FALSE and setting it to
+        ///   TRUE can increase the throughput of Ethernet based cameras like the STX & STT but doing so
+        ///   is not recommended for robust operation.
+        /// * The DCP_FAST_LINK parameter defaults to FALSE and setting it to TRUE speeds up the
+        ///   Establish Link command by not dumping the pixel FIFOs in the camera, It is used internally to
+        ///   speed up the Query USB and Query Ethernet commands.
+        /// * The DCP_COLUMN_REPAIR_ENABLE defaults to FALSE and setting it to TRUE causes the
+        ///   Universal Driver Library to repair up to 7 columns in the Imaging CCD automatically. This is
+        ///   done in conjunction with column data stored in nonvolatile memory in the cameras. Under
+        ///   Windows the setting of this parameter persists in the Registry through the setting of the
+        ///   HKEY_CURRENT_USER\Software\SBIG\SBIGUDRV\Filter\ColumnRepairEnable setting.
+        /// * The DCP_WARM_PIXEL_REPAIR_ENABLE defaults to Zero and setting it to 1 through 8
+        ///   causes the Universal Driver Library to repair warm pixels in the Imaging CCD automatically. A
+        ///   setting of 8 replaces approximately 5% of pixels and a setting of 1 replaces approximately 1 in a
+        ///   million. A decrease of 1 in the setting replaces approximately 1/10th the number of pixels of the
+        ///   higher setting (7 ~ 0.5%, 6 ~ 0.05%, etc). Under Windows the setting of this parameter persists
+        ///   in the Registry through the setting of the
+        ///   HKEY_CURRENT_USER\Software\SBIG\SBIGUDRV\Filter\WarmPixelRepairEnable setting.
+        /// * The DCP_WARM_PIXEL_REPAIR_COUNT parameter returns the total number of pixels
+        ///   replaced in the last image by the Warm Pixel Repair routine described above. You can use this
+        ///   parameter to tweak the DCP_WARM_PIXEL_REPAIR_ENABLE parameter to filter as many
+        ///   warm pixels as your application requires.
+        /// </remarks>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct SetDriverControlParams
         {
             /// <summary>
-            /// the parameter to modify. see also: DRIVER_CONTROL_PARAM enum.
+            /// the parameter to modify. see also: <seealso cref="DRIVER_CONTROL_PARAM"/> enum.
             /// </summary>
-            public UInt16 controlParameter;
+            public DRIVER_CONTROL_PARAM controlParameter;
+
             /// <summary>
             /// the value of the control parameter.
             /// </summary>
             public UInt32 controlValue;
         };
 
-        /*!
-         * \brief Get Driver Control command parameters
-         *
-         * Requests the value of a driver control parameter.
-         */
+        /// <summary>
+        /// Requests the value of a driver control parameter.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetDriverControlParams
         {
             /// <summary>
-            /// the driver parameter to be retrieved. see also: DRIVER_CONTROL_PARAM enum.
+            /// the driver parameter to be retrieved. see also: <seealso cref="DRIVER_CONTROL_PARAM"/> enum.
             /// </summary>
-            public UInt16 controlParameter;
+            public DRIVER_CONTROL_PARAM controlParameter;
         };
 
-        /*!
-         * \brief Get Driver Control command results
-         *
-         * Returns the value of a driver control parameter.
-         */
+        /// <summary>
+        /// Returns the value of a driver control parameter.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetDriverControlResults
         {
             /// <summary>
-            /// The value of the requested driver parameter. see also: DRIVER_CONTROL_PARAM enum.
+            /// The value of the requested driver parameter. see also: <seealso cref="DRIVER_CONTROL_PARAM"/> enum.
             /// </summary>
-            public UInt32 controlValue;
+            public DRIVER_CONTROL_PARAM controlValue;
         };
 
-        /*!
-         * \brief USB AD Control command parameters
-         *
-         * This command is used to modify the USB cameras A/D gain and offset registers.
-         * This command is intended for OEM use only. The typical application does not need to use this
-         * command as the USB cameras initialize the A/D to factory set defaults when the camera powers
-         * up.
-         * 
-         * * For the USB_AD_IMAGING_GAIN and AD_USB_TRACKING_GAIN commands the allowed
-         *   setting for the data parameter is 0 through 63. The actual Gain of the A/D (in Volts/Volt) ranges
-         *   from 1.0 to 6.0 and is determined by the following formula:
-         *   Gain = 6.0 / ( 1.0 + 5.0 * ( (63 - data) / 63 )
-         *   Note that the default A/D Gain set by the camera at power up is 1.2 for the Imaging CCD and 2.0
-         *   for the Tracking CCD. Furthermore, the gain item reported by the Get CCD Info command will
-         *   always report the default factory-set gain and will not change based upon changes made to the
-         *   A/D gain by this command.
-         * * For the USB_AD_IMAGING_OFFSET and USB_AD_TRACKING_OFFSET commands the
-         *   allowed setting for the data parameter is -255 through 255. Positive offsets increase the video
-         *   black level in ADUs. The cameras are programmed at the factory to typically have a 900 to 1000
-         *   ADU black level offset.
-         */
+        /// <summary>
+        /// This command is used to modify the USB cameras A/D gain and offset registers.
+        /// This command is intended for OEM use only.
+        /// The typical application does not need to use this command as the USB cameras initialize the A/D to factory set defaults when the camera powers up.
+        /// </summary>
+        /// <remarks>
+        /// * For the USB_AD_IMAGING_GAIN and AD_USB_TRACKING_GAIN commands the allowed
+        ///   setting for the data parameter is 0 through 63. The actual Gain of the A/D (in Volts/Volt) ranges
+        ///   from 1.0 to 6.0 and is determined by the following formula:
+        ///   Gain = 6.0 / ( 1.0 + 5.0 * ( (63 - data) / 63 )
+        ///   Note that the default A/D Gain set by the camera at power up is 1.2 for the Imaging CCD and 2.0
+        ///   for the Tracking CCD. Furthermore, the gain item reported by the Get CCD Info command will
+        ///   always report the default factory-set gain and will not change based upon changes made to the
+        ///   A/D gain by this command.
+        /// * For the USB_AD_IMAGING_OFFSET and USB_AD_TRACKING_OFFSET commands the
+        ///   allowed setting for the data parameter is -255 through 255. Positive offsets increase the video
+        ///   black level in ADUs. The cameras are programmed at the factory to typically have a 900 to 1000
+        ///   ADU black level offset.
+        /// </remarks>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct USBADControlParams
         {
             /// <summary>
-            /// Imaging/Tracking Gain or offset. see also: USB_AD_CONTROL_COMMAND enum.
+            /// Imaging/Tracking Gain or offset. see also: <seealso cref="USB_AD_CONTROL_COMMAND"/> enum.
             /// </summary>
-            public UInt16 command;
+            public USB_AD_CONTROL_COMMAND command;
+
             /// <summary>
             /// Command specific.
             /// </summary>
             public Int16 data;
         };
 
-        /*!
-         * \brief Information from queried USB device.
-         * 
-         * Results for a single USB query.
-         */
+        /// <summary>
+        /// Results for a single USB query.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QUERY_USB_INFO
         {
             /// <summary>
@@ -3895,9 +3827,10 @@ namespace SbigSharp
             /// </summary>
             public MY_LOGICAL cameraFound;
             /// <summary>
-            /// Camera type found. see also: CAMERA_TYPE enum.
+            /// Camera type found. see also: <seealso cref="CAMERA_TYPE"/> enum.
             /// </summary>
-            public UInt16 cameraType;
+            public CAMERA_TYPE cameraType;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             /// <summary>
             /// null terminated string. Name of found camera.
@@ -3910,36 +3843,40 @@ namespace SbigSharp
             public string serialNumber;
         };
 
-        /*!
-         * \brief Query USB command results 
-         * 
-         * Returns a list of up to four cameras found by the driver via USB.
-         */
+        /// <summary>
+        /// Returns a list of up to four cameras found by the driver via USB.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryUSBResults
         {
             /// <summary>
             /// Number of cameras found. (Max 4)
             /// </summary>
             public UInt16 camerasFound;
+            /// <summary>
+            /// Information returned by cameras.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.Struct, SizeConst = 4)]
-            public QUERY_USB_INFO[] usbInfo;      //!< Information returned by cameras.
+            public QUERY_USB_INFO[] usbInfo;
         };
 
-        /*!
-         * \brief Query USB command results extended
-         * 
-         * Returns a list of up to eight cameras found by the driver via USB.
-         */
+        /// <summary>
+        /// Returns a list of up to eight cameras found by the driver via USB.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryUSBResults2
         {
             /// <summary>
             /// Number of cameras found. (Max 8)
             /// </summary>
             public UInt16 camerasFound;
+            /// <summary>
+            /// Information returned by cameras.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.Struct, SizeConst = 8)]
-            public QUERY_USB_INFO[] usbInfo;      //!< Information returned by cameras.
+            public QUERY_USB_INFO[] usbInfo;
         };
-
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryUSBResults3
         {
             /// <summary>
@@ -3950,11 +3887,10 @@ namespace SbigSharp
             public QUERY_USB_INFO[] usbInfo;     //<! Information returned by cameras.
         };
 
-        /*!
-         * \brief Query Ethernet device results
-         * 
-         * Returned information for a single device over Ethernet.
-         */
+        /// <summary>
+        /// Returned information for a single device over Ethernet.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QUERY_ETHERNET_INFO
         {
             /// <summary>
@@ -3966,9 +3902,10 @@ namespace SbigSharp
             /// </summary>
             public UInt32 ipAddress;
             /// <summary>
-            /// Camera type found. see also: CAMERA_TYPE enum.
+            /// Camera type found. see also: <seealso cref="CAMERA_TYPE"/> enum.
             /// </summary>
-            public UInt16 cameraType;
+            public CAMERA_TYPE cameraType;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             /// <summary>
             /// null terminated string. Name of found camera.
@@ -3981,43 +3918,47 @@ namespace SbigSharp
             public string serialNumber;
         };
 
-        /*!
-         * \brief Query Ethernet command results
-         * 
-         * Returns a list of up to eight cameras found by the driver via Ethernet.
-         */
+        /// <summary>
+        /// Returns a list of up to eight cameras found by the driver via Ethernet.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryEthernetResults
         {
             /// <summary>
             /// Number of cameras found.
             /// </summary>
             public UInt16 camerasFound;
+            /// <summary>
+            /// Information of found devices.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.Struct, SizeConst = 4)]
-            public QUERY_ETHERNET_INFO[] ethernetInfo;    //!< Information of found devices.
+            public QUERY_ETHERNET_INFO[] ethernetInfo;
         };
 
-        /*!
-         * \brief Query Ethernet command results extended
-         * 
-         * Returns a list of up to eight cameras found by the driver via Ethernet.
-         */
+        /// <summary>
+        /// Returns a list of up to eight cameras found by the driver via Ethernet.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryEthernetResults2
         {
             /// <summary>
             /// Number of cameras found.
             /// </summary>
             public UInt16 camerasFound;
+            /// <summary>
+            /// Information of found devices.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.Struct, SizeConst = 8)]
-            public QUERY_ETHERNET_INFO[] ethernetInfo;    //!< Information of found devices.
+            public QUERY_ETHERNET_INFO[] ethernetInfo;
         };
 
-        /*!
-         * \brief Get Pentium Cycle Count command parameters
-         * 
-         * This command is used to read a Pentium processor's internal cycle counter. Pentium processors have a
-         * 32 or 64 bit register that increments every clock cycle. For example on a 1 GHz Pentium the counter
-         * advances 1 billion counts per second. This command can be used to retrieve that counter.
-         */
+        /// <summary>
+        /// This command is used to read a Pentium processor's internal cycle counter.
+        /// Pentium processors have a 32 or 64 bit register that increments every clock cycle. 
+        /// For example on a 1 GHz Pentium the counter advances 1 billion counts per second. 
+        /// This command can be used to retrieve that counter.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetPentiumCycleCountParams
         {
             /// <summary>
@@ -4026,13 +3967,13 @@ namespace SbigSharp
             public UInt16 rightShift;
         };
 
-        /*!
-         * \brief Get Pentium Cycle Count command results
-         * 
-         * This command is used to read a Pentium processor's internal cycle counter. Pentium processors have a
-         * 32 or 64 bit register that increments every clock cycle. For example on a 1 GHz Pentium the counter
-         * advances 1 billion counts per second. This command can be used to retrieve that counter.
-         */
+        /// <summary>
+        /// This command is used to read a Pentium processor's internal cycle counter. 
+        /// Pentium processors have a 32 or 64 bit register that increments every clock cycle.
+        /// For example on a 1 GHz Pentium the counter advances 1 billion counts per second. 
+        /// This command can be used to retrieve that counter.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetPentiumCycleCountResults
         {
             /// <summary>
@@ -4045,15 +3986,13 @@ namespace SbigSharp
             public UInt32 countHigh;
         };
 
-        /*!
-         * \brief RW USB I2C Count command parameters
-         * 
-         * This command is used read or write data to the USB cameras I2C expansion port. It writes the 
-         * supplied data to the I2C port, or reads data from the supplied address.
-         * 
-         * This command is typically called by SBIG code in the Universal Driver. If you think you have
-         * some reason to call this function you should check with SBIG first.
-         */
+        /// <summary>
+        /// This command is used read or write data to the USB cameras I2C expansion port.
+        /// It writes the supplied data to the I2C port, or reads data from the supplied address.
+        /// This command is typically called by SBIG code in the Universal Driver.
+        /// If you think you have some reason to call this function you should check with SBIG first.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct RWUSBI2CParams
         {
             /// <summary>
@@ -4074,15 +4013,13 @@ namespace SbigSharp
             public Byte deviceAddress;
         };
 
-        /*!
-         * \brief RW USB I2C Count command results
-         * 
-         * This command is used read or write data to the USB cameras I2C expansion port. It returns
-         * the result of the read request.
-         *
-         * This command is typically called by SBIG code in the Universal Driver. If you think you have
-         * some reason to call this function you should check with SBIG first.
-         */
+        /// <summary>
+        /// This command is used read or write data to the USB cameras I2C expansion port. 
+        /// It returns the result of the read request.
+        /// This command is typically called by SBIG code in the Universal Driver.
+        /// If you think you have some reason to call this function you should check with SBIG first.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct RWUSBI2CResults
         {
             /// <summary>
@@ -4091,55 +4028,60 @@ namespace SbigSharp
             public Byte data;
         };
 
-        /*!
-         * \brief CFW command parameters
-         * 
-         * The CFW Command is a high-level API for controlling the SBIG color filter wheels. It supports the
-         * CFW-2 (two position shutter wheel in the ST-5C/237), the CFW-5 (internal color filter wheel for the
-         * ST-5C/237), the CFW-8, the internal filter wheel (CFW-L) in the ST-L Large Format Camera, the
-         * internal filter wheel (CFW-402) in the ST-402 camera, the old 6-position CFW-6A, the 10-position
-         * CFW-10 in both I2C and RS-232 interface modes, the I2C based CFW-9 and 8-position CFW for the
-         * STL (CFW-L8), the five (FW5-STX) and seven (FW7-STX) position CFWs for the STX, the five
-         * (FW5-8300) and eight (FW8-8300) position CFWs for the ST-8300 and the eight (FW8-STT) position
-         * CFW for the STT cameras.
-
-         * * CFW Command CFWC_QUERY
-         *   Use this command to monitor the progress of the Goto sub-command. This command takes no
-         *   additional parameters in the CFParams. You would typically do this several times a second after
-         *   the issuing the Goto command until it reports CFWS_IDLE in the cfwStatus entry of the
-         *   CFWResults. Additionally filter wheels that can report their current position (all filter wheels
-         *   except the CFW-6A or CFW-8) have that position reported in cfwPosition entry of the
-         *   CFWResults.
-         * * CFW Command CFWC_GOTO
-         *   Use this command to start moving the color filter wheel towards a given position. Set the desired
-         *   position in the cfwParam1 entry with entries defined by the CFW_POSITION enum.
-         *   CFW Command CFWC_INIT
-         * * Use this command to initialize/self-calibrate the color filter wheel. All SBIG color filter wheels
-         *   self calibrate on power-up and should not require further initialization. We offer this option for
-         *   users that experience difficulties with their color filter wheels or when changing between the
-         *   CFW-2 and CFW-5 in the ST-5C/237. This command takes no additional parameters in the
-         *   CFWParams struct.
-         * * CFW Command CFWC_GET_INFO
-         *   This command supports several sub-commands as determined by the cfwParam1 entry (see the
-         *   CFW_GETINFO_SELECT enum). Command CFWG_FIRMWARE_VERSION returns the
-         * * CFWC_OPEN_DEVICE and CFWC_CLOSE_DEVICE:
-         *   These commands are used to Open and Close any OS based communications port associated
-         *   with the CFW and should proceed the first command sent and follow the last command sent to
-         *   the CFW. While strictly only required for the RS-232 version of the CFW-10 calling these
-         *   commands is a good idea for future compatibility. For the RS-232 based CFW-10 set the 
-         *   cfwParam1 entry to one of the settings CFW_COM_PORT enum to indicate which PC COM port is 
-         *   used to control the CFW-10. Again, only the RS232 controlled CFW-10 requires these calls.
-         */
+        /// <summary>
+        /// The CFW Command is a high-level API for controlling the SBIG color filter wheels.
+        /// It supports 
+        /// the CFW-2 (two position shutter wheel in the ST-5C/237),
+        /// the CFW-5 (internal color filter wheel for the ST-5C/237),
+        /// the CFW-8, the internal filter wheel(CFW-L) in the ST-L Large Format Camera, 
+        /// the internal filter wheel(CFW-402) in the ST-402 camera, 
+        /// the old 6-position CFW-6A, the 10-position
+        /// CFW-10 in both I2C and RS-232 interface modes,
+        /// the I2C based CFW-9 and 8-position CFW for the STL(CFW-L8),
+        /// the five(FW5-STX) and seven(FW7-STX) position CFWs for the STX,
+        /// the five(FW5-8300) and eight(FW8-8300) position CFWs for the ST-8300 and the eight(FW8-STT) position CFW for the STT cameras.
+        /// </summary>
+        /// <remarks>
+        /// * CFW Command CFWC_QUERY
+        ///   Use this command to monitor the progress of the Goto sub-command. This command takes no
+        ///   additional parameters in the CFParams. You would typically do this several times a second after
+        ///   the issuing the Goto command until it reports CFWS_IDLE in the cfwStatus entry of the
+        ///   CFWResults. Additionally filter wheels that can report their current position (all filter wheels
+        ///   except the CFW-6A or CFW-8) have that position reported in cfwPosition entry of the
+        ///   CFWResults.
+        /// * CFW Command CFWC_GOTO
+        ///   Use this command to start moving the color filter wheel towards a given position. Set the desired
+        ///   position in the cfwParam1 entry with entries defined by the CFW_POSITION enum.
+        ///   CFW Command CFWC_INIT
+        /// * Use this command to initialize/self-calibrate the color filter wheel. All SBIG color filter wheels
+        ///   self calibrate on power-up and should not require further initialization. We offer this option for
+        ///   users that experience difficulties with their color filter wheels or when changing between the
+        ///   CFW-2 and CFW-5 in the ST-5C/237. This command takes no additional parameters in the
+        ///   CFWParams struct.
+        /// * CFW Command CFWC_GET_INFO
+        ///   This command supports several sub-commands as determined by the cfwParam1 entry (see the
+        ///   CFW_GETINFO_SELECT enum). Command CFWG_FIRMWARE_VERSION returns the
+        /// * CFWC_OPEN_DEVICE and CFWC_CLOSE_DEVICE:
+        ///   These commands are used to Open and Close any OS based communications port associated
+        ///   with the CFW and should proceed the first command sent and follow the last command sent to
+        ///   the CFW. While strictly only required for the RS-232 version of the CFW-10 calling these
+        ///   commands is a good idea for future compatibility. For the RS-232 based CFW-10 set the 
+        ///   cfwParam1 entry to one of the settings CFW_COM_PORT enum to indicate which PC COM port is 
+        ///   used to control the CFW-10. Again, only the RS232 controlled CFW-10 requires these calls.
+        /// </remarks>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct CFWParams
         {
             /// <summary>
-            /// see also: CFW_MODEL_SELECT enum.
+            /// see also: <seealso cref="CFW_MODEL_SELECT"/> enum.
             /// </summary>
-            public UInt16 cfwModel;
+            public CFW_MODEL_SELECT cfwModel;
+
             /// <summary>
-            /// see also: CFW_COMMAND enum.
+            /// see also: <seealso cref="CFW_COMMAND"/> enum.
             /// </summary>
-            public UInt16 cfwCommand;
+            public CFW_COMMAND cfwCommand;
+
             /// <summary>
             /// command specific
             /// </summary>
@@ -4168,63 +4110,72 @@ namespace SbigSharp
             public UIntPtr inPtr;
         };
 
-        /*!
-         * \brief CFW command results
-         * 
-         * The CFW Command is a high-level API for controlling the SBIG color filter wheels. It supports the
-         * CFW-2 (two position shutter wheel in the ST-5C/237), the CFW-5 (internal color filter wheel for the
-         * ST-5C/237), the CFW-8, the internal filter wheel (CFW-L) in the ST-L Large Format Camera, the
-         * internal filter wheel (CFW-402) in the ST-402 camera, the old 6-position CFW-6A, the 10-position
-         * CFW-10 in both I2C and RS-232 interface modes, the I2C based CFW-9 and 8-position CFW for the
-         * STL (CFW-L8), the five (FW5-STX) and seven (FW7-STX) position CFWs for the STX, the five
-         * (FW5-8300) and eight (FW8-8300) position CFWs for the ST-8300 and the eight (FW8-STT) position
-         * CFW for the STT cameras.
-
-         * * CFW Command CFWC_QUERY
-         *   Use this command to monitor the progress of the Goto sub-command. This command takes no
-         *   additional parameters in the CFParams. You would typically do this several times a second after
-         *   the issuing the Goto command until it reports CFWS_IDLE in the cfwStatus entry of the
-         *   CFWResults. Additionally filter wheels that can report their current position (all filter wheels
-         *   except the CFW-6A or CFW-8) have that position reported in cfwPosition entry of the
-         *   CFWResults.
-         * * CFW Command CFWC_GOTO
-         *   Use this command to start moving the color filter wheel towards a given position. Set the desired
-         *   position in the cfwParam1 entry with entries defined by the CFW_POSITION enum.
-         *   CFW Command CFWC_INIT
-         * * Use this command to initialize/self-calibrate the color filter wheel. All SBIG color filter wheels
-         *   self calibrate on power-up and should not require further initialization. We offer this option for
-         *   users that experience difficulties with their color filter wheels or when changing between the
-         *   CFW-2 and CFW-5 in the ST-5C/237. This command takes no additional parameters in the
-         *   CFWParams struct.
-         * * CFW Command CFWC_GET_INFO
-         *   This command supports several sub-commands as determined by the cfwParam1 entry (see the
-         *   CFW_GETINFO_SELECT enum). Command CFWG_FIRMWARE_VERSION returns the
-         * * CFWC_OPEN_DEVICE and CFWC_CLOSE_DEVICE:
-         *   These commands are used to Open and Close any OS based communications port associated
-         *   with the CFW and should proceed the first command sent and follow the last command sent to
-         *   the CFW. While strictly only required for the RS-232 version of the CFW-10 calling these
-         *   commands is a good idea for future compatibility. For the RS-232 based CFW-10 set the 
-         *   cfwParam1 entry to one of the settings CFW_COM_PORT enum to indicate which PC COM port is 
-         *   used to control the CFW-10. Again, only the RS232 controlled CFW-10 requires these calls.
-         */
+        /// <summary>
+        /// The CFW Command is a high-level API for controlling the SBIG color filter wheels. 
+        /// It supports the
+        /// CFW-2 (two position shutter wheel in the ST-5C/237), 
+        /// the CFW-5 (internal color filter wheel for the ST-5C/237),
+        /// the CFW-8, the internal filter wheel (CFW-L) in the ST-L Large Format Camera,
+        /// the internal filter wheel (CFW-402) in the ST-402 camera, 
+        /// the old 6-position CFW-6A,
+        /// the 10-position
+        /// CFW-10 in both I2C and RS-232 interface modes,
+        /// the I2C based CFW-9 and 8-position CFW for the
+        /// STL (CFW-L8), the five (FW5-STX) and seven (FW7-STX) position CFWs for the STX,
+        /// the five (FW5-8300) and eight (FW8-8300) position CFWs for the ST-8300 and 
+        /// the eight (FW8-STT) position CFW for the STT cameras.
+        /// </summary>
+        /// <remarks>
+        /// * CFW Command CFWC_QUERY
+        ///   Use this command to monitor the progress of the Goto sub-command. This command takes no
+        ///   additional parameters in the CFParams. You would typically do this several times a second after
+        ///   the issuing the Goto command until it reports CFWS_IDLE in the cfwStatus entry of the
+        ///   CFWResults. Additionally filter wheels that can report their current position (all filter wheels
+        ///   except the CFW-6A or CFW-8) have that position reported in cfwPosition entry of the
+        ///   CFWResults.
+        /// * CFW Command CFWC_GOTO
+        ///   Use this command to start moving the color filter wheel towards a given position. Set the desired
+        ///   position in the cfwParam1 entry with entries defined by the CFW_POSITION enum.
+        ///   CFW Command CFWC_INIT
+        /// * Use this command to initialize/self-calibrate the color filter wheel. All SBIG color filter wheels
+        ///   self calibrate on power-up and should not require further initialization. We offer this option for
+        ///   users that experience difficulties with their color filter wheels or when changing between the
+        ///   CFW-2 and CFW-5 in the ST-5C/237. This command takes no additional parameters in the
+        ///   CFWParams struct.
+        /// * CFW Command CFWC_GET_INFO
+        ///   This command supports several sub-commands as determined by the cfwParam1 entry (see the
+        ///   CFW_GETINFO_SELECT enum). Command CFWG_FIRMWARE_VERSION returns the
+        /// * CFWC_OPEN_DEVICE and CFWC_CLOSE_DEVICE:
+        ///   These commands are used to Open and Close any OS based communications port associated
+        ///   with the CFW and should proceed the first command sent and follow the last command sent to
+        ///   the CFW. While strictly only required for the RS-232 version of the CFW-10 calling these
+        ///   commands is a good idea for future compatibility. For the RS-232 based CFW-10 set the 
+        ///   cfwParam1 entry to one of the settings CFW_COM_PORT enum to indicate which PC COM port is 
+        ///   used to control the CFW-10. Again, only the RS232 controlled CFW-10 requires these calls.
+        /// </remarks>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct CFWResults
         {
             /// <summary>
-            /// see also: CFW_MODEL_SELECT enum.
+            /// see also: <seealso cref="CFW_MODEL_SELECT"/> enum.
             /// </summary>
-            public UInt16 cfwModel;
+            public CFW_MODEL_SELECT cfwModel;
+
             /// <summary>
-            /// see also: CFW_POSITION enum.
+            /// see also: <seealso cref="CFW_POSITION"/> enum.
             /// </summary>
-            public UInt16 cfwPosition;
+            public CFW_POSITION cfwPosition;
+
             /// <summary>
-            /// see also: CFW_STATUS enum.
+            /// see also: <seealso cref="CFW_STATUS"/> enum.
             /// </summary>
-            public UInt16 cfwStatus;
+            public CFW_STATUS cfwStatus;
+
             /// <summary>
-            /// see also: CFW_ERROR enum.
+            /// see also: <seealso cref="CFW_ERROR"/> enum.
             /// </summary>
-            public UInt16 cfwError;
+            public CFW_ERROR cfwError;
+
             /// <summary>
             /// command specific
             /// </summary>
@@ -4235,46 +4186,41 @@ namespace SbigSharp
             public UInt32 cfwResult2;
         };
 
-        /*!
-         * \brief Bit IO command parameters
-         * 
-         * This command is used read or write control bits in the USB cameras.
-         *
-         * On the ST-L camera you can use this command to monitor whether the input power supply has
-         * dropped to the point where you ought to warn the user. Do this by issuing a Read operation on
-         * bit 0 and if that bit is set the power has dropped below 10 Volts.
-         * 
-         * bitName values:
-         * * 0=Read Power Supply Low Voltage, 
-         * * 1=Write Genl. Purp. Bit 1,
-         * * 2=Write Genl. Purp. Bit 2, 
-         * * 3=Read Genl. Purp. Bit 3
-         */
+        /// <summary>
+        /// This command is used read or write control bits in the USB cameras.
+        /// On the ST-L camera you can use this command to monitor whether the input power supply has dropped to the point where you ought to warn the user. 
+        /// Do this by issuing a Read operation on bit 0 and if that bit is set the power has dropped below 10 Volts.
+        /// <para>bitName values:</para>
+        /// <para>* 0=Read Power Supply Low Voltage, </para>
+        /// <para>* 1=Write Genl. Purp. Bit 1,</para>
+        /// <para>* 2=Write Genl. Purp. Bit 2, </para>
+        /// <para>* 3=Read Genl. Purp. Bit 3</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct BitIOParams
         {
             /// <summary>
-            /// 0=Write, 1=Read. see also: BITIO_OPERATION enum.
+            /// 0=Write, 1=Read. see also: <seealso cref="BITIO_OPERATION"/> enum.
             /// </summary>
-            public UInt16 bitOperation;
+            public BITIO_OPERATION bitOperation;
+
             /// <summary>
-            /// see also: BITIO_NAME enum.
+            /// see also: <seealso cref="BITIO_NAME"/> enum.
             /// </summary>
-            public UInt16 bitName;
+            public BITIO_NAME bitName;
+
             /// <summary>
             /// 1=Set Bit, 0=Clear Bit
             /// </summary>
             public MY_LOGICAL setBit;
         };
 
-        /*!
-         * \brief Bit IO command results
-         * 
-         * This command is used read or write control bits in the USB cameras.
-         *
-         * On the ST-L camera you can use this command to monitor whether the input power supply has
-         * dropped to the point where you ought to warn the user. Do this by issuing a Read operation on
-         * bit 0 and if that bit is set the power has dropped below 10 Volts.
-         */
+        /// <summary>
+        /// This command is used read or write control bits in the USB cameras.
+        /// On the ST-L camera you can use this command to monitor whether the input power supply has dropped to the point where you ought to warn the user.
+        /// Do this by issuing a Read operation on bit 0 and if that bit is set the power has dropped below 10 Volts.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct BitIOResults
         {
             /// <summary>
@@ -4283,59 +4229,57 @@ namespace SbigSharp
             public MY_LOGICAL bitIsSet;
         };
 
-        /*!
-         * \brief User EEPROM command parameters
-         * 
-         * Read or write a block of data the user space in the EEPROM.
-         */
+        /// <summary>
+        /// Read or write a block of data the user space in the EEPROM.
+        /// </summary>
 
-        /*!
-         * \brief User EEPROM command results
-         * 
-         * Read or write a block of data the user space in the EEPROM.
-         */
+        /// <summary>
+        /// Read or write a block of data the user space in the EEPROM.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct UserEEPROMResults
         {
             /// <summary>
             /// TRUE to write data to user EEPROM space, FALSE to read.
             /// </summary>
             public MY_LOGICAL writeData;
+            /// <summary>
+            /// Buffer of data to be written.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
-            public Byte[] data;     //!< Buffer of data to be written.
+            public Byte[] data;
         };
 
-        /*!
-         * \brief Column EEPROM command parameters and results
-         * \internal
-         * 
-         * Internal SBIG use only. This command is used read or write the STF-8300's Column Repair data stored in the camera for use
-         * with that camera's Auto Filter Capability.
-         *
-         * * The left most column is column 1 (not zero). Specifying a column zero doesn filter any
-         *   columns.
-         * * This command is somewhat unique in that the Parameters and the Results are the same struct.
-         * * To enable column filtering you must use this command and also the Set Driver Control command
-         *   to set the DCP_COLUMN_REPAIR parameter to 1.
-         */
+        /// <summary>
+        /// Internal SBIG use only.
+        /// This command is used read or write the STF-8300's Column Repair data stored in the camera for use with that camera's Auto Filter Capability.
+        /// 
+        /// <para>* The left most column is column 1 (not zero). Specifying a column zero doesn't filter any columns.</para>
+        /// <para>* This command is somewhat unique in that the Parameters and the Results are the same struct.</para>
+        /// <para>* To enable column filtering you must use this command and also the Set Driver Control command to set the DCP_COLUMN_REPAIR parameter to 1.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct ColumnEEPROMResults
         {
             /// <summary>
             /// TRUE to write data to specified EEPROM column, FALSE to read.
             /// </summary>
             public MY_LOGICAL writeData;
+            /// <summary>
+            /// Specify up to 7 columns to repair.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 7)]
-            public UInt16[] columns;  //!< Specify up to 7 columns to repair.
-                                      /// <summary>
-                                      /// not used at this time.
-                                      /// </summary>
+            public UInt16[] columns;
+            /// <summary>
+            /// not used at this time.
+            /// </summary>
             public UInt16 flags;
         };
 
-        /*!
-         * \brief Biorad TDI Setup command parameters
-         * 
-         * Send the Biorad setup to the camera, returning any error.
-         */
+        /// <summary>
+        /// Send the Biorad setup to the camera, returning any error.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct BTDISetupParams
         {
             /// <summary>
@@ -4344,82 +4288,83 @@ namespace SbigSharp
             public Byte rowPeriod;
         };
 
-        /*!
-         * \brief Biorad TDI Setup command results
-         * 
-         * Results of the Biorad setup, returning any error.
-         */
+        /// <summary>
+        /// Results of the Biorad setup, returning any error.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct BTDISetupResults
         {
             /// <summary>
-            /// Results of the command. see also: BTDI_ERROR enum.
+            /// Results of the command. see also: <seealso cref="BTDI_ERROR"/> enum.
             /// </summary>
-            public Byte btdiErrors;
+            public BTDI_ERROR btdiErrors;
+
         };
 
-        /*!
-         * \brief Motor Focus command parameters
-         * 
-         * The Motor Focus Command is a high-level API for controlling SBIG Motor Focus accessories. It
-         * supports the new ST Motor Focus unit and will be expanded as required to support new models in the
-         * future.
-         * 
-         * * Motor Focus Command MFC_QUERY
-         *   Use this command to monitor the progress of the Goto sub-command. This command takes no
-         *   additional parameters in the MFParams. You would typically do this several times a second after
-         *   the issuing the Goto command until it reports MFS_IDLE in the mfStatus entry of the
-         *   MFResults. Motor Focus accessories report their current position in the mfPosition entry of the
-         *   MFResults struct where the position is a signed long with 0 designating the center of motion or
-         *   the home position. Also the Temperature in hundredths of a degree-C is reported in the
-         *   mfResult1 entry.
-         * * Motor Focus Command MFC_GOTO
-         *   Use this command to start moving the Motor Focus accessory towards a given position. Set the
-         *   desired position in the mfParam1 entry. Again, the position is a signed long with 0 representing
-         *   the center or home position.
-         * * Motor Focus Command MFC_INIT
-         *   Use this command to initialize/self-calibrate the Motor Focus accessory. This causes the Motor
-         *   Focus accessory to find the center or Home position. You can not count on SBIG Motor Focus
-         *   accessories to self calibrate upon power-up and should issue this command upon first
-         *   establishing a link to the Camera. Additionally you should retain the last position of the Motor
-         *   Focus accessory in a parameter file and after initializing the Motor Focus accessory, you should
-         *   return it to its last position. Finally, note that this command takes no additional parameters in the
-         *   MFParams struct.
-         * * Motor Focus Command MFC_GET_INFO
-         *   This command supports several sub-commands as determined by the mfParam1 entry (see the
-         *   MF_GETINFO_SELECT enum). Command MFG_FIRMWARE_VERSION returns the version
-         *   of the Motor Focus firmware in the mfResults1 entry of the MFResults and the Maximum
-         *   Extension (plus or minus) that the Motor Focus supports is in the mfResults2 entry. The
-         *   MFG_DATA_REGISTERS command is internal SBIG use only and all other commands are
-         *   undefined.
-         * * Motor Focus Command MFC_ABORT
-         *   Use this command to abort a move in progress from a previous Goto command. Note that this
-         *   will not abort an Init.
-         *
-         * Notes: 
-         * * The Motor Focus Command takes pointers to MFParams as parameters and MFResults as
-         *   results.
-         * * Set the mfModel entry in the MFParams to the type of Motor Focus accessory you want to
-         *   control. The same value is returned in the mfModel entry of the MFResults. If you select the
-         *   MFSEL_AUTO option the driver will use the most appropriate model and return the model it
-         *   found in the mfModel entry of the MFResults.
-         * * The Motor Focus Command is a single API call that supports multiple sub-commands through
-         *   the mfCommand entry in the MFParams. Each of the sub-commands requires certain settings of
-         *   the MFParams entries and returns varying results in the MFResults. Each of these
-         *   sub-commands is discussed in detail above.
-         * * As with all API calls the Motor Focus Command returns an error code. If the error code is
-         *   CE_MF_ERROR, then in addition the mfError entry in the MFResults further enumerates the
-         *   error.
-         */
+        /// <summary>
+
+        /// The Motor Focus Command is a high-level API for controlling SBIG Motor Focus accessories. 
+        /// It supports the new ST Motor Focus unit and will be expanded as required to support new models in the future.
+        /// </summary>
+        /// <remarks>
+        /// * Motor Focus Command MFC_QUERY
+        ///   Use this command to monitor the progress of the Goto sub-command. This command takes no
+        ///   additional parameters in the MFParams. You would typically do this several times a second after
+        ///   the issuing the Goto command until it reports MFS_IDLE in the mfStatus entry of the
+        ///   MFResults. Motor Focus accessories report their current position in the mfPosition entry of the
+        ///   MFResults struct where the position is a signed long with 0 designating the center of motion or
+        ///   the home position. Also the Temperature in hundredths of a degree-C is reported in the
+        ///   mfResult1 entry.
+        /// * Motor Focus Command MFC_GOTO
+        ///   Use this command to start moving the Motor Focus accessory towards a given position. Set the
+        ///   desired position in the mfParam1 entry. Again, the position is a signed long with 0 representing
+        ///   the center or home position.
+        /// * Motor Focus Command MFC_INIT
+        ///   Use this command to initialize/self-calibrate the Motor Focus accessory. This causes the Motor
+        ///   Focus accessory to find the center or Home position. You can not count on SBIG Motor Focus
+        ///   accessories to self calibrate upon power-up and should issue this command upon first
+        ///   establishing a link to the Camera. Additionally you should retain the last position of the Motor
+        ///   Focus accessory in a parameter file and after initializing the Motor Focus accessory, you should
+        ///   return it to its last position. Finally, note that this command takes no additional parameters in the
+        ///   MFParams struct.
+        /// * Motor Focus Command MFC_GET_INFO
+        ///   This command supports several sub-commands as determined by the mfParam1 entry (see the
+        ///   MF_GETINFO_SELECT enum). Command MFG_FIRMWARE_VERSION returns the version
+        ///   of the Motor Focus firmware in the mfResults1 entry of the MFResults and the Maximum
+        ///   Extension (plus or minus) that the Motor Focus supports is in the mfResults2 entry. The
+        ///   MFG_DATA_REGISTERS command is internal SBIG use only and all other commands are
+        ///   undefined.
+        /// * Motor Focus Command MFC_ABORT
+        ///   Use this command to abort a move in progress from a previous Goto command. Note that this
+        ///   will not abort an Init.
+        /// Notes: 
+        /// * The Motor Focus Command takes pointers to MFParams as parameters and MFResults as
+        ///   results.
+        /// * Set the mfModel entry in the MFParams to the type of Motor Focus accessory you want to
+        ///   control. The same value is returned in the mfModel entry of the MFResults. If you select the
+        ///   MFSEL_AUTO option the driver will use the most appropriate model and return the model it
+        ///   found in the mfModel entry of the MFResults.
+        /// * The Motor Focus Command is a single API call that supports multiple sub-commands through
+        ///   the mfCommand entry in the MFParams. Each of the sub-commands requires certain settings of
+        ///   the MFParams entries and returns varying results in the MFResults. Each of these
+        ///   sub-commands is discussed in detail above.
+        /// * As with all API calls the Motor Focus Command returns an error code. If the error code is
+        ///   CE_MF_ERROR, then in addition the mfError entry in the MFResults further enumerates the
+        ///   error.
+        /// </remarks>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct MFParams
         {
             /// <summary>
-            /// see also: MF_MODEL_SELECT enum.
+            /// see also: <seealso cref="MF_MODEL_SELECT"/> enum.
             /// </summary>
-            public UInt16 mfModel;
+            public MF_MODEL_SELECT mfModel;
+
             /// <summary>
-            /// see also: MF_COMMAND enum.
+            /// see also: <seealso cref="MF_COMMAND"/> enum.
             /// </summary>
-            public UInt16 mfCommand;
+            public MF_COMMAND mfCommand;
+
             /// <summary>
             /// command specific.
             /// </summary>
@@ -4448,77 +4393,75 @@ namespace SbigSharp
             public UIntPtr inPtr;
         };
 
-        /*!
-         * \brief Motor Focus command results
-         * 
-         * The Motor Focus Command is a high-level API for controlling SBIG Motor Focus accessories. It
-         * supports the new ST Motor Focus unit and will be expanded as required to support new models in the
-         * future.
-         * 
-         * * Motor Focus Command MFC_QUERY
-         *   Use this command to monitor the progress of the Goto sub-command. This command takes no
-         *   additional parameters in the MFParams. You would typically do this several times a second after
-         *   the issuing the Goto command until it reports MFS_IDLE in the mfStatus entry of the
-         *   MFResults. Motor Focus accessories report their current position in the mfPosition entry of the
-         *   MFResults struct where the position is a signed long with 0 designating the center of motion or
-         *   the home position. Also the Temperature in hundredths of a degree-C is reported in the
-         *   mfResult1 entry.
-         * * Motor Focus Command MFC_GOTO
-         *   Use this command to start moving the Motor Focus accessory towards a given position. Set the
-         *   desired position in the mfParam1 entry. Again, the position is a signed long with 0 representing
-         *   the center or home position.
-         * * Motor Focus Command MFC_INIT
-         *   Use this command to initialize/self-calibrate the Motor Focus accessory. This causes the Motor
-         *   Focus accessory to find the center or Home position. You can not count on SBIG Motor Focus
-         *   accessories to self calibrate upon power-up and should issue this command upon first
-         *   establishing a link to the Camera. Additionally you should retain the last position of the Motor
-         *   Focus accessory in a parameter file and after initializing the Motor Focus accessory, you should
-         *   return it to its last position. Finally, note that this command takes no additional parameters in the
-         *   MFParams struct.
-         * * Motor Focus Command MFC_GET_INFO
-         *   This command supports several sub-commands as determined by the mfParam1 entry (see the
-         *   MF_GETINFO_SELECT enum). Command MFG_FIRMWARE_VERSION returns the version
-         *   of the Motor Focus firmware in the mfResults1 entry of the MFResults and the Maximum
-         *   Extension (plus or minus) that the Motor Focus supports is in the mfResults2 entry. The
-         *   MFG_DATA_REGISTERS command is internal SBIG use only and all other commands are
-         *   undefined.
-         * * Motor Focus Command MFC_ABORT
-         *   Use this command to abort a move in progress from a previous Goto command. Note that this
-         *   will not abort an Init.
-         *
-         * Notes: 
-         * * The Motor Focus Command takes pointers to MFParams as parameters and MFResults as
-         *   results.
-         * * Set the mfModel entry in the MFParams to the type of Motor Focus accessory you want to
-         *   control. The same value is returned in the mfModel entry of the MFResults. If you select the
-         *   MFSEL_AUTO option the driver will use the most appropriate model and return the model it
-         *   found in the mfModel entry of the MFResults.
-         * * The Motor Focus Command is a single API call that supports multiple sub-commands through
-         *   the mfCommand entry in the MFParams. Each of the sub-commands requires certain settings of
-         *   the MFParams entries and returns varying results in the MFResults. Each of these
-         *   sub-commands is discussed in detail above.
-         * * As with all API calls the Motor Focus Command returns an error code. If the error code is
-         *   CE_MF_ERROR, then in addition the mfError entry in the MFResults further enumerates the
-         *   error.
-         */
+        /// <summary>
+        /// The Motor Focus Command is a high-level API for controlling SBIG Motor Focus accessories. 
+        /// It supports the new ST Motor Focus unit and will be expanded as required to support new models in the future.
+        /// </summary>
+        /// <remarks>
+        /// * Motor Focus Command MFC_QUERY
+        ///   Use this command to monitor the progress of the Goto sub-command. This command takes no
+        ///   additional parameters in the MFParams. You would typically do this several times a second after
+        ///   the issuing the Goto command until it reports MFS_IDLE in the mfStatus entry of the
+        ///   MFResults. Motor Focus accessories report their current position in the mfPosition entry of the
+        ///   MFResults struct where the position is a signed long with 0 designating the center of motion or
+        ///   the home position. Also the Temperature in hundredths of a degree-C is reported in the
+        ///   mfResult1 entry.
+        /// * Motor Focus Command MFC_GOTO
+        ///   Use this command to start moving the Motor Focus accessory towards a given position. Set the
+        ///   desired position in the mfParam1 entry. Again, the position is a signed long with 0 representing
+        ///   the center or home position.
+        /// * Motor Focus Command MFC_INIT
+        ///   Use this command to initialize/self-calibrate the Motor Focus accessory. This causes the Motor
+        ///   Focus accessory to find the center or Home position. You can not count on SBIG Motor Focus
+        ///   accessories to self calibrate upon power-up and should issue this command upon first
+        ///   establishing a link to the Camera. Additionally you should retain the last position of the Motor
+        ///   Focus accessory in a parameter file and after initializing the Motor Focus accessory, you should
+        ///   return it to its last position. Finally, note that this command takes no additional parameters in the
+        ///   MFParams struct.
+        /// * Motor Focus Command MFC_GET_INFO
+        ///   This command supports several sub-commands as determined by the mfParam1 entry (see the
+        ///   MF_GETINFO_SELECT enum). Command MFG_FIRMWARE_VERSION returns the version
+        ///   of the Motor Focus firmware in the mfResults1 entry of the MFResults and the Maximum
+        ///   Extension (plus or minus) that the Motor Focus supports is in the mfResults2 entry. The
+        ///   MFG_DATA_REGISTERS command is internal SBIG use only and all other commands are
+        ///   undefined.
+        /// * Motor Focus Command MFC_ABORT
+        ///   Use this command to abort a move in progress from a previous Goto command. Note that this
+        ///   will not abort an Init.
+        /// Notes: 
+        /// * The Motor Focus Command takes pointers to MFParams as parameters and MFResults as
+        ///   results.
+        /// * Set the mfModel entry in the MFParams to the type of Motor Focus accessory you want to
+        ///   control. The same value is returned in the mfModel entry of the MFResults. If you select the
+        ///   MFSEL_AUTO option the driver will use the most appropriate model and return the model it
+        ///   found in the mfModel entry of the MFResults.
+        /// * The Motor Focus Command is a single API call that supports multiple sub-commands through
+        ///   the mfCommand entry in the MFParams. Each of the sub-commands requires certain settings of
+        ///   the MFParams entries and returns varying results in the MFResults. Each of these
+        ///   sub-commands is discussed in detail above.
+        /// * As with all API calls the Motor Focus Command returns an error code. If the error code is
+        ///   CE_MF_ERROR, then in addition the mfError entry in the MFResults further enumerates the
+        ///   error.
+        /// </remarks>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct MFResults
         {
             /// <summary>
-            /// see also: MF_MODEL_SELECT enum. 
+            /// see also: <seealso cref="MF_MODEL_SELECT"/> enum. 
             /// </summary>
-            public UInt16 mfModel;
+            public MF_MODEL_SELECT mfModel;
             /// <summary>
             /// position of the Motor Focus, 0=Center, signed.
             /// </summary>
             public Int32 mfPosition;
             /// <summary>
-            /// see also: MF_STATUS enum.
+            /// see also: <seealso cref="MF_STATUS"/> enum.
             /// </summary>
-            public UInt16 mfStatus;
+            public MF_STATUS mfStatus;
             /// <summary>
-            /// see also: MF_ERROR  enum.
+            /// see also: <seealso cref="MF_ERROR"/>  enum.
             /// </summary>
-            public UInt16 mfError;
+            public MF_ERROR mfError;
             /// <summary>
             /// command specific.
             /// </summary>
@@ -4529,23 +4472,23 @@ namespace SbigSharp
             public Int32 mfResult2;
         };
 
-        /*!
-         * \brief Differential Guider command parameters
-         * 
-         * Differential Guider Command Guide:
-         * * DGC_DETECT detects whether a Differential Guide unit is connected to the camera.
-         *   Command takes no arguments.
-         * * DGC_GET_BRIGHTNESS obtains the brightness setting of the red and IR LEDs in the differential guide unit.
-         *   inPtr should be a pointer to a DGLEDState struct.
-         * * DGC_SET_BRIGHTNESS sets the brightness registers of the red and IR LEDs in the differential guide unit.
-         *   outPtr should be a pointer to a DGLEDState struct with the desired values register values set.
-         */
+
+        /// <summary>
+        /// Differential Guider Command Guide:
+        /// <para>* DGC_DETECT detects whether a Differential Guide unit is connected to the camera.</para>
+        /// <para>  Command takes no arguments.</para>
+        /// <para>* DGC_GET_BRIGHTNESS obtains the brightness setting of the red and IR LEDs in the differential guide unit.</para>
+        /// <para>  inPtr should be a pointer to a DGLEDState struct.</para>
+        /// <para>* DGC_SET_BRIGHTNESS sets the brightness registers of the red and IR LEDs in the differential guide unit.</para>
+        /// <para>  outPtr should be a pointer to a DGLEDState struct with the desired values register values set.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct DiffGuiderParams
         {
             /// <summary>
-            /// Command for Differential Guider. see also: DIFF_GUIDER_COMMAND enum. 
+            /// Command for Differential Guider. see also: <seealso cref="DIFF_GUIDER_COMMAND"/> enum. 
             /// </summary>
-            public UInt16 diffGuiderCommand;
+            public DIFF_GUIDER_COMMAND diffGuiderCommand;
             /// <summary>
             /// Unused.
             /// </summary>
@@ -4578,21 +4521,20 @@ namespace SbigSharp
             public UIntPtr inPtr;
         };
 
-        /*!
-         * \brief Differential Guider command results
-         * 
-         * Returned results of a Differential Guider Command.
-         */
+        /// <summary>
+        /// Returned results of a Differential Guider Command.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct DiffGuiderResults
         {
             /// <summary>
-            /// see also: DIFF_GUIDER_ERROR enum.
+            /// see also: <seealso cref="DIFF_GUIDER_ERROR"/> enum.
             /// </summary>
-            public UInt16 diffGuiderError;
+            public DIFF_GUIDER_ERROR diffGuiderError;
             /// <summary>
-            /// see also: DIFF_GUIDER_STATUS enum.
+            /// see also: <seealso cref="DIFF_GUIDER_STATUS"/> enum.
             /// </summary>
-            public UInt16 diffGuiderStatus;
+            public DIFF_GUIDER_STATUS diffGuiderStatus;
             /// <summary>
             /// Unused.
             /// </summary>
@@ -4603,11 +4545,10 @@ namespace SbigSharp
             public UInt32 diffGuiderResult2;
         };
 
-        /*!
-         * \brief Differential Guider LED state
-         * 
-         * State of the Differential Guider LEDs.
-         */
+        /// <summary>
+        /// State of the Differential Guider LEDs.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct DGLEDState
         {
             /// <summary>
@@ -4628,18 +4569,17 @@ namespace SbigSharp
             public UInt16 nIRBrightness;
         };
 
-        /*!
-         * \brief Bulk I/O command parameters
-         * \internal
-         * 
-         * Internal SBIG use only. Implement the Bulk IO command which is used for Bulk Reads/Writes to the camera for diagnostic purposes.
-         */
+        /// <summary>
+        /// \internal
+        /// <para>Internal SBIG use only. Implement the Bulk IO command which is used for Bulk Reads/Writes to the camera for diagnostic purposes.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct BulkIOParams
         {
             /// <summary>
-            /// see also: BULK_IO_COMMAND enum.
+            /// see also: <seealso cref="BULK_IO_COMMAND"/> enum.
             /// </summary>
-            public UInt16 command;
+            public BULK_IO_COMMAND command;
             /// <summary>
             /// TRUE if reading/writing data to/from the Pixel pipe, FALSE to read/write from the com pipe.
             /// </summary>
@@ -4655,12 +4595,11 @@ namespace SbigSharp
             public IntPtr dataPtr;
         };
 
-        /*!
-         * \brief Bulk I/O command results
-         * \internal
-         * 
-         * Internal SBIG use only. Results of a Bulk I/O command.
-         */
+        /// <summary>
+        /// \internal
+        /// <para>Internal SBIG use only. Results of a Bulk I/O command.</para>
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct BulkIOResults
         {
             /// <summary>
@@ -4669,17 +4608,14 @@ namespace SbigSharp
             public UInt32 dataLength;
         };
 
-        /*!
-         * \brief Customer Options command parameters
-         * 
-         * This command is used read or write the STX/STXL/STT's customer options.
-         */
+        /// <summary>
+        /// This command is used read or write the STX/STXL/STT's customer options.
+        /// </summary>
 
-        /*!
-         * \brief Customer Options command results
-         * 
-         * This command is used read or write the STX/STXL/STT's customer options.
-         */
+        /// <summary>
+        /// This command is used read or write the STX/STXL/STT's customer options.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct CustomerOptionsResults
         {
             /// <summary>
@@ -4704,11 +4640,10 @@ namespace SbigSharp
             public MY_LOGICAL bVddNormallyOff;
         };
 
-        /*!
-         * \brief Get I2C AO Model command results
-         * 
-         * Results of a CC_GET_AO_MODEL command.
-         */
+        /// <summary>
+        /// Results of a CC_GET_AO_MODEL command.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetI2CAoModelResults
         {
             /// <summary>
@@ -4717,79 +4652,166 @@ namespace SbigSharp
             public UInt16 i2cAoModel;
         };
 
-        /*!
-         * \brief Debug flags for Command IDs.
-         *
-         * Flags for enabling debug messages of CC_***_*** commands.
-         */
+        /// <summary>
+        /// Flags for enabling debug messages of CC_***_*** commands.
+        /// </summary>
         public enum DEBUG_LOG_CC_FLAGS : ushort
         {
-            DLF_CC_BASE = 0x0001,   //!< Log MC_SYSTEM, CC_BREAKPOINT, CC_OPEN_*, CC_CLOSE_*, etc.
-            DLF_CC_READOUT = 0x0002,    //!< Log readout commands.
-            DLF_CC_STATUS = 0x0004, //!< Log status commands.
-            DLF_CC_TEMPERATURE = 0x0008,    //!< Log temperature commands.
-            DLF_CC_CFW = 0x0010,    //!< Log filter wheel commands.
-            DLF_CC_AO = 0x0020, //!< Log AO commands
-            DLF_CC_40 = 0x0040, //!< Unused.
-            DLF_CC_80 = 0x0080  //!< Unused.
+            /// <summary>
+            /// Log MC_SYSTEM, CC_BREAKPOINT, CC_OPEN_*, CC_CLOSE_*, etc.
+            /// </summary>
+            DLF_CC_BASE = 0x0001,
+            /// <summary>
+            /// Log readout commands.
+            /// </summary>
+            DLF_CC_READOUT = 0x0002,
+            /// <summary>
+            /// Log status commands.
+            /// </summary>
+            DLF_CC_STATUS = 0x0004,
+            /// <summary>
+            /// Log temperature commands.
+            /// </summary>
+            DLF_CC_TEMPERATURE = 0x0008,
+            /// <summary>
+            /// Log filter wheel commands.
+            /// </summary>
+            DLF_CC_CFW = 0x0010,
+            /// <summary>
+            /// Log AO commands
+            /// </summary>
+            DLF_CC_AO = 0x0020,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_CC_40 = 0x0040,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_CC_80 = 0x0080
         };
 
-        /*!
-         * \brief Debug flags for Microcommand IDs.
-         * 
-         * Flags for enabling debug messages of MC_***_*** commands.
-         */
+        /// <summary>
+        /// Flags for enabling debug messages of MC_***_*** commands.
+        /// </summary>
         public enum DEBUG_LOG_MC_FLAGS : ushort
         {
-            DLF_MC_BASE = 0x0001,   //!< Log MC_START_*, MC_END_*, MC_OPEN_*, MC_CLOSE_*, etc...
-            DLF_MC_READOUT = 0x0002,    //!< Log readout commands at microcommand level.
-            DLF_MC_STATUS = 0x0004, //!< Log status commands at microcommand level.
-            DLF_MC_TEMPERATURE = 0x0008,    //!< Log temperature commands at microcommand level.
-            DLF_MC_EEPROM = 0x0010, //!< Log EEPROM microcommands.
-            DLF_MC_20 = 0x0020, //!< Unused.
-            DLF_MC_40 = 0x0040, //!< Unused.
-            DLF_MC_80 = 0x0080  //!< Unused.
+            /// <summary>
+            /// Log MC_START_*, MC_END_*, MC_OPEN_*, MC_CLOSE_*, etc...
+            /// </summary>
+            DLF_MC_BASE = 0x0001,
+            /// <summary>
+            /// Log readout commands at microcommand level.
+            /// </summary>
+            DLF_MC_READOUT = 0x0002,
+            /// <summary>
+            /// Log status commands at microcommand level.
+            /// </summary>
+            DLF_MC_STATUS = 0x0004,
+            /// <summary>
+            /// Log temperature commands at microcommand level.
+            /// </summary>
+            DLF_MC_TEMPERATURE = 0x0008,
+            /// <summary>
+            /// Log EEPROM microcommands.
+            /// </summary>
+            DLF_MC_EEPROM = 0x0010,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_MC_20 = 0x0020,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_MC_40 = 0x0040,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_MC_80 = 0x0080
         };
 
-        /*!
-         * \brief Debug flags for communications.
-         *
-         * Flags for enabling debug messages of communication methods.
-         */
+        /// <summary>
+        /// Flags for enabling debug messages of communication methods.
+        /// </summary>
         public enum DEBUG_LOG_FCE_FLAGS : ushort
         {
-            DLF_FCE_ETH = 0x0001,   //!< Log Ethernet communication functions.
-            DLF_FCE_USB = 0x0002,   //!< Log USB communication functions.
-            DLF_FCE_FIFO = 0x0004,  //!< Log FIFO communication functions.
-            DLF_FCE_0008 = 0x0008,  //!< Unused.
-            DLF_FCE_0010 = 0x0010,  //!< Unused.
-            DLF_FCE_0020 = 0x0020,  //!< Unused.
-            DLF_FCE_0040 = 0x0040,  //!< Unused.
-            DLF_FCE_CAMERA = 0x0080 //!< Log camera communication responses.
+            /// <summary>
+            /// Log Ethernet communication functions.
+            /// </summary>
+            DLF_FCE_ETH = 0x0001,
+            /// <summary>
+            /// Log USB communication functions.
+            /// </summary>
+            DLF_FCE_USB = 0x0002,
+            /// <summary>
+            /// Log FIFO communication functions.
+            /// </summary>
+            DLF_FCE_FIFO = 0x0004,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_FCE_0008 = 0x0008,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_FCE_0010 = 0x0010,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_FCE_0020 = 0x0020,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_FCE_0040 = 0x0040,
+            /// <summary>
+            /// Log camera communication responses.
+            /// </summary>
+            DLF_FCE_CAMERA = 0x0080
         };
 
-        /*!
-         * \brief Debug flags for I/O operations.
-         *
-         * Flags for enabling debug messages of I/O operations.
-         */
+        /// <summary>
+        /// Flags for enabling debug messages of I/O operations.
+        /// </summary>
         public enum DEBUG_LOG_IO_FLAGS : ushort
         {
-            DLF_IO_RD_COM_PIPE = 0x0001,    //!< Log reading from com pipe.
-            DLF_IO_WR_COM_PIPE = 0x0002,    //!< Log writing to com pipe.
-            DLF_IO_RD_PIXEL_PIPE = 0x0004,  //!< Log reading from pixel pipe.
-            DLF_IO_RD_ALT_PIPE = 0x0008,    //!< Log reading from alternate pixel pipe.
-            DLF_IO_WR_ALT_PIPE = 0x0010,    //!< Log writing to alternate pixel pipe.
-            DLF_IO_RD = 0x0020, //!< Log reading from Async I/O.
-            DLF_IO_WR = 0x0040, //!< Log writing to Async I/O.
-            DLF_IO_0080 = 0x0080    //!< Unused.
+            /// <summary>
+            /// Log reading from com pipe.
+            /// </summary>
+            DLF_IO_RD_COM_PIPE = 0x0001,
+            /// <summary>
+            /// Log writing to com pipe.
+            /// </summary>
+            DLF_IO_WR_COM_PIPE = 0x0002,
+            /// <summary>
+            /// Log reading from pixel pipe.
+            /// </summary>
+            DLF_IO_RD_PIXEL_PIPE = 0x0004,
+            /// <summary>
+            /// Log reading from alternate pixel pipe.
+            /// </summary>
+            DLF_IO_RD_ALT_PIPE = 0x0008,
+            /// <summary>
+            /// Log writing to alternate pixel pipe.
+            /// </summary>
+            DLF_IO_WR_ALT_PIPE = 0x0010,
+            /// <summary>
+            /// Log reading from Async I/O.
+            /// </summary>
+            DLF_IO_RD = 0x0020,
+            /// <summary>
+            /// Log writing to Async I/O.
+            /// </summary>
+            DLF_IO_WR = 0x0040,
+            /// <summary>
+            /// Unused.
+            /// </summary>
+            DLF_IO_0080 = 0x0080
         };
 
-        /*!
-         * \brief Debug log command parameters.
-         *
-         * Change debug logging, and path to log file.
-         */
+        /// <summary>
+        /// Change debug logging, and path to log file.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct DebugLogParams
         {
             /// <summary>
@@ -4814,7 +4836,7 @@ namespace SbigSharp
             /// </summary>
             public string logFilePathName;
         };
-
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetReadoutInProgressResults
         {
             /// <summary>
@@ -4822,22 +4844,19 @@ namespace SbigSharp
             /// </summary>
             public MY_LOGICAL RIP;
         };
-
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct SetRBIPreflashParams
         {
             public UInt16 darkFrameLength;
             public UInt16 flushCount;
         };
-
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetRBIPreflashResults
         {
             public UInt16 darkFrameLength;
             public UInt16 flushCount;
         };
-
-        /*!
-         * \brief QueryFeatureSupportedParams
-         */
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryFeatureSupportedParams
         {
             /// <summary>
@@ -4845,10 +4864,7 @@ namespace SbigSharp
             /// </summary>
             public FeatureFirmwareRequirement ffr;
         };
-
-        /*!
-         * \brief QueryFeatureSupportedResult
-         */
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryFeatureSupportedResults
         {
             /// <summary>
@@ -4857,11 +4873,10 @@ namespace SbigSharp
             public MY_LOGICAL result;
         };
 
-        /*!
-         * \brief Query Exposure Ticks command results.
-         *
-         * Internal SBIG use only. Queries Start/End exposure performance tracking.
-         */
+        /// <summary>
+        /// Internal SBIG use only. Queries Start/End exposure performance tracking.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryExposureTicksResults
         {
             /// <summary>
@@ -4897,30 +4912,33 @@ namespace SbigSharp
             public LARGE_INTEGER endExposureTicks1;
         };
 
-        /*!
-         * SBIGUnivDrvCommand()
-         *  \brief Command function: Supports Parallel, USB and Ethernet based cameras
-         * \param command PAR_COMMAND integer 
-         * \param Params pointer to a command-specific structure containing the relevant command parameters.
-         * \param pResults pointer to a comand-specific results structure containing the results of the command.
-         *
-         * The master API hook for the SBIG Universal Driver dll. The calling program needs to allocate the memory 
-         *  for the parameters and results structs and these routines read them and fill them in respectively.
-         */
+        /// <summary>
+        /// Command function: Supports Parallel, USB and Ethernet based cameras
+        /// <para>
+        ///     The master API hook for the SBIG Universal Driver dll. 
+        ///     The calling program needs to allocate the memory for the parameters 
+        ///     and results structs and these routines read them and fill them in respectively.
+        /// </para>
+        /// </summary>
+        /// <param name="command">See also <seealso cref="PAR_COMMAND"/> enum.</param>
+        /// <param name="Params">Params pointer to a command-specific structure containing the relevant command parameters.</param>
+        /// <param name="pResults">pResults pointer to a comand-specific results structure containing the results of the command.</param>
+        /// <returns></returns>
         [DllImport("SBIGUDrv.dll", CallingConvention = CallingConvention.StdCall)]
         private static extern PAR_ERROR SBIGUnivDrvCommand(
             PAR_COMMAND command, IntPtr Params, IntPtr pResults);
 
-        /*!
-         * SBIGLogDebugMsg()
-         *  \brief Command function: Supports Parallel, USB and Ethernet based cameras
-         * \param pStr pointer to an array of characters, null-terminated, which should be written to the log file.
-         * \param length unsigned int of buffer's length in bytes.
-         * \internal
-         * 
-         * A function used to expose writing to the log file to calling programs. Useful for debugging purposes.
-         */
         //TODO: 檢查移植是否正確 extern "C" Int16 __stdcall SBIGLogDebugMsg(char* pStr, UInt16 length);
+        /// <summary>
+        /// Command function: Supports Parallel, USB and Ethernet based cameras
+        /// <para>
+        ///     \internal
+        ///     A function used to expose writing to the log file to calling programs. Useful for debugging purposes.
+        /// </para>
+        /// </summary>
+        /// <param name="pStr">pointer to an array of characters, null-terminated, which should be written to the log file.</param>
+        /// <param name="length">unsigned int of buffer's length in bytes.</param>
+        /// <returns></returns>
         [DllImport("SBIGUDrv.dll", CallingConvention = CallingConvention.StdCall)]
         private static extern Int16 SBIGLogDebugMsg(UIntPtr pStr, UInt16 length);
 
