@@ -55,7 +55,7 @@ namespace SbigSharp
             of the driver for SBIG.
 
         */
-        /*! \enum PAR_COMMAND
+        /*!
          * \ingroup BASE_STRUCTURES
          * Command ID enum 
          */
@@ -67,108 +67,358 @@ namespace SbigSharp
                 General Use Commands
 
             */
-            CC_NULL,                        /*!< Null Command             */
+            /// <summary>
+            /// Null Command
+            /// </summary>
+            CC_NULL,
 
             /* 1 - 10 */
-            CC_START_EXPOSURE = 1,          /*!< Start exposure command           */
-            CC_END_EXPOSURE,                /*!< End exposure command           */
-            CC_READOUT_LINE,                /*!< Readout line command           */
-            CC_DUMP_LINES,                  /*!< Dump lines command            */
-            CC_SET_TEMPERATURE_REGULATION,  /*!< Set Temperature regulation command        */
-            CC_QUERY_TEMPERATURE_STATUS,    /*!< Query temperature status command        */
-            CC_ACTIVATE_RELAY,              /*!< Activate Relay command           */
-            CC_PULSE_OUT,                   /*!< Pulse out command            */
-            CC_ESTABLISH_LINK,              /*!< Establish link command           */
-            CC_GET_DRIVER_INFO,             /*!< Get driver info command          */
+            /// <summary>
+            /// Start exposure command
+            /// </summary>
+            CC_START_EXPOSURE = 1,
+            /// <summary>
+            /// End exposure command
+            /// </summary>
+            CC_END_EXPOSURE,
+            /// <summary>
+            /// Readout line command
+            /// </summary>
+            CC_READOUT_LINE,
+            /// <summary>
+            /// Dump lines command
+            /// </summary>
+            CC_DUMP_LINES,
+            /// <summary>
+            /// Set Temperature regulation command
+            /// </summary>
+            CC_SET_TEMPERATURE_REGULATION,
+            /// <summary>
+            /// Query temperature status command
+            /// </summary>
+            CC_QUERY_TEMPERATURE_STATUS,
+            /// <summary>
+            /// Activate Relay command
+            /// </summary>
+            CC_ACTIVATE_RELAY,
+            /// <summary>
+            /// Pulse out command
+            /// </summary>
+            CC_PULSE_OUT,
+            /// <summary>
+            /// Establish link command
+            /// </summary>
+            CC_ESTABLISH_LINK,
+            /// <summary>
+            /// Get driver info command
+            /// </summary>
+            CC_GET_DRIVER_INFO,
 
             /* 11 - 20 */
-            CC_GET_CCD_INFO,                /*!< Get CCD info command           */
-            CC_QUERY_COMMAND_STATUS,        /*!< Query command status command         */
-            CC_MISCELLANEOUS_CONTROL,       /*!< Miscellaneous control command         */
-            CC_READ_SUBTRACT_LINE,          /*!< Read subtract line command          */
-            CC_UPDATE_CLOCK,                /*!< Update clock command           */
-            CC_READ_OFFSET,                 /*!< Read offset command           */
-            CC_OPEN_DRIVER,                 /*!< Open driver command           */
-            CC_CLOSE_DRIVER,                /*!< Close driver command           */
-            CC_TX_SERIAL_BYTES,             /*!< TX Serial bytes command          */
-            CC_GET_SERIAL_STATUS,           /*!< Get serial status command          */
+            /// <summary>
+            /// Get CCD info command
+            /// </summary>
+            CC_GET_CCD_INFO,
+            /// <summary>
+            /// Query command status command
+            /// </summary>
+            CC_QUERY_COMMAND_STATUS,
+            /// <summary>
+            /// Miscellaneous control command
+            /// </summary>
+            CC_MISCELLANEOUS_CONTROL,
+            /// <summary>
+            /// Read subtract line command
+            /// </summary>
+            CC_READ_SUBTRACT_LINE,
+            /// <summary>
+            /// Update clock command
+            /// </summary>
+            CC_UPDATE_CLOCK,
+            /// <summary>
+            /// Read offset command
+            /// </summary>
+            CC_READ_OFFSET,
+            /// <summary>
+            /// Open driver command
+            /// </summary>
+            CC_OPEN_DRIVER,
+            /// <summary>
+            /// Close driver command
+            /// </summary>
+            CC_CLOSE_DRIVER,
+            /// <summary>
+            /// TX Serial bytes command
+            /// </summary>
+            CC_TX_SERIAL_BYTES,
+            /// <summary>
+            /// Get serial status command
+            /// </summary>
+            CC_GET_SERIAL_STATUS,
 
             /* 21 - 30 */
-            CC_AO_TIP_TILT,                 /*!< AO tip/tilt command           */
-            CC_AO_SET_FOCUS,                /*!< AO set focus command           */
-            CC_AO_DELAY,                    /*!< AO delay command            */
-            CC_GET_TURBO_STATUS,            /*!< Get turbo status command          */
-            CC_END_READOUT,                 /*!< End readout command           */
-            CC_GET_US_TIMER,                /*!< Get US timer command           */
-            CC_OPEN_DEVICE,                 /*!< Open device command           */
-            CC_CLOSE_DEVICE,                /*!< Close device command           */
-            CC_SET_IRQL,                    /*!< Set IRQL command            */
-            CC_GET_IRQL,                    /*!< Get IRQL command            */
+            /// <summary>
+            /// AO tip/tilt command
+            /// </summary>
+            CC_AO_TIP_TILT,
+
+            /// <summary>
+            /// AO set focus command
+            /// </summary>
+            CC_AO_SET_FOCUS,
+            /// <summary>
+            /// AO delay command
+            /// </summary>
+            CC_AO_DELAY,
+            /// <summary>
+            /// Get turbo status command
+            /// </summary>
+            CC_GET_TURBO_STATUS,
+            /// <summary>
+            /// End readout command
+            /// </summary>
+            CC_END_READOUT,
+            /// <summary>
+            /// Get US timer command
+            /// </summary>
+            CC_GET_US_TIMER,
+            /// <summary>
+            /// Open device command
+            /// </summary>
+            CC_OPEN_DEVICE,
+            /// <summary>
+            /// Close device command
+            /// </summary>
+            CC_CLOSE_DEVICE,
+            /// <summary>
+            /// Set IRQL command
+            /// </summary>
+            CC_SET_IRQL,
+            /// <summary>
+            /// Get IRQL command
+            /// </summary>
+            CC_GET_IRQL,
 
             /* 31 - 40 */
-            CC_GET_LINE,                    /*!< Get line command            */
-            CC_GET_LINK_STATUS,             /*!< Get link status command          */
-            CC_GET_DRIVER_HANDLE,           /*!< Get driver handle command          */
-            CC_SET_DRIVER_HANDLE,           /*!< Set driver handle command          */
-            CC_START_READOUT,               /*!< Start readout command           */
-            CC_GET_ERROR_STRING,            /*!< Get error string command          */
-            CC_SET_DRIVER_CONTROL,          /*!< Set driver control command          */
-            CC_GET_DRIVER_CONTROL,          /*!< Get driver control command          */
-            CC_USB_AD_CONTROL,              /*!< USB A/D control command          */
-            CC_QUERY_USB,                   /*!< Query USB command            */
+            /// <summary>
+            /// Get line command
+            /// </summary>
+            CC_GET_LINE,
+            /// <summary>
+            /// Get link status command
+            /// </summary>
+            CC_GET_LINK_STATUS,
+            /// <summary>
+            /// Get driver handle command
+            /// </summary>
+            CC_GET_DRIVER_HANDLE,
+            /// <summary>
+            /// Set driver handle command
+            /// </summary>
+            CC_SET_DRIVER_HANDLE,
+            /// <summary>
+            /// Start readout command
+            /// </summary>
+            CC_START_READOUT,
+            /// <summary>
+            /// Get error string command
+            /// </summary>
+            CC_GET_ERROR_STRING,
+            /// <summary>
+            /// Set driver control command
+            /// </summary>
+            CC_SET_DRIVER_CONTROL,
+            /// <summary>
+            /// Get driver control command
+            /// </summary>
+            CC_GET_DRIVER_CONTROL,
+            /// <summary>
+            /// USB A/D control command
+            /// </summary>
+            CC_USB_AD_CONTROL,
+            /// <summary>
+            /// Query USB command
+            /// </summary>
+            CC_QUERY_USB,
 
             /* 41 - 50 */
-            CC_GET_PENTIUM_CYCLE_COUNT,     /*!< Get Pentium cycle count command        */
-            CC_RW_USB_I2C,                  /*!< Read/Write USB I2C command          */
-            CC_CFW,                         /*!< Control Filter Wheel command         */
-            CC_BIT_IO,                      /*!< Bit I/O command            */
-            CC_USER_EEPROM,                 /*!< User EEPROM command           */
-            CC_AO_CENTER,                   /*!< AO Center command            */
-            CC_BTDI_SETUP,                  /*!< BTDI setup command            */
-            CC_MOTOR_FOCUS,                 /*!< Motor focus command           */
-            CC_QUERY_ETHERNET,              /*!< Query Ethernet command           */
-            CC_START_EXPOSURE2,             /*!< Start Exposure command v2          */
+            /// <summary>
+            /// Get Pentium cycle count command
+            /// </summary>
+            CC_GET_PENTIUM_CYCLE_COUNT,
+            /// <summary>
+            /// Read/Write USB I2C command
+            /// </summary>
+            CC_RW_USB_I2C,
+            /// <summary>
+            /// Control Filter Wheel command
+            /// </summary>
+            CC_CFW,
+            /// <summary>
+            /// Bit I/O command
+            /// </summary>
+            CC_BIT_IO,
+            /// <summary>
+            /// User EEPROM command
+            /// </summary>
+            CC_USER_EEPROM,
+            /// <summary>
+            /// AO Center command
+            /// </summary>
+            CC_AO_CENTER,
+            /// <summary>
+            /// BTDI setup command
+            /// </summary>
+            CC_BTDI_SETUP,
+            /// <summary>
+            /// Motor focus command
+            /// </summary>
+            CC_MOTOR_FOCUS,
+            /// <summary>
+            /// Query Ethernet command
+            /// </summary>
+            CC_QUERY_ETHERNET,
+            /// <summary>
+            /// Start Exposure command v2
+            /// </summary>
+            CC_START_EXPOSURE2,
 
             /* 51 - 60 */
-            CC_SET_TEMPERATURE_REGULATION2, /*!< Set Temperature regulation command        */
-            CC_READ_OFFSET2,                /*!< Read offset command v2           */
-            CC_DIFF_GUIDER,                 /*!< Differential Guider command         */
-            CC_COLUMN_EEPROM,               /*!< Column EEPROM command           */
-            CC_CUSTOMER_OPTIONS,            /*!< Customer Options command          */
-            CC_DEBUG_LOG,                   /*!< Debug log command            */
-            CC_QUERY_USB2,                  /*!< Query USB command v2           */
-            CC_QUERY_ETHERNET2,             /*!< Query Ethernet command v2          */
-            CC_GET_AO_MODEL,                /*!< Get AO model command           */
-            CC_QUERY_USB3,                  /*!< Query up to 24 USB cameras          */
-            CC_QUERY_COMMAND_STATUS2,       /*!< Expanded Query Command Status to include extra information  */
-                                            /*
-                                                SBIG Use Only Commands
-                                            */
+            /// <summary>
+            /// Set Temperature regulation command
+            /// </summary>
+            CC_SET_TEMPERATURE_REGULATION2,
+            /// <summary>
+            /// Read offset command v2
+            /// </summary>
+            CC_READ_OFFSET2,
+            /// <summary>
+            /// Differential Guider command
+            /// </summary>
+            CC_DIFF_GUIDER,
+            /// <summary>
+            /// Column EEPROM command
+            /// </summary>
+            CC_COLUMN_EEPROM,
+            /// <summary>
+            /// Customer Options command
+            /// </summary>
+            CC_CUSTOMER_OPTIONS,
+            /// <summary>
+            /// Debug log command
+            /// </summary>
+            CC_DEBUG_LOG,
+            /// <summary>
+            /// Query USB command v2
+            /// </summary>
+            CC_QUERY_USB2,
+            /// <summary>
+            /// Query Ethernet command v2
+            /// </summary>
+            CC_QUERY_ETHERNET2,
+            /// <summary>
+            /// Get AO model command
+            /// </summary>
+            CC_GET_AO_MODEL,
+            /// <summary>
+            /// Query up to 24 USB cameras
+            /// </summary>
+            CC_QUERY_USB3,
+            /// <summary>
+            /// Expanded Query Command Status to include extra information
+            /// </summary>
+            CC_QUERY_COMMAND_STATUS2,
+            /*
+                SBIG Use Only Commands
+            */
 
             /* 90 - 99 */
-            CC_SEND_BLOCK = 90,             /*!< Send block command            */
-            CC_SEND_BYTE,                   /*!< Send byte command            */
-            CC_GET_BYTE,                    /*!< Get byte command            */
-            CC_SEND_AD,                     /*!< Send A/D command            */
-            CC_GET_AD,                      /*!< Get A/D command            */
-            CC_CLOCK_AD,                    /*!< Clock A/D command            */
-            CC_SYSTEM_TEST,                 /*!< System test command           */
-            CC_GET_DRIVER_OPTIONS,          /*!< Get driver options command          */
-            CC_SET_DRIVER_OPTIONS,          /*!< Set driver options command          */
-            CC_FIRMWARE,                    /*!< Firmware command            */
+            /// <summary>
+            /// Send block command
+            /// </summary>
+            CC_SEND_BLOCK = 90,
+            /// <summary>
+            /// Send byte command
+            /// </summary>
+            CC_SEND_BYTE,
+            /// <summary>
+            /// Get byte command
+            /// </summary>
+            CC_GET_BYTE,
+            /// <summary>
+            /// Send A/D command
+            /// </summary>
+            CC_SEND_AD,
+            /// <summary>
+            /// Get A/D command
+            /// </summary>
+            CC_GET_AD,
+            /// <summary>
+            /// Clock A/D command
+            /// </summary>
+            CC_CLOCK_AD,
+            /// <summary>
+            /// System test command
+            /// </summary>
+            CC_SYSTEM_TEST,
+            /// <summary>
+            /// Get driver options command
+            /// </summary>
+            CC_GET_DRIVER_OPTIONS,
+            /// <summary>
+            /// Set driver options command
+            /// </summary>
+            CC_SET_DRIVER_OPTIONS,
+            /// <summary>
+            /// Firmware command
+            /// </summary>
+            CC_FIRMWARE,
 
             /* 100 -109 */
-            CC_BULK_IO,                     /*!< Bulk I/O command            */
-            CC_RIPPLE_CORRECTION,           /*!< Ripple correction command          */
-            CC_EZUSB_RESET,                 /*!< EZUSB Reset command           */
-            CC_BREAKPOINT,                  /*!< Breakpoint command            */
-            CC_QUERY_EXPOSURE_TICKS,        /*!< Query exposure ticks command         */
-            CC_SET_ACTIVE_CCD_AREA,         /*!< Set active CCD area command         */
-            CC_READOUT_IN_PROGRESS,         /*!< Returns TRUE if a readout is in progress on any driver handle  */
-            CC_GET_RBI_PARAMETERS,          /*!< Updates the RBI Preflash parameters       */
-            CC_SET_RBI_PARAMETERS,          /*!< Obtains the RBI Preflash parameters from the camera   */
-            CC_QUERY_FEATURE_SUPPORTED,     /*!< Checks to see if a camera's firmware supports a command.  */
-            CC_LAST_COMMAND                 /*!< Last command ID            */
+            /// <summary>
+            /// Bulk I/O command
+            /// </summary>
+            CC_BULK_IO,
+            /// <summary>
+            /// Ripple correction command
+            /// </summary>
+            CC_RIPPLE_CORRECTION,
+            /// <summary>
+            /// EZUSB Reset command
+            /// </summary>
+            CC_EZUSB_RESET,
+            /// <summary>
+            /// Breakpoint command
+            /// </summary>
+            CC_BREAKPOINT,
+            /// <summary>
+            /// Query exposure ticks command
+            /// </summary>
+            CC_QUERY_EXPOSURE_TICKS,
+            /// <summary>
+            /// Set active CCD area command
+            /// </summary>
+            CC_SET_ACTIVE_CCD_AREA,
+            /// <summary>
+            /// Returns TRUE if a readout is in progress on any driver handle
+            /// </summary>
+            CC_READOUT_IN_PROGRESS,
+            /// <summary>
+            /// Updates the RBI Preflash parameters
+            /// </summary>
+            CC_GET_RBI_PARAMETERS,
+            /// <summary>
+            /// Obtains the RBI Preflash parameters from the camera
+            /// </summary>
+            CC_SET_RBI_PARAMETERS,
+            /// <summary>
+            /// Checks to see if a camera's firmware supports a command.
+            /// </summary>
+            CC_QUERY_FEATURE_SUPPORTED,
+            /// <summary>
+            /// Last command ID
+            /// </summary>
+            CC_LAST_COMMAND
 
             /* 110 - 119 */
 
@@ -195,58 +445,190 @@ namespace SbigSharp
         public enum PAR_ERROR : ushort
         {
             /* 0 - 10 */
-            CE_NO_ERROR,                            /*!< No error ID        */
-            CE_CAMERA_NOT_FOUND = CE_ERROR_BASE,    /*!< Camera not found error      */
-            CE_EXPOSURE_IN_PROGRESS,                /*!< Exposure in progress error     */
-            CE_NO_EXPOSURE_IN_PROGRESS,             /*!< No exposure in progress error    */
-            CE_UNKNOWN_COMMAND,                     /*!< Unknown command error      */
-            CE_BAD_CAMERA_COMMAND,                  /*!< Bad camera command error     */
-            CE_BAD_PARAMETER,                       /*!< Bad parameter command      */
-            CE_TX_TIMEOUT,                          /*!< Transfer (Tx) timeout error    */
-            CE_RX_TIMEOUT,                          /*!< Receive (Rx) timeout error     */
-            CE_NAK_RECEIVED,                        /*!< Received Negative Acknowledgement    */
-            CE_CAN_RECEIVED,                        /*!< Received Cancel       */
+            /// <summary>
+            /// No error ID
+            /// </summary>
+            CE_NO_ERROR,
+            /// <summary>
+            /// Camera not found error
+            /// </summary>
+            CE_CAMERA_NOT_FOUND = CE_ERROR_BASE,
+            /// <summary>
+            /// Exposure in progress error
+            /// </summary>
+            CE_EXPOSURE_IN_PROGRESS,
+            /// <summary>
+            /// No exposure in progress error
+            /// </summary>
+            CE_NO_EXPOSURE_IN_PROGRESS,
+            /// <summary>
+            /// Unknown command error
+            /// </summary>
+            CE_UNKNOWN_COMMAND,
+            /// <summary>
+            /// Bad camera command error
+            /// </summary>
+            CE_BAD_CAMERA_COMMAND,
+            /// <summary>
+            /// Bad parameter command
+            /// </summary>
+            CE_BAD_PARAMETER,
+            /// <summary>
+            /// Transfer (Tx) timeout error
+            /// </summary>
+            CE_TX_TIMEOUT,
+            /// <summary>
+            /// Receive (Rx) timeout error
+            /// </summary>
+            CE_RX_TIMEOUT,
+            /// <summary>
+            /// Received Negative Acknowledgement
+            /// </summary>
+            CE_NAK_RECEIVED,
+            /// <summary>
+            /// Received Cancel
+            /// </summary>
+            CE_CAN_RECEIVED,
 
             /* 11 - 20 */
-            CE_UNKNOWN_RESPONSE,                    /*!< Unknown response error      */
-            CE_BAD_LENGTH,                          /*!< Bad length error       */
-            CE_AD_TIMEOUT,                          /*!< A/D timeout error       */
-            CE_KBD_ESC,                             /*!< Keyboard error        */
-            CE_CHECKSUM_ERROR,                      /*!< Checksum error        */
-            CE_EEPROM_ERROR,                        /*!< EEPROM error        */
-            CE_SHUTTER_ERROR,                       /*!< Shutter error        */
-            CE_UNKNOWN_CAMERA,                      /*!< Unknown camera error      */
-            CE_DRIVER_NOT_FOUND,                    /*!< Driver not found error      */
-            CE_DRIVER_NOT_OPEN,                     /*!< Driver not open error      */
+            /// <summary>
+            /// Unknown response error
+            /// </summary>
+            CE_UNKNOWN_RESPONSE,
+            /// <summary>
+            /// Bad length error
+            /// </summary>
+            CE_BAD_LENGTH,
+            /// <summary>
+            /// A/D timeout error
+            /// </summary>
+            CE_AD_TIMEOUT,
+            /// <summary>
+            /// Keyboard error
+            /// </summary>
+            CE_KBD_ESC,
+            /// <summary>
+            /// Checksum error
+            /// </summary>
+            CE_CHECKSUM_ERROR,
+            /// <summary>
+            /// EEPROM error
+            /// </summary>
+            CE_EEPROM_ERROR,
+            /// <summary>
+            /// Shutter error
+            /// </summary>
+            CE_SHUTTER_ERROR,
+            /// <summary>
+            /// Unknown camera error
+            /// </summary>
+            CE_UNKNOWN_CAMERA,
+            /// <summary>
+            /// Driver not found error
+            /// </summary>
+            CE_DRIVER_NOT_FOUND,
+            /// <summary>
+            /// Driver not open error
+            /// </summary>
+            CE_DRIVER_NOT_OPEN,
 
             /* 21 - 30 */
-            CE_DRIVER_NOT_CLOSED,                   /*!< Driver not closed error     */
-            CE_SHARE_ERROR,                         /*!< Share error        */
-            CE_TCE_NOT_FOUND,                       /*!< TCE not found error      */
-            CE_AO_ERROR,                            /*!< AO error         */
-            CE_ECP_ERROR,                           /*!< ECP error         */
-            CE_MEMORY_ERROR,                        /*!< Memory error        */
-            CE_DEVICE_NOT_FOUND,                    /*!< Device not found error      */
-            CE_DEVICE_NOT_OPEN,                     /*!< Device not open error      */
-            CE_DEVICE_NOT_CLOSED,                   /*!< Device not closed error     */
-            CE_DEVICE_NOT_IMPLEMENTED,              /*!< Device not implemented error    */
+            /// <summary>
+            /// Driver not closed error
+            /// </summary>
+            CE_DRIVER_NOT_CLOSED,
+            /// <summary>
+            /// Share error
+            /// </summary>
+            CE_SHARE_ERROR,
+            /// <summary>
+            /// TCE not found error
+            /// </summary>
+            CE_TCE_NOT_FOUND,
+            /// <summary>
+            /// AO error
+            /// </summary>
+            CE_AO_ERROR,
+            /// <summary>
+            /// ECP error
+            /// </summary>
+            CE_ECP_ERROR,
+            /// <summary>
+            /// Memory error
+            /// </summary>
+            CE_MEMORY_ERROR,
+            /// <summary>
+            /// Device not found error
+            /// </summary>
+            CE_DEVICE_NOT_FOUND,
+            /// <summary>
+            /// Device not open error
+            /// </summary>
+            CE_DEVICE_NOT_OPEN,
+            /// <summary>
+            /// Device not closed error
+            /// </summary>
+            CE_DEVICE_NOT_CLOSED,
+            /// <summary>
+            /// Device not implemented error
+            /// </summary>
+            CE_DEVICE_NOT_IMPLEMENTED,
 
             /* 31 - 40 */
-            CE_DEVICE_DISABLED,                     /*!< Device disabled error      */
-            CE_OS_ERROR,                            /*!< OS error         */
-            CE_SOCK_ERROR,                          /*!< Socket error        */
-            CE_SERVER_NOT_FOUND,                    /*!< Server not found error      */
-            CE_CFW_ERROR,                           /*!< Filter wheel error       */
-            CE_MF_ERROR,                            /*!< Motor Focus error       */
-            CE_FIRMWARE_ERROR,                      /*!< Firmware error        */
-            CE_DIFF_GUIDER_ERROR,                   /*!< Differential guider error     */
-            CE_RIPPLE_CORRECTION_ERROR,             /*!< Ripple corrections error     */
-            CE_EZUSB_RESET,                         /*!< EZUSB Reset error       */
+            /// <summary>
+            /// Device disabled error
+            /// </summary>
+            CE_DEVICE_DISABLED,
+            /// <summary>
+            /// OS error
+            /// </summary>
+            CE_OS_ERROR,
+            /// <summary>
+            /// Socket error
+            /// </summary>
+            CE_SOCK_ERROR,
+            /// <summary>
+            /// Server not found error
+            /// </summary>
+            CE_SERVER_NOT_FOUND,
+            /// <summary>
+            /// Filter wheel error
+            /// </summary>
+            CE_CFW_ERROR,
+            /// <summary>
+            /// Motor Focus error
+            /// </summary>
+            CE_MF_ERROR,
+            /// <summary>
+            /// Firmware error
+            /// </summary>
+            CE_FIRMWARE_ERROR,
+            /// <summary>
+            /// Differential guider error
+            /// </summary>
+            CE_DIFF_GUIDER_ERROR,
+            /// <summary>
+            /// Ripple corrections error
+            /// </summary>
+            CE_RIPPLE_CORRECTION_ERROR,
+            /// <summary>
+            /// EZUSB Reset error
+            /// </summary>
+            CE_EZUSB_RESET,
 
             /* 41 - 50*/
-            CE_INCOMPATIBLE_FIRMWARE,               /*!< Firmware needs update to support feature. */
-            CE_INVALID_HANDLE,                      /*!< An invalid R/W handle was supplied for I/O */
-            CE_NEXT_ERROR                           /*!< Development purposes: Next Error   */
+            /// <summary>
+            /// Firmware needs update to support feature.
+            /// </summary>
+            CE_INCOMPATIBLE_FIRMWARE,
+            /// <summary>
+            /// An invalid R/W handle was supplied for I/O
+            /// </summary>
+            CE_INVALID_HANDLE,
+            /// <summary>
+            /// Development purposes: Next Error
+            /// </summary>
+            CE_NEXT_ERROR
 
         };
 
@@ -264,10 +646,22 @@ namespace SbigSharp
          */
         public enum PAR_COMMAND_STATUS : ushort
         {
-            CS_IDLE,                    /*!< Camera state: Idle.    */
-            CS_IN_PROGRESS,             /*!< Camera state: Exposure in progress */
-            CS_INTEGRATING,             /*!< Camera state: Integrating   */
-            CS_INTEGRATION_COMPLETE     /*!< Camera state: Integration complete */
+            /// <summary>
+            /// Camera state: Idle.
+            /// </summary>
+            CS_IDLE,
+            /// <summary>
+            /// Camera state: Exposure in progress
+            /// </summary>
+            CS_IN_PROGRESS,
+            /// <summary>
+            /// Camera state: Integrating
+            /// </summary>
+            CS_INTEGRATING,
+            /// <summary>
+            /// Camera state: Integration complete
+            /// </summary>
+            CS_INTEGRATION_COMPLETE
         };
 
         public enum FeatureFirmwareRequirement : ushort
@@ -325,9 +719,18 @@ namespace SbigSharp
          */
         public enum QUERY_TEMP_STATUS_REQUEST : ushort
         {
-            TEMP_STATUS_STANDARD,   /*!< Temperature status Standard  */
-            TEMP_STATUS_ADVANCED,   /*!< Temperature status Advanced  */
-            TEMP_STATUS_ADVANCED2   /*!< Temperature status Advanced 2  */
+            /// <summary>
+            /// Temperature status Standard
+            /// </summary>
+            TEMP_STATUS_STANDARD,
+            /// <summary>
+            /// Temperature status Advanced
+            /// </summary>
+            TEMP_STATUS_ADVANCED,
+            /// <summary>
+            /// Temperature status Advanced 2
+            /// </summary>
+            TEMP_STATUS_ADVANCED2
         };
 
         /*!
@@ -336,10 +739,22 @@ namespace SbigSharp
          */
         public enum ABG_STATE7 : ushort
         {
-            ABG_LOW7,       /*!< ABG Low 7   */
-            ABG_CLK_LOW7,   /*!< ABG Clock Low 7 */
-            ABG_CLK_MED7,   /*!< ABG Clock Medium 7 */
-            ABG_CLK_HI7     /*!< ABG Clock High 7 */
+            /// <summary>
+            /// ABG Low 7
+            /// </summary>
+            ABG_LOW7,
+            /// <summary>
+            /// ABG Clock Low 7
+            /// </summary>
+            ABG_CLK_LOW7,
+            /// <summary>
+            /// ABG Clock Medium 7
+            /// </summary>
+            ABG_CLK_MED7,
+            /// <summary>
+            /// ABG Clock High 7
+            /// </summary>
+            ABG_CLK_HI7
         };
 
         /*!
@@ -404,9 +819,18 @@ namespace SbigSharp
          */
         public enum DRIVER_REQUEST : ushort
         {
-            DRIVER_STD,         /*!< Driver standard */
-            DRIVER_EXTENDED,    /*!< Driver extended */
-            DRIVER_USB_LOADER   /*!< Driver USB loader */
+            /// <summary>
+            /// Driver standard
+            /// </summary>
+            DRIVER_STD,
+            /// <summary>
+            /// Driver extended
+            /// </summary>
+            DRIVER_EXTENDED,
+            /// <summary>
+            /// Driver USB loader
+            /// </summary>
+            DRIVER_USB_LOADER
         };
 
         /*!
@@ -415,9 +839,18 @@ namespace SbigSharp
          */
         public enum CCD_REQUEST : ushort
         {
-            CCD_IMAGING,        /*!< Request Imaging CCD   */
-            CCD_TRACKING,       /*!< Request Internal Tracking CCD */
-            CCD_EXT_TRACKING    /*!< Request External Tracking CCD */
+            /// <summary>
+            /// Request Imaging CCD
+            /// </summary>
+            CCD_IMAGING,
+            /// <summary>
+            /// Request Internal Tracking CCD
+            /// </summary>
+            CCD_TRACKING,
+            /// <summary>
+            /// Request External Tracking CCD
+            /// </summary>
+            CCD_EXT_TRACKING
         };
 
         /*!
@@ -426,17 +859,50 @@ namespace SbigSharp
          */
         public enum READOUT_BINNING_MODE : ushort
         {
-            RM_1X1,             /*!< 1x1 binning readout mode   */
-            RM_2X2,             /*!< 2x2 binning readout mode   */
-            RM_3X3,             /*!< 3x3 binning readout mode   */
-            RM_NX1,             /*!< Nx1 binning readout mode   */
-            RM_NX2,             /*!< Nx2 binning readout mode   */
-            RM_NX3,             /*!< Nx3 binning readout mode   */
-            RM_1X1_VOFFCHIP,    /*!< 1x1 Off-chip binning readout mode */
-            RM_2X2_VOFFCHIP,    /*!< 2x2 Off-chip binning readout mode */
-            RM_3X3_VOFFCHIP,    /*!< 3x3 Off-chip binning readout mode */
-            RM_9X9,             /*!< 9x9 binning readout mode   */
-            RM_NXN              /*!< NxN binning readout mode   */
+            /// <summary>
+            /// 1x1 binning readout mode
+            /// </summary>
+            RM_1X1,
+            /// <summary>
+            /// 2x2 binning readout mode
+            /// </summary>
+            RM_2X2,
+            /// <summary>
+            /// 3x3 binning readout mode
+            /// </summary>
+            RM_3X3,
+            /// <summary>
+            /// Nx1 binning readout mode
+            /// </summary>
+            RM_NX1,
+            /// <summary>
+            /// Nx2 binning readout mode
+            /// </summary>
+            RM_NX2,
+            /// <summary>
+            /// Nx3 binning readout mode
+            /// </summary>
+            RM_NX3,
+            /// <summary>
+            /// 1x1 Off-chip binning readout mode
+            /// </summary>
+            RM_1X1_VOFFCHIP,
+            /// <summary>
+            /// 2x2 Off-chip binning readout mode
+            /// </summary>
+            RM_2X2_VOFFCHIP,
+            /// <summary>
+            /// 3x3 Off-chip binning readout mode
+            /// </summary>
+            RM_3X3_VOFFCHIP,
+            /// <summary>
+            /// 9x9 binning readout mode
+            /// </summary>
+            RM_9X9,
+            /// <summary>
+            /// NxN binning readout mode
+            /// </summary>
+            RM_NXN
         };
 
         /*!
@@ -445,13 +911,34 @@ namespace SbigSharp
          */
         public enum CCD_INFO_REQUEST : ushort
         {
-            CCD_INFO_IMAGING,               /*!< Imaging CCD Info    */
-            CCD_INFO_TRACKING,              /*!< Tracking CCD Info    */
-            CCD_INFO_EXTENDED,              /*!< Extended CCD Info    */
-            CCD_INFO_EXTENDED_5C,           /*!< Extended CCD Info 5C   */
-            CCD_INFO_EXTENDED2_IMAGING,     /*!< Extended Imaging CCD Info 2 */
-            CCD_INFO_EXTENDED2_TRACKING,    /*!< Extended Tracking CCD Info 2 */
-            CCD_INFO_EXTENDED3              /*!< Extended Imaging CCD Info 3 */
+            /// <summary>
+            /// Imaging CCD Info
+            /// </summary>
+            CCD_INFO_IMAGING,
+            /// <summary>
+            /// Tracking CCD Info
+            /// </summary>
+            CCD_INFO_TRACKING,
+            /// <summary>
+            /// Extended CCD Info
+            /// </summary>
+            CCD_INFO_EXTENDED,
+            /// <summary>
+            /// Extended CCD Info 5C
+            /// </summary>
+            CCD_INFO_EXTENDED_5C,
+            /// <summary>
+            /// Extended Imaging CCD Info 2
+            /// </summary>
+            CCD_INFO_EXTENDED2_IMAGING,
+            /// <summary>
+            /// Extended Tracking CCD Info 2
+            /// </summary>
+            CCD_INFO_EXTENDED2_TRACKING,
+            /// <summary>
+            /// Extended Imaging CCD Info 3
+            /// </summary>
+            CCD_INFO_EXTENDED3
         };
 
         /*!
@@ -460,8 +947,14 @@ namespace SbigSharp
          */
         public enum IMAGING_ABG : ushort
         {
-            ABG_NOT_PRESENT,    /*!< Anti-blooming gate not Present */
-            ABG_PRESENT         /*!< Anti-blooming gate present  */
+            /// <summary>
+            /// Anti-blooming gate not Present
+            /// </summary>
+            ABG_NOT_PRESENT,
+            /// <summary>
+            /// Anti-blooming gate present
+            /// </summary>
+            ABG_PRESENT
         };
 
         /*!
@@ -470,12 +963,30 @@ namespace SbigSharp
          */
         public enum PORT_RATE : ushort
         {
-            BR_AUTO,    /*!< Bit-rate auto */
-            BR_9600,    /*!< Bit-rate 9600 */
-            BR_19K,     /*!< Bit-rate 19K */
-            BR_38K,     /*!< Bit-rate 38K */
-            BR_57K,     /*!< Bit-rate 57K */
-            BR_115K     /*!< Bit-rate 115K */
+            /// <summary>
+            /// Bit-rate auto
+            /// </summary>
+            BR_AUTO,
+            /// <summary>
+            /// Bit-rate 9600
+            /// </summary>
+            BR_9600,
+            /// <summary>
+            /// Bit-rate 19K
+            /// </summary>
+            BR_19K,
+            /// <summary>
+            /// Bit-rate 38K
+            /// </summary>
+            BR_38K,
+            /// <summary>
+            /// Bit-rate 57K
+            /// </summary>
+            BR_57K,
+            /// <summary>
+            /// Bit-rate 115K
+            /// </summary>
+            BR_115K
         };
 
         /*!
@@ -484,26 +995,86 @@ namespace SbigSharp
          */
         public enum CAMERA_TYPE : ushort
         {
-            ST7_CAMERA = 4,     /*!< ST-7 Camera                                 */
-            ST8_CAMERA,         /*!< ST-8 Camera                                 */
-            ST5C_CAMERA,        /*!< ST-5C Camera                                 */
-            TCE_CONTROLLER,     /*!< TCE-Controller                                 */
-            ST237_CAMERA,       /*!< ST-237 Camera                                 */
-            STK_CAMERA,         /*!< ST-K Camera                                 */
-            ST9_CAMERA,         /*!< ST-9 Camera                                 */
-            STV_CAMERA,         /*!< ST-V Camera                                 */
-            ST10_CAMERA,        /*!< ST-10 Camera                                 */
-            ST1K_CAMERA,        /*!< ST-1000 Camera                                 */
-            ST2K_CAMERA,        /*!< ST-2000 Camera                                 */
-            STL_CAMERA,         /*!< STL Camera                                  */
-            ST402_CAMERA,       /*!< ST-402 Camera                                 */
-            STX_CAMERA,         /*!< STX Camera                                  */
-            ST4K_CAMERA,        /*!< ST-4000 Camera                                 */
-            STT_CAMERA,         /*!< STT Camera                                  */
-            STI_CAMERA,         /*!< ST-i Camera                                 */
-            STF_CAMERA,         /*!< STF Camera, NOTE: STF8, and STF cameras both report this kind, but have *DIFFERENT CAMERA MODEL ID VARIABLES* (stf8CameraID and stfCameraID) */
-            NEXT_CAMERA,        /*!< Next Camera                                 */
-            NO_CAMERA = 0xFFFF  /*!< No Camera                                  */
+            /// <summary>
+            /// ST-7 Camera
+            /// </summary>
+            ST7_CAMERA = 4,
+            /// <summary>
+            /// ST-8 Camera
+            /// </summary>
+            ST8_CAMERA,
+            /// <summary>
+            /// ST-5C Camera
+            /// </summary>
+            ST5C_CAMERA,
+            /// <summary>
+            /// TCE-Controller
+            /// </summary>
+            TCE_CONTROLLER,
+            /// <summary>
+            /// ST-237 Camera
+            /// </summary>
+            ST237_CAMERA,
+            /// <summary>
+            /// ST-K Camera
+            /// </summary>
+            STK_CAMERA,
+            /// <summary>
+            /// ST-9 Camera
+            /// </summary>
+            ST9_CAMERA,
+            /// <summary>
+            /// ST-V Camera
+            /// </summary>
+            STV_CAMERA,
+            /// <summary>
+            /// ST-10 Camera
+            /// </summary>
+            ST10_CAMERA,
+            /// <summary>
+            /// ST-1000 Camera
+            /// </summary>
+            ST1K_CAMERA,
+            /// <summary>
+            /// ST-2000 Camera
+            /// </summary>
+            ST2K_CAMERA,
+            /// <summary>
+            /// STL Camera
+            /// </summary>
+            STL_CAMERA,
+            /// <summary>
+            /// ST-402 Camera
+            /// </summary>
+            ST402_CAMERA,
+            /// <summary>
+            /// STX Camera
+            /// </summary>
+            STX_CAMERA,
+            /// <summary>
+            /// ST-4000 Camera
+            /// </summary>
+            ST4K_CAMERA,
+            /// <summary>
+            /// STT Camera
+            /// </summary>
+            STT_CAMERA,
+            /// <summary>
+            /// ST-i Camera
+            /// </summary>
+            STI_CAMERA,
+            /// <summary>
+            /// STF Camera, NOTE: STF8, and STF cameras both report this kind, but have *DIFFERENT CAMERA MODEL ID VARIABLES* (stf8CameraID and stfCameraID)
+            /// </summary>
+            STF_CAMERA,
+            /// <summary>
+            /// Next Camera
+            /// </summary>
+            NEXT_CAMERA,
+            /// <summary>
+            /// No Camera
+            /// </summary>
+            NO_CAMERA = 0xFFFF
         };
 
         /*!
@@ -512,12 +1083,30 @@ namespace SbigSharp
          */
         public enum SHUTTER_COMMAND : ushort
         {
-            SC_LEAVE_SHUTTER,       /*!< Shutter Control: Leave shutter in current state. */
-            SC_OPEN_SHUTTER,        /*!< Shutter Control: Open shutter.      */
-            SC_CLOSE_SHUTTER,       /*!< Shutter Control: Close shutter.     */
-            SC_INITIALIZE_SHUTTER,  /*!< Shutter Control: Initialize shutter.    */
-            SC_OPEN_EXT_SHUTTER,    /*!< Shutter Control: Open external shutter.   */
-            SC_CLOSE_EXT_SHUTTER    /*!< Shutter Control: Close external shutter.   */
+            /// <summary>
+            /// Shutter Control: Leave shutter in current state.
+            /// </summary>
+            SC_LEAVE_SHUTTER,
+            /// <summary>
+            /// Shutter Control: Open shutter.
+            /// </summary>
+            SC_OPEN_SHUTTER,
+            /// <summary>
+            /// Shutter Control: Close shutter.
+            /// </summary>
+            SC_CLOSE_SHUTTER,
+            /// <summary>
+            /// Shutter Control: Initialize shutter.
+            /// </summary>
+            SC_INITIALIZE_SHUTTER,
+            /// <summary>
+            /// Shutter Control: Open external shutter.
+            /// </summary>
+            SC_OPEN_EXT_SHUTTER,
+            /// <summary>
+            /// Shutter Control: Close external shutter.
+            /// </summary>
+            SC_CLOSE_EXT_SHUTTER
         };
 
         /*!
@@ -526,10 +1115,22 @@ namespace SbigSharp
          */
         public enum SHUTTER_STATE7 : ushort
         {
-            SS_OPEN,    /*!< Shuter State: Open  */
-            SS_CLOSED,  /*!< Shuter State: Closed */
-            SS_OPENING, /*!< Shutter State: Opening */
-            SS_CLOSING  /*!< Shutter State: Closing */
+            /// <summary>
+            /// Shuter State: Open
+            /// </summary>
+            SS_OPEN,
+            /// <summary>
+            /// Shuter State: Closed
+            /// </summary>
+            SS_CLOSED,
+            /// <summary>
+            /// Shutter State: Opening
+            /// </summary>
+            SS_OPENING,
+            /// <summary>
+            /// Shutter State: Closing
+            /// </summary>
+            SS_CLOSING
         };
 
         /*!
@@ -538,13 +1139,34 @@ namespace SbigSharp
          */
         public enum TEMPERATURE_REGULATION : ushort
         {
-            REGULATION_OFF,                 /*!< Temperature regulation off     */
-            REGULATION_ON,                  /*!< Temperature regulation on     */
-            REGULATION_OVERRIDE,            /*!< Temperature regulation override   */
-            REGULATION_FREEZE,              /*!< Temperature regulation freeze    */
-            REGULATION_UNFREEZE,            /*!< Temperature regulation unfreeze   */
-            REGULATION_ENABLE_AUTOFREEZE,   /*!< Temperature regulation enable autofreeze */
-            REGULATION_DISABLE_AUTOFREEZE   /*!< Temperature regulation disable autofreeze */
+            /// <summary>
+            /// Temperature regulation off
+            /// </summary>
+            REGULATION_OFF,
+            /// <summary>
+            /// Temperature regulation on
+            /// </summary>
+            REGULATION_ON,
+            /// <summary>
+            /// Temperature regulation override
+            /// </summary>
+            REGULATION_OVERRIDE,
+            /// <summary>
+            /// Temperature regulation freeze
+            /// </summary>
+            REGULATION_FREEZE,
+            /// <summary>
+            /// Temperature regulation unfreeze
+            /// </summary>
+            REGULATION_UNFREEZE,
+            /// <summary>
+            /// Temperature regulation enable autofreeze
+            /// </summary>
+            REGULATION_ENABLE_AUTOFREEZE,
+            /// <summary>
+            /// Temperature regulation disable autofreeze
+            /// </summary>
+            REGULATION_DISABLE_AUTOFREEZE
         };
 
         /*!
@@ -557,10 +1179,22 @@ namespace SbigSharp
          */
         public enum LED_STATE : ushort
         {
-            LED_OFF,        /*!< LED off  */
-            LED_ON,         /*!< LED on   */
-            LED_BLINK_LOW,  /*!< LED Blink low */
-            LED_BLINK_HIGH  /*!< LED Blink high */
+            /// <summary>
+            /// LED off
+            /// </summary>
+            LED_OFF,
+            /// <summary>
+            /// LED on
+            /// </summary>
+            LED_ON,
+            /// <summary>
+            /// LED Blink low
+            /// </summary>
+            LED_BLINK_LOW,
+            /// <summary>
+            /// LED Blink high
+            /// </summary>
+            LED_BLINK_HIGH
         };
 
         /*!
@@ -568,14 +1202,38 @@ namespace SbigSharp
          */
         public enum FILTER_COMMAND : ushort
         {
-            FILTER_LEAVE,   /*!< Filter leave  */
-            FILTER_SET_1,   /*!< Filter slot 1  */
-            FILTER_SET_2,   /*!< Filter slot 2  */
-            FILTER_SET_3,   /*!< Filter slot 3  */
-            FILTER_SET_4,   /*!< Filter slot 4  */
-            FILTER_SET_5,   /*!< Filter slot 5  */
-            FILTER_STOP,    /*!< Stop filter  */
-            FILTER_INIT     /*!< Initialize filter */
+            /// <summary>
+            /// Filter leave
+            /// </summary>
+            FILTER_LEAVE,
+            /// <summary>
+            /// Filter slot 1
+            /// </summary>
+            FILTER_SET_1,
+            /// <summary>
+            /// Filter slot 2
+            /// </summary>
+            FILTER_SET_2,
+            /// <summary>
+            /// Filter slot 3
+            /// </summary>
+            FILTER_SET_3,
+            /// <summary>
+            /// Filter slot 4
+            /// </summary>
+            FILTER_SET_4,
+            /// <summary>
+            /// Filter slot 5
+            /// </summary>
+            FILTER_SET_5,
+            /// <summary>
+            /// Stop filter
+            /// </summary>
+            FILTER_STOP,
+            /// <summary>
+            /// Initialize filter
+            /// </summary>
+            FILTER_INIT
         };
 
         /*!
@@ -583,13 +1241,34 @@ namespace SbigSharp
          */
         public enum FILTER_STATE : ushort
         {
-            FS_MOVING,  /*!< Filter wheel moving   */
-            FS_AT_1,    /*!< Filter wheel at slot 1   */
-            FS_AT_2,    /*!< Filter wheel at slot 2   */
-            FS_AT_3,    /*!< Filter wheel at slot 3   */
-            FS_AT_4,    /*!< Filter wheel at slot 4   */
-            FS_AT_5,    /*!< Filter wheel at slot 5   */
-            FS_UNKNOWN  /*!< Filter wheel at slot Unknown */
+            /// <summary>
+            /// Filter wheel moving
+            /// </summary>
+            FS_MOVING,
+            /// <summary>
+            /// Filter wheel at slot 1
+            /// </summary>
+            FS_AT_1,
+            /// <summary>
+            /// Filter wheel at slot 2
+            /// </summary>
+            FS_AT_2,
+            /// <summary>
+            /// Filter wheel at slot 3
+            /// </summary>
+            FS_AT_3,
+            /// <summary>
+            /// Filter wheel at slot 4
+            /// </summary>
+            FS_AT_4,
+            /// <summary>
+            /// Filter wheel at slot 5
+            /// </summary>
+            FS_AT_5,
+            /// <summary>
+            /// Filter wheel at slot Unknown
+            /// </summary>
+            FS_UNKNOWN
         };
 
         /*!
@@ -597,9 +1276,18 @@ namespace SbigSharp
          */
         public enum AD_SIZE : ushort
         {
-            AD_UNKNOWN, /*!< Unknown size */
-            AD_12_BITS, /*!< 12-bits  */
-            AD_16_BITS  /*!< 16-bits  */
+            /// <summary>
+            /// Unknown size
+            /// </summary>
+            AD_UNKNOWN,
+            /// <summary>
+            /// 12-bits
+            /// </summary>
+            AD_12_BITS,
+            /// <summary>
+            /// 16-bits
+            /// </summary>
+            AD_16_BITS
         };
 
         /*!
@@ -607,10 +1295,22 @@ namespace SbigSharp
          */
         public enum FILTER_TYPE : ushort
         {
-            FW_UNKNOWN,     /*!< Unkwown Filter Wheel */
-            FW_EXTERNAL,    /*!< External Filter Wheel */
-            FW_VANE,        /*!< Vane Filter Wheel  */
-            FW_FILTER_WHEEL /*!< Standard Filter Wheel */
+            /// <summary>
+            /// Unkwown Filter Wheel
+            /// </summary>
+            FW_UNKNOWN,
+            /// <summary>
+            /// External Filter Wheel
+            /// </summary>
+            FW_EXTERNAL,
+            /// <summary>
+            /// Vane Filter Wheel
+            /// </summary>
+            FW_VANE,
+            /// <summary>
+            /// Standard Filter Wheel
+            /// </summary>
+            FW_FILTER_WHEEL
         };
 
         /*!
@@ -618,10 +1318,22 @@ namespace SbigSharp
          */
         public enum AO_FOCUS_COMMAND : ushort
         {
-            AOF_HARD_CENTER,    /*!< AO Focus hard center */
-            AOF_SOFT_CENTER,    /*!< AO Focus soft center */
-            AOF_STEP_IN,        /*!< AO Focus step in  */
-            AOF_STEP_OUT        /*!< AO Focus step out  */
+            /// <summary>
+            /// AO Focus hard center
+            /// </summary>
+            AOF_HARD_CENTER,
+            /// <summary>
+            /// AO Focus soft center
+            /// </summary>
+            AOF_SOFT_CENTER,
+            /// <summary>
+            /// AO Focus step in
+            /// </summary>
+            AOF_STEP_IN,
+            /// <summary>
+            /// AO Focus step out
+            /// </summary>
+            AOF_STEP_OUT
         };
 
         // Ethernet stuff
@@ -640,36 +1352,126 @@ namespace SbigSharp
          */
         public enum SBIG_DEVICE_TYPE : ushort
         {
-            DEV_NONE,           /*!< Device type: None   */
-            DEV_LPT1,           /*!< LPT port slot 1   */
-            DEV_LPT2,           /*!< LPT port slot 2   */
-            DEV_LPT3,           /*!< LPT port slot 3   */
-            DEV_USB = 0x7F00,   /*!< USB autodetect    */
-            DEV_ETH,            /*!< Ethernet     */
-            DEV_USB1,           /*!< USB slot 1 CC_QUERY_USB */
-            DEV_USB2,           /*!< USB slot 2     */
-            DEV_USB3,           /*!< USB slot 3     */
-            DEV_USB4,           /*!< USB slot 4     */
-            DEV_USB5,           /*!< USB slot 5 CC_QUERY_USB2 */
-            DEV_USB6,           /*!< USB slot 6     */
-            DEV_USB7,           /*!< USB slot 7     */
-            DEV_USB8,           /*!< USB slot 8     */
-            DEV_USB9,           /*!< USB slot 9 CC_QUERY_USB3 */
-            DEV_USB10,          /*!< USB slot 10    */
-            DEV_USB11,          /*!< USB slot 11    */
-            DEV_USB12,          /*!< USB slot 12    */
-            DEV_USB13,          /*!< USB slot 13    */
-            DEV_USB14,          /*!< USB slot 14    */
-            DEV_USB15,          /*!< USB slot 15    */
-            DEV_USB16,          /*!< USB slot 16    */
-            DEV_USB17,          /*!< USB slot 17    */
-            DEV_USB18,          /*!< USB slot 18    */
-            DEV_USB19,          /*!< USB slot 19    */
-            DEV_USB20,          /*!< USB slot 20    */
-            DEV_USB21,          /*!< USB slot 21    */
-            DEV_USB22,          /*!< USB slot 22    */
-            DEV_USB23,          /*!< USB slot 23    */
-            DEV_USB24,          /*!< USB slot 24    */
+            /// <summary>
+            /// Device type: None
+            /// </summary>
+            DEV_NONE,
+            /// <summary>
+            /// LPT port slot 1
+            /// </summary>
+            DEV_LPT1,
+            /// <summary>
+            /// LPT port slot 2
+            /// </summary>
+            DEV_LPT2,
+            /// <summary>
+            /// LPT port slot 3
+            /// </summary>
+            DEV_LPT3,
+            /// <summary>
+            /// USB autodetect
+            /// </summary>
+            DEV_USB = 0x7F00,
+            /// <summary>
+            /// Ethernet
+            /// </summary>
+            DEV_ETH,
+            /// <summary>
+            /// USB slot 1 CC_QUERY_USB
+            /// </summary>
+            DEV_USB1,
+            /// <summary>
+            /// USB slot 2
+            /// </summary>
+            DEV_USB2,
+            /// <summary>
+            /// USB slot 3
+            /// </summary>
+            DEV_USB3,
+            /// <summary>
+            /// USB slot 4
+            /// </summary>
+            DEV_USB4,
+            /// <summary>
+            /// USB slot 5 CC_QUERY_USB2
+            /// </summary>
+            DEV_USB5,
+            /// <summary>
+            /// USB slot 6
+            /// </summary>
+            DEV_USB6,
+            /// <summary>
+            /// USB slot 7
+            /// </summary>
+            DEV_USB7,
+            /// <summary>
+            /// USB slot 8
+            /// </summary>
+            DEV_USB8,
+            /// <summary>
+            /// USB slot 9 CC_QUERY_USB3
+            /// </summary>
+            DEV_USB9,
+            /// <summary>
+            /// USB slot 10
+            /// </summary>
+            DEV_USB10,
+            /// <summary>
+            /// USB slot 11
+            /// </summary>
+            DEV_USB11,
+            /// <summary>
+            /// USB slot 12
+            /// </summary>
+            DEV_USB12,
+            /// <summary>
+            /// USB slot 13
+            /// </summary>
+            DEV_USB13,
+            /// <summary>
+            /// USB slot 14
+            /// </summary>
+            DEV_USB14,
+            /// <summary>
+            /// USB slot 15
+            /// </summary>
+            DEV_USB15,
+            /// <summary>
+            /// USB slot 16
+            /// </summary>
+            DEV_USB16,
+            /// <summary>
+            /// USB slot 17
+            /// </summary>
+            DEV_USB17,
+            /// <summary>
+            /// USB slot 18
+            /// </summary>
+            DEV_USB18,
+            /// <summary>
+            /// USB slot 19
+            /// </summary>
+            DEV_USB19,
+            /// <summary>
+            /// USB slot 20
+            /// </summary>
+            DEV_USB20,
+            /// <summary>
+            /// USB slot 21
+            /// </summary>
+            DEV_USB21,
+            /// <summary>
+            /// USB slot 22
+            /// </summary>
+            DEV_USB22,
+            /// <summary>
+            /// USB slot 23
+            /// </summary>
+            DEV_USB23,
+            /// <summary>
+            /// USB slot 24
+            /// </summary>
+            DEV_USB24,
         };
 
         /*!
@@ -677,30 +1479,102 @@ namespace SbigSharp
          */
         public enum DRIVER_CONTROL_PARAM : ushort
         {
-            DCP_USB_FIFO_ENABLE,            /*!< Enable FIFO           */
-            DCP_CALL_JOURNAL_ENABLE,        /*!< Enable Journaling          */
-            DCP_IVTOH_RATIO,                /*!< IV to H Ratio           */
-            DCP_USB_FIFO_SIZE,              /*!< USB FIFO size           */
-            DCP_USB_DRIVER,                 /*!< USB Driver            */
-            DCP_KAI_RELGAIN,                /*!< KAI Relative Gain          */
-            DCP_USB_PIXEL_DL_ENABLE,        /*!< USB Pixel D\L enable         */
-            DCP_HIGH_THROUGHPUT,            /*!< High throughput          */
-            DCP_VDD_OPTIMIZED,              /*!< VDD Optimized           */
-            DCP_AUTO_AD_GAIN,               /*!< Auto A/D Gain           */
-            DCP_NO_HCLKS_FOR_INTEGRATION,   /*!< No H-Clocks for Integration       */
-            DCP_TDI_MODE_ENABLE,            /*!< TDI Mode Enable          */
-            DCP_VERT_FLUSH_CONTROL_ENABLE,  /*!< Vertical Flush control enable       */
-            DCP_ETHERNET_PIPELINE_ENABLE,   /*!< Ethernet pipeline enable        */
-            DCP_FAST_LINK,                  /*!< Fast link            */
-            DCP_OVERSCAN_ROWSCOLS,          /*!< Overscan Rows/Columns         */
-            DCP_PIXEL_PIPELINE_ENABLE,      /*!< Enable Pixel Pipeline         */
-            DCP_COLUMN_REPAIR_ENABLE,       /*!< Enable column repair         */
-            DCP_WARM_PIXEL_REPAIR_ENABLE,   /*!< Enable warm pixel repair        */
-            DCP_WARM_PIXEL_REPAIR_COUNT,    /*!< warm pixel repair count        */
-            DCP_TDI_MODE_DRIFT_RATE,        /*!< TDI Drift rate in [XXX]        */
-            DCP_OVERRIDE_AD_GAIN,           /*!< Override A/D Converter's Gain       */
-            DCP_ENABLE_AUTO_OFFSET,     /*!< Override auto offset adjustments in certain cameras. */
-            DCP_LAST                        /*!< Last Device control parameter       */
+            /// <summary>
+            /// Enable FIFO
+            /// </summary>
+            DCP_USB_FIFO_ENABLE,
+            /// <summary>
+            /// Enable Journaling
+            /// </summary>
+            DCP_CALL_JOURNAL_ENABLE,
+            /// <summary>
+            /// IV to H Ratio
+            /// </summary>
+            DCP_IVTOH_RATIO,
+            /// <summary>
+            /// USB FIFO size
+            /// </summary>
+            DCP_USB_FIFO_SIZE,
+            /// <summary>
+            /// USB Driver
+            /// </summary>
+            DCP_USB_DRIVER,
+            /// <summary>
+            /// KAI Relative Gain
+            /// </summary>
+            DCP_KAI_RELGAIN,
+            /// <summary>
+            /// USB Pixel D\L enable
+            /// </summary>
+            DCP_USB_PIXEL_DL_ENABLE,
+            /// <summary>
+            /// High throughput
+            /// </summary>
+            DCP_HIGH_THROUGHPUT,
+            /// <summary>
+            /// VDD Optimized
+            /// </summary>
+            DCP_VDD_OPTIMIZED,
+            /// <summary>
+            /// Auto A/D Gain
+            /// </summary>
+            DCP_AUTO_AD_GAIN,
+            /// <summary>
+            /// No H-Clocks for Integration
+            /// </summary>
+            DCP_NO_HCLKS_FOR_INTEGRATION,
+            /// <summary>
+            /// TDI Mode Enable
+            /// </summary>
+            DCP_TDI_MODE_ENABLE,
+            /// <summary>
+            /// Vertical Flush control enable
+            /// </summary>
+            DCP_VERT_FLUSH_CONTROL_ENABLE,
+            /// <summary>
+            /// Ethernet pipeline enable
+            /// </summary>
+            DCP_ETHERNET_PIPELINE_ENABLE,
+            /// <summary>
+            /// Fast link
+            /// </summary>
+            DCP_FAST_LINK,
+            /// <summary>
+            /// Overscan Rows/Columns
+            /// </summary>
+            DCP_OVERSCAN_ROWSCOLS,
+            /// <summary>
+            /// Enable Pixel Pipeline
+            /// </summary>
+            DCP_PIXEL_PIPELINE_ENABLE,
+            /// <summary>
+            /// Enable column repair
+            /// </summary>
+            DCP_COLUMN_REPAIR_ENABLE,
+            /// <summary>
+            /// Enable warm pixel repair
+            /// </summary>
+            DCP_WARM_PIXEL_REPAIR_ENABLE,
+            /// <summary>
+            /// warm pixel repair count
+            /// </summary>
+            DCP_WARM_PIXEL_REPAIR_COUNT,
+            /// <summary>
+            /// TDI Drift rate in [XXX]
+            /// </summary>
+            DCP_TDI_MODE_DRIFT_RATE,
+            /// <summary>
+            /// Override A/D Converter's Gain
+            /// </summary>
+            DCP_OVERRIDE_AD_GAIN,
+            /// <summary>
+            /// Override auto offset adjustments in certain cameras.
+            /// </summary>
+            DCP_ENABLE_AUTO_OFFSET,
+            /// <summary>
+            /// Last Device control parameter
+            /// </summary>
+            DCP_LAST
         };
 
         /*!
@@ -708,20 +1582,50 @@ namespace SbigSharp
          */
         public enum USB_AD_CONTROL_COMMAND : ushort
         {
-            USB_AD_IMAGING_GAIN,            /*!< Imaging gain     */
-            USB_AD_IMAGING_OFFSET,          /*!< Imaging offset     */
+            /// <summary>
+            /// Imaging gain
+            /// </summary>
+            USB_AD_IMAGING_GAIN,
+            /// <summary>
+            /// Imaging offset
+            /// </summary>
+            USB_AD_IMAGING_OFFSET,
+            /// <summary>
+            /// Internal tracking gain
+            /// </summary>
 
-            USB_AD_TRACKING_GAIN,           /*!< Internal tracking gain   */
-            USB_AD_TRACKING_OFFSET,         /*!< Internal tracking offset  */
+            USB_AD_TRACKING_GAIN,
+            /// <summary>
+            /// Internal tracking offset
+            /// </summary>
+            USB_AD_TRACKING_OFFSET,
+            /// <summary>
+            /// External tracking gain
+            /// </summary>
 
-            USB_AD_EXTTRACKING_GAIN,        /*!< External tracking gain   */
-            USB_AD_EXTTRACKING_OFFSET,      /*!< External tracking offset  */
+            USB_AD_EXTTRACKING_GAIN,
+            /// <summary>
+            /// External tracking offset
+            /// </summary>
+            USB_AD_EXTTRACKING_OFFSET,
+            /// <summary>
+            /// Imaging gain channel 2
+            /// </summary>
 
-            USB_AD_IMAGING2_GAIN,           /*!< Imaging gain channel 2   */
-            USB_AD_IMAGING2_OFFSET,         /*!< Imaging offset channel 2  */
+            USB_AD_IMAGING2_GAIN,
+            /// <summary>
+            /// Imaging offset channel 2
+            /// </summary>
+            USB_AD_IMAGING2_OFFSET,
+            /// <summary>
+            /// Imaging gain right channel
+            /// </summary>
 
-            USB_AD_IMAGING_GAIN_RIGHT,      /*!< Imaging gain right channel  */
-            USB_AD_IMAGING_OFFSET_RIGHT,    /*!< Imaging offset right channel */
+            USB_AD_IMAGING_GAIN_RIGHT,
+            /// <summary>
+            /// Imaging offset right channel
+            /// </summary>
+            USB_AD_IMAGING_OFFSET_RIGHT,
         };
 
         /*!
@@ -729,10 +1633,22 @@ namespace SbigSharp
          */
         public enum ENUM_USB_DRIVER : ushort
         {
-            USBD_SBIGE, /*!< SBIG E */
-            USBD_SBIGI, /*!< SBIG I */
-            USBD_SBIGM, /*!< SBIG_M */
-            USBD_NEXT   /*!< Next */
+            /// <summary>
+            /// SBIG E
+            /// </summary>
+            USBD_SBIGE,
+            /// <summary>
+            /// SBIG I
+            /// </summary>
+            USBD_SBIGI,
+            /// <summary>
+            /// SBIG_M
+            /// </summary>
+            USBD_SBIGM,
+            /// <summary>
+            /// Next
+            /// </summary>
+            USBD_NEXT
         };
 
         /*!
@@ -740,26 +1656,86 @@ namespace SbigSharp
          */
         public enum CFW_MODEL_SELECT : ushort
         {
-            CFWSEL_UNKNOWN,         /*!< Unknown Model */
-            CFWSEL_CFW2,            /*!< CFW2   */
-            CFWSEL_CFW5,            /*!< CFW5   */
-            CFWSEL_CFW8,            /*!< CFW8   */
-            CFWSEL_CFWL,            /*!< CFWL   */
-            CFWSEL_CFW402,          /*!< CFW-402  */
-            CFWSEL_AUTO,            /*!< Auto   */
-            CFWSEL_CFW6A,           /*!< CFW-6A   */
-            CFWSEL_CFW10,           /*!< CFW10   */
-            CFWSEL_CFW10_SERIAL,    /*!< CFW10-Serial */
-            CFWSEL_CFW9,            /*!< CFW9   */
-            CFWSEL_CFWL8,           /*!< CFWL8   */
-            CFWSEL_CFWL8G,          /*!< CFWL8-G  */
-            CFWSEL_CFW1603,         /*!< CFW1603  */
-            CFWSEL_FW5_STX,         /*!< FW5-STX  */
-            CFWSEL_FW5_8300,        /*!< FW5-8300  */
-            CFWSEL_FW8_8300,        /*!< FW8-8300  */
-            CFWSEL_FW7_STX,         /*!< FW7-STX  */
-            CFWSEL_FW8_STT,         /*!< FW8-STT  */
-            CFWSEL_FW5_STF_DETENT   /*!< FW5-STF Detent */
+            /// <summary>
+            /// Unknown Model
+            /// </summary>
+            CFWSEL_UNKNOWN,
+            /// <summary>
+            /// CFW2
+            /// </summary>
+            CFWSEL_CFW2,
+            /// <summary>
+            /// CFW5
+            /// </summary>
+            CFWSEL_CFW5,
+            /// <summary>
+            /// CFW8
+            /// </summary>
+            CFWSEL_CFW8,
+            /// <summary>
+            /// CFWL
+            /// </summary>
+            CFWSEL_CFWL,
+            /// <summary>
+            /// CFW-402
+            /// </summary>
+            CFWSEL_CFW402,
+            /// <summary>
+            /// Auto
+            /// </summary>
+            CFWSEL_AUTO,
+            /// <summary>
+            /// CFW-6A
+            /// </summary>
+            CFWSEL_CFW6A,
+            /// <summary>
+            /// CFW10
+            /// </summary>
+            CFWSEL_CFW10,
+            /// <summary>
+            /// CFW10-Serial
+            /// </summary>
+            CFWSEL_CFW10_SERIAL,
+            /// <summary>
+            /// CFW9
+            /// </summary>
+            CFWSEL_CFW9,
+            /// <summary>
+            /// CFWL8
+            /// </summary>
+            CFWSEL_CFWL8,
+            /// <summary>
+            /// CFWL8-G
+            /// </summary>
+            CFWSEL_CFWL8G,
+            /// <summary>
+            /// CFW1603
+            /// </summary>
+            CFWSEL_CFW1603,
+            /// <summary>
+            /// FW5-STX
+            /// </summary>
+            CFWSEL_FW5_STX,
+            /// <summary>
+            /// FW5-8300
+            /// </summary>
+            CFWSEL_FW5_8300,
+            /// <summary>
+            /// FW8-8300
+            /// </summary>
+            CFWSEL_FW8_8300,
+            /// <summary>
+            /// FW7-STX
+            /// </summary>
+            CFWSEL_FW7_STX,
+            /// <summary>
+            /// FW8-STT
+            /// </summary>
+            CFWSEL_FW8_STT,
+            /// <summary>
+            /// FW5-STF Detent
+            /// </summary>
+            CFWSEL_FW5_STF_DETENT
         };
 
         /*!
@@ -767,12 +1743,30 @@ namespace SbigSharp
          */
         public enum CFW_COMMAND : ushort
         {
-            CFWC_QUERY,         /*!< Query   */
-            CFWC_GOTO,          /*!< Go-to slot  */
-            CFWC_INIT,          /*!< Initialize  */
-            CFWC_GET_INFO,      /*!< Get Info  */
-            CFWC_OPEN_DEVICE,   /*!< Open device */
-            CFWC_CLOSE_DEVICE   /*!< Close device */
+            /// <summary>
+            /// Query
+            /// </summary>
+            CFWC_QUERY,
+            /// <summary>
+            /// Go-to slot
+            /// </summary>
+            CFWC_GOTO,
+            /// <summary>
+            /// Initialize
+            /// </summary>
+            CFWC_INIT,
+            /// <summary>
+            /// Get Info
+            /// </summary>
+            CFWC_GET_INFO,
+            /// <summary>
+            /// Open device
+            /// </summary>
+            CFWC_OPEN_DEVICE,
+            /// <summary>
+            /// Close device
+            /// </summary>
+            CFWC_CLOSE_DEVICE
         };
 
         /*!
@@ -780,9 +1774,18 @@ namespace SbigSharp
          */
         public enum CFW_STATUS : ushort
         {
-            CFWS_UNKNOWN,   /*!< Unknown state */
-            CFWS_IDLE,      /*!< Idle state  */
-            CFWS_BUSY       /*!< Busy state  */
+            /// <summary>
+            /// Unknown state
+            /// </summary>
+            CFWS_UNKNOWN,
+            /// <summary>
+            /// Idle state
+            /// </summary>
+            CFWS_IDLE,
+            /// <summary>
+            /// Busy state
+            /// </summary>
+            CFWS_BUSY
         };
 
         /*!
@@ -790,15 +1793,42 @@ namespace SbigSharp
          */
         public enum CFW_ERROR : ushort
         {
-            CFWE_NONE,              /*!< No error     */
-            CFWE_BUSY,              /*!< Busy error     */
-            CFWE_BAD_COMMAND,       /*!< Bad command error   */
-            CFWE_CAL_ERROR,         /*!< Calibration error   */
-            CFWE_MOTOR_TIMEOUT,     /*!< Motor timeout error  */
-            CFWE_BAD_MODEL,         /*!< Bad model error   */
-            CFWE_DEVICE_NOT_CLOSED, /*!< Device not closed error */
-            CFWE_DEVICE_NOT_OPEN,   /*!< Device not open error  */
-            CFWE_I2C_ERROR          /*!< I2C communication error */
+            /// <summary>
+            /// No error
+            /// </summary>
+            CFWE_NONE,
+            /// <summary>
+            /// Busy error
+            /// </summary>
+            CFWE_BUSY,
+            /// <summary>
+            /// Bad command error
+            /// </summary>
+            CFWE_BAD_COMMAND,
+            /// <summary>
+            /// Calibration error
+            /// </summary>
+            CFWE_CAL_ERROR,
+            /// <summary>
+            /// Motor timeout error
+            /// </summary>
+            CFWE_MOTOR_TIMEOUT,
+            /// <summary>
+            /// Bad model error
+            /// </summary>
+            CFWE_BAD_MODEL,
+            /// <summary>
+            /// Device not closed error
+            /// </summary>
+            CFWE_DEVICE_NOT_CLOSED,
+            /// <summary>
+            /// Device not open error
+            /// </summary>
+            CFWE_DEVICE_NOT_OPEN,
+            /// <summary>
+            /// I2C communication error
+            /// </summary>
+            CFWE_I2C_ERROR
         };
 
         /*!
@@ -806,17 +1836,50 @@ namespace SbigSharp
          */
         public enum CFW_POSITION : ushort
         {
-            CFWP_UNKNOWN,   /*!< Unknown */
-            CFWP_1,         /*!< Slot 1  */
-            CFWP_2,         /*!< Slot 2  */
-            CFWP_3,         /*!< Slot 3  */
-            CFWP_4,         /*!< Slot 4  */
-            CFWP_5,         /*!< Slot 5  */
-            CFWP_6,         /*!< Slot 6  */
-            CFWP_7,         /*!< Slot 7  */
-            CFWP_8,         /*!< Slot 8  */
-            CFWP_9,         /*!< Slot 9  */
-            CFWP_10         /*!< Slot 10 */
+            /// <summary>
+            /// Unknown
+            /// </summary>
+            CFWP_UNKNOWN,
+            /// <summary>
+            /// Slot 1
+            /// </summary>
+            CFWP_1,
+            /// <summary>
+            /// Slot 2
+            /// </summary>
+            CFWP_2,
+            /// <summary>
+            /// Slot 3
+            /// </summary>
+            CFWP_3,
+            /// <summary>
+            /// Slot 4
+            /// </summary>
+            CFWP_4,
+            /// <summary>
+            /// Slot 5
+            /// </summary>
+            CFWP_5,
+            /// <summary>
+            /// Slot 6
+            /// </summary>
+            CFWP_6,
+            /// <summary>
+            /// Slot 7
+            /// </summary>
+            CFWP_7,
+            /// <summary>
+            /// Slot 8
+            /// </summary>
+            CFWP_8,
+            /// <summary>
+            /// Slot 9
+            /// </summary>
+            CFWP_9,
+            /// <summary>
+            /// Slot 10
+            /// </summary>
+            CFWP_10
         };
 
         /*!
@@ -824,10 +1887,22 @@ namespace SbigSharp
          */
         public enum CFW_COM_PORT : ushort
         {
-            CFWPORT_COM1 = 1,   /*!< COM1 */
-            CFWPORT_COM2,   /*!< COM2 */
-            CFWPORT_COM3,   /*!< COM3 */
-            CFWPORT_COM4    /*!< COM4 */
+            /// <summary>
+            /// COM1
+            /// </summary>
+            CFWPORT_COM1 = 1,
+            /// <summary>
+            /// COM2
+            /// </summary>
+            CFWPORT_COM2,
+            /// <summary>
+            /// COM3
+            /// </summary>
+            CFWPORT_COM3,
+            /// <summary>
+            /// COM4
+            /// </summary>
+            CFWPORT_COM4
         };
 
         /*!
@@ -835,9 +1910,18 @@ namespace SbigSharp
          */
         public enum CFW_GETINFO_SELECT : ushort
         {
-            CFWG_FIRMWARE_VERSION,  /*!< Firmware version */
-            CFWG_CAL_DATA,          /*!< Calibration data */
-            CFWG_DATA_REGISTERS     /*!< Data registers  */
+            /// <summary>
+            /// Firmware version
+            /// </summary>
+            CFWG_FIRMWARE_VERSION,
+            /// <summary>
+            /// Calibration data
+            /// </summary>
+            CFWG_CAL_DATA,
+            /// <summary>
+            /// Data registers
+            /// </summary>
+            CFWG_DATA_REGISTERS
         };
 
         /*!
@@ -845,8 +1929,14 @@ namespace SbigSharp
          */
         public enum BITIO_OPERATION : ushort
         {
-            BITIO_WRITE,    /*!< Write */
-            BITIO_READ      /*!< Read */
+            /// <summary>
+            /// Write
+            /// </summary>
+            BITIO_WRITE,
+            /// <summary>
+            /// Read
+            /// </summary>
+            BITIO_READ
         };
 
         /*!
@@ -854,11 +1944,26 @@ namespace SbigSharp
          */
         public enum BITIO_NAME : ushort
         {
-            BITI_PS_LOW,    /*!< In: PS Low */
-            BITO_IO1,       /*!< Out: I/O 1 */
-            BITO_IO2,       /*!< Out: I/O 2 */
-            BITI_IO3,       /*!< In: I/O 3 */
-            BITO_FPGA_WE    /*!< FPGA WE */
+            /// <summary>
+            /// In: PS Low
+            /// </summary>
+            BITI_PS_LOW,
+            /// <summary>
+            /// Out: I/O 1
+            /// </summary>
+            BITO_IO1,
+            /// <summary>
+            /// Out: I/O 2
+            /// </summary>
+            BITO_IO2,
+            /// <summary>
+            /// In: I/O 3
+            /// </summary>
+            BITI_IO3,
+            /// <summary>
+            /// FPGA WE
+            /// </summary>
+            BITO_FPGA_WE
         };
 
         /*!
@@ -866,8 +1971,14 @@ namespace SbigSharp
          */
         public enum BTDI_ERROR : ushort
         {
-            BTDI_SCHEDULE_ERROR = 1,    /*!< BTDI Schedule error */
-            BTDI_OVERRUN_ERROR = 2      /*!< BTDI Overrun error  */
+            /// <summary>
+            /// BTDI Schedule error
+            /// </summary>
+            BTDI_SCHEDULE_ERROR = 1,
+            /// <summary>
+            /// BTDI Overrun error
+            /// </summary>
+            BTDI_OVERRUN_ERROR = 2
         };
 
         /*!
@@ -875,9 +1986,18 @@ namespace SbigSharp
          */
         public enum MF_MODEL_SELECT : ushort
         {
-            MFSEL_UNKNOWN,  /*!< Unknown */
-            MFSEL_AUTO,     /*!< Automatic */
-            MFSEL_STF       /*!< STF  */
+            /// <summary>
+            /// Unknown
+            /// </summary>
+            MFSEL_UNKNOWN,
+            /// <summary>
+            /// Automatic
+            /// </summary>
+            MFSEL_AUTO,
+            /// <summary>
+            /// STF
+            /// </summary>
+            MFSEL_STF
         };
 
         /*!
@@ -885,11 +2005,26 @@ namespace SbigSharp
          */
         public enum MF_COMMAND : ushort
         {
-            MFC_QUERY,      /*!< Query  */
-            MFC_GOTO,       /*!< Go-to  */
-            MFC_INIT,       /*!< Initialize */
-            MFC_GET_INFO,   /*!< Get Info */
-            MFC_ABORT       /*!< Abort  */
+            /// <summary>
+            /// Query
+            /// </summary>
+            MFC_QUERY,
+            /// <summary>
+            /// Go-to
+            /// </summary>
+            MFC_GOTO,
+            /// <summary>
+            /// Initialize
+            /// </summary>
+            MFC_INIT,
+            /// <summary>
+            /// Get Info
+            /// </summary>
+            MFC_GET_INFO,
+            /// <summary>
+            /// Abort
+            /// </summary>
+            MFC_ABORT
         };
 
         /*!
@@ -897,9 +2032,18 @@ namespace SbigSharp
          */
         public enum MF_STATUS : ushort
         {
-            MFS_UNKNOWN,    /*!< Unknown */
-            MFS_IDLE,       /*!< Idle  */
-            MFS_BUSY        /*!< Busy  */
+            /// <summary>
+            /// Unknown
+            /// </summary>
+            MFS_UNKNOWN,
+            /// <summary>
+            /// Idle
+            /// </summary>
+            MFS_IDLE,
+            /// <summary>
+            /// Busy
+            /// </summary>
+            MFS_BUSY
         };
 
         /*!
@@ -907,14 +2051,38 @@ namespace SbigSharp
          */
         public enum MF_ERROR : ushort
         {
-            MFE_NONE,           /*!< None    */
-            MFE_BUSY,           /*!< Busy    */
-            MFE_BAD_COMMAND,    /*!< Bad command  */
-            MFE_CAL_ERROR,      /*!< Calibration error */
-            MFE_MOTOR_TIMEOUT,  /*!< Motor timeout  */
-            MFE_BAD_MODEL,      /*!< Bad model   */
-            MFE_I2C_ERROR,      /*!< I2C error   */
-            MFE_NOT_FOUND       /*!< Not found   */
+            /// <summary>
+            /// None
+            /// </summary>
+            MFE_NONE,
+            /// <summary>
+            /// Busy
+            /// </summary>
+            MFE_BUSY,
+            /// <summary>
+            /// Bad command
+            /// </summary>
+            MFE_BAD_COMMAND,
+            /// <summary>
+            /// Calibration error
+            /// </summary>
+            MFE_CAL_ERROR,
+            /// <summary>
+            /// Motor timeout
+            /// </summary>
+            MFE_MOTOR_TIMEOUT,
+            /// <summary>
+            /// Bad model
+            /// </summary>
+            MFE_BAD_MODEL,
+            /// <summary>
+            /// I2C error
+            /// </summary>
+            MFE_I2C_ERROR,
+            /// <summary>
+            /// Not found
+            /// </summary>
+            MFE_NOT_FOUND
         };
 
         /*!
@@ -922,8 +2090,14 @@ namespace SbigSharp
          */
         public enum MF_GETINFO_SELECT : ushort
         {
-            MFG_FIRMWARE_VERSION,   /*!< Firmware Version */
-            MFG_DATA_REGISTERS      /*!< Data Registers  */
+            /// <summary>
+            /// Firmware Version
+            /// </summary>
+            MFG_FIRMWARE_VERSION,
+            /// <summary>
+            /// Data Registers
+            /// </summary>
+            MFG_DATA_REGISTERS
         };
 
         /*!
@@ -931,9 +2105,18 @@ namespace SbigSharp
          */
         public enum DIFF_GUIDER_COMMAND : ushort
         {
-            DGC_DETECT,         /*!< Detect Differential guider hardware */
-            DGC_GET_BRIGHTNESS, /*!< Get brightness       */
-            DGC_SET_BRIGHTNESS  /*!< Set brightness       */
+            /// <summary>
+            /// Detect Differential guider hardware
+            /// </summary>
+            DGC_DETECT,
+            /// <summary>
+            /// Get brightness
+            /// </summary>
+            DGC_GET_BRIGHTNESS,
+            /// <summary>
+            /// Set brightness
+            /// </summary>
+            DGC_SET_BRIGHTNESS
         };
 
         /*!
@@ -941,10 +2124,22 @@ namespace SbigSharp
          */
         public enum DIFF_GUIDER_ERROR : ushort
         {
-            DGE_NO_ERROR,       /*!< No error      */
-            DGE_NOT_FOUND,      /*!< Differential guider not found */
-            DGE_BAD_COMMAND,    /*!< Bad command     */
-            DGE_BAD_PARAMETER   /*!< Bad parameter     */
+            /// <summary>
+            /// No error
+            /// </summary>
+            DGE_NO_ERROR,
+            /// <summary>
+            /// Differential guider not found
+            /// </summary>
+            DGE_NOT_FOUND,
+            /// <summary>
+            /// Bad command
+            /// </summary>
+            DGE_BAD_COMMAND,
+            /// <summary>
+            /// Bad parameter
+            /// </summary>
+            DGE_BAD_PARAMETER
         };
 
         /*!
@@ -952,9 +2147,18 @@ namespace SbigSharp
          */
         public enum DIFF_GUIDER_STATUS : ushort
         {
-            DGS_UNKNOWN,    /*!< Unknown */
-            DGS_IDLE,       /*!< Idle  */
-            DGS_BUSY        /*!< Busy  */
+            /// <summary>
+            /// Unknown
+            /// </summary>
+            DGS_UNKNOWN,
+            /// <summary>
+            /// Idle
+            /// </summary>
+            DGS_IDLE,
+            /// <summary>
+            /// Busy
+            /// </summary>
+            DGS_BUSY
         };
 
         /*!
@@ -962,9 +2166,18 @@ namespace SbigSharp
          */
         public enum FAN_STATE : ushort
         {
-            FS_OFF,         /*!< Fan Off */
-            FS_ON,          /*!< Fan On  */
-            FS_AUTOCONTROL  /*!< Fan Auto */
+            /// <summary>
+            /// Fan Off
+            /// </summary>
+            FS_OFF,
+            /// <summary>
+            /// Fan On
+            /// </summary>
+            FS_ON,
+            /// <summary>
+            /// Fan Auto
+            /// </summary>
+            FS_AUTOCONTROL
         };
 
         /*!
@@ -972,9 +2185,18 @@ namespace SbigSharp
          */
         public enum BULK_IO_COMMAND : ushort
         {
-            BIO_READ,   /*!< Read */
-            BIO_WRITE,  /*!< Write */
-            BIO_FLUSH   /*!< Flush */
+            /// <summary>
+            /// Read
+            /// </summary>
+            BIO_READ,
+            /// <summary>
+            /// Write
+            /// </summary>
+            BIO_WRITE,
+            /// <summary>
+            /// Flush
+            /// </summary>
+            BIO_FLUSH
         };
 
         /*!
@@ -982,9 +2204,18 @@ namespace SbigSharp
          */
         public enum PIXEL_CHANNEL_MODE : ushort
         {
-            PIXEL_CHANNEL_MODE_A,   /*!< Pixel Channel A */
-            PIXEL_CHANNEL_MODE_B,   /*!< Pixel Channel B */
-            PIXEL_CHANNEL_MODE_AB   /*!< Pixel Channel AB */
+            /// <summary>
+            /// Pixel Channel A
+            /// </summary>
+            PIXEL_CHANNEL_MODE_A,
+            /// <summary>
+            /// Pixel Channel B
+            /// </summary>
+            PIXEL_CHANNEL_MODE_B,
+            /// <summary>
+            /// Pixel Channel AB
+            /// </summary>
+            PIXEL_CHANNEL_MODE_AB
         };
 
         /*!
@@ -992,8 +2223,14 @@ namespace SbigSharp
          */
         public enum ACTIVE_PIXEL_CHANNEL : ushort
         {
-            PIXEL_CHANNEL_A,    /*!< Pixel Channel A */
-            PIXEL_CHANNEL_B     /*!< Pixel Channel B */
+            /// <summary>
+            /// Pixel Channel A
+            /// </summary>
+            PIXEL_CHANNEL_A,
+            /// <summary>
+            /// Pixel Channel B
+            /// </summary>
+            PIXEL_CHANNEL_B
         };
 
         public enum EXTRA_EXPOSURE_STATUS : ushort
