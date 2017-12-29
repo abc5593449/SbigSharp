@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Runtime.InteropServices;
 
 namespace SbigSharp
@@ -30,15 +31,16 @@ namespace SbigSharp
     /// </summary>
     public static class SBIG
     {
-        /*!
-            \defgroup BASE_STRUCTURES
-            Supported Camera Commands
+        // Supported Camera Commands
+        // ===========================
+        // These are the commands supported by the driver.
+        // They are prefixed by CC_ to designate them as camera commands 
+        //  and avoid conflicts with other enums.
+        //
+        // Some of the commands are marked as SBIG use only 
+        //  and have been included to enhance testability of the driver for SBIG.
 
-            These are the commands supported by the driver.
-            They are prefixed by CC_ to designate them as camera commands and avoid conflicts with other enums.
-
-            Some of the commands are marked as SBIG use only and have been included to enhance testability of the driver for SBIG.
-        */
+        #region SBIG enum
 
         /// <summary>
         /// Command ID enum 
@@ -407,11 +409,11 @@ namespace SbigSharp
 
         };
 
-        /*
-            Return Error Codes
+        // Return Error Codes
+        // ====================
+        // These are the error codes returned by the driver function.
+        // They are prefixed with CE_ to designate them as camera errors.
 
-            These are the error codes returned by the driver function.  They are prefixed with CE_ to designate them as camera errors.
-        */
         /// <summary>
         /// Base value for all error IDs.
         /// </summary>
@@ -615,12 +617,10 @@ namespace SbigSharp
             #endregion // 41 - 50
         };
 
-        /*
-            Camera Command State Codes
-
-            These are the return status codes for the Query Command Status command.
-            They are prefixed with CS_ to designate them as camera status.
-        */
+        // Camera Command State Codes
+        // ============================
+        // These are the return status codes for the Query Command Status command.
+        // They are prefixed with CS_ to designate them as camera status.
 
         /// <summary>
         /// Camera states enum 
@@ -669,31 +669,30 @@ namespace SbigSharp
         const UInt16 RBI_PREFLASH_LENGTH_MASK = 0x0FFF;
         const UInt16 RBI_PREFLASH_FLUSH_MASK = 0xF000;
         const Byte RBI_PREFLASH_FLUSH_BIT = 0x0C;
-        /*
-            Misc. Enumerated Constants
-            QUERY_TEMP_STATUS_REQUEST - Used with the Query Temperature Status command.
-            ABG_STATE7 - Passed to Start Exposure Command
-            MY_LOGICAL - General purpose type
-            DRIVER_REQUEST - Used with Get Driver Info command
-            CCD_REQUEST - Used with Imaging commands to specify CCD
-            CCD_INFO_REQUEST - Used with Get CCD Info Command
-            PORT - Used with Establish Link Command
-            CAMERA_TYPE - Returned by Establish Link and Get CCD Info commands
-            SHUTTER_COMMAND, SHUTTER_STATE7 - Used with Start Exposure and Miscellaneous Control Commands
-            TEMPERATURE_REGULATION - Used with Enable Temperature Regulation
-            LED_STATE - Used with the Miscellaneous Control Command
-            FILTER_COMMAND, FILTER_STATE - Used with the Miscellaneous Control Command
-            AD_SIZE, FILTER_TYPE - Used with the GetCCDInfo3 Command
-            AO_FOCUS_COMMAND - Used with the AO Set Focus Command
-            SBIG_DEVICE_TYPE - Used with Open Device Command
-            DRIVER_CONTROL_PARAM - Used with Get/SetDriverControl Command
-            USB_AD_CONTROL_COMMAND - Used with UsbADControl Command
-            CFW_MODEL_SELECT, CFW_STATUS, CFW_ERROR - Used with CFW command
-            CFW_POSITION, CFW_GET_INFO_SELECT - Used with CFW Command
-            BIT_IO_OPERATION, BIT_IO_NMAE - Used with BitIO command
-            MF_MODEL_SELECT, MF_STATUS, MF_ERROR, MF_GET_INFO_SELECT - Used with Motor Focus Command
-            DIFF_GUIDER_COMMAND, DIFF_GUIDER_STATE, DIFF_GUIDER_ERROR - Used with the Diff Guider Command
-        */
+
+        // Misc. Enumerated Constants
+        // QUERY_TEMP_STATUS_REQUEST - Used with the Query Temperature Status command.
+        // ABG_STATE7 - Passed to Start Exposure Command
+        // MY_LOGICAL - General purpose type
+        // DRIVER_REQUEST - Used with Get Driver Info command
+        // CCD_REQUEST - Used with Imaging commands to specify CCD
+        // CCD_INFO_REQUEST - Used with Get CCD Info Command
+        // PORT - Used with Establish Link Command
+        // CAMERA_TYPE - Returned by Establish Link and Get CCD Info commands
+        // SHUTTER_COMMAND, SHUTTER_STATE7 - Used with Start Exposure and Miscellaneous Control Commands
+        // TEMPERATURE_REGULATION - Used with Enable Temperature Regulation
+        // LED_STATE - Used with the Miscellaneous Control Command
+        // FILTER_COMMAND, FILTER_STATE - Used with the Miscellaneous Control Command
+        // AD_SIZE, FILTER_TYPE - Used with the GetCCDInfo3 Command
+        // AO_FOCUS_COMMAND - Used with the AO Set Focus Command
+        // SBIG_DEVICE_TYPE - Used with Open Device Command
+        // DRIVER_CONTROL_PARAM - Used with Get/SetDriverControl Command
+        // USB_AD_CONTROL_COMMAND - Used with UsbADControl Command
+        // CFW_MODEL_SELECT, CFW_STATUS, CFW_ERROR - Used with CFW command
+        // CFW_POSITION, CFW_GET_INFO_SELECT - Used with CFW Command
+        // BIT_IO_OPERATION, BIT_IO_NMAE - Used with BitIO command
+        // MF_MODEL_SELECT, MF_STATUS, MF_ERROR, MF_GET_INFO_SELECT - Used with Motor Focus Command
+        // DIFF_GUIDER_COMMAND, DIFF_GUIDER_STATE, DIFF_GUIDER_ERROR - Used with the Diff Guider Command
 
         /// <summary>
         /// Query Temperature Status enum 
@@ -2234,6 +2233,7 @@ namespace SbigSharp
             /// </summary>
             XES_POST_EXP
         };
+        #endregion // SBIG enum
 
         #region General Purpose Flags
 
@@ -2508,12 +2508,8 @@ namespace SbigSharp
 
         #endregion // General Purpose Flags
 
-        /*!
-            \defgroup commandParamStructs
-            Command Parameter and Results Structs
-
-            Make sure you set your compiler for byte structure alignment as that is how the driver was built.
-        */
+        #region Command Parameter and Results Structs
+        // Make sure you set your compiler for byte structure alignment as that is how the driver was built.
 
         /// <summary>
         /// SBIG Parameters structure interface.
@@ -2759,9 +2755,9 @@ namespace SbigSharp
         public struct QueryTemperatureStatusParams : IParams
         {
             /// <summary>
-            /// see also: <seealso cref="TEMP_STATUS_REQUEST"/> enum.
+            /// see also: <seealso cref="QUERY_TEMP_STATUS_REQUEST"/> enum.
             /// </summary>
-            public UInt16 request;
+            public QUERY_TEMP_STATUS_REQUEST request;
         };
 
         /// <summary>
@@ -3197,9 +3193,10 @@ namespace SbigSharp
         public struct QueryCommandStatusParams : IParams
         {
             /// <summary>
-            /// command of which the status is desired
+            /// command of which the status is desired. 
+            /// See also <seealso cref="PAR_COMMAND"/> enum.
             /// </summary>
-            public UInt16 command;
+            public PAR_COMMAND command;
         };
 
         /// <summary>
@@ -3209,9 +3206,9 @@ namespace SbigSharp
         public struct QueryCommandStatusResults : IResults
         {
             /// <summary>
-            /// command status.
+            /// command status. See also <seealso cref="PAR_ERROR"/> enum.
             /// </summary>
-            public UInt16 status;
+            public PAR_ERROR status;
         };
 
         /// <summary>
@@ -3379,6 +3376,25 @@ namespace SbigSharp
             /// for deviceType::DEV_ETH:  Ethernet address.
             /// </summary>
             public UInt32 ipAddress;
+
+            //TODO: 重新檢查建構式
+            public OpenDeviceParams(string s) : this()
+            {
+                try
+                {
+                    // first, try to parse as an IP address
+                    IPAddress ip = IPAddress.Parse(s);
+                    byte[] b = ip.GetAddressBytes();
+                    ipAddress = (((uint)b[0]) << 24) | (((uint)b[1]) << 16) | (((uint)b[2]) << 8) | ((uint)b[3]);
+                    deviceType = SBIG_DEVICE_TYPE.DEV_ETH;
+                }
+                catch (FormatException)
+                {
+                    // if it's not an IP, it should be a string value of the enum
+                    if (!Enum.TryParse(s, true, out deviceType))
+                        throw new ArgumentException("must pass either an IP address or valid DeviceType enum string");
+                }
+            }
         };
 
         /// <summary>
@@ -4941,6 +4957,7 @@ namespace SbigSharp
                 }
             }
         }
+        #endregion // Command Parameter and Results Structs
 
         #region SBIGUnivDrvCommand
         /// <summary>
@@ -5001,7 +5018,7 @@ namespace SbigSharp
         /// </exception>
         public static void UnivDrvCommand<TParams>(
             PAR_COMMAND command, TParams Params)
-            where TParams : struct, IParams
+            where TParams : IParams
         {
             // marshall the input structure, if it exists
             var ParamGch = GCHandle.Alloc(Params, GCHandleType.Pinned);
@@ -5026,7 +5043,7 @@ namespace SbigSharp
         /// </exception>
         public static void UnivDrvCommand<TResults>(
             PAR_COMMAND command, out TResults pResults)
-            where TResults : struct, IResults
+            where TResults : IResults
         {
             pResults = default(TResults);
 
@@ -5057,12 +5074,12 @@ namespace SbigSharp
         /// <exception cref="FailedOperationException">
         ///     An error has occurred. See also <seealso cref="PAR_ERROR"/> enum.
         /// </exception>
-        public static void UnivDrvCommand<TParams, TResult>(
-            PAR_COMMAND command, TParams Params, out TResult pResults)
-            where TParams : struct, IParams
-            where TResult : struct, IResults
+        public static void UnivDrvCommand<TParams, TResults>(
+            PAR_COMMAND command, TParams Params, out TResults pResults)
+            where TParams : IParams
+            where TResults : IResults
         {
-            pResults = default(TResult);
+            pResults = default(TResults);
             // marshall the input structure, if it exists
             var ParamGch = GCHandle.Alloc(Params, GCHandleType.Pinned);
             var ParamPtr = ParamGch.AddrOfPinnedObject();
@@ -5075,14 +5092,14 @@ namespace SbigSharp
             _UnivDrvCommand(command, ParamPtr, ResultsPtr);
 
             // Marshall back
-            //Marshal.PtrToStructure(ResultsPtr, Results);
-            pResults = (TResult)Marshal.PtrToStructure(ResultsPtr, typeof(TResult));
+            pResults = (TResults)Marshal.PtrToStructure(ResultsPtr, typeof(TResults));
 
             // clean up
             Marshal.FreeHGlobal(ResultsPtr);
             if (IntPtr.Zero != ParamPtr)
                 ParamGch.Free();
         }
+
         #endregion
 
         //TODO: 檢查移植是否正確 extern "C" Int16 __stdcall SBIGLogDebugMsg(char* pStr, UInt16 length);
@@ -5098,6 +5115,102 @@ namespace SbigSharp
         /// <returns></returns>
         [DllImport("SBIGUDrv.dll", CallingConvention = CallingConvention.StdCall)]
         private static extern Int16 SBIGLogDebugMsg(UIntPtr pStr, UInt16 length);
+
+        #region Extension Advanced Function
+
+        //TODO: 檢查函數
+        public static CAMERA_TYPE EstablishLink()
+        {
+            UnivDrvCommand(
+                PAR_COMMAND.CC_ESTABLISH_LINK,
+                new EstablishLinkParams(),
+                out EstablishLinkResults elr);
+            return elr.cameraType;
+        }
+
+        //TODO:檢查函數
+        /// <summary>
+        /// Waits for any exposure in progress to complete, ends it, and reads it out into a 2D ushort array
+        /// </summary>
+        public static ushort[,] WaitEndAndReadoutExposure(StartExposureParams2 sep)
+        {
+            //QueryCommandStatusResults qcsr = new QueryCommandStatusResults()
+            //{
+            //    status = PAR_ERROR.CE_NO_ERROR
+            //};
+
+            // wait for the exposure to be done
+            while (true)
+            {
+                UnivDrvCommand(
+                    PAR_COMMAND.CC_QUERY_COMMAND_STATUS,
+                    new QueryCommandStatusParams()
+                    {
+                        command = PAR_COMMAND.CC_START_EXPOSURE
+                    },
+                    out QueryCommandStatusResults qcsr);
+
+                if (PAR_ERROR.CE_NO_EXPOSURE_IN_PROGRESS == qcsr.status)
+                    break;
+            }
+
+            // prepare the CCD for readout
+            UnivDrvCommand(
+                PAR_COMMAND.CC_END_EXPOSURE,
+                new EndExposureParams()
+                {
+                    ccd = CCD_REQUEST.CCD_IMAGING
+                });
+            // then telling it where and how we're going to read
+            UnivDrvCommand(
+                PAR_COMMAND.CC_START_READOUT,
+                new StartReadoutParams
+                {
+                    ccd = CCD_REQUEST.CCD_IMAGING,
+                    readoutMode = 0,
+                    left = 0,
+                    top = 0,
+                    width = sep.width,
+                    height = sep.height
+                });
+            //TODO: 了解ushort[,]如何被使用
+            // allocate the image buffer
+            ushort[,] data = new ushort[sep.height, sep.width];
+            GCHandle datagch = GCHandle.Alloc(data, GCHandleType.Pinned);
+            IntPtr dataptr = datagch.AddrOfPinnedObject();
+
+            // put the data into it
+            ReadoutLineParams rlp = new ReadoutLineParams
+            {
+                ccd = CCD_REQUEST.CCD_IMAGING,
+                pixelStart = 0,
+                pixelLength = sep.width,
+                readoutMode = 0
+            };
+            GCHandle rlpgch = GCHandle.Alloc(rlp, GCHandleType.Pinned);
+            // get the image from the camera, line by line
+            for (int i = 0; i < sep.height; i++)
+                _UnivDrvCommand(
+                    PAR_COMMAND.CC_READOUT_LINE,
+                    rlpgch.AddrOfPinnedObject(),
+                    dataptr + (i * sep.width * sizeof(ushort)));
+
+            // cleanup our memory goo
+            rlpgch.Free();
+            datagch.Free();
+            /*Bitmap b3 = new Bitmap(sep.width, sep.height, PixelFormat.Format16bppGrayScale);
+            BitmapData bd = b3.LockBits(new Rectangle(0, 0, sep.width, sep.height), ImageLockMode.WriteOnly, PixelFormat.Format16bppGrayScale);
+            bd.Scan0 = datagch.AddrOfPinnedObject();
+            b3.UnlockBits(bd);
+            Color c2 = b3.GetPixel(0, 0);
+            Bitmap bmp = new Bitmap(sep.width, sep.height, sep.width * sizeof(ushort), PixelFormat.Format16bppGrayScale, datagch.AddrOfPinnedObject());
+            bmp.Save("foo.bmp");
+            bmp.Dispose();*/
+
+            return data;
+        }
+
+        #endregion // Extension Advanced Function
 
     } // class
 } // namespace
