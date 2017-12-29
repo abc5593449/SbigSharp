@@ -2516,10 +2516,22 @@ namespace SbigSharp
         */
 
         /// <summary>
+        /// SBIG Parameters structure interface.
+        /// </summary>
+        public interface IParams
+        { }
+
+        /// <summary>
+        /// SBIG Results structure interface.
+        /// </summary>
+        public interface IResults
+        { }
+
+        /// <summary>
         /// Parameters used to start SBIG camera exposures.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct StartExposureParams
+        public struct StartExposureParams : IParams
         {
             /// <summary>
             /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
@@ -2546,7 +2558,7 @@ namespace SbigSharp
         /// Expanded parameters structure used to start SBIG camera exposures.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct StartExposureParams2
+        public struct StartExposureParams2 : IParams
         {
             /// <summary>
             /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
@@ -2595,7 +2607,7 @@ namespace SbigSharp
         /// <para>Set ABORT_DONT_END flag in ccd to abort exposures in supported cameras.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct EndExposureParams
+        public struct EndExposureParams : IParams
         {
             /// <summary>
             /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
@@ -2608,7 +2620,7 @@ namespace SbigSharp
         /// Parameters used to readout lines of SBIG cameras during readout.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct ReadoutLineParams
+        public struct ReadoutLineParams : IParams
         {
             /// <summary>
             /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
@@ -2634,7 +2646,7 @@ namespace SbigSharp
         /// Parameters used to dump/flush CCD lines during readout.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct DumpLinesParams
+        public struct DumpLinesParams : IParams
         {
             /// <summary>
             /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
@@ -2656,7 +2668,7 @@ namespace SbigSharp
         /// Parameters used to end SBIG camera readout.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct EndReadoutParams
+        public struct EndReadoutParams : IParams
         {
             /// <summary>
             /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
@@ -2670,7 +2682,7 @@ namespace SbigSharp
         /// <para>Automatically dumps unused exposure lines.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct StartReadoutParams
+        public struct StartReadoutParams : IParams
         {
             /// <summary>
             /// Requested CCD. see also: <seealso cref="CCD_REQUEST"/> enum.
@@ -2706,7 +2718,7 @@ namespace SbigSharp
         /// The <seealso cref="SetTemperatureRegulationParams2"/> described in the next section is easier to use with temperatures stated in Degrees Celsius.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct SetTemperatureRegulationParams
+        public struct SetTemperatureRegulationParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="TEMPERATURE_REGULATION"/> enum.
@@ -2724,7 +2736,7 @@ namespace SbigSharp
         /// <para>regulation using temperatures in Degrees C instead of the funny A/D units described above.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct SetTemperatureRegulationParams2
+        public struct SetTemperatureRegulationParams2 : IParams
         {
             /// <summary>
             /// see also: <seealso cref="TEMPERATURE_REGULATION"/> enum.
@@ -2744,7 +2756,7 @@ namespace SbigSharp
         /// If you pass a pointer to a QueryTemperatureStatusParams struct you'll have access to the expanded results.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryTemperatureStatusParams
+        public struct QueryTemperatureStatusParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="TEMP_STATUS_REQUEST"/> enum.
@@ -2756,7 +2768,7 @@ namespace SbigSharp
         /// The results struct of a Temperature Status Query, with request set to TEMP_STATUS_STANDARD.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryTemperatureStatusResults
+        public struct QueryTemperatureStatusResults : IResults
         {
             /// <summary>
             /// temperature regulation is enabled when this is TRUE.
@@ -2784,7 +2796,7 @@ namespace SbigSharp
         /// The results struct of a Temperature Status Query, with request set to TEMP_STATUS_ADVANCED.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryTemperatureStatusResults2
+        public struct QueryTemperatureStatusResults2 : IResults
         {
             /// <summary>
             /// temperature regulation is enabled when this is TRUE. &REGULATION_FROZEN_MASK is TRUE when TE is frozen.
@@ -2853,7 +2865,7 @@ namespace SbigSharp
         /// <para>b0 = -Y Relay, 0=Off, 1= Active</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct ActivateRelayParams
+        public struct ActivateRelayParams : IParams
         {
             /// <summary>
             /// x plus activation duration in hundredths of a second
@@ -2880,7 +2892,7 @@ namespace SbigSharp
         /// <para>b1-b3 - PixCel255/237 Filter state, 0=moving, 1-5=at position 1-5, 6=unknown</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct PulseOutParams
+        public struct PulseOutParams : IParams
         {
             /// <summary>
             /// number of pulses to generate (0 thru 255).
@@ -2903,7 +2915,7 @@ namespace SbigSharp
         /// Just use the dedicated commands like AO Tip Tilt.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct TXSerialBytesParams
+        public struct TXSerialBytesParams : IParams
         {
             /// <summary>
             /// Length of data buffer to send
@@ -2921,7 +2933,7 @@ namespace SbigSharp
         /// <para>Results of a TXSerialBytes command.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct TXSerialBytesResults
+        public struct TXSerialBytesResults : IResults
         {
             /// <summary>
             /// Bytes sent out.
@@ -2936,7 +2948,7 @@ namespace SbigSharp
         /// Just use the dedicated commands like AO Tip Tilt.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetSerialStatusResults
+        public struct GetSerialStatusResults : IResults
         {
             public MY_LOGICAL clearToCOM;
         };
@@ -2946,7 +2958,7 @@ namespace SbigSharp
         /// It should be used before any other commands are issued to the camera (excluding the Get Driver Info command).
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct EstablishLinkParams
+        public struct EstablishLinkParams : IParams
         {
             /// <summary>
             /// Maintained for historical purposes. Keep set to 0.
@@ -2958,7 +2970,7 @@ namespace SbigSharp
         /// Results from an EstablishLink command.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct EstablishLinkResults
+        public struct EstablishLinkResults : IResults
         {
             /// <summary>
             /// Returns connected camera's type ID. See also: <seealso cref="CAMERA_TYPE"/> enum. 
@@ -2973,7 +2985,7 @@ namespace SbigSharp
         /// Initially the standard request and extended requests will be supported but as the driver evolves additional requests will be added.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetDriverInfoParams
+        public struct GetDriverInfoParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="DRIVER_REQUEST"/> enum.
@@ -2986,7 +2998,7 @@ namespace SbigSharp
         /// Standard, Extended and USB Loader Results Struct.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetDriverInfoResults0
+        public struct GetDriverInfoResults0 : IResults
         {
             /// <summary>
             /// driver version in BCD with the format XX.XX
@@ -3009,7 +3021,7 @@ namespace SbigSharp
         /// Currently 6 standard requests are supported but as the driver evolves additional requests will be added.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetCCDInfoParams
+        public struct GetCCDInfoParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="CCD_INFO_REQUEST"/>.
@@ -3054,7 +3066,7 @@ namespace SbigSharp
         /// Get CCD Info command results 0 and 1 request.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetCCDInfoResults0
+        public struct GetCCDInfoResults0 : IResults
         {
             /// <summary>
             /// version of the firmware in the resident microcontroller in BCD format (XX.XX, 0x1234 = 12.34).
@@ -3082,7 +3094,7 @@ namespace SbigSharp
         /// Get CCD Info command results second request.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetCCDInfoResults2
+        public struct GetCCDInfoResults2 : IResults
         {
             /// <summary>
             /// number of bad columns in imaging CCD
@@ -3110,7 +3122,7 @@ namespace SbigSharp
         /// Get CCD Info command results third request. (For the PixCel255/237)
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetCCDInfoResults3
+        public struct GetCCDInfoResults3 : IResults
         {
             /// <summary>
             /// 0 = Unknown, 1 = 12 bits, 2 = 16 bits. see also: <seealso cref="AD_SIZE"/> enum.
@@ -3137,7 +3149,7 @@ namespace SbigSharp
         /// <para>Other: See the CB_XXX_XXX definitions in the sbigurdv.h header file.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetCCDInfoResults4
+        public struct GetCCDInfoResults4 : IResults
         {
             /// <summary>
             /// Camera capabilities. See the CB_XXX_XXX definitions in the sbigurdv.h header file.
@@ -3161,7 +3173,7 @@ namespace SbigSharp
         /// <para>b2 ?b31: reserved for future expansion</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetCCDInfoResults6
+        public struct GetCCDInfoResults6 : IResults
         {
             /// <summary>
             /// Set of bits for additional camera capabilities
@@ -3182,7 +3194,7 @@ namespace SbigSharp
         /// Typically this will be used to monitor the progress of an exposure, relay closure or CFW-6A move command.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryCommandStatusParams
+        public struct QueryCommandStatusParams : IParams
         {
             /// <summary>
             /// command of which the status is desired
@@ -3194,7 +3206,7 @@ namespace SbigSharp
         /// Results for the Query Command Status command.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryCommandStatusResults
+        public struct QueryCommandStatusResults : IResults
         {
             /// <summary>
             /// command status.
@@ -3206,7 +3218,7 @@ namespace SbigSharp
         /// Results for the Query Command Status command.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryCommandStatusResults2
+        public struct QueryCommandStatusResults2 : IResults
         {
             /// <summary>
             /// command status. 
@@ -3229,7 +3241,7 @@ namespace SbigSharp
         /// <para>b12b11 - LED state, 0=off, 1=on, 2=blink low, 3=blink high</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct MiscellaneousControlParams
+        public struct MiscellaneousControlParams : IParams
         {
             /// <summary>
             /// set TRUE to turn on the Fan.
@@ -3252,7 +3264,7 @@ namespace SbigSharp
         /// In the SBIG cameras the offset is adjusted at the factory and this command is for testing or informational purposes only.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct ReadOffsetParams
+        public struct ReadOffsetParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="CCD_REQUEST"/> enum.
@@ -3265,7 +3277,7 @@ namespace SbigSharp
         /// Results structure for the Read Offset command.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct ReadOffsetResults
+        public struct ReadOffsetResults : IResults
         {
             /// <summary>
             /// the CCD's offset.
@@ -3277,7 +3289,7 @@ namespace SbigSharp
         /// In the SBIG cameras the offset is adjusted at the factory and this command is for testing or informational purposes only.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct ReadOffsetResults2
+        public struct ReadOffsetResults2 : IResults
         {
             /// <summary>
             /// the CCD's offset.
@@ -3293,7 +3305,7 @@ namespace SbigSharp
         /// The AO Tip Tilt Command is used to position an AO-7 attached to the telescope port of an ST-7/8/etc.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct AOTipTiltParams
+        public struct AOTipTiltParams : IParams
         {
             /// <summary>
             /// this is the desired position of the mirror in the X axis.
@@ -3311,7 +3323,7 @@ namespace SbigSharp
         /// This command is a holdover from that.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct AOSetFocusParams
+        public struct AOSetFocusParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="AO_FOCUS_COMMAND"/> enum.
@@ -3325,7 +3337,7 @@ namespace SbigSharp
         /// <para>This sleep command is blocking.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct AODelayParams
+        public struct AODelayParams : IParams
         {
             /// <summary>
             /// this is the desired delay in microseconds.
@@ -3339,7 +3351,7 @@ namespace SbigSharp
         /// It could be reassigned in the future.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetTurboStatusResults
+        public struct GetTurboStatusResults : IResults
         {
             /// <summary>
             /// TRUE if turbo is detected.
@@ -3352,7 +3364,7 @@ namespace SbigSharp
         /// You will typically call this second (after Open Driver).
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct OpenDeviceParams
+        public struct OpenDeviceParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="SBIG_DEVICE_TYPE"/> enum. specifies LPT, Ethernet, etc.
@@ -3376,7 +3388,7 @@ namespace SbigSharp
         /// Under fast machines Low will work fine. On slower machines the mouse may get sluggish unless you select the Medium or High priority.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct SetIRQLParams
+        public struct SetIRQLParams : IParams
         {
             /// <summary>
             /// IRQ Level.
@@ -3388,7 +3400,7 @@ namespace SbigSharp
         /// Results of Get IRQ Level command.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetIRQLResults
+        public struct GetIRQLResults : IResults
         {
             /// <summary>
             /// IRQ Level.
@@ -3400,7 +3412,7 @@ namespace SbigSharp
         /// This command returns the status of the communications link established with the camera.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetLinkStatusResults
+        public struct GetLinkStatusResults : IResults
         {
             /// <summary>
             /// TRUE when a link has been established
@@ -3431,7 +3443,7 @@ namespace SbigSharp
         /// Under all other circumstances the counter is zero.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetUSTimerResults
+        public struct GetUSTimerResults : IResults
         {
             /// <summary>
             /// counter value in microseconds.
@@ -3444,7 +3456,7 @@ namespace SbigSharp
         /// <para>Intended for SBIG internal use only. Unimplemented.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        private struct SendBlockParams
+        private struct SendBlockParams : IParams
         {
             /// <summary>
             /// Destination port.
@@ -3466,7 +3478,7 @@ namespace SbigSharp
         /// <para>Intended for SBIG internal use only. Unimplemented.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        private struct SendByteParams
+        private struct SendByteParams : IParams
         {
             /// <summary>
             /// Destination port.
@@ -3483,7 +3495,7 @@ namespace SbigSharp
         /// <para>Intended for SBIG internal use only. Clock the AD the number of times passed.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct ClockADParams
+        public struct ClockADParams : IParams
         {
             /// <summary>
             /// CCD to clock. see also: <seealso cref="CCD_REQUEST"/> enum. (Unused)
@@ -3510,7 +3522,7 @@ namespace SbigSharp
         /// <para>Intended for SBIG internal use only. Pass the SystemTest command to the micro.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct SystemTestParams
+        public struct SystemTestParams : IParams
         {
             /// <summary>
             /// Flag TRUE to test the clocks.
@@ -3539,7 +3551,7 @@ namespace SbigSharp
         /// <para>Intended for SBIG internal use only. Unused.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        private struct SendSTVBlockParams
+        private struct SendSTVBlockParams : IParams
         {
             /// <summary>
             /// Outgoing buffer length.
@@ -3566,7 +3578,7 @@ namespace SbigSharp
         /// <para>error number. It's handy for reporting driver level errors to the user.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetErrorStringParams
+        public struct GetErrorStringParams : IParams
         {
             /// <summary>
             /// Error code. see also: <seealso cref="PAR_ERROR"/> enum.
@@ -3580,7 +3592,7 @@ namespace SbigSharp
         /// <para>error number. It's handy for reporting driver level errors to the user.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetErrorStringResults
+        public struct GetErrorStringResults : IResults
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             /// <summary>
@@ -3620,7 +3632,7 @@ namespace SbigSharp
         /// will be commingled. To avoid this, simply readout one camera/CCD at a time in an atomic process.
         /// </remarks>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct SetDriverHandleParams
+        public struct SetDriverHandleParams : IParams
         {
             /// <summary>
             /// Handle to driver.
@@ -3657,7 +3669,7 @@ namespace SbigSharp
         /// will be commingled. To avoid this, simply readout one camera/CCD at a time in an atomic process.
         /// </remarks>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetDriverHandleResults
+        public struct GetDriverHandleResults : IResults
         {
             /// <summary>
             /// Handle to driver.
@@ -3743,7 +3755,7 @@ namespace SbigSharp
         ///   warm pixels as your application requires.
         /// </remarks>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct SetDriverControlParams
+        public struct SetDriverControlParams : IParams
         {
             /// <summary>
             /// the parameter to modify. see also: <seealso cref="DRIVER_CONTROL_PARAM"/> enum.
@@ -3760,7 +3772,7 @@ namespace SbigSharp
         /// Requests the value of a driver control parameter.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetDriverControlParams
+        public struct GetDriverControlParams : IParams
         {
             /// <summary>
             /// the driver parameter to be retrieved. see also: <seealso cref="DRIVER_CONTROL_PARAM"/> enum.
@@ -3772,7 +3784,7 @@ namespace SbigSharp
         /// Returns the value of a driver control parameter.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetDriverControlResults
+        public struct GetDriverControlResults : IResults
         {
             /// <summary>
             /// The value of the requested driver parameter. see also: <seealso cref="DRIVER_CONTROL_PARAM"/> enum.
@@ -3800,7 +3812,7 @@ namespace SbigSharp
         ///   ADU black level offset.
         /// </remarks>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct USBADControlParams
+        public struct USBADControlParams : IParams
         {
             /// <summary>
             /// Imaging/Tracking Gain or offset. see also: <seealso cref="USB_AD_CONTROL_COMMAND"/> enum.
@@ -3844,7 +3856,7 @@ namespace SbigSharp
         /// Returns a list of up to four cameras found by the driver via USB.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryUSBResults
+        public struct QueryUSBResults : IResults
         {
             /// <summary>
             /// Number of cameras found. (Max 4)
@@ -3861,7 +3873,7 @@ namespace SbigSharp
         /// Returns a list of up to eight cameras found by the driver via USB.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryUSBResults2
+        public struct QueryUSBResults2 : IResults
         {
             /// <summary>
             /// Number of cameras found. (Max 8)
@@ -3874,7 +3886,7 @@ namespace SbigSharp
             public QUERY_USB_INFO[] usbInfo;
         };
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryUSBResults3
+        public struct QueryUSBResults3 : IResults
         {
             /// <summary>
             /// Number of cameras found. (Max 24)
@@ -3919,7 +3931,7 @@ namespace SbigSharp
         /// Returns a list of up to eight cameras found by the driver via Ethernet.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryEthernetResults
+        public struct QueryEthernetResults : IResults
         {
             /// <summary>
             /// Number of cameras found.
@@ -3936,7 +3948,7 @@ namespace SbigSharp
         /// Returns a list of up to eight cameras found by the driver via Ethernet.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryEthernetResults2
+        public struct QueryEthernetResults2 : IResults
         {
             /// <summary>
             /// Number of cameras found.
@@ -3956,7 +3968,7 @@ namespace SbigSharp
         /// This command can be used to retrieve that counter.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetPentiumCycleCountParams
+        public struct GetPentiumCycleCountParams : IParams
         {
             /// <summary>
             /// number of bits to shift the results to the right (dividing by 2)
@@ -3971,7 +3983,7 @@ namespace SbigSharp
         /// This command can be used to retrieve that counter.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetPentiumCycleCountResults
+        public struct GetPentiumCycleCountResults : IResults
         {
             /// <summary>
             /// lower 32 bits of the Pentium cycle counter
@@ -3990,7 +4002,7 @@ namespace SbigSharp
         /// If you think you have some reason to call this function you should check with SBIG first.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct RWUSBI2CParams
+        public struct RWUSBI2CParams : IParams
         {
             /// <summary>
             /// Address to read from or write to
@@ -4017,7 +4029,7 @@ namespace SbigSharp
         /// If you think you have some reason to call this function you should check with SBIG first.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct RWUSBI2CResults
+        public struct RWUSBI2CResults : IResults
         {
             /// <summary>
             /// Data read from the external I2C device
@@ -4067,7 +4079,7 @@ namespace SbigSharp
         ///   used to control the CFW-10. Again, only the RS232 controlled CFW-10 requires these calls.
         /// </remarks>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct CFWParams
+        public struct CFWParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="CFW_MODEL_SELECT"/> enum.
@@ -4151,7 +4163,7 @@ namespace SbigSharp
         ///   used to control the CFW-10. Again, only the RS232 controlled CFW-10 requires these calls.
         /// </remarks>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct CFWResults
+        public struct CFWResults : IResults
         {
             /// <summary>
             /// see also: <seealso cref="CFW_MODEL_SELECT"/> enum.
@@ -4194,7 +4206,7 @@ namespace SbigSharp
         /// <para>* 3=Read Genl. Purp. Bit 3</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct BitIOParams
+        public struct BitIOParams : IParams
         {
             /// <summary>
             /// 0=Write, 1=Read. see also: <seealso cref="BITIO_OPERATION"/> enum.
@@ -4218,7 +4230,7 @@ namespace SbigSharp
         /// Do this by issuing a Read operation on bit 0 and if that bit is set the power has dropped below 10 Volts.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct BitIOResults
+        public struct BitIOResults : IResults
         {
             /// <summary>
             /// 1=Bit is set, 0=Bit is clear
@@ -4234,7 +4246,7 @@ namespace SbigSharp
         /// Read or write a block of data the user space in the EEPROM.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct UserEEPROMResults
+        public struct UserEEPROMResults : IResults
         {
             /// <summary>
             /// TRUE to write data to user EEPROM space, FALSE to read.
@@ -4256,7 +4268,7 @@ namespace SbigSharp
         /// <para>* To enable column filtering you must use this command and also the Set Driver Control command to set the DCP_COLUMN_REPAIR parameter to 1.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct ColumnEEPROMResults
+        public struct ColumnEEPROMResults : IResults
         {
             /// <summary>
             /// TRUE to write data to specified EEPROM column, FALSE to read.
@@ -4277,7 +4289,7 @@ namespace SbigSharp
         /// Send the Biorad setup to the camera, returning any error.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct BTDISetupParams
+        public struct BTDISetupParams : IParams
         {
             /// <summary>
             /// Row period.
@@ -4289,7 +4301,7 @@ namespace SbigSharp
         /// Results of the Biorad setup, returning any error.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct BTDISetupResults
+        public struct BTDISetupResults : IResults
         {
             /// <summary>
             /// Results of the command. see also: <seealso cref="BTDI_ERROR"/> enum.
@@ -4350,7 +4362,7 @@ namespace SbigSharp
         ///   error.
         /// </remarks>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct MFParams
+        public struct MFParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="MF_MODEL_SELECT"/> enum.
@@ -4441,7 +4453,7 @@ namespace SbigSharp
         ///   error.
         /// </remarks>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct MFResults
+        public struct MFResults : IResults
         {
             /// <summary>
             /// see also: <seealso cref="MF_MODEL_SELECT"/> enum. 
@@ -4480,7 +4492,7 @@ namespace SbigSharp
         /// <para>  outPtr should be a pointer to a DGLEDState struct with the desired values register values set.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct DiffGuiderParams
+        public struct DiffGuiderParams : IParams
         {
             /// <summary>
             /// Command for Differential Guider. see also: <seealso cref="DIFF_GUIDER_COMMAND"/> enum. 
@@ -4522,7 +4534,7 @@ namespace SbigSharp
         /// Returned results of a Differential Guider Command.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct DiffGuiderResults
+        public struct DiffGuiderResults : IResults
         {
             /// <summary>
             /// see also: <seealso cref="DIFF_GUIDER_ERROR"/> enum.
@@ -4571,7 +4583,7 @@ namespace SbigSharp
         /// <para>Internal SBIG use only. Implement the Bulk IO command which is used for Bulk Reads/Writes to the camera for diagnostic purposes.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct BulkIOParams
+        public struct BulkIOParams : IParams
         {
             /// <summary>
             /// see also: <seealso cref="BULK_IO_COMMAND"/> enum.
@@ -4597,7 +4609,7 @@ namespace SbigSharp
         /// <para>Internal SBIG use only. Results of a Bulk I/O command.</para>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct BulkIOResults
+        public struct BulkIOResults : IResults
         {
             /// <summary>
             /// Bytes sent/received.
@@ -4613,7 +4625,7 @@ namespace SbigSharp
         /// This command is used read or write the STX/STXL/STT's customer options.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct CustomerOptionsResults
+        public struct CustomerOptionsResults : IResults
         {
             /// <summary>
             /// TRUE/FALSE = set/get options respectively.
@@ -4641,7 +4653,7 @@ namespace SbigSharp
         /// Results of a CC_GET_AO_MODEL command.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetI2CAoModelResults
+        public struct GetI2CAoModelResults : IResults
         {
             /// <summary>
             /// AO model.
@@ -4809,7 +4821,7 @@ namespace SbigSharp
         /// Change debug logging, and path to log file.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct DebugLogParams
+        public struct DebugLogParams : IParams
         {
             /// <summary>
             /// Command flags.
@@ -4834,7 +4846,7 @@ namespace SbigSharp
             public string logFilePathName;
         };
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetReadoutInProgressResults
+        public struct GetReadoutInProgressResults : IResults
         {
             /// <summary>
             /// Readout In Progress. TRUE if RIP, FALSE otherwise.
@@ -4842,19 +4854,19 @@ namespace SbigSharp
             public MY_LOGICAL RIP;
         };
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct SetRBIPreflashParams
+        public struct SetRBIPreflashParams : IParams
         {
             public UInt16 darkFrameLength;
             public UInt16 flushCount;
         };
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct GetRBIPreflashResults
+        public struct GetRBIPreflashResults : IResults
         {
             public UInt16 darkFrameLength;
             public UInt16 flushCount;
         };
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryFeatureSupportedParams
+        public struct QueryFeatureSupportedParams : IParams
         {
             /// <summary>
             /// Feature to query for firmware support. 
@@ -4862,7 +4874,7 @@ namespace SbigSharp
             public FeatureFirmwareRequirement ffr;
         };
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryFeatureSupportedResults
+        public struct QueryFeatureSupportedResults : IResults
         {
             /// <summary>
             /// TRUE if feature is supported, FALSE otherwise.
@@ -4874,7 +4886,7 @@ namespace SbigSharp
         /// Internal SBIG use only. Queries Start/End exposure performance tracking.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct QueryExposureTicksResults
+        public struct QueryExposureTicksResults : IResults
         {
             /// <summary>
             /// Union LARGE_INTEGER
@@ -4910,6 +4922,28 @@ namespace SbigSharp
         };
 
         /// <summary>
+        /// gets thrown whenever an SBIG operation doesn't return success (CE_NO_ERROR)
+        /// </summary>
+        public class FailedOperationException : Exception
+        {
+            public PAR_ERROR ErrorCode { get; private set; }
+
+            public FailedOperationException(PAR_ERROR errorCode)
+            {
+                ErrorCode = errorCode;
+            }
+
+            public override string Message
+            {
+                get
+                {
+                    return ErrorCode.ToString();
+                }
+            }
+        }
+
+        #region SBIGUnivDrvCommand
+        /// <summary>
         /// Command function: Supports Parallel, USB and Ethernet based cameras
         /// <para>
         ///     The master API hook for the SBIG Universal Driver dll. 
@@ -4920,10 +4954,136 @@ namespace SbigSharp
         /// <param name="command">See also <seealso cref="PAR_COMMAND"/> enum.</param>
         /// <param name="Params">Params pointer to a command-specific structure containing the relevant command parameters.</param>
         /// <param name="pResults">pResults pointer to a comand-specific results structure containing the results of the command.</param>
-        /// <returns></returns>
+        /// <returns>See also <seealso cref="PAR_ERROR"/> enum.</returns>
         [DllImport("SBIGUDrv.dll", CallingConvention = CallingConvention.StdCall)]
         private static extern PAR_ERROR SBIGUnivDrvCommand(
             PAR_COMMAND command, IntPtr Params, IntPtr pResults);
+
+        /// <summary>
+        /// Command function: Supports Parallel, USB and Ethernet based cameras.
+        /// An exception is thrown when an error occurs.
+        /// </summary>
+        /// <param name="command">The command to be executed. See also <seealso cref="PAR_COMMAND"/> enum.</param>
+        /// <param name="Params">Command parameters.</param>
+        /// <param name="pResults">Output from the operation.</param>
+        /// <exception cref="FailedOperationException">
+        ///     An error has occurred. See also <seealso cref="PAR_ERROR"/> enum.
+        /// </exception>
+        private static void _UnivDrvCommand(
+            PAR_COMMAND command, IntPtr Params, IntPtr pResults)
+        {
+            PAR_ERROR errorCode = SBIGUnivDrvCommand(command, Params, pResults);
+            if (PAR_ERROR.CE_NO_ERROR != errorCode)
+                throw new FailedOperationException(errorCode);
+        }
+
+        /// <summary>
+        /// Call SBIG Universal Driver, pass command.
+        /// </summary>
+        /// <param name="command">The command to be executed. See also <seealso cref="PAR_COMMAND"/> enum.</param>
+        /// <exception cref="FailedOperationException">
+        ///     An error has occurred. See also <seealso cref="PAR_ERROR"/> enum.
+        /// </exception>
+        public static void UnivDrvCommand(PAR_COMMAND command)
+        {
+            // make the call
+            _UnivDrvCommand(command, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        /// <summary>
+        /// Call SBIG Universal Driver, pass command and parameters.
+        /// </summary>
+        /// <typeparam name="TParams">SBIG parameters struct.</typeparam>
+        /// <param name="command">The command to be executed. See also <seealso cref="PAR_COMMAND"/> enum.</param>
+        /// <param name="Params">Command parameters.</param>
+        /// <exception cref="FailedOperationException">
+        ///     An error has occurred. See also <seealso cref="PAR_ERROR"/> enum.
+        /// </exception>
+        public static void UnivDrvCommand<TParams>(
+            PAR_COMMAND command, TParams Params)
+            where TParams : struct, IParams
+        {
+            // marshall the input structure, if it exists
+            var ParamGch = GCHandle.Alloc(Params, GCHandleType.Pinned);
+            var ParamPtr = ParamGch.AddrOfPinnedObject();
+
+            // make the call
+            _UnivDrvCommand(command, ParamPtr, IntPtr.Zero);
+
+            // clean up
+            if (IntPtr.Zero != ParamPtr)
+                ParamGch.Free();
+        }
+
+        /// <summary>
+        /// Call SBIG Universal Driver, pass command and output the results.
+        /// </summary>
+        /// <typeparam name="TResults">SBIG results struct.</typeparam>
+        /// <param name="command">The command to be executed. See also <seealso cref="PAR_COMMAND"/> enum.</param>
+        /// <param name="pResults">Output from the operation.</param>
+        /// <exception cref="FailedOperationException">
+        ///     An error has occurred. See also <seealso cref="PAR_ERROR"/> enum.
+        /// </exception>
+        public static void UnivDrvCommand<TResults>(
+            PAR_COMMAND command, out TResults pResults)
+            where TResults : struct, IResults
+        {
+            pResults = default(TResults);
+
+            // translate the struct into bytes, which are pinned
+            IntPtr ResultsPtr = Marshal.AllocHGlobal(Marshal.SizeOf(pResults));
+            // pass true to free up any incoming memory, since we're going to overwrite it
+            Marshal.StructureToPtr(pResults, ResultsPtr, true);
+
+            // make the call
+            _UnivDrvCommand(command, IntPtr.Zero, ResultsPtr);
+
+            // Marshall back
+            //Marshal.PtrToStructure(ResultsPtr, Results);
+            pResults = (TResults)Marshal.PtrToStructure(ResultsPtr, typeof(TResults));
+
+            // clean up
+            Marshal.FreeHGlobal(ResultsPtr);
+        }
+
+        /// <summary>
+        /// Call SBIG Universal Driver, pass command and parameters, and output the results.
+        /// </summary>
+        /// <typeparam name="TParams">SBIG parameters struct.</typeparam>
+        /// <typeparam name="TResults">SBIG results struct.</typeparam>
+        /// <param name="command">The command to be executed. See also <seealso cref="PAR_COMMAND"/> enum.</param>
+        /// <param name="Params">Command parameters.</param>
+        /// <param name="pResults">Output from the operation.</param>
+        /// <exception cref="FailedOperationException">
+        ///     An error has occurred. See also <seealso cref="PAR_ERROR"/> enum.
+        /// </exception>
+        public static void UnivDrvCommand<TParams, TResult>(
+            PAR_COMMAND command, TParams Params, out TResult pResults)
+            where TParams : struct, IParams
+            where TResult : struct, IResults
+        {
+            pResults = default(TResult);
+            // marshall the input structure, if it exists
+            var ParamGch = GCHandle.Alloc(Params, GCHandleType.Pinned);
+            var ParamPtr = ParamGch.AddrOfPinnedObject();
+            // translate the struct into bytes, which are pinned
+            IntPtr ResultsPtr = Marshal.AllocHGlobal(Marshal.SizeOf(pResults));
+            // pass true to free up any incoming memory, since we're going to overwrite it
+            Marshal.StructureToPtr(pResults, ResultsPtr, true);
+
+            // make the call
+            _UnivDrvCommand(command, ParamPtr, ResultsPtr);
+
+            // Marshall back
+            //Marshal.PtrToStructure(ResultsPtr, Results);
+            pResults = (TResult)Marshal.PtrToStructure(ResultsPtr, typeof(TResult));
+
+            // clean up
+            Marshal.FreeHGlobal(ResultsPtr);
+            if (IntPtr.Zero != ParamPtr)
+                ParamGch.Free();
+        }
+        #endregion
 
         //TODO: 檢查移植是否正確 extern "C" Int16 __stdcall SBIGLogDebugMsg(char* pStr, UInt16 length);
         /// <summary>
