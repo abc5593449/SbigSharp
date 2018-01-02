@@ -59,7 +59,7 @@ namespace SbigSharp
             try
             {
                 // connect to the camera
-                SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_OPEN_DRIVER, null);
+                SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_OPEN_DRIVER);
                 SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_OPEN_DEVICE, odp);
                 SBIG.EstablishLink();
 
@@ -69,8 +69,8 @@ namespace SbigSharp
                 SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_ACTIVATE_RELAY, arp);
 
                 // disconnect
-                SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_CLOSE_DEVICE, null);
-                SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_CLOSE_DRIVER, null);
+                SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_CLOSE_DEVICE);
+                SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_CLOSE_DRIVER);
 
                 Console.WriteLine("Success!");
             }

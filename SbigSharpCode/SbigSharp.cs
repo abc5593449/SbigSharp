@@ -31,6 +31,8 @@ namespace SbigSharp
     /// </summary>
     public static class SBIG
     {
+        #region SBIG C language header file "sbigudrv.h"
+
         // Supported Camera Commands
         // ===========================
         // These are the commands supported by the driver.
@@ -5065,6 +5067,43 @@ namespace SbigSharp
 
         /// <summary>
         /// Call SBIG Universal Driver, pass command and parameters, and output the results.
+        /// <para>Specialization for Readout line data.</para>
+        /// </summary>
+        /// <param name="command">Only <seealso cref="PAR_COMMAND.CC_READOUT_LINE"/> can be passed.</param>
+        /// <param name="Params">Readout line params. See also <seealso cref="ReadoutLineParams"/> enum.</param>
+        /// <param name="data">Output UInt16 type of readout line data.</param>
+        /// <exception cref="ArgumentException">
+        ///     When the command is not equal to "PAR_COMMAND.CC_READOUT_LINE".
+        /// </exception>
+        /// <exception cref="FailedOperationException">
+        ///     An error has occurred. See also <seealso cref="PAR_ERROR"/> enum.
+        /// </exception>
+        public static void UnivDrvCommand(
+            PAR_COMMAND command, ReadoutLineParams Params, out UInt16[] data)
+        {
+            if (PAR_COMMAND.CC_READOUT_LINE != command)
+                throw new ArgumentException(
+                    "The command is not equal to \"PAR_COMMAND.CC_READOUT_LINE!\"");
+
+            data = new UInt16[Params.pixelLength];
+
+            // allocate the image buffer
+            var datagch = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var dataPtr = datagch.AddrOfPinnedObject();
+
+            // put the data into it
+            GCHandle rlpgch = GCHandle.Alloc(Params, GCHandleType.Pinned);
+
+            // make the call
+            _UnivDrvCommand(command, rlpgch.AddrOfPinnedObject(), dataPtr);
+
+            // clean up memory
+            rlpgch.Free();
+            datagch.Free();
+        }
+
+        /// <summary>
+        /// Call SBIG Universal Driver, pass command and parameters, and output the results.
         /// </summary>
         /// <typeparam name="TParams">SBIG parameters struct.</typeparam>
         /// <typeparam name="TResults">SBIG results struct.</typeparam>
@@ -5116,9 +5155,14 @@ namespace SbigSharp
         [DllImport("SBIGUDrv.dll", CallingConvention = CallingConvention.StdCall)]
         private static extern Int16 SBIGLogDebugMsg(UIntPtr pStr, UInt16 length);
 
-        #region Extension Advanced Function
+        #endregion // SBIG C language header file "sbigudrv.h"
 
-        //TODO: 檢查函數
+        #region Extension
+
+        /// <summary>
+        /// Establish link.
+        /// </summary>
+        /// <returns>The type of establish link camera.</returns>
         public static CAMERA_TYPE EstablishLink()
         {
             UnivDrvCommand(
@@ -5130,29 +5174,29 @@ namespace SbigSharp
 
         //TODO:檢查函數
         /// <summary>
-        /// Waits for any exposure in progress to complete, ends it, and reads it out into a 2D ushort array
+        /// Waits for any exposure in progress to complete, ends it, 
+        /// and reads it out into a 2D ushort array.
         /// </summary>
-        public static ushort[,] WaitEndAndReadoutExposure(StartExposureParams2 sep)
+        /// <param name="sep2"></param>
+        /// <returns></returns>
+        public static ushort[,] WaitEndAndReadoutExposure(StartExposureParams2 sep2)
         {
-            //QueryCommandStatusResults qcsr = new QueryCommandStatusResults()
-            //{
-            //    status = PAR_ERROR.CE_NO_ERROR
-            //};
+            var qcsp = new QueryCommandStatusParams()
+            {
+                command = PAR_COMMAND.CC_START_EXPOSURE
+            };
+
+            var qcsr = new QueryCommandStatusResults()
+            {
+                status = PAR_ERROR.CE_NO_ERROR
+            };
 
             // wait for the exposure to be done
-            while (true)
+            do
             {
-                UnivDrvCommand(
-                    PAR_COMMAND.CC_QUERY_COMMAND_STATUS,
-                    new QueryCommandStatusParams()
-                    {
-                        command = PAR_COMMAND.CC_START_EXPOSURE
-                    },
-                    out QueryCommandStatusResults qcsr);
-
-                if (PAR_ERROR.CE_NO_EXPOSURE_IN_PROGRESS == qcsr.status)
-                    break;
+                UnivDrvCommand(PAR_COMMAND.CC_QUERY_COMMAND_STATUS, qcsp, out qcsr);
             }
+            while (PAR_ERROR.CE_NO_EXPOSURE_IN_PROGRESS != qcsr.status);
 
             // prepare the CCD for readout
             UnivDrvCommand(
@@ -5170,47 +5214,39 @@ namespace SbigSharp
                     readoutMode = 0,
                     left = 0,
                     top = 0,
-                    width = sep.width,
-                    height = sep.height
+                    width = sep2.width,
+                    height = sep2.height
                 });
-            //TODO: 了解ushort[,]如何被使用
-            // allocate the image buffer
-            ushort[,] data = new ushort[sep.height, sep.width];
-            GCHandle datagch = GCHandle.Alloc(data, GCHandleType.Pinned);
-            IntPtr dataptr = datagch.AddrOfPinnedObject();
+
+            var data = new UInt16[sep2.height, sep2.width];
 
             // put the data into it
-            ReadoutLineParams rlp = new ReadoutLineParams
+            var rlp = new ReadoutLineParams
             {
                 ccd = CCD_REQUEST.CCD_IMAGING,
                 pixelStart = 0,
-                pixelLength = sep.width,
-                readoutMode = 0
+                pixelLength = sep2.width,
+                readoutMode = READOUT_BINNING_MODE.RM_1X1
             };
-            GCHandle rlpgch = GCHandle.Alloc(rlp, GCHandleType.Pinned);
-            // get the image from the camera, line by line
-            for (int i = 0; i < sep.height; i++)
-                _UnivDrvCommand(
-                    PAR_COMMAND.CC_READOUT_LINE,
-                    rlpgch.AddrOfPinnedObject(),
-                    dataptr + (i * sep.width * sizeof(ushort)));
 
-            // cleanup our memory goo
-            rlpgch.Free();
-            datagch.Free();
-            /*Bitmap b3 = new Bitmap(sep.width, sep.height, PixelFormat.Format16bppGrayScale);
-            BitmapData bd = b3.LockBits(new Rectangle(0, 0, sep.width, sep.height), ImageLockMode.WriteOnly, PixelFormat.Format16bppGrayScale);
-            bd.Scan0 = datagch.AddrOfPinnedObject();
-            b3.UnlockBits(bd);
-            Color c2 = b3.GetPixel(0, 0);
-            Bitmap bmp = new Bitmap(sep.width, sep.height, sep.width * sizeof(ushort), PixelFormat.Format16bppGrayScale, datagch.AddrOfPinnedObject());
-            bmp.Save("foo.bmp");
-            bmp.Dispose();*/
+            // get the image from the camera, line by line
+            for (int y = 0; y < sep2.height; y++)
+            {
+                UnivDrvCommand(
+                  PAR_COMMAND.CC_READOUT_LINE,
+                  rlp,
+                  out UInt16[] readoutLineData);
+
+                for (int x = 0; x < sep2.width; x++)
+                {
+                    data[y, x] = readoutLineData[x];
+                }
+            }
 
             return data;
         }
 
-        #endregion // Extension Advanced Function
+        #endregion // Extension
 
     } // class
 } // namespace
