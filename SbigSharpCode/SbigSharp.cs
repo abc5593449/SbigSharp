@@ -5175,11 +5175,11 @@ namespace SbigSharp
         //TODO:檢查函數
         /// <summary>
         /// Waits for any exposure in progress to complete, ends it, 
-        /// and reads it out into a 2D ushort array.
+        /// and reads it out into a 2D UInt16 array.
         /// </summary>
-        /// <param name="sep2"></param>
-        /// <returns></returns>
-        public static ushort[,] WaitEndAndReadoutExposure(StartExposureParams2 sep2)
+        /// <param name="sep2">See also <seealso cref="StartExposureParams2"/> struct.</param>
+        /// <returns>2D UInt16 array of Data.</returns>
+        public static UInt16[,] WaitEndAndReadoutExposure(StartExposureParams2 sep2)
         {
             var qcsp = new QueryCommandStatusParams()
             {
