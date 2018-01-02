@@ -3375,26 +3375,30 @@ namespace SbigSharp
             /// </summary>
             public UInt16 lptBaseAddress;
             /// <summary>
-            /// for deviceType::DEV_ETH:  Ethernet address.
+            /// for deviceType::DEV_ETH: Ethernet address.
             /// </summary>
             public UInt32 ipAddress;
 
-            //TODO: 重新檢查建構式
-            public OpenDeviceParams(string s) : this()
+            /// <summary>
+            /// Create an <seealso cref="OpenDeviceParams"/> using an IP string.
+            /// </summary>
+            /// <param name="IP">IP address</param>
+            public OpenDeviceParams(string IP) : this()
             {
                 try
                 {
-                    // first, try to parse as an IP address
-                    IPAddress ip = IPAddress.Parse(s);
-                    byte[] b = ip.GetAddressBytes();
-                    ipAddress = (((uint)b[0]) << 24) | (((uint)b[1]) << 16) | (((uint)b[2]) << 8) | ((uint)b[3]);
+                    // try to parse as an IP address
+                    byte[] b = IPAddress.Parse(IP).GetAddressBytes();
+                    ipAddress =
+                        (((uint)b[0]) << 24) |
+                        (((uint)b[1]) << 16) |
+                        (((uint)b[2]) << 08) |
+                        (((uint)b[3]) << 00);
                     deviceType = SBIG_DEVICE_TYPE.DEV_ETH;
                 }
                 catch (FormatException)
                 {
-                    // if it's not an IP, it should be a string value of the enum
-                    if (!Enum.TryParse(s, true, out deviceType))
-                        throw new ArgumentException("must pass either an IP address or valid DeviceType enum string");
+                    throw new ArgumentException("Must pass either an IP address.");
                 }
             }
         };
