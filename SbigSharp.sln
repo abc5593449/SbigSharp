@@ -11,12 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SbigSharp", "SbigSharp\Sbig
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SbigNet", "SbigNet\SbigNet.csproj", "{C2404166-F2E5-4C6E-9D0F-0A04849522DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{5326F28C-1A4A-4566-A03E-73543DB3A149}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SbigSharpCode\SbigSharpCode.projitems*{0309b14c-34b6-4481-a0aa-24293b7ee4b9}*SharedItemsImports = 13
-		SbigSharpCode\SbigSharpCode.projitems*{5326f28c-1a4a-4566-a03e-73543db3a149}*SharedItemsImports = 4
 		SbigSharpCode\SbigSharpCode.projitems*{83eb4ad0-15f4-48ce-a2ff-61e818e0dfde}*SharedItemsImports = 4
 		SbigSharpCode\SbigSharpCode.projitems*{b534a8c4-7ed3-497c-a873-187024ea8a2c}*SharedItemsImports = 4
 		SbigSharpCode\SbigSharpCode.projitems*{c2404166-f2e5-4c6e-9d0f-0a04849522df}*SharedItemsImports = 4
@@ -38,10 +35,6 @@ Global
 		{C2404166-F2E5-4C6E-9D0F-0A04849522DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2404166-F2E5-4C6E-9D0F-0A04849522DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2404166-F2E5-4C6E-9D0F-0A04849522DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5326F28C-1A4A-4566-A03E-73543DB3A149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5326F28C-1A4A-4566-A03E-73543DB3A149}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5326F28C-1A4A-4566-A03E-73543DB3A149}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5326F28C-1A4A-4566-A03E-73543DB3A149}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
