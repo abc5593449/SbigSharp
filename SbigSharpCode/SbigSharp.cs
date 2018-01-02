@@ -33,6 +33,8 @@ namespace SbigSharp
     {
         #region SBIG C language header file "sbigudrv.h"
 
+        #region SBIG enum
+
         // Supported Camera Commands
         // ===========================
         // These are the commands supported by the driver.
@@ -41,8 +43,6 @@ namespace SbigSharp
         //
         // Some of the commands are marked as SBIG use only 
         //  and have been included to enhance testability of the driver for SBIG.
-
-        #region SBIG enum
 
         /// <summary>
         /// Command ID enum 
@@ -1047,7 +1047,9 @@ namespace SbigSharp
             /// </summary>
             STI_CAMERA,
             /// <summary>
-            /// STF Camera, NOTE: STF8, and STF cameras both report this kind, but have *DIFFERENT CAMERA MODEL ID VARIABLES* (stf8CameraID and stfCameraID)
+            /// STF Camera,
+            /// NOTE: STF8, and STF cameras both report this kind,
+            /// but have *DIFFERENT CAMERA MODEL ID VARIABLES* (stf8CameraID and stfCameraID)
             /// </summary>
             STF_CAMERA,
             /// <summary>
@@ -1376,7 +1378,7 @@ namespace SbigSharp
             /// </summary>
             DEV_USB4,
             /// <summary>
-            /// USB slot 5 CC_QUERY_USB2
+            /// USB slot 5 <seealso cref="PAR_COMMAND.CC_QUERY_USB2"/>
             /// </summary>
             DEV_USB5,
             /// <summary>
@@ -1392,7 +1394,7 @@ namespace SbigSharp
             /// </summary>
             DEV_USB8,
             /// <summary>
-            /// USB slot 9 CC_QUERY_USB3
+            /// USB slot 9 <seealso cref="PAR_COMMAND.CC_QUERY_USB3"/>
             /// </summary>
             DEV_USB9,
             /// <summary>
@@ -2240,23 +2242,30 @@ namespace SbigSharp
         #region General Purpose Flags
 
         /// <summary>
-        /// set in EndExposureParams::ccd to skip synchronization delay - Use this to increase the rep rate when taking darks to later be subtracted from SC_LEAVE_SHUTTER exposures such as when tracking and imaging.
+        /// set in EndExposureParams::ccd to skip synchronization delay - 
+        /// Use this to increase the rep rate when taking darks to later be subtracted 
+        /// from SC_LEAVE_SHUTTER exposures such as when tracking and imaging.
         /// </summary>
         const UInt16 END_SKIP_DELAY = 0x8000;
 
         /// <summary>
-        /// Set in StartExposureParams::ccd to skip lowering Imaging CCD Vdd during integration. - Use this to increase the rep rate when you don't care about glow in the upper-left corner of the imaging CCD.
+        /// Set in StartExposureParams::ccd to skip lowering Imaging CCD Vdd during integration.
+        /// - Use this to increase the rep rate when you don't care about glow 
+        /// in the upper-left corner of the imaging CCD.
         /// </summary>
         const UInt16 START_SKIP_VDD = 0x8000;
 
         /// <summary>
-        /// Set in StartExposureParams::ccd and EndExposureParams::ccd to force shutter motor to stay on all the time which reduces delays in Start and End Exposure timing and yields higher image throughput.
+        /// Set in StartExposureParams::ccd and EndExposureParams::ccd to force shutter motor 
+        /// to stay on all the time which reduces delays in Start and End Exposure timing 
+        /// and yields higher image throughput.
         /// Don't do this too often or camera head will heat up.
         /// </summary>
         const UInt16 START_MOTOR_ALWAYS_ON = 0x4000;
 
         /// <summary>
-        /// Set in EndExposureParams::ccd to abort the exposure completely instead of just ending the integration phase for cameras with internal frame buffers like the STX.
+        /// Set in EndExposureParams::ccd to abort the exposure completely instead 
+        /// of just ending the integration phase for cameras with internal frame buffers like the STX.
         /// </summary>
         const UInt16 ABORT_DONT_END = 0x2000;
 
@@ -2265,55 +2274,57 @@ namespace SbigSharp
         /// Set in StartExposureParams2::exposureTime enable TDI readout mode
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_TDI_ENABLE = 0x01000000;   //!< Enable TDI mode flag.
+        const UInt32 EXP_TDI_ENABLE = 0x01000000; 
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime ripple correction for STF-8050/4070
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_RIPPLE_CORRECTION = 0x02000000;    //!< Enable Ripple correction flag.
+        const UInt32 EXP_RIPPLE_CORRECTION = 0x02000000;  
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime to activate the dual channel CCD readout mode of the STF-8050.
+        /// Set in StarExposureParams2::exposureTime to activate the dual channel 
+        /// CCD readout mode of the STF-8050.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_DUAL_CHANNEL_MODE = 0x04000000;    //!< Enable dual channel readout mode flag.
+        const UInt32 EXP_DUAL_CHANNEL_MODE = 0x04000000;    
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime to activate the fast readout mode of the STF-8300, etc.
+        /// Set in StarExposureParams2::exposureTime to activate the fast readout mode 
+        /// of the STF-8300, etc.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_FAST_READOUT = 0x08000000; //!< Enable fast readout mode flag.
+        const UInt32 EXP_FAST_READOUT = 0x08000000; 
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to interpret exposure time as milliseconds.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_MS_EXPOSURE = 0x10000000;  //!< Enable millisecond exposure time flag.
+        const UInt32 EXP_MS_EXPOSURE = 0x10000000;  
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to do light clear of the CCD.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_LIGHT_CLEAR = 0x20000000;  //!< Do light clear of CCD flag.
+        const UInt32 EXP_LIGHT_CLEAR = 0x20000000; 
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to send trigger out Y-.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_SEND_TRIGGER_OUT = 0x40000000;  //!< Send trigger out flag.
+        const UInt32 EXP_SEND_TRIGGER_OUT = 0x40000000; 
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to wait for trigger in pulse.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_WAIT_FOR_TRIGGER_IN = 0x80000000;  //!< Wait for trigger in flag.
+        const UInt32 EXP_WAIT_FOR_TRIGGER_IN = 0x80000000; 
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to mask with exposure time to remove flags.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_TIME_MASK = 0x00FFFFFF;  //!< Mask for exposure time value.
+        const UInt32 EXP_TIME_MASK = 0x00FFFFFF; 
 
         /// <summary>
         /// Bit Field Definitions for the in the GetCCDInfoResults4 struct.
@@ -2323,7 +2334,7 @@ namespace SbigSharp
         /// mask for CCD type
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_TYPE_MASK = 0x0001; //!< Mask for CCD type.
+        const UInt16 CB_CCD_TYPE_MASK = 0x0001; 
 
         /// <summary>
         /// b0=0 is full frame CCD
@@ -2537,7 +2548,8 @@ namespace SbigSharp
             public CCD_REQUEST ccd;
 
             /// <summary>
-            /// Exposure time in hundredths of a second in least significant 24 bits. Most significant bits are bit-flags described in exposureTime #define block.
+            /// Exposure time in hundredths of a second in least significant 24 bits. 
+            /// Most significant bits are bit-flags described in exposureTime #define block.
             /// </summary>
             public UInt32 exposureTime;
             /// <summary>
@@ -5176,7 +5188,6 @@ namespace SbigSharp
             return elr.cameraType;
         }
 
-        //TODO:檢查函數
         /// <summary>
         /// Waits for any exposure in progress to complete, ends it, 
         /// and reads it out into a 2D UInt16 array.
