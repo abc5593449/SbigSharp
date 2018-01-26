@@ -1,12 +1,12 @@
-﻿using System;
+﻿using SbigSharp;
+using System;
 
-namespace SbigSharp
+namespace SbigSharpDemo
 {
     class Program
     {
         static void Main(string[] args)
-        {
-            // initialize the driver
+        { // initialize the driver
             SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_OPEN_DRIVER);
 
             // ask the SBIG driver what, if any, USB cameras are plugged in
@@ -30,7 +30,6 @@ namespace SbigSharp
             SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_OPEN_DEVICE, new SBIG.OpenDeviceParams("127.0.0.1"));
             SBIG.CAMERA_TYPE ct = SBIG.EstablishLink();
 
-
             // query camera info
             var gcir0 = new SBIG.GetCCDInfoResults0();
             SBIG.UnivDrvCommand(
@@ -41,7 +40,8 @@ namespace SbigSharp
                 },
                 out gcir0);
             // now print it out
-            Console.WriteLine("Firmware version: " + (gcir0.firmwareVersion >> 8) + "." + (gcir0.firmwareVersion & 0xFF));
+            Console.WriteLine("Firmware version: " +
+                (gcir0.firmwareVersion >> 8) + "." + (gcir0.firmwareVersion & 0xFF));
             Console.WriteLine("Camera type: " + gcir0.cameraType.ToString());
             Console.WriteLine("Camera name: " + gcir0.name);
             Console.WriteLine("Readout modes: " + gcir0.readoutModes);
@@ -65,7 +65,9 @@ namespace SbigSharp
                 out gcir2);
             // print it out
             Console.Write("Bad columns: " + gcir2.badColumns + " = ");
-            Console.WriteLine(gcir2.columns[0] + ", " + gcir2.columns[1] + ", " + gcir2.columns[2] + ", " + gcir2.columns[3]);
+            Console.WriteLine(
+                gcir2.columns[0] + ", " + gcir2.columns[1] + ", " +
+                gcir2.columns[2] + ", " + gcir2.columns[3]);
             Console.WriteLine("ABG: " + gcir2.imagingABG.ToString());
             Console.WriteLine("Serial number: " + gcir2.serialNumber);
 
@@ -134,17 +136,15 @@ namespace SbigSharp
             // make the call!!!
             SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_READOUT_LINE, rlp, out data);
             // do it a lot
-            DateTime start = DateTime.Now;
+            var start = DateTime.Now;
             for (int i = 0; i < 1000000; i++)
                 SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_READOUT_LINE, rlp, out data);
-            DateTime end = DateTime.Now;
-            TimeSpan ts = end - start;
-            Console.WriteLine(ts);
+            var end = DateTime.Now;
+            Console.WriteLine(end - start);
 
             // clean up
             SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_CLOSE_DEVICE);
             SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_CLOSE_DRIVER);
-        } // Main
-
-    } // class
-} // namespace
+        }
+    }
+}

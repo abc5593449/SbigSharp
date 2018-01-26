@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SbigSharp;
+using System;
 
-namespace SbigSharp
+namespace SbigRelayControl
 {
     class Program
     {
@@ -78,7 +79,6 @@ namespace SbigSharp
             {
                 Console.WriteLine("Error: " + e);
             }
-        } // Main
-
-    } // class
-} // namespace
+        }
+    }
+}

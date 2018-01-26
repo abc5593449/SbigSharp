@@ -5115,7 +5115,14 @@ namespace SbigSharp
         public static void UnivDrvCommand(PAR_COMMAND command)
         {
             // make the call
-            _UnivDrvCommand(command, IntPtr.Zero, IntPtr.Zero);
+            try
+            {
+                _UnivDrvCommand(command, IntPtr.Zero, IntPtr.Zero);
+            }
+            catch (FailedOperationException e)
+            {
+                throw e;
+            }
         }
 
         /// <summary>
@@ -5135,8 +5142,15 @@ namespace SbigSharp
             var ParamGch = GCHandle.Alloc(Params, GCHandleType.Pinned);
             var ParamPtr = ParamGch.AddrOfPinnedObject();
 
-            // make the call
-            _UnivDrvCommand(command, ParamPtr, IntPtr.Zero);
+            try
+            {
+                // make the call
+                _UnivDrvCommand(command, ParamPtr, IntPtr.Zero);
+            }
+            catch (FailedOperationException e)
+            {
+                throw e;
+            }
 
             // clean up
             if (IntPtr.Zero != ParamPtr)
@@ -5163,8 +5177,15 @@ namespace SbigSharp
             // pass true to free up any incoming memory, since we're going to overwrite it
             Marshal.StructureToPtr(pResults, ResultsPtr, true);
 
-            // make the call
-            _UnivDrvCommand(command, IntPtr.Zero, ResultsPtr);
+            try
+            {
+                // make the call
+                _UnivDrvCommand(command, IntPtr.Zero, ResultsPtr);
+            }
+            catch (FailedOperationException e)
+            {
+                throw e;
+            }
 
             // Marshall back
             //Marshal.PtrToStructure(ResultsPtr, Results);
@@ -5203,8 +5224,15 @@ namespace SbigSharp
             // put the data into it
             GCHandle rlpgch = GCHandle.Alloc(Params, GCHandleType.Pinned);
 
-            // make the call
-            _UnivDrvCommand(command, rlpgch.AddrOfPinnedObject(), dataPtr);
+            try
+            {
+                // make the call
+                _UnivDrvCommand(command, rlpgch.AddrOfPinnedObject(), dataPtr);
+            }
+            catch (FailedOperationException e)
+            {
+                throw e;
+            }
 
             // clean up memory
             rlpgch.Free();
@@ -5236,8 +5264,15 @@ namespace SbigSharp
             // pass true to free up any incoming memory, since we're going to overwrite it
             Marshal.StructureToPtr(pResults, ResultsPtr, true);
 
-            // make the call
-            _UnivDrvCommand(command, ParamPtr, ResultsPtr);
+            try
+            {
+                // make the call
+                _UnivDrvCommand(command, ParamPtr, ResultsPtr);
+            }
+            catch (FailedOperationException e)
+            {
+                throw e;
+            }
 
             // Marshall back
             pResults = (TResults)Marshal.PtrToStructure(ResultsPtr, typeof(TResults));
