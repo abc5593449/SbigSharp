@@ -648,11 +648,26 @@ namespace SbigSharp
             CS_INTEGRATION_COMPLETE
         };
 
+        /// <summary>
+        /// Feature Firmware Requirement
+        /// </summary>
         public enum FeatureFirmwareRequirement : UInt16
         {
+            /// <summary>
+            /// FFR_CTRL_OFFSET_CORRECTION
+            /// </summary>
             FFR_CTRL_OFFSET_CORRECTION,
+            /// <summary>
+            /// FFR_CTRL_EXT_SHUTTER_ONLY
+            /// </summary>
             FFR_CTRL_EXT_SHUTTER_ONLY,
+            /// <summary>
+            /// FFR_ASYNC_TRIGGER_IN
+            /// </summary>
             FFR_ASYNC_TRIGGER_IN,
+            /// <summary>
+            /// FFR_LAST
+            /// </summary>
             FFR_LAST
         };
 
@@ -756,13 +771,24 @@ namespace SbigSharp
             /// </summary>
             const UInt16 TRUE = 1;
 
+            /// <summary>
+            /// bool value.
+            /// </summary>
             public UInt16 value;
 
+            /// <summary>
+            /// MY_LOGICAL constructor.
+            /// </summary>
+            /// <param name="value"></param>
             public MY_LOGICAL(UInt16 value)
             {
                 this.value = value;
             }
 
+            /// <summary>
+            /// MY_LOGICAL constructor.
+            /// </summary>
+            /// <param name="value">bool value</param>
             public MY_LOGICAL(bool value)
             {
                 this.value = (UInt16)(value ? 1 : 0);
@@ -2218,6 +2244,9 @@ namespace SbigSharp
             PIXEL_CHANNEL_B
         };
 
+        /// <summary>
+        /// <seealso cref="PAR_COMMAND.CC_QUERY_COMMAND_STATUS2"/>
+        /// </summary>
         public enum EXTRA_EXPOSURE_STATUS : UInt16
         {
             /// <summary>
@@ -2274,57 +2303,57 @@ namespace SbigSharp
         /// Set in StartExposureParams2::exposureTime enable TDI readout mode
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_TDI_ENABLE = 0x01000000; 
+        const UInt32 EXP_TDI_ENABLE = 0x01000000;
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime ripple correction for STF-8050/4070
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_RIPPLE_CORRECTION = 0x02000000;  
+        const UInt32 EXP_RIPPLE_CORRECTION = 0x02000000;
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to activate the dual channel 
         /// CCD readout mode of the STF-8050.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_DUAL_CHANNEL_MODE = 0x04000000;    
+        const UInt32 EXP_DUAL_CHANNEL_MODE = 0x04000000;
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to activate the fast readout mode 
         /// of the STF-8300, etc.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_FAST_READOUT = 0x08000000; 
+        const UInt32 EXP_FAST_READOUT = 0x08000000;
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to interpret exposure time as milliseconds.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_MS_EXPOSURE = 0x10000000;  
+        const UInt32 EXP_MS_EXPOSURE = 0x10000000;
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to do light clear of the CCD.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_LIGHT_CLEAR = 0x20000000; 
+        const UInt32 EXP_LIGHT_CLEAR = 0x20000000;
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to send trigger out Y-.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_SEND_TRIGGER_OUT = 0x40000000; 
+        const UInt32 EXP_SEND_TRIGGER_OUT = 0x40000000;
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to wait for trigger in pulse.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_WAIT_FOR_TRIGGER_IN = 0x80000000; 
+        const UInt32 EXP_WAIT_FOR_TRIGGER_IN = 0x80000000;
 
         /// <summary>
         /// Set in StarExposureParams2::exposureTime to mask with exposure time to remove flags.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_TIME_MASK = 0x00FFFFFF; 
+        const UInt32 EXP_TIME_MASK = 0x00FFFFFF;
 
         /// <summary>
         /// Bit Field Definitions for the in the GetCCDInfoResults4 struct.
@@ -2334,7 +2363,7 @@ namespace SbigSharp
         /// mask for CCD type
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_TYPE_MASK = 0x0001; 
+        const UInt16 CB_CCD_TYPE_MASK = 0x0001;
 
         /// <summary>
         /// b0=0 is full frame CCD
@@ -2809,7 +2838,7 @@ namespace SbigSharp
         public struct QueryTemperatureStatusResults2 : IResults
         {
             /// <summary>
-            /// temperature regulation is enabled when this is TRUE. &REGULATION_FROZEN_MASK is TRUE when TE is frozen.
+            /// temperature regulation is enabled when this is TRUE. &amp;REGULATION_FROZEN_MASK is TRUE when TE is frozen.
             /// </summary>
             public MY_LOGICAL coolingEnabled;
             /// <summary>
@@ -2868,7 +2897,7 @@ namespace SbigSharp
 
         /// <summary>
         /// The Activate Relay command is used to activate one or more of the telescope control outputs or to cancel an activation in progress.
-        /// <para>The status for this command (from QueryCommandStatus) consists of four bit fields:</para>
+        /// <para>The status for this command (from <seealso cref="PAR_COMMAND.CC_QUERY_COMMAND_STATUS"/>) consists of four bit fields:</para>
         /// <para>b3 = +X Relay, 0=Off, 1= Active</para>
         /// <para>b2 = -X Relay, 0=Off, 1= Active</para>
         /// <para>b1 = +Y Relay, 0=Off, 1= Active</para>
@@ -2960,6 +2989,9 @@ namespace SbigSharp
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetSerialStatusResults : IResults
         {
+            /// <summary>
+            /// Clear to COM.
+            /// </summary>
             public MY_LOGICAL clearToCOM;
         };
 
@@ -3014,10 +3046,10 @@ namespace SbigSharp
             /// driver version in BCD with the format XX.XX
             /// </summary>
             public UInt16 version;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             /// <summary>
             /// driver name, null terminated string
             /// </summary>
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             public string name;
             /// <summary>
             /// maximum request response available from this driver
@@ -3087,15 +3119,18 @@ namespace SbigSharp
             /// </summary>
             public CAMERA_TYPE cameraType;
 
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             /// <summary>
             /// null terminated string containing the name of the camera.
             /// </summary>
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             public string name;
             /// <summary>
             /// number of readout modes supported.
             /// </summary>
             public UInt16 readoutModes;
+            /// <summary>
+            /// number of readout modes supported.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.Struct, SizeConst = 20)]
             public READOUT_INFO[] readoutInfo;
         };
@@ -3121,10 +3156,10 @@ namespace SbigSharp
             /// </summary>
             public IMAGING_ABG imagingABG;
 
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
             /// <summary>
             /// null terminated serial number string
             /// </summary>
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
             public string serialNumber;
         };
 
@@ -3628,10 +3663,10 @@ namespace SbigSharp
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetErrorStringResults : IResults
         {
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             /// <summary>
             /// Error string in english (not unicode).
             /// </summary>
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             public string errorString;
         };
 
@@ -3766,7 +3801,7 @@ namespace SbigSharp
         ///   FALSE it disables the background flushing of the vertical clocks of KAI CCDs during exposure
         ///   integration and is intended for SBIG testing only.
         /// * The DCP_ETHERNET_PIPELINE_ENABLE parameter defaults to FALSE and setting it to
-        ///   TRUE can increase the throughput of Ethernet based cameras like the STX & STT but doing so
+        ///   TRUE can increase the throughput of Ethernet based cameras like the STX &amp; STT but doing so
         ///   is not recommended for robust operation.
         /// * The DCP_FAST_LINK parameter defaults to FALSE and setting it to TRUE speeds up the
         ///   Establish Link command by not dumping the pixel FIFOs in the camera, It is used internally to
@@ -3873,21 +3908,20 @@ namespace SbigSharp
             /// Camera type found. see also: <seealso cref="CAMERA_TYPE"/> enum.
             /// </summary>
             public CAMERA_TYPE cameraType;
-
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             /// <summary>
             /// null terminated string. Name of found camera.
             /// </summary>
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             public string name;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
             /// <summary>
             /// null terminated string. Serial number of found camera.
             /// </summary>
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
             public string serialNumber;
         };
 
         /// <summary>
-        /// Returns a list of up to four cameras found by the driver via USB.
+        /// Returns a list of up to 4 cameras found by the driver via USB.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryUSBResults : IResults
@@ -3904,7 +3938,7 @@ namespace SbigSharp
         };
 
         /// <summary>
-        /// Returns a list of up to eight cameras found by the driver via USB.
+        /// Returns a list of up to 8 cameras found by the driver via USB.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryUSBResults2 : IResults
@@ -3919,6 +3953,10 @@ namespace SbigSharp
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.Struct, SizeConst = 8)]
             public QUERY_USB_INFO[] usbInfo;
         };
+
+        /// <summary>
+        /// Returns a list of up to 24 cameras found by the driver via USB.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryUSBResults3 : IResults
         {
@@ -3926,8 +3964,11 @@ namespace SbigSharp
             /// Number of cameras found. (Max 24)
             /// </summary>
             public UInt16 camerasFound;
+            /// <summary>
+            /// Information returned by cameras.
+            /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.Struct, SizeConst = 24)]
-            public QUERY_USB_INFO[] usbInfo;     //<! Information returned by cameras.
+            public QUERY_USB_INFO[] usbInfo;
         };
 
         /// <summary>
@@ -3949,15 +3990,15 @@ namespace SbigSharp
             /// </summary>
             public CAMERA_TYPE cameraType;
 
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             /// <summary>
             /// null terminated string. Name of found camera.
             /// </summary>
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             public string name;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
             /// <summary>
             /// null terminated string. Serial number of found camera. 
             /// </summary>
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
             public string serialNumber;
         };
 
@@ -4345,7 +4386,6 @@ namespace SbigSharp
         };
 
         /// <summary>
-
         /// The Motor Focus Command is a high-level API for controlling SBIG Motor Focus accessories. 
         /// It supports the new ST Motor Focus unit and will be expanded as required to support new models in the future.
         /// </summary>
@@ -4873,12 +4913,16 @@ namespace SbigSharp
             /// I/O flags.
             /// </summary>
             public UInt16 ioFlags;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 1024)]
             /// <summary>
             /// Path to SBIGUDRV log file.
             /// </summary>
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 1024)]
             public string logFilePathName;
         };
+
+        /// <summary>
+        /// Get Readout In Progress Results
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetReadoutInProgressResults : IResults
         {
@@ -4887,18 +4931,44 @@ namespace SbigSharp
             /// </summary>
             public MY_LOGICAL RIP;
         };
+
+        /// <summary>
+        /// Set RBI Preflash Params
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct SetRBIPreflashParams : IParams
         {
+            /// <summary>
+            /// darkFrameLength
+            /// </summary>
             public UInt16 darkFrameLength;
+            /// <summary>
+            /// flushCount
+            /// </summary>
             public UInt16 flushCount;
         };
+
+        /// <summary>
+        /// Get RBI Preflash Results
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct GetRBIPreflashResults : IResults
         {
+            /// <summary>
+            /// darkFrameLength
+            /// </summary>
             public UInt16 darkFrameLength;
+            /// <summary>
+            /// flushCount
+            /// </summary>
             public UInt16 flushCount;
         };
+
+        /// <summary>
+        /// The <seealso cref="PAR_COMMAND.CC_QUERY_FEATURE_SUPPORTED"/> command queries the driver to see if the camera's firmware supports a given feature. 
+        /// See <see cref="FeatureFirmwareRequirement"/> enum for information on supported features.
+        /// The QueryFeatureSupportedResults structure's result variable will be TRUE if the feature is supported by the connected camera, and false otherwise.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryFeatureSupportedParams : IParams
         {
@@ -4907,6 +4977,10 @@ namespace SbigSharp
             /// </summary>
             public FeatureFirmwareRequirement ffr;
         };
+
+        /// <summary>
+        /// See also <seealso cref="QueryFeatureSupportedParams"/> parameter.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         public struct QueryFeatureSupportedResults : IResults
         {
@@ -4928,11 +5002,20 @@ namespace SbigSharp
             [StructLayout(LayoutKind.Explicit, Pack = 8)]
             public struct LARGE_INTEGER
             {
+                /// <summary>
+                /// Double Word
+                /// </summary>
                 [FieldOffset(0)]
                 public UInt32 LowPart;
+                /// <summary>
+                /// Double Word
+                /// </summary>
                 [FieldOffset(4)]
                 public Int32 HighPart;
 
+                /// <summary>
+                /// Quad Word
+                /// </summary>
                 [FieldOffset(0)]
                 public Int64 QuadPart;
             };
@@ -4960,13 +5043,23 @@ namespace SbigSharp
         /// </summary>
         public class FailedOperationException : Exception
         {
+            /// <summary>
+            /// Error code.
+            /// </summary>
             public PAR_ERROR ErrorCode { get; private set; }
 
+            /// <summary>
+            /// FailedOperationException constructor.
+            /// </summary>
+            /// <param name="errorCode"></param>
             public FailedOperationException(PAR_ERROR errorCode)
             {
                 ErrorCode = errorCode;
             }
 
+            /// <summary>
+            /// Error message.
+            /// </summary>
             public override string Message
             {
                 get
