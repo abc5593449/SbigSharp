@@ -48,7 +48,7 @@ namespace SbigSharp
         /// Command ID enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum PAR_COMMAND : ushort
+        public enum PAR_COMMAND : UInt16
         {
             /// <summary>
             /// Null Command
@@ -419,13 +419,13 @@ namespace SbigSharp
         /// <summary>
         /// Base value for all error IDs.
         /// </summary>
-        const ushort CE_ERROR_BASE = 1;
+        const UInt16 CE_ERROR_BASE = 1;
 
         /// <summary>
         /// Error ID enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum PAR_ERROR : ushort
+        public enum PAR_ERROR : UInt16
         {
             #region 0 - 10
             /// <summary>
@@ -628,7 +628,7 @@ namespace SbigSharp
         /// Camera states enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum PAR_COMMAND_STATUS : ushort
+        public enum PAR_COMMAND_STATUS : UInt16
         {
             /// <summary>
             /// Camera state: Idle.
@@ -648,7 +648,7 @@ namespace SbigSharp
             CS_INTEGRATION_COMPLETE
         };
 
-        public enum FeatureFirmwareRequirement : ushort
+        public enum FeatureFirmwareRequirement : UInt16
         {
             FFR_CTRL_OFFSET_CORRECTION,
             FFR_CTRL_EXT_SHUTTER_ONLY,
@@ -700,7 +700,7 @@ namespace SbigSharp
         /// Query Temperature Status enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum QUERY_TEMP_STATUS_REQUEST : ushort
+        public enum QUERY_TEMP_STATUS_REQUEST : UInt16
         {
             /// <summary>
             /// Temperature status Standard
@@ -720,7 +720,7 @@ namespace SbigSharp
         /// ABG state enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum ABG_STATE7 : ushort
+        public enum ABG_STATE7 : UInt16
         {
             /// <summary>
             /// ABG Low 7
@@ -758,21 +758,21 @@ namespace SbigSharp
 
             public UInt16 value;
 
-            public MY_LOGICAL(ushort value)
+            public MY_LOGICAL(UInt16 value)
             {
                 this.value = value;
             }
 
             public MY_LOGICAL(bool value)
             {
-                this.value = (ushort)(value ? 1 : 0);
+                this.value = (UInt16)(value ? 1 : 0);
             }
 
             /// <summary>
-            /// implicit ushort to MY_LOGICAL conversion operator
+            /// implicit UInt16 to MY_LOGICAL conversion operator
             /// </summary>
-            /// <param name="us">ushort type value.</param>
-            public static implicit operator MY_LOGICAL(ushort us)
+            /// <param name="us">UInt16 type value.</param>
+            public static implicit operator MY_LOGICAL(UInt16 us)
             {
                 return new MY_LOGICAL(us);
             }
@@ -787,7 +787,7 @@ namespace SbigSharp
             }
 
             /// <summary>
-            /// implicit MY_LOGICAL to ushort conversion operator
+            /// implicit MY_LOGICAL to UInt16 conversion operator
             /// </summary>
             /// <param name="logical">MY_LOGICAL type value.</param>
             public static implicit operator bool(MY_LOGICAL logical)
@@ -800,7 +800,7 @@ namespace SbigSharp
         /// Driver request enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum DRIVER_REQUEST : ushort
+        public enum DRIVER_REQUEST : UInt16
         {
             /// <summary>
             /// Driver standard
@@ -820,7 +820,7 @@ namespace SbigSharp
         /// CCD Request enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum CCD_REQUEST : ushort
+        public enum CCD_REQUEST : UInt16
         {
             /// <summary>
             /// Request Imaging CCD
@@ -840,7 +840,7 @@ namespace SbigSharp
         /// Readout Modes enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum READOUT_BINNING_MODE : ushort
+        public enum READOUT_BINNING_MODE : UInt16
         {
             /// <summary>
             /// 1x1 binning readout mode
@@ -892,7 +892,7 @@ namespace SbigSharp
         /// CCD Information request enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum CCD_INFO_REQUEST : ushort
+        public enum CCD_INFO_REQUEST : UInt16
         {
             /// <summary>
             /// Imaging CCD Info
@@ -928,7 +928,7 @@ namespace SbigSharp
         /// Anti-blooming gate capability enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum IMAGING_ABG : ushort
+        public enum IMAGING_ABG : UInt16
         {
             /// <summary>
             /// Anti-blooming gate not Present
@@ -944,7 +944,7 @@ namespace SbigSharp
         /// Port bit-rate enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum PORT_RATE : ushort
+        public enum PORT_RATE : UInt16
         {
             /// <summary>
             /// Bit-rate auto
@@ -976,7 +976,7 @@ namespace SbigSharp
         /// Camera type enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum CAMERA_TYPE : ushort
+        public enum CAMERA_TYPE : UInt16
         {
             /// <summary>
             /// ST-7 Camera
@@ -1066,7 +1066,7 @@ namespace SbigSharp
         /// Shutter Control enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum SHUTTER_COMMAND : ushort
+        public enum SHUTTER_COMMAND : UInt16
         {
             /// <summary>
             /// Shutter Control: Leave shutter in current state.
@@ -1098,7 +1098,7 @@ namespace SbigSharp
         /// Shutter State enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum SHUTTER_STATE7 : ushort
+        public enum SHUTTER_STATE7 : UInt16
         {
             /// <summary>
             /// Shuter State: Open
@@ -1122,7 +1122,7 @@ namespace SbigSharp
         /// Temperature regulation enum 
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        public enum TEMPERATURE_REGULATION : ushort
+        public enum TEMPERATURE_REGULATION : UInt16
         {
             /// <summary>
             /// Temperature regulation off
@@ -1162,7 +1162,7 @@ namespace SbigSharp
         /// <summary>
         /// LED State enum 
         /// </summary>
-        public enum LED_STATE : ushort
+        public enum LED_STATE : UInt16
         {
             /// <summary>
             /// LED off
@@ -1185,7 +1185,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter command enum
         /// </summary>
-        public enum FILTER_COMMAND : ushort
+        public enum FILTER_COMMAND : UInt16
         {
             /// <summary>
             /// Filter leave
@@ -1224,7 +1224,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter State enum 
         /// </summary>
-        public enum FILTER_STATE : ushort
+        public enum FILTER_STATE : UInt16
         {
             /// <summary>
             /// Filter wheel moving
@@ -1259,7 +1259,7 @@ namespace SbigSharp
         /// <summary>
         /// A/D Size enum 
         /// </summary>
-        public enum AD_SIZE : ushort
+        public enum AD_SIZE : UInt16
         {
             /// <summary>
             /// Unknown size
@@ -1278,7 +1278,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter Wheel Type enum
         /// </summary>
-        public enum FILTER_TYPE : ushort
+        public enum FILTER_TYPE : UInt16
         {
             /// <summary>
             /// Unkwown Filter Wheel
@@ -1301,7 +1301,7 @@ namespace SbigSharp
         /// <summary>
         /// AO Focus enum 
         /// </summary>
-        public enum AO_FOCUS_COMMAND : ushort
+        public enum AO_FOCUS_COMMAND : UInt16
         {
             /// <summary>
             /// AO Focus hard center
@@ -1335,7 +1335,7 @@ namespace SbigSharp
         /// <summary>
         /// SBIG Device types enum 
         /// </summary>
-        public enum SBIG_DEVICE_TYPE : ushort
+        public enum SBIG_DEVICE_TYPE : UInt16
         {
             /// <summary>
             /// Device type: None
@@ -1462,7 +1462,7 @@ namespace SbigSharp
         /// <summary>
         /// Driver control parameters enum
         /// </summary>
-        public enum DRIVER_CONTROL_PARAM : ushort
+        public enum DRIVER_CONTROL_PARAM : UInt16
         {
             /// <summary>
             /// Enable FIFO
@@ -1565,7 +1565,7 @@ namespace SbigSharp
         /// <summary>
         /// USB A/D Control commands 
         /// </summary>
-        public enum USB_AD_CONTROL_COMMAND : ushort
+        public enum USB_AD_CONTROL_COMMAND : UInt16
         {
             /// <summary>
             /// Imaging gain
@@ -1616,7 +1616,7 @@ namespace SbigSharp
         /// <summary>
         /// USB Driver enum 
         /// </summary>
-        public enum ENUM_USB_DRIVER : ushort
+        public enum ENUM_USB_DRIVER : UInt16
         {
             /// <summary>
             /// SBIG E
@@ -1639,7 +1639,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter Weel Model Selection enum 
         /// </summary>
-        public enum CFW_MODEL_SELECT : ushort
+        public enum CFW_MODEL_SELECT : UInt16
         {
             /// <summary>
             /// Unknown Model
@@ -1726,7 +1726,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter Wheel Command enum 
         /// </summary>
-        public enum CFW_COMMAND : ushort
+        public enum CFW_COMMAND : UInt16
         {
             /// <summary>
             /// Query
@@ -1757,7 +1757,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter Wheel Status enum 
         /// </summary>
-        public enum CFW_STATUS : ushort
+        public enum CFW_STATUS : UInt16
         {
             /// <summary>
             /// Unknown state
@@ -1776,7 +1776,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter Wheel errors enum 
         /// </summary>
-        public enum CFW_ERROR : ushort
+        public enum CFW_ERROR : UInt16
         {
             /// <summary>
             /// No error
@@ -1819,7 +1819,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter Wheel position enum 
         /// </summary>
-        public enum CFW_POSITION : ushort
+        public enum CFW_POSITION : UInt16
         {
             /// <summary>
             /// Unknown
@@ -1870,7 +1870,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter Wheel COM port enum 
         /// </summary>
-        public enum CFW_COM_PORT : ushort
+        public enum CFW_COM_PORT : UInt16
         {
             /// <summary>
             /// COM1
@@ -1893,7 +1893,7 @@ namespace SbigSharp
         /// <summary>
         /// Filter Wheel Get Info select enum 
         /// </summary>
-        public enum CFW_GETINFO_SELECT : ushort
+        public enum CFW_GETINFO_SELECT : UInt16
         {
             /// <summary>
             /// Firmware version
@@ -1912,7 +1912,7 @@ namespace SbigSharp
         /// <summary>
         /// Bit I/O Operation enum 
         /// </summary>
-        public enum BITIO_OPERATION : ushort
+        public enum BITIO_OPERATION : UInt16
         {
             /// <summary>
             /// Write
@@ -1927,7 +1927,7 @@ namespace SbigSharp
         /// <summary>
         /// Bit I/O Name enum 
         /// </summary>
-        public enum BITIO_NAME : ushort
+        public enum BITIO_NAME : UInt16
         {
             /// <summary>
             /// In: PS Low
@@ -1954,7 +1954,7 @@ namespace SbigSharp
         /// <summary>
         /// Biorad TDI Error enum 
         /// </summary>
-        public enum BTDI_ERROR : ushort
+        public enum BTDI_ERROR : UInt16
         {
             /// <summary>
             /// BTDI Schedule error
@@ -1969,7 +1969,7 @@ namespace SbigSharp
         /// <summary>
         /// Motor Focus Model Selection enum 
         /// </summary>
-        public enum MF_MODEL_SELECT : ushort
+        public enum MF_MODEL_SELECT : UInt16
         {
             /// <summary>
             /// Unknown
@@ -1988,7 +1988,7 @@ namespace SbigSharp
         /// <summary>
         /// Motor Focus Command enum 
         /// </summary>
-        public enum MF_COMMAND : ushort
+        public enum MF_COMMAND : UInt16
         {
             /// <summary>
             /// Query
@@ -2015,7 +2015,7 @@ namespace SbigSharp
         /// <summary>
         /// Motor Focus Status 
         /// </summary>
-        public enum MF_STATUS : ushort
+        public enum MF_STATUS : UInt16
         {
             /// <summary>
             /// Unknown
@@ -2034,7 +2034,7 @@ namespace SbigSharp
         /// <summary>
         /// Motor Focus Error state enum 
         /// </summary>
-        public enum MF_ERROR : ushort
+        public enum MF_ERROR : UInt16
         {
             /// <summary>
             /// None
@@ -2073,7 +2073,7 @@ namespace SbigSharp
         /// <summary>
         /// Motor Focus Get Info Select enum 
         /// </summary>
-        public enum MF_GETINFO_SELECT : ushort
+        public enum MF_GETINFO_SELECT : UInt16
         {
             /// <summary>
             /// Firmware Version
@@ -2088,7 +2088,7 @@ namespace SbigSharp
         /// <summary>
         /// Differential guider commands enum 
         /// </summary>
-        public enum DIFF_GUIDER_COMMAND : ushort
+        public enum DIFF_GUIDER_COMMAND : UInt16
         {
             /// <summary>
             /// Detect Differential guider hardware
@@ -2107,7 +2107,7 @@ namespace SbigSharp
         /// <summary>
         /// Differential guider error enum 
         /// </summary>
-        public enum DIFF_GUIDER_ERROR : ushort
+        public enum DIFF_GUIDER_ERROR : UInt16
         {
             /// <summary>
             /// No error
@@ -2130,7 +2130,7 @@ namespace SbigSharp
         /// <summary>
         /// Differential Guider status enum 
         /// </summary>
-        public enum DIFF_GUIDER_STATUS : ushort
+        public enum DIFF_GUIDER_STATUS : UInt16
         {
             /// <summary>
             /// Unknown
@@ -2149,7 +2149,7 @@ namespace SbigSharp
         /// <summary>
         /// Fan state enum 
         /// </summary>
-        public enum FAN_STATE : ushort
+        public enum FAN_STATE : UInt16
         {
             /// <summary>
             /// Fan Off
@@ -2168,7 +2168,7 @@ namespace SbigSharp
         /// <summary>
         /// Bulk IO command enum 
         /// </summary>
-        public enum BULK_IO_COMMAND : ushort
+        public enum BULK_IO_COMMAND : UInt16
         {
             /// <summary>
             /// Read
@@ -2187,7 +2187,7 @@ namespace SbigSharp
         /// <summary>
         /// Pixel channel mode enum 
         /// </summary>
-        public enum PIXEL_CHANNEL_MODE : ushort
+        public enum PIXEL_CHANNEL_MODE : UInt16
         {
             /// <summary>
             /// Pixel Channel A
@@ -2206,7 +2206,7 @@ namespace SbigSharp
         /// <summary>
         /// Active Pixel Channel enum 
         /// </summary>
-        public enum ACTIVE_PIXEL_CHANNEL : ushort
+        public enum ACTIVE_PIXEL_CHANNEL : UInt16
         {
             /// <summary>
             /// Pixel Channel A
@@ -2218,7 +2218,7 @@ namespace SbigSharp
             PIXEL_CHANNEL_B
         };
 
-        public enum EXTRA_EXPOSURE_STATUS : ushort
+        public enum EXTRA_EXPOSURE_STATUS : UInt16
         {
             /// <summary>
             /// CCD is currently idle.
@@ -4698,7 +4698,7 @@ namespace SbigSharp
         /// <summary>
         /// Flags for enabling debug messages of CC_***_*** commands.
         /// </summary>
-        public enum DEBUG_LOG_CC_FLAGS : ushort
+        public enum DEBUG_LOG_CC_FLAGS : UInt16
         {
             /// <summary>
             /// Log MC_SYSTEM, CC_BREAKPOINT, CC_OPEN_*, CC_CLOSE_*, etc.
@@ -4737,7 +4737,7 @@ namespace SbigSharp
         /// <summary>
         /// Flags for enabling debug messages of MC_***_*** commands.
         /// </summary>
-        public enum DEBUG_LOG_MC_FLAGS : ushort
+        public enum DEBUG_LOG_MC_FLAGS : UInt16
         {
             /// <summary>
             /// Log MC_START_*, MC_END_*, MC_OPEN_*, MC_CLOSE_*, etc...
@@ -4776,7 +4776,7 @@ namespace SbigSharp
         /// <summary>
         /// Flags for enabling debug messages of communication methods.
         /// </summary>
-        public enum DEBUG_LOG_FCE_FLAGS : ushort
+        public enum DEBUG_LOG_FCE_FLAGS : UInt16
         {
             /// <summary>
             /// Log Ethernet communication functions.
@@ -4815,7 +4815,7 @@ namespace SbigSharp
         /// <summary>
         /// Flags for enabling debug messages of I/O operations.
         /// </summary>
-        public enum DEBUG_LOG_IO_FLAGS : ushort
+        public enum DEBUG_LOG_IO_FLAGS : UInt16
         {
             /// <summary>
             /// Log reading from com pipe.
