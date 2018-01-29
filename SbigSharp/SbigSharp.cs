@@ -5372,19 +5372,21 @@ namespace SbigSharp
                 readoutMode = sep2.readoutMode
             };
 
+            var rlpGCH = GCHandle.Alloc(rlp, GCHandleType.Pinned);
+            GCHandle dataGCH = GCHandle.Alloc(data, GCHandleType.Pinned);
+            IntPtr dataPtr = dataGCH.AddrOfPinnedObject();
+
             // get the image from the camera, line by line
             for (int y = 0; y < sep2.height; y++)
             {
-                UnivDrvCommand(
-                  PAR_COMMAND.CC_READOUT_LINE,
-                  rlp,
-                  out UInt16[] readoutLineData);
-
-                for (int x = 0; x < sep2.width; x++)
-                {
-                    data[y, x] = readoutLineData[x];
-                }
+                _UnivDrvCommand(
+                    PAR_COMMAND.CC_READOUT_LINE,
+                    rlpGCH.AddrOfPinnedObject(),
+                    dataPtr + (y * sep2.width * sizeof(UInt16)));
             }
+            // cleanup our memory goo
+            rlpGCH.Free();
+            dataGCH.Free();
 
             return data;
         }
