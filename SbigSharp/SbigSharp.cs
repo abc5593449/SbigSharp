@@ -5346,15 +5346,15 @@ namespace SbigSharp
                 PAR_COMMAND.CC_END_EXPOSURE,
                 new EndExposureParams()
                 {
-                    ccd = CCD_REQUEST.CCD_IMAGING
+                    ccd = sep2.ccd
                 });
             // then telling it where and how we're going to read
             UnivDrvCommand(
                 PAR_COMMAND.CC_START_READOUT,
                 new StartReadoutParams
                 {
-                    ccd = CCD_REQUEST.CCD_IMAGING,
-                    readoutMode = 0,
+                    ccd = sep2.ccd,
+                    readoutMode = sep2.readoutMode,
                     left = 0,
                     top = 0,
                     width = sep2.width,
@@ -5366,10 +5366,10 @@ namespace SbigSharp
             // put the data into it
             var rlp = new ReadoutLineParams
             {
-                ccd = CCD_REQUEST.CCD_IMAGING,
+                ccd = sep2.ccd,
                 pixelStart = 0,
                 pixelLength = sep2.width,
-                readoutMode = READOUT_BINNING_MODE.RM_1X1
+                readoutMode = sep2.readoutMode
             };
 
             // get the image from the camera, line by line
