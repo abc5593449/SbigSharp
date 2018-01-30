@@ -5317,12 +5317,9 @@ namespace SbigSharp
         }
 
         /// <summary>
-        /// Waits for any exposure in progress to complete, ends it, 
-        /// and reads it out into a 2D UInt16 array.
+        /// Waits for any exposure in progress to complete.
         /// </summary>
-        /// <param name="sep2">See also <seealso cref="StartExposureParams2"/> struct.</param>
-        /// <returns>2D UInt16 array of Data.</returns>
-        public static UInt16[,] WaitEndAndReadoutExposure(StartExposureParams2 sep2)
+        public static void WaitExposure()
         {
             var qcsp = new QueryCommandStatusParams()
             {
@@ -5340,7 +5337,15 @@ namespace SbigSharp
                 UnivDrvCommand(PAR_COMMAND.CC_QUERY_COMMAND_STATUS, qcsp, out qcsr);
             }
             while (PAR_ERROR.CE_NO_EXPOSURE_IN_PROGRESS != qcsr.status);
+        }
 
+        /// <summary>
+        /// Read data into the buffer.
+        /// </summary>
+        private static void _ReadoutData<T>(
+            StartExposureParams2 sep2, ref T buffer)
+            where T : class
+        {
             // prepare the CCD for readout
             UnivDrvCommand(
                 PAR_COMMAND.CC_END_EXPOSURE,
@@ -5361,8 +5366,6 @@ namespace SbigSharp
                     height = sep2.height
                 });
 
-            var data = new UInt16[sep2.height, sep2.width];
-
             // put the data into it
             var rlp = new ReadoutLineParams
             {
@@ -5373,7 +5376,7 @@ namespace SbigSharp
             };
 
             var rlpGCH = GCHandle.Alloc(rlp, GCHandleType.Pinned);
-            GCHandle dataGCH = GCHandle.Alloc(data, GCHandleType.Pinned);
+            GCHandle dataGCH = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             IntPtr dataPtr = dataGCH.AddrOfPinnedObject();
 
             // get the image from the camera, line by line
@@ -5387,11 +5390,46 @@ namespace SbigSharp
             // cleanup our memory goo
             rlpGCH.Free();
             dataGCH.Free();
+        }
 
-            return data;
+        /// <summary>
+        /// Read data into the buffer.
+        /// </summary>
+        /// <param name="sep2">See also <seealso cref="StartExposureParams2"/> struct.</param>
+        /// <param name="data">1D UInt16 Array of data uses buffer references.</param>
+        public static void ReadoutData(
+            StartExposureParams2 sep2, ref UInt16[] data)
+        {
+            _ReadoutData(sep2, ref data);
+        }
+
+        /// <summary>
+        /// Read data into the buffer.
+        /// </summary>
+        /// <param name="sep2">See also <seealso cref="StartExposureParams2"/> struct.</param>
+        /// <param name="data">2D UInt16 Array of data uses buffer references.</param>
+        public static void ReadoutData(
+            StartExposureParams2 sep2, ref UInt16[,] data)
+        {
+            _ReadoutData(sep2, ref data);
+        }
+
+        /// <summary>
+        /// Waits for any exposure in progress to complete, ends it, 
+        /// and reads it out into a 2D UInt16 array.
+        /// </summary>
+        /// <param name="sep2">See also <seealso cref="StartExposureParams2"/> struct.</param>
+        /// <returns>2D UInt16 array of Data.</returns>
+        public static UInt16[,] WaitEndAndReadoutExposure(StartExposureParams2 sep2)
+        {
+            WaitExposure();
+
+            var data = new UInt16[sep2.height, sep2.width];
+            _ReadoutData(sep2, ref data);
+
+            return data as UInt16[,];
         }
 
         #endregion // Extension
-
     } // class
 } // namespace
