@@ -5317,6 +5317,22 @@ namespace SbigSharp
         }
 
         /// <summary>
+        /// Use <seealso cref="StartExposureParams"/> to start exposure.
+        /// </summary>
+        public static void Exposure(StartExposureParams ShootingParameters)
+        {
+            UnivDrvCommand(PAR_COMMAND.CC_START_EXPOSURE, ShootingParameters);
+        }
+
+        /// <summary>
+        /// Use <seealso cref="StartExposureParams2"/> to start exposure.
+        /// </summary>
+        public static void Exposure(StartExposureParams2 ShootingParameters2)
+        {
+            UnivDrvCommand(PAR_COMMAND.CC_START_EXPOSURE2, ShootingParameters2);
+        }
+
+        /// <summary>
         /// Waits for any exposure in progress to complete.
         /// </summary>
         public static void WaitExposure()
