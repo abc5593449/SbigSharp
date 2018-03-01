@@ -5319,17 +5319,19 @@ namespace SbigSharp
         /// <summary>
         /// Use <seealso cref="StartExposureParams"/> to start exposure.
         /// </summary>
-        public static void Exposure(StartExposureParams ShootingParameters)
+        /// <param name="sep"><seealso cref="StartExposureParams"/></param>
+        public static void Exposure(StartExposureParams sep)
         {
-            UnivDrvCommand(PAR_COMMAND.CC_START_EXPOSURE, ShootingParameters);
+            UnivDrvCommand(PAR_COMMAND.CC_START_EXPOSURE, sep);
         }
 
         /// <summary>
         /// Use <seealso cref="StartExposureParams2"/> to start exposure.
         /// </summary>
-        public static void Exposure(StartExposureParams2 ShootingParameters2)
+        /// <param name="sep2"><seealso cref="StartExposureParams2"/></param>
+        public static void Exposure(StartExposureParams2 sep2)
         {
-            UnivDrvCommand(PAR_COMMAND.CC_START_EXPOSURE2, ShootingParameters2);
+            UnivDrvCommand(PAR_COMMAND.CC_START_EXPOSURE2, sep2);
         }
 
         /// <summary>
@@ -5356,19 +5358,31 @@ namespace SbigSharp
         }
 
         /// <summary>
-        /// Read data into the buffer.
+        /// Abort exposure.
         /// </summary>
-        private static void _ReadoutData<T>(
-            StartExposureParams2 sep2, ref T buffer)
-            where T : class
+        /// <param name="sep2"><seealso cref="StartExposureParams2"/></param>
+        public static void AbortExposure(StartExposureParams2 sep2)
         {
-            // prepare the CCD for readout
             UnivDrvCommand(
                 PAR_COMMAND.CC_END_EXPOSURE,
                 new EndExposureParams()
                 {
                     ccd = sep2.ccd
                 });
+        }
+
+        /// <summary>
+        /// Read data into the buffer.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sep2"></param>
+        /// <param name="buffer"></param>
+        private static void _ReadoutData<T>(
+            StartExposureParams2 sep2, ref T buffer)
+            where T : class
+        {
+            // prepare the CCD for readout
+            AbortExposure(sep2);
             // then telling it where and how we're going to read
             UnivDrvCommand(
                 PAR_COMMAND.CC_START_READOUT,
