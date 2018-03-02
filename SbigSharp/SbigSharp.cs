@@ -5335,9 +5335,10 @@ namespace SbigSharp
         }
 
         /// <summary>
-        /// Waits for any exposure in progress to complete.
+        /// Is the exposure in progress?
         /// </summary>
-        public static void WaitExposure()
+        /// <returns>Yes or No</returns>
+        public static bool ExposureInProgress()
         {
             var qcsp = new QueryCommandStatusParams()
             {
@@ -5349,12 +5350,19 @@ namespace SbigSharp
                 status = PAR_ERROR.CE_NO_ERROR
             };
 
+            UnivDrvCommand(PAR_COMMAND.CC_QUERY_COMMAND_STATUS, qcsp, out qcsr);
+
+            return (PAR_ERROR.CE_EXPOSURE_IN_PROGRESS == qcsr.status) &&
+                (PAR_ERROR.CE_NO_EXPOSURE_IN_PROGRESS != qcsr.status);
+        }
+
+        /// <summary>
+        /// Waits for any exposure in progress to complete.
+        /// </summary>
+        public static void WaitExposure()
+        {
             // wait for the exposure to be done
-            do
-            {
-                UnivDrvCommand(PAR_COMMAND.CC_QUERY_COMMAND_STATUS, qcsp, out qcsr);
-            }
-            while (PAR_ERROR.CE_NO_EXPOSURE_IN_PROGRESS != qcsr.status);
+            while (ExposureInProgress()) ;
         }
 
         /// <summary>
