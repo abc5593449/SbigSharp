@@ -6,7 +6,8 @@ namespace SbigSharpDemo
     class Program
     {
         static void Main(string[] args)
-        { // initialize the driver
+        {
+            // initialize the driver
             SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_OPEN_DRIVER);
 
             // ask the SBIG driver what, if any, USB cameras are plugged in
@@ -14,21 +15,19 @@ namespace SbigSharpDemo
             for (int i = 0; i < qur.camerasFound; i++)
             {
                 if (!qur.usbInfo[i].cameraFound)
-                    Console.WriteLine("Cam " + i + ": not found");
+                    Console.WriteLine($"Cam {i}: not found");
                 else
-                    Console.WriteLine(String.Format(
-                        "Cam {0}: type={1} name={2} ser={3}",
-                        i,
-                        qur.usbInfo[i].cameraType,
-                        qur.usbInfo[i].name,
-                        qur.usbInfo[i].serialNumber));
+                    Console.WriteLine(
+                        $"Cam {i}: type={qur.usbInfo[i].cameraType} " +
+                        $"name={ qur.usbInfo[i].name} " +
+                        $"ser={qur.usbInfo[i].serialNumber}");
             }
 
-            //
             // connect to the camera
-            //
-            SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_OPEN_DEVICE, new SBIG.OpenDeviceParams("127.0.0.1"));
-            SBIG.CAMERA_TYPE ct = SBIG.EstablishLink();
+            SBIG.UnivDrvCommand(
+                SBIG.PAR_COMMAND.CC_OPEN_DEVICE,
+                new SBIG.OpenDeviceParams("127.0.0.1"));
+            var cameraType = SBIG.EstablishLink();
 
             // query camera info
             var gcir0 = new SBIG.GetCCDInfoResults0();
@@ -40,18 +39,17 @@ namespace SbigSharpDemo
                 },
                 out gcir0);
             // now print it out
-            Console.WriteLine("Firmware version: " +
-                (gcir0.firmwareVersion >> 8) + "." + (gcir0.firmwareVersion & 0xFF));
-            Console.WriteLine("Camera type: " + gcir0.cameraType.ToString());
-            Console.WriteLine("Camera name: " + gcir0.name);
-            Console.WriteLine("Readout modes: " + gcir0.readoutModes);
+            Console.WriteLine($"Firmware version: {gcir0.firmwareVersion >> 8}.{gcir0.firmwareVersion & 0xFF}");
+            Console.WriteLine($"Camera type: {gcir0.cameraType}");
+            Console.WriteLine($"Camera name: {gcir0.name}");
+            Console.WriteLine($"Readout modes: {gcir0.readoutModes}");
             for (int i = 0; i < gcir0.readoutModes; i++)
             {
                 SBIG.READOUT_INFO ri = gcir0.readoutInfo[i];
-                Console.WriteLine(" Readout mode: " + ri.mode);
-                Console.WriteLine("  Width: " + ri.width);
-                Console.WriteLine("  Height: " + ri.height);
-                Console.WriteLine("  Gain: " + (ri.gain >> 8) + "." + (ri.gain & 0xFF) + " e-/ADU");
+                Console.WriteLine($"Readout mode: {ri.mode}");
+                Console.WriteLine($"Width: {ri.width}");
+                Console.WriteLine($"Height: {ri.height}");
+                Console.WriteLine($"Gain: {ri.gain >> 8}.{ri.gain & 0xFF} e-/ADU");
             }
 
             // get extended info
@@ -64,12 +62,12 @@ namespace SbigSharpDemo
                 },
                 out gcir2);
             // print it out
-            Console.Write("Bad columns: " + gcir2.badColumns + " = ");
+            Console.Write($"Bad columns: {gcir2.badColumns} = ");
             Console.WriteLine(
-                gcir2.columns[0] + ", " + gcir2.columns[1] + ", " +
-                gcir2.columns[2] + ", " + gcir2.columns[3]);
-            Console.WriteLine("ABG: " + gcir2.imagingABG.ToString());
-            Console.WriteLine("Serial number: " + gcir2.serialNumber);
+                $"{gcir2.columns[0]}, {gcir2.columns[1] }, " +
+                $"{gcir2.columns[2]}, { gcir2.columns[3]}");
+            Console.WriteLine($"ABG: {gcir2.imagingABG}");
+            Console.WriteLine($"Serial number: {gcir2.serialNumber}");
 
             // query temperature
             SBIG.UnivDrvCommand(
@@ -118,10 +116,9 @@ namespace SbigSharpDemo
                 controlValue = 0
             };
             SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_SET_DRIVER_CONTROL, sdcp);
-
-            //
+            
             // read a TDI line
-            //
+
             // input params
             var rlp = new SBIG.ReadoutLineParams
             {
@@ -132,7 +129,7 @@ namespace SbigSharpDemo
                 //SBIG.ReadoutLineParams.MakeNBinMode(SBIG.ReadoutBinningMode.RM_NX1, 4)
             };
             // output
-            ushort[] data = new ushort[rlp.pixelLength];
+            var data = new ushort[rlp.pixelLength];
             // make the call!!!
             SBIG.UnivDrvCommand(SBIG.PAR_COMMAND.CC_READOUT_LINE, rlp, out data);
             // do it a lot
