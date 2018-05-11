@@ -5408,9 +5408,9 @@ namespace SbigSharp
             var rlp = new ReadoutLineParams
             {
                 ccd = sep2.ccd,
+                readoutMode = sep2.readoutMode,
                 pixelStart = sep2.left,
-                pixelLength = sep2.width,
-                readoutMode = sep2.readoutMode
+                pixelLength = sep2.width
             };
 
             var rlpGCH = GCHandle.Alloc(rlp, GCHandleType.Pinned);
@@ -5418,7 +5418,7 @@ namespace SbigSharp
             IntPtr dataPtr = dataGCH.AddrOfPinnedObject();
 
             // get the image from the camera, line by line
-            for (int y = sep2.top; y < sep2.height; y++)
+            for (int y = 0; y < sep2.height; y++)
             {
                 _UnivDrvCommand(
                     PAR_COMMAND.CC_READOUT_LINE,
