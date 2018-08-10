@@ -416,6 +416,8 @@ namespace SbigSharp
         // These are the error codes returned by the driver function.
         // They are prefixed with CE_ to designate them as camera errors.
 
+        #region BASE_STRUCTURES
+
         /// <summary>
         /// Base value for all error IDs.
         /// </summary>
@@ -1179,6 +1181,8 @@ namespace SbigSharp
             /// </summary>
             REGULATION_DISABLE_AUTOFREEZE
         };
+
+        #endregion // BASE_STRUCTURES
 
         /// <summary>
         /// Mask for Temperature Regulation frozen state
@@ -2298,6 +2302,7 @@ namespace SbigSharp
         /// </summary>
         const UInt16 ABORT_DONT_END = 0x2000;
 
+        #region EXPOSURE_FLAGS
         //TODO: Add supported cameras.
         /// <summary>
         /// Set in <see cref="StartExposureParams2.exposureTime"/> enable TDI readout mode
@@ -2354,11 +2359,13 @@ namespace SbigSharp
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
         const UInt32 EXP_TIME_MASK = 0x00FFFFFF;
+        #endregion // EXPOSURE_FLAGS
 
         /// <summary>
         /// Bit Field Definitions for the in the <see cref="GetCCDInfoResults4"/> struct.
         /// </summary>
 
+        #region CAPABILITIES_BITS
         /// <summary>
         /// mask for CCD type
         /// <para>ingroup CAPABILITIES_BITS</para>
@@ -2484,8 +2491,9 @@ namespace SbigSharp
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
         const UInt16 CB_REQUIRES_STARTEXP2_YES = 0x0040;
+        #endregion // CAPABILITIES_BITS
 
-
+        #region MINIMUM_DEFINES
         /// <summary>
         /// Minimum exposure for ST-7 cameras in 1/100ths second
         /// <para>ingroup MINIMUM_DEFINES</para>
@@ -2547,6 +2555,7 @@ namespace SbigSharp
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
         const Int16 MIN_STU_EXPOSURE = 1;
+        #endregion // MINIMUM_DEFINES
 
         #endregion // General Purpose Flags
 
