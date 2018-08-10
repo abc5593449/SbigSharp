@@ -416,10 +416,12 @@ namespace SbigSharp
         // These are the error codes returned by the driver function.
         // They are prefixed with CE_ to designate them as camera errors.
 
+        #region BASE_STRUCTURES
+
         /// <summary>
         /// Base value for all error IDs.
         /// </summary>
-        const UInt16 CE_ERROR_BASE = 1;
+        public const UInt16 CE_ERROR_BASE = 1;
 
         /// <summary>
         /// Error ID enum 
@@ -675,17 +677,26 @@ namespace SbigSharp
         /// Pulse in is currently active state modifier flag.
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        const UInt16 CS_PULSE_IN_ACTIVE = 0x8000;
+        public const UInt16 CS_PULSE_IN_ACTIVE = 0x8000;
 
         /// <summary>
         /// Waiting for trigger state modifier flag
         /// <para>ingroup BASE_STRUCTURES</para>
         /// </summary>
-        const UInt16 CS_WAITING_FOR_TRIGGER = 0x8000;
+        public const UInt16 CS_WAITING_FOR_TRIGGER = 0x8000;
 
-        const UInt16 RBI_PREFLASH_LENGTH_MASK = 0x0FFF;
-        const UInt16 RBI_PREFLASH_FLUSH_MASK = 0xF000;
-        const Byte RBI_PREFLASH_FLUSH_BIT = 0x0C;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const UInt16 RBI_PREFLASH_LENGTH_MASK = 0x0FFF;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const UInt16 RBI_PREFLASH_FLUSH_MASK = 0xF000;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const Byte RBI_PREFLASH_FLUSH_BIT = 0x0C;
 
         // Misc. Enumerated Constants
         // QUERY_TEMP_STATUS_REQUEST - Used with the Query Temperature Status command.
@@ -765,11 +776,11 @@ namespace SbigSharp
             /// <summary>
             /// MY_LOGICAL false definition.
             /// </summary>
-            const UInt16 FALSE = 0;
+            public const UInt16 FALSE = 0;
             /// <summary>
             /// MY_LOGICAL true definition.
             /// </summary>
-            const UInt16 TRUE = 1;
+            public const UInt16 TRUE = 1;
 
             /// <summary>
             /// bool value.
@@ -1180,10 +1191,12 @@ namespace SbigSharp
             REGULATION_DISABLE_AUTOFREEZE
         };
 
+        #endregion // BASE_STRUCTURES
+
         /// <summary>
         /// Mask for Temperature Regulation frozen state
         /// </summary>
-        const UInt16 REGULATION_FROZEN_MASK = 0x8000;
+        public const UInt16 REGULATION_FROZEN_MASK = 0x8000;
 
         /// <summary>
         /// LED State enum 
@@ -1351,12 +1364,12 @@ namespace SbigSharp
         /// <summary>
         /// Service port for Ethernet access.
         /// </summary>
-        const Int16 SRV_SERVICE_PORT = 5000;
+        public const Int16 SRV_SERVICE_PORT = 5000;
 
         /// <summary>
         /// Broadcast port for SBIG Cameras
         /// </summary>
-        const Int16 BROADCAST_PORT = 5001;
+        public const Int16 BROADCAST_PORT = 5001;
 
         /// <summary>
         /// SBIG Device types enum 
@@ -2271,282 +2284,284 @@ namespace SbigSharp
         #region General Purpose Flags
 
         /// <summary>
-        /// set in EndExposureParams::ccd to skip synchronization delay - 
+        /// set in <see cref="EndExposureParams.ccd"/> to skip synchronization delay - 
         /// Use this to increase the rep rate when taking darks to later be subtracted 
-        /// from SC_LEAVE_SHUTTER exposures such as when tracking and imaging.
+        /// from <see cref="SHUTTER_COMMAND.SC_LEAVE_SHUTTER"/> exposures such as when tracking and imaging.
         /// </summary>
-        const UInt16 END_SKIP_DELAY = 0x8000;
+        public const UInt16 END_SKIP_DELAY = 0x8000;
 
         /// <summary>
-        /// Set in StartExposureParams::ccd to skip lowering Imaging CCD Vdd during integration.
+        /// Set in <see cref="StartExposureParams.ccd"/> to skip lowering Imaging CCD Vdd during integration.
         /// - Use this to increase the rep rate when you don't care about glow 
         /// in the upper-left corner of the imaging CCD.
         /// </summary>
-        const UInt16 START_SKIP_VDD = 0x8000;
+        public const UInt16 START_SKIP_VDD = 0x8000;
 
         /// <summary>
-        /// Set in StartExposureParams::ccd and EndExposureParams::ccd to force shutter motor 
+        /// Set in <see cref="StartExposureParams.ccd"/> and <see cref="EndExposureParams.ccd"/> to force shutter motor 
         /// to stay on all the time which reduces delays in Start and End Exposure timing 
         /// and yields higher image throughput.
         /// Don't do this too often or camera head will heat up.
         /// </summary>
-        const UInt16 START_MOTOR_ALWAYS_ON = 0x4000;
+        public const UInt16 START_MOTOR_ALWAYS_ON = 0x4000;
 
         /// <summary>
-        /// Set in EndExposureParams::ccd to abort the exposure completely instead 
+        /// Set in <see cref="EndExposureParams.ccd"/> to abort the exposure completely instead 
         /// of just ending the integration phase for cameras with internal frame buffers like the STX.
         /// </summary>
-        const UInt16 ABORT_DONT_END = 0x2000;
+        public const UInt16 ABORT_DONT_END = 0x2000;
 
+        #region EXPOSURE_FLAGS
         //TODO: Add supported cameras.
         /// <summary>
-        /// Set in StartExposureParams2::exposureTime enable TDI readout mode
+        /// Set in <see cref="StartExposureParams2.exposureTime"/> enable TDI readout mode
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_TDI_ENABLE = 0x01000000;
+        public const UInt32 EXP_TDI_ENABLE = 0x01000000;
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime ripple correction for STF-8050/4070
+        /// Set in <see cref="StartExposureParams2.exposureTime"/> ripple correction for STF-8050/4070
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_RIPPLE_CORRECTION = 0x02000000;
+        public const UInt32 EXP_RIPPLE_CORRECTION = 0x02000000;
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime to activate the dual channel 
+        /// Set in <see cref="StartExposureParams2.exposureTime"/> to activate the dual channel 
         /// CCD readout mode of the STF-8050.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_DUAL_CHANNEL_MODE = 0x04000000;
+        public const UInt32 EXP_DUAL_CHANNEL_MODE = 0x04000000;
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime to activate the fast readout mode 
+        /// Set in <see cref="StartExposureParams2.exposureTime"/> to activate the fast readout mode 
         /// of the STF-8300, etc.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_FAST_READOUT = 0x08000000;
+        public const UInt32 EXP_FAST_READOUT = 0x08000000;
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime to interpret exposure time as milliseconds.
+        /// Set in <see cref="StartExposureParams2.exposureTime"/> to interpret exposure time as milliseconds.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_MS_EXPOSURE = 0x10000000;
+        public const UInt32 EXP_MS_EXPOSURE = 0x10000000;
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime to do light clear of the CCD.
+        /// Set in <see cref="StartExposureParams2.exposureTime"/> to do light clear of the CCD.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_LIGHT_CLEAR = 0x20000000;
+        public const UInt32 EXP_LIGHT_CLEAR = 0x20000000;
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime to send trigger out Y-.
+        /// Set in <see cref="StartExposureParams2.exposureTime"/> to send trigger out Y-.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_SEND_TRIGGER_OUT = 0x40000000;
+        public const UInt32 EXP_SEND_TRIGGER_OUT = 0x40000000;
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime to wait for trigger in pulse.
+        /// Set in <see cref="StartExposureParams2.exposureTime"/> to wait for trigger in pulse.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_WAIT_FOR_TRIGGER_IN = 0x80000000;
+        public const UInt32 EXP_WAIT_FOR_TRIGGER_IN = 0x80000000;
 
         /// <summary>
-        /// Set in StarExposureParams2::exposureTime to mask with exposure time to remove flags.
+        /// Set in <see cref="StartExposureParams2.exposureTime"/> to mask with exposure time to remove flags.
         /// <para>ingroup EXPOSURE_FLAGS</para>
         /// </summary>
-        const UInt32 EXP_TIME_MASK = 0x00FFFFFF;
+        public const UInt32 EXP_TIME_MASK = 0x00FFFFFF;
+        #endregion // EXPOSURE_FLAGS
 
-        /// <summary>
-        /// Bit Field Definitions for the in the GetCCDInfoResults4 struct.
-        /// </summary>
-
+        // Bit Field Definitions for the in the GetCCDInfoResults4 struct.
+        #region CAPABILITIES_BITS
         /// <summary>
         /// mask for CCD type
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_TYPE_MASK = 0x0001;
+        public const UInt16 CB_CCD_TYPE_MASK = 0x0001;
 
         /// <summary>
         /// b0=0 is full frame CCD
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_TYPE_FULL_FRAME = 0x0000;
+        public const UInt16 CB_CCD_TYPE_FULL_FRAME = 0x0000;
 
         /// <summary>
         /// b0=1 is frame transfer CCD
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_TYPE_FRAME_TRANSFER = 0x0001;
+        public const UInt16 CB_CCD_TYPE_FRAME_TRANSFER = 0x0001;
 
         /// <summary>
         /// mask for electronic shutter type
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_ESHUTTER_MASK = 0x0002;
+        public const UInt16 CB_CCD_ESHUTTER_MASK = 0x0002;
 
         /// <summary>
         /// b1=0 indicates no electronic shutter
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_ESHUTTER_NO = 0x0000;
+        public const UInt16 CB_CCD_ESHUTTER_NO = 0x0000;
 
         /// <summary>
         /// b1=1 indicates electronic shutter
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_ESHUTTER_YES = 0x0002;
+        public const UInt16 CB_CCD_ESHUTTER_YES = 0x0002;
 
         /// <summary>
         /// mask for external tracker support
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_EXT_TRACKER_MASK = 0x0004;
+        public const UInt16 CB_CCD_EXT_TRACKER_MASK = 0x0004;
 
         /// <summary>
         /// b2=0 indicates no external tracker support
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_EXT_TRACKER_NO = 0x0000;
+        public const UInt16 CB_CCD_EXT_TRACKER_NO = 0x0000;
 
         /// <summary>
         /// b2=1 indicates external tracker support
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_EXT_TRACKER_YES = 0x0004;
+        public const UInt16 CB_CCD_EXT_TRACKER_YES = 0x0004;
 
         /// <summary>
         /// mask for BTDI support
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_BTDI_MASK = 0x0008;
+        public const UInt16 CB_CCD_BTDI_MASK = 0x0008;
 
         /// <summary>
         /// b3=0 indicates no BTDI support
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_BTDI_NO = 0x0000;
+        public const UInt16 CB_CCD_BTDI_NO = 0x0000;
 
         /// <summary>
         /// b3=1 indicates BTDI support
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_CCD_BTDI_YES = 0x0008;
+        public const UInt16 CB_CCD_BTDI_YES = 0x0008;
 
         /// <summary>
         /// mask for AO-8 detected 
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_AO8_MASK = 0x0010;
+        public const UInt16 CB_AO8_MASK = 0x0010;
 
         /// <summary>
         /// b4=0 indicates no AO-8 detected
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_AO8_NO = 0x0000;
+        public const UInt16 CB_AO8_NO = 0x0000;
 
         /// <summary>
         /// b4=1 indicates AO-8 detected
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_AO8_YES = 0x0010;
+        public const UInt16 CB_AO8_YES = 0x0010;
 
         /// <summary>
         /// mask for camera with frame buffer
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_FRAME_BUFFER_MASK = 0x0020;
+        public const UInt16 CB_FRAME_BUFFER_MASK = 0x0020;
 
         /// <summary>
         /// b5=0 indicates camera without Frame Buffer
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_FRAME_BUFFER_NO = 0x0000;
+        public const UInt16 CB_FRAME_BUFFER_NO = 0x0000;
 
         /// <summary>
         /// b5=1 indicates camera with Frame Buffer
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_FRAME_BUFFER_YES = 0x0020;
+        public const UInt16 CB_FRAME_BUFFER_YES = 0x0020;
 
         /// <summary>
         /// mask for camera that requires StartExposure2
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_REQUIRES_STARTEXP2_MASK = 0x0040;
+        public const UInt16 CB_REQUIRES_STARTEXP2_MASK = 0x0040;
 
         /// <summary>
         /// b6=0 indicates camera works with StartExposure
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_REQUIRES_STARTEXP2_NO = 0x0000;
+        public const UInt16 CB_REQUIRES_STARTEXP2_NO = 0x0000;
 
         /// <summary>
         /// b6=1 indicates camera Requires StartExposure2
         /// <para>ingroup CAPABILITIES_BITS</para>
         /// </summary>
-        const UInt16 CB_REQUIRES_STARTEXP2_YES = 0x0040;
+        public const UInt16 CB_REQUIRES_STARTEXP2_YES = 0x0040;
+        #endregion // CAPABILITIES_BITS
 
-
+        #region MINIMUM_DEFINES
         /// <summary>
         /// Minimum exposure for ST-7 cameras in 1/100ths second
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_ST7_EXPOSURE = 12;
+        public const Int16 MIN_ST7_EXPOSURE = 12;
 
         /// <summary>
         /// Minimum exposure for ST-402 cameras in 1/100ths second
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_ST402_EXPOSURE = 4;
+        public const Int16 MIN_ST402_EXPOSURE = 4;
 
         /// <summary>
         /// Minimum exposure fpr STF-3200 cameras in 1/100ths second
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_ST3200_EXPOSURE = 9;
+        public const Int16 MIN_ST3200_EXPOSURE = 9;
 
 
         /// <summary>
         /// Minimum exposure for STF-8300 cameras in 1/100ths second
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_STF8300_EXPOSURE = 9;
+        public const Int16 MIN_STF8300_EXPOSURE = 9;
 
         /// <summary>
         /// Minimum exposure for STF-8050 cameras in 1/1000ths second since has E Shutter
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_STF8050_EXPOSURE = 1;
+        public const Int16 MIN_STF8050_EXPOSURE = 1;
 
         /// <summary>
         /// Minimum exposure for STF-4070 cameras in 1/1000ths second since has E Shutter
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_STF4070_EXPOSURE = 1;
+        public const Int16 MIN_STF4070_EXPOSURE = 1;
 
 
         /// <summary>
         /// Minimum exposure for STF-0402 cameras in 1/100ths second.
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_STF0402_EXPOSURE = 4;
+        public const Int16 MIN_STF0402_EXPOSURE = 4;
 
         /// <summary>
         /// Minimum exposure for STX cameras in 1/100ths second
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_STX_EXPOSURE = 18;
+        public const Int16 MIN_STX_EXPOSURE = 18;
 
         /// <summary>
         /// Minimum exposure for STT cameras in 1/100ths second
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_STT_EXPOSURE = 12;
+        public const Int16 MIN_STT_EXPOSURE = 12;
 
         /// <summary>
         /// Minimum exposure in 1/1000ths second since ST-i has E Shutter
         /// <para>ingroup MINIMUM_DEFINES</para>
         /// </summary>
-        const Int16 MIN_STU_EXPOSURE = 1;
+        public const Int16 MIN_STU_EXPOSURE = 1;
+        #endregion // MINIMUM_DEFINES
 
         #endregion // General Purpose Flags
 
@@ -2608,6 +2623,7 @@ namespace SbigSharp
             /// Exposure time in hundredths of a second in least significant 24 bits. Most significant bits are bit-flags described in exposureTime #define block.
             /// </summary>
             public UInt32 exposureTime;
+
             /// <summary>
             /// Deprecated. See also: <seealso cref="ABG_STATE7"/>.
             /// </summary>
