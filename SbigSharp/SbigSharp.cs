@@ -2361,10 +2361,7 @@ namespace SbigSharp
         const UInt32 EXP_TIME_MASK = 0x00FFFFFF;
         #endregion // EXPOSURE_FLAGS
 
-        /// <summary>
-        /// Bit Field Definitions for the in the <see cref="GetCCDInfoResults4"/> struct.
-        /// </summary>
-
+        // Bit Field Definitions for the in the GetCCDInfoResults4 struct.
         #region CAPABILITIES_BITS
         /// <summary>
         /// mask for CCD type
@@ -2617,6 +2614,7 @@ namespace SbigSharp
             /// Exposure time in hundredths of a second in least significant 24 bits. Most significant bits are bit-flags described in exposureTime #define block.
             /// </summary>
             public UInt32 exposureTime;
+
             /// <summary>
             /// Deprecated. See also: <seealso cref="ABG_STATE7"/>.
             /// </summary>
